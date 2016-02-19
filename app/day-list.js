@@ -1,14 +1,15 @@
 'use strict';
+
 import React, {
   Component,
   StyleSheet,
   Text,
   View,
-  ListView
+  ListView,
+  TouchableHighlight
 } from 'react-native';
 
 import { notEqual } from './utils';
-import { getMany, getOne } from './data/lookup';
 
 function getRowData(dataBlob, sectionId, rowId) {
   const setTimes = dataBlob[sectionId].set_times;
@@ -34,8 +35,19 @@ function dataSource(data) {
   return { dataSource: ds.cloneWithRowsAndSections(data, sectionIds, rowIds) };
 }
 
-function renderRow(rowData) {
-  return <Text style={styles.row}>{rowData.band.name} {rowData.start_time}</Text>;
+function renderRow(rowData, navigator) {
+  function goToRow() {
+    const routes = navigator.getCurrentRoutes();
+    const currentIndex = routes[routes.length - 1].index;
+
+    navigator.push({ name: 'Band', index: currentIndex + 1, title: rowData.band.name, band_id: rowData.band.id });
+  }
+
+  return (
+    <TouchableHighlight underlayColor='#ccc' onPress={goToRow}>
+      <Text style={styles.row}>{rowData.band.name} {rowData.start_time}</Text>
+    </TouchableHighlight>
+  );
 }
 
 function renderSectionHeader(sectionData, sectionId) {
@@ -58,7 +70,7 @@ export default class DayList extends Component {
         <ListView
           style={styles.listView}
           dataSource={this.state.dataSource}
-          renderRow={renderRow}
+          renderRow={(rowData) => renderRow(rowData, this.props.navigator)}
           renderSectionHeader={renderSectionHeader}
           renderSeparator={renderSeparator}
         />

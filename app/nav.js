@@ -11,9 +11,10 @@ import React, {
 
 import Home from './home';
 import List from './list';
-import ListHeaders from './list_headers';
 import DayList from './day-list';
+import Band from './band';
 import { fullSchedule } from './server';
+import { getOne } from './data/lookup';
 
 class NavButton extends React.Component {
   render() {
@@ -132,7 +133,8 @@ var NavigationBarSample = React.createClass({
             'Days': <List navigator={navigator} dataSource={this.state.fullSchedule.days} />,
             'Venues': <List navigator={navigator} dataSource={this.state.fullSchedule.venues} />,
             'SetTimes': <List navigator={navigator} dataSource={this.state.fullSchedule.set_times} />,
-            'Day 1': <DayList navigator={navigator} dataSource={this.findDay('Day 1')} fullSchedule={this.state.fullSchedule} />
+            'Day 1': <DayList navigator={navigator} dataSource={this.findDay('Day 1')} fullSchedule={this.state.fullSchedule} />,
+            'Band': <Band navigator={navigator} band={getOne(this.state.fullSchedule.bands, route.band_id)} fullSchedule={this.state.fullSchedule}/>
           }
 
           return component[route.name];
