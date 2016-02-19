@@ -17,7 +17,7 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullSchedule: { bands: [], venues: [], set_times: [] }
+      fullSchedule: { bands: [], venues: [], set_times: [], days: [] }
     };
     this.setFullSchedule();
   }
@@ -29,22 +29,14 @@ export default class Home extends Component {
   }
 
   render() {
+    const days = this.state.fullSchedule.days.sort((l, r) => l.name > r.name).map((day) => {
+      return <Text key={day.id} onPress={() => this.props.navigator.push({ name: day.name, index: 1, title: day.name })}>{day.name}</Text>;
+    });
+
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          HERD FEST
-        </Text>
-        <TouchableHighlight>
-          <Text style={styles.instructions} onPress={() => this.props.navigator.push({ name: 'Bands', index: 1, title: 'Bands' })}>
-            Bands
-          </Text>
-        </TouchableHighlight>
-        <Text style={styles.instructions} onPress={() => this.props.navigator.push({ name: 'Venues', index: 1, title: 'Venues' })}>
-          Venues
-        </Text>
-        <Text style={styles.instructions} onPress={() => this.props.navigator.push({ name: 'SetTimes', index: 1, title: 'Set Times' })}>
-          Set Times
-        </Text>
+        <Text style={styles.welcome}>HERD FEST</Text>
+        {days}
       </View>
     );
   }

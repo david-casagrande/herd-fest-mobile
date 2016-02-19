@@ -11,6 +11,8 @@ import React, {
 
 import Home from './home';
 import List from './list';
+import ListHeaders from './list_headers';
+import DayList from './day-list';
 import { fullSchedule } from './server';
 
 class NavButton extends React.Component {
@@ -83,7 +85,7 @@ var NavigationBarSample = React.createClass({
   },
 
   getInitialState: function() {
-    return { fullSchedule: { bands: [], venues: [], set_times:[] } };
+    return { fullSchedule: { bands: [], venues: [], set_times:[], days: [] } };
   },
 
   componentWillMount: function() {
@@ -113,6 +115,10 @@ var NavigationBarSample = React.createClass({
     this._listeners && this._listeners.forEach(listener => listener.remove());
   },
 
+  findDay: function(query) {
+    return this.state.fullSchedule.days.find((day) => day.name === query);
+  },
+
   render: function() {
     return (
       <Navigator
@@ -123,10 +129,12 @@ var NavigationBarSample = React.createClass({
           const component = {
             'Home': <Home navigator={navigator} />,
             'Bands': <List navigator={navigator} dataSource={this.state.fullSchedule.bands} />,
+            'Days': <List navigator={navigator} dataSource={this.state.fullSchedule.days} />,
             'Venues': <List navigator={navigator} dataSource={this.state.fullSchedule.venues} />,
-            'SetTimes': <List navigator={navigator} dataSource={this.state.fullSchedule.set_times} />
+            'SetTimes': <List navigator={navigator} dataSource={this.state.fullSchedule.set_times} />,
+            'Day 1': <DayList navigator={navigator} dataSource={this.findDay('Day 1')} fullSchedule={this.state.fullSchedule} />
           }
-          console.log(this.state);
+
           return component[route.name];
         }}
         navigationBar={

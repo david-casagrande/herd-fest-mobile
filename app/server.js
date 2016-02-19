@@ -1,3 +1,4 @@
+// const domain = 'https://herd-fest-api.heroku.com';
 const domain = 'http://localhost:3000';
 const fullScheduleURL = `${domain}/api/full_schedule`;
 

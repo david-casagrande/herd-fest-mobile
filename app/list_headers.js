@@ -7,15 +7,23 @@ import React, {
   ListView
 } from 'react-native';
 
-import { fullSchedule } from './server';
-
-function dataSource(props) {
-  const data = props.dataSource || [];
-  const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-  return { dataSource: ds.cloneWithRows(data) };
+function changed(l, r) {
+  return l !== r;
 }
 
-export default class List extends Component {
+function dataSource(props) {
+  const data = props.dataSource || {};
+  const ds = new ListView.DataSource({
+    getSectionData: (x, y, z) => console.log(x, y, z),
+    rowHasChanged: changed,
+    sectionHeaderHasChanged: changed
+  });
+  // getSectionData          : getSectionData,
+  // getRowData              : getRowData,
+  return { dataSource: ds.cloneWithRowsAndSections(data) };
+}
+
+export default class ListHeaders extends Component {
   constructor(props) {
     super(props);
     this.state = dataSource(props);
@@ -27,7 +35,8 @@ export default class List extends Component {
         <ListView
           style={styles.listView}
           dataSource={this.state.dataSource}
-          renderRow={(rowData) => <Text>{rowData.name}</Text>}
+          renderRow={(rowData) => { console.log(sectionData, sectionId); <Text>{rowData.name}</Text>}}
+          renderSectionHeader={(sectionData, sectionId) => { console.log(sectionData, sectionId); return <Text>{sectionData.name}</Text>; }}
         />
       </View>
     );
