@@ -1,5 +1,5 @@
 import { getMany, getOne } from '../data/lookup';
-import { groupBy, uniq } from '../utils';
+import { groupBy, uniq, sortStartTimes } from '../utils';
 
 function venueSetTimes(venue, setTimes, bands) {
   return setTimes
@@ -14,7 +14,7 @@ function dayVenues(venues, setTimes, bands) {
     return {
       id: venue.id,
       name: venue.name,
-      setTimes: venueSetTimes(venue, setTimes, bands).sort((l, r) => l.startTime > r.startTime)
+      setTimes: venueSetTimes(venue, setTimes, bands).sort(sortStartTimes)
     };
   });
 }

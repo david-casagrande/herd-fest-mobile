@@ -9,7 +9,7 @@ import React, {
   TouchableHighlight
 } from 'react-native';
 
-import { notEqual } from './utils';
+import { notEqual, formatDate } from './utils';
 import dayListDecorator from './decorators/day-list';
 
 function getRowData(dataBlob, sectionId, rowId) {
@@ -46,7 +46,10 @@ function renderRow(rowData, navigator) {
 
   return (
     <TouchableHighlight underlayColor='#ccc' onPress={goToRow}>
-      <Text style={styles.row}>{rowData.band.name} {rowData.startTime}</Text>
+      <View style={styles.rowContainer}>
+        <Text style={[styles.row, styles.setTime]}>{formatDate(rowData.startTime)}</Text>
+        <Text style={styles.row}>{rowData.band.name}</Text>
+      </View>
     </TouchableHighlight>
   );
 }
@@ -93,10 +96,19 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: 10
   },
+  rowContainer: {
+    flex: 1,
+    flexDirection: 'row'
+  },
   row: {
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 10
+  },
+  setTime: {
+    backgroundColor: 'red',
+    width: 74,
+    color: 'white'
   },
   separator: {
     height: StyleSheet.hairlineWidth,
