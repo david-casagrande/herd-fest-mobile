@@ -49,6 +49,7 @@ export default class Band extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text>Bio: {this.props.band.description}</Text>
         <Text style={styles.welcome}>Playing On</Text>
         {this.setTimes()}
       </View>

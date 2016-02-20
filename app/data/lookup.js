@@ -1,7 +1,6 @@
 export function getMany(collection, ids) {
   const lookupTable = {};
   collection.forEach((item) => lookupTable[item.id] = item);
-
   return ids.map((id) => lookupTable[id]);
 }
 

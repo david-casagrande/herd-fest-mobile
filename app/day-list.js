@@ -10,9 +10,10 @@ import React, {
 } from 'react-native';
 
 import { notEqual } from './utils';
+import dayListDecorator from './decorators/day-list';
 
 function getRowData(dataBlob, sectionId, rowId) {
-  const setTimes = dataBlob[sectionId].set_times;
+  const setTimes = dataBlob[sectionId].setTimes;
   return setTimes.find((setTime) => setTime.id === rowId);
 }
 
@@ -30,7 +31,7 @@ function dataSource(data) {
   });
 
   const sectionIds = data.map((venue, idx) => idx);
-  const rowIds = data.map((venue) => venue.set_times.map((set_time) => set_time.id));
+  const rowIds = data.map((venue) => venue.setTimes.map((setTime) => setTime.id));
 
   return { dataSource: ds.cloneWithRowsAndSections(data, sectionIds, rowIds) };
 }
@@ -45,7 +46,7 @@ function renderRow(rowData, navigator) {
 
   return (
     <TouchableHighlight underlayColor='#ccc' onPress={goToRow}>
-      <Text style={styles.row}>{rowData.band.name} {rowData.start_time}</Text>
+      <Text style={styles.row}>{rowData.band.name} {rowData.startTime}</Text>
     </TouchableHighlight>
   );
 }
@@ -61,7 +62,9 @@ function renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
 export default class DayList extends Component {
   constructor(props) {
     super(props);
-    this.state = dataSource(props.dataSource.venues);
+
+    const data = dayListDecorator(props.dataSource, props.fullSchedule);
+    this.state = dataSource(data.venues);
   }
 
   render() {

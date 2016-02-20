@@ -13,3 +13,7 @@ export function groupBy(collection, key) {
 
   return grouped;
 }
+
+export function uniq(collection) {
+  return collection.filter((item, idx) => collection.indexOf(item) ===  idx);
+}

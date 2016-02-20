@@ -133,7 +133,7 @@ var NavigationBarSample = React.createClass({
             'Days': <List navigator={navigator} dataSource={this.state.fullSchedule.days} />,
             'Venues': <List navigator={navigator} dataSource={this.state.fullSchedule.venues} />,
             'SetTimes': <List navigator={navigator} dataSource={this.state.fullSchedule.set_times} />,
-            'Day 1': <DayList navigator={navigator} dataSource={this.findDay('Day 1')} fullSchedule={this.state.fullSchedule} />,
+            'Day': <DayList navigator={navigator} dataSource={getOne(this.state.fullSchedule.days, route.day_id)} fullSchedule={this.state.fullSchedule} />,
             'Band': <Band navigator={navigator} band={getOne(this.state.fullSchedule.bands, route.band_id)} fullSchedule={this.state.fullSchedule}/>
           }
 
