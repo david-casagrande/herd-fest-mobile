@@ -1,6 +1,6 @@
 jest.dontMock('../lookup');
 
-const lookup = require('../lookup');
+const lookup = require('../lookup').default;
 const getMany = lookup.getMany;
 const getOne = lookup.getOne;
 

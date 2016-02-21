@@ -1,11 +1,11 @@
-import { getMany, getOne } from '../data/lookup';
-import { groupBy, uniq, sortStartTimes } from '../utils';
+import lookup from '../data/lookup';
+import utils from '../utils';
 
 function venueSetTimes(venue, setTimes, bands) {
   return setTimes
-    .filter((setTime) => venue.set_times.includes(setTime.id))
+    .filter((setTime) => venue.set_times.indexOf(setTime.id) > -1)
     .map((setTime) => {
-      return { id: setTime.id, startTime: setTime.start_time, band: getOne(bands, setTime.band) }
+      return { id: setTime.id, startTime: setTime.start_time, band: lookup.getOne(bands, setTime.band) }
     });
 }
 
@@ -14,15 +14,15 @@ function dayVenues(venues, setTimes, bands) {
     return {
       id: venue.id,
       name: venue.name,
-      setTimes: venueSetTimes(venue, setTimes, bands).sort(sortStartTimes)
+      setTimes: venueSetTimes(venue, setTimes, bands).sort(utils.sortStartTimes)
     };
   });
 }
 
 export default function dayListDecorator(data, collection) {
-  const venues = getMany(collection.venues, uniq(data.venues));
-  const setTimes = getMany(collection.set_times, data.set_times);
-  const bands = getMany(collection.bands, data.bands);
+  const venues = lookup.getMany(collection.venues, utils.uniq(data.venues));
+  const setTimes = lookup.getMany(collection.set_times, data.set_times);
+  const bands = lookup.getMany(collection.bands, data.bands);
 
   return {
     id: data.id,

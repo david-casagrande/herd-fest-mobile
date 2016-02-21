@@ -1,10 +1,14 @@
 import moment from 'moment';
 
-export function notEqual(l, r) {
+function notEqual(l, r) {
   return l !== r;
 }
 
-export function groupBy(collection, key) {
+function uniq(collection) {
+  return collection.filter((item, idx) => collection.indexOf(item) ===  idx);
+}
+
+function groupBy(collection, key) {
   const grouped = {};
 
   collection.forEach((item) => {
@@ -16,18 +20,14 @@ export function groupBy(collection, key) {
   return grouped;
 }
 
-export function uniq(collection) {
-  return collection.filter((item, idx) => collection.indexOf(item) ===  idx);
-}
-
-export function formatDate(date, format = 'h:mmA') {
+function formatDate(date, format = 'h:mmA') {
   const converted = moment.utc(date).format(format);
   return converted;
 }
 
-export function sortStartTimes(l, r) {
+function sortStartTimes(l, r) {
   function addTime(hour) {
-    if(hour < 6) { hour += 23; }
+    if(hour < 7) { hour += 23; }
     return hour;
   }
 
@@ -36,3 +36,13 @@ export function sortStartTimes(l, r) {
 
   return addTime(lHour) > addTime(rHour);
 }
+
+const utils = {
+  notEqual,
+  groupBy,
+  uniq,
+  formatDate,
+  sortStartTimes
+};
+
+export default Object.freeze(utils);

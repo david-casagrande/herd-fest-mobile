@@ -65,6 +65,8 @@ function renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
 export default class DayList extends Component {
   constructor(props) {
     super(props);
+console.log(props.fullSchedule);
+console.log(props.day);
 
     const data = dayListDecorator(props.dataSource, props.fullSchedule);
     this.state = dataSource(data.venues);
