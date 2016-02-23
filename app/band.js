@@ -7,12 +7,12 @@ import React, {
   View
 } from 'react-native';
 
-import { getMany, getOne } from './data/lookup';
-import { groupBy } from './utils';
+import lookup from './data/lookup';
+import utils from './utils';
 
 function setTimes(props) {
-  const bandSetTimes = getMany(props.fullSchedule.set_times, props.band.set_times);
-  return groupBy(bandSetTimes, 'day');
+  const bandSetTimes = lookup.getMany(props.fullSchedule.set_times, props.band.set_times);
+  return utils.groupBy(bandSetTimes, 'day');
 }
 
 export default class Band extends Component {
@@ -26,13 +26,13 @@ export default class Band extends Component {
   setTimes() {
     const days = Object.keys(this.state.setTimes);
     return days.map((dayId) => {
-      const day = getOne(this.props.fullSchedule.days, dayId);
+      const day = lookup.getOne(this.props.fullSchedule.days, dayId);
       const setTimesToRender = this.state.setTimes[dayId];
       const venues = this.props.fullSchedule.venues;
 
       function renderSetTimes() {
         return setTimesToRender.map((setTime) => {
-          const venue = getOne(venues, setTime.venue);
+          const venue = lookup.getOne(venues, setTime.venue);
           return <Text key={setTime.id}>{setTime.start_time} @ {venue.name}</Text>
         });
       }

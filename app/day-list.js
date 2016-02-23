@@ -9,7 +9,7 @@ import React, {
   TouchableHighlight
 } from 'react-native';
 
-import { notEqual, formatDate } from './utils';
+import utils from './utils';
 import dayListDecorator from './decorators/day-list';
 
 function getRowData(dataBlob, sectionId, rowId) {
@@ -26,8 +26,8 @@ function dataSource(data) {
   const ds = new ListView.DataSource({
     getRowData: getRowData,
     // getSectionHeaderData: getSectionHeaderData,
-    rowHasChanged: notEqual,
-    sectionHeaderHasChanged: notEqual
+    rowHasChanged: utils.notEqual,
+    sectionHeaderHasChanged: utils.notEqual
   });
 
   const sectionIds = data.map((venue, idx) => idx);
@@ -47,7 +47,7 @@ function renderRow(rowData, navigator) {
   return (
     <TouchableHighlight underlayColor='#ccc' onPress={goToRow}>
       <View style={styles.rowContainer}>
-        <Text style={[styles.row, styles.setTime]}>{formatDate(rowData.startTime)}</Text>
+        <Text style={[styles.row, styles.setTime]}>{utils.formatDate(rowData.startTime)}</Text>
         <Text style={styles.row}>{rowData.band.name}</Text>
       </View>
     </TouchableHighlight>
@@ -65,10 +65,8 @@ function renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
 export default class DayList extends Component {
   constructor(props) {
     super(props);
-console.log(props.fullSchedule);
-console.log(props.day);
 
-    const data = dayListDecorator(props.dataSource, props.fullSchedule);
+    const data = dayListDecorator(props.day, props.fullSchedule);
     this.state = dataSource(data.venues);
   }
 

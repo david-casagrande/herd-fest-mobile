@@ -14,7 +14,7 @@ import List from './list';
 import DayList from './day-list';
 import Band from './band';
 import { fullSchedule } from './server';
-import { getOne } from './data/lookup';
+import lookup from './data/lookup';
 
 class NavButton extends React.Component {
   render() {
@@ -70,12 +70,6 @@ var NavigationBarRouteMapper = {
   },
 
 };
-
-function newRandomRoute() {
-  return {
-    title: '#' + Math.ceil(Math.random() * 1000),
-  };
-}
 
 var NavigationBarSample = React.createClass({
 
@@ -133,9 +127,9 @@ var NavigationBarSample = React.createClass({
             'Days': <List navigator={navigator} dataSource={this.state.fullSchedule.days} />,
             'Venues': <List navigator={navigator} dataSource={this.state.fullSchedule.venues} />,
             'SetTimes': <List navigator={navigator} dataSource={this.state.fullSchedule.set_times} />,
-            'Day': <DayList navigator={navigator} dataSource={getOne(this.state.fullSchedule.days, route.day_id)} fullSchedule={this.state.fullSchedule} />,
-            'Band': <Band navigator={navigator} band={getOne(this.state.fullSchedule.bands, route.band_id)} fullSchedule={this.state.fullSchedule}/>
-          }
+            'Day': <DayList navigator={navigator} day={lookup.getOne(this.state.fullSchedule.days, route.day_id)} fullSchedule={this.state.fullSchedule} />,
+            'Band': <Band navigator={navigator} band={lookup.getOne(this.state.fullSchedule.bands, route.band_id)} fullSchedule={this.state.fullSchedule}/>
+          };
 
           return component[route.name];
         }}

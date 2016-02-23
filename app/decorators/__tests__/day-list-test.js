@@ -43,8 +43,8 @@ describe('dayListDecorator', function() {
   it('converts day', function() {
     const result = dayListDecorator(day, fullSchedule);
     const expected = {
-      id: day.id,
-      name: day.name,
+      // id: day.id,
+      // name: day.name,
       venues: [
         {
           id: venues[1].id,
@@ -93,6 +93,8 @@ describe('dayListDecorator', function() {
       ]
     };
 
-    expect(result).toBeTruthy(expected);
+    expect(result.id).toEqual(day.id);
+    expect(result.name).toEqual(day.name);
+    expect(result.venues.length).toEqual(2);
   });
 });
