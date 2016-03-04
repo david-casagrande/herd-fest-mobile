@@ -4,7 +4,9 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View
+  View,
+  Image,
+  ScrollView
 } from 'react-native';
 
 import lookup from './data/lookup';
@@ -48,11 +50,16 @@ export default class Band extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
+        <Image
+          source={{uri: this.props.band.image_url}}
+          style={styles.image}
+          resizeMode={'cover'}
+        />
         <Text>Bio: {this.props.band.description}</Text>
         <Text style={styles.welcome}>Playing On</Text>
         {this.setTimes()}
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -60,9 +67,10 @@ export default class Band extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#fff',
+    paddingTop: 64
   },
   welcome: {
     fontSize: 20,
@@ -70,8 +78,10 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   instructions: {
-    textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
   },
+  image: {
+    height: 200
+  }
 });
