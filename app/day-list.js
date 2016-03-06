@@ -36,12 +36,14 @@ function dataSource(data) {
   return { dataSource: ds.cloneWithRowsAndSections(data, sectionIds, rowIds) };
 }
 
+function currentIndex(navigator) {
+  const routes = navigator.getCurrentRoutes();
+  return routes[routes.length - 1].index;
+}
+
 function renderRow(rowData, navigator) {
   function goToRow() {
-    const routes = navigator.getCurrentRoutes();
-    const currentIndex = routes[routes.length - 1].index;
-
-    navigator.push({ name: 'Band', index: currentIndex + 1, title: rowData.band.name, band_id: rowData.band.id });
+    navigator.push({ name: 'Band', index: currentIndex(navigator) + 1, title: rowData.band.name, band_id: rowData.band.id });
   }
 
   return (
@@ -54,8 +56,16 @@ function renderRow(rowData, navigator) {
   );
 }
 
-function renderSectionHeader(sectionData, sectionId) {
-  return <Text style={styles.sectionHeader}>{sectionData.name}</Text>;
+function renderSectionHeader(sectionData, sectionId, navigator) {
+  function goToSection() {
+    navigator.push({ name: 'Venue', index: currentIndex(navigator) + 1, title: sectionData.name, venue_id: sectionData.id });
+  }
+
+  return (
+    <TouchableHighlight underlayColor='#ccc' onPress={goToSection}>
+      <Text style={styles.sectionHeader}>{sectionData.name}</Text>
+    </TouchableHighlight>
+  );
 }
 
 function renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
@@ -77,7 +87,9 @@ export default class DayList extends Component {
           style={styles.listView}
           dataSource={this.state.dataSource}
           renderRow={(rowData) => renderRow(rowData, this.props.navigator)}
-          renderSectionHeader={renderSectionHeader}
+          renderSectionHeader={(sectionData, sectionId) => {
+            return renderSectionHeader(sectionData, sectionId, this.props.navigator);
+          }}
           renderSeparator={renderSeparator}
         />
       </View>

@@ -13,6 +13,7 @@ import Home from './home';
 import List from './list';
 import DayList from './day-list';
 import Band from './band';
+import Venue from './venue';
 import { fullSchedule } from './server';
 import lookup from './data/lookup';
 
@@ -128,7 +129,8 @@ var NavigationBarSample = React.createClass({
             'Venues': <List navigator={navigator} dataSource={this.state.fullSchedule.venues} />,
             'SetTimes': <List navigator={navigator} dataSource={this.state.fullSchedule.set_times} />,
             'Day': <DayList navigator={navigator} day={lookup.getOne(this.state.fullSchedule.days, route.day_id)} fullSchedule={this.state.fullSchedule} />,
-            'Band': <Band navigator={navigator} band={lookup.getOne(this.state.fullSchedule.bands, route.band_id)} fullSchedule={this.state.fullSchedule}/>
+            'Band': <Band navigator={navigator} band={lookup.getOne(this.state.fullSchedule.bands, route.band_id)} fullSchedule={this.state.fullSchedule}/>,
+            'Venue': <Venue navigator={navigator} venue={lookup.getOne(this.state.fullSchedule.venues, route.venue_id)} fullSchedule={this.state.fullSchedule}/>
           };
 
           return component[route.name];
