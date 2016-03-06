@@ -11,6 +11,7 @@ function venueSetTimes(venue, setTimes, bands) {
 
 function dayVenues(venues, setTimes, bands) {
   return venues.map((venue) => {
+    
     return {
       id: venue.id,
       name: venue.name,
