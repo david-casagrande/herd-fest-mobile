@@ -1,40 +1,39 @@
-'use strict';
-
 import React, {
   Component,
+  Linking,
   StyleSheet,
   Text,
-  View,
-  Image,
-  ScrollView,
-  Linking,
-  TouchableOpacity
+  TouchableOpacity,
+  View
 } from 'react-native';
 
 import lookup from './data/lookup';
 import utils from './utils';
+import venueStyles from './styles/venue-styles';
 
 function setTimes(props) {
   const venueSetTimes = lookup.getMany(props.fullSchedule.set_times, props.venue.set_times);
   return utils.groupBy(venueSetTimes, 'day');
 }
 
+// move to utils
 function link(url) {
-  Linking.canOpenURL(url).then(supported => {
+  Linking.canOpenURL(url).then((supported) => {
     if (!supported) {
-      console.log('Can\'t handle url: ' + url);
-    } else {
-      return Linking.openURL(url);
+      return url;
     }
-  }).catch(err => console.error('An error occurred', err));
+    return Linking.openURL(url);
+  }).catch((linkingError) => linkingError);
 }
+
+const styles = StyleSheet.create(venueStyles);
 
 export default class Venue extends Component {
   constructor(props) {
     super(props);
     this.state = {
       setTimes: setTimes(this.props)
-    }
+    };
   }
 
   setTimes() {
@@ -47,7 +46,7 @@ export default class Venue extends Component {
       function renderSetTimes() {
         return setTimesToRender.map((setTime) => {
           const venue = lookup.getOne(venues, setTime.venue);
-          return <Text key={setTime.id}>{setTime.start_time} @ {venue.name}</Text>
+          return <Text key={setTime.id}>{setTime.start_time} @ {venue.name}</Text>;
         });
       }
 
@@ -61,7 +60,7 @@ export default class Venue extends Component {
   }
 
   render() {
-    const addressURL = 'https://maps.google.com/?q=' + this.props.venue.street_address + ', Buffalo, NY';
+    const addressURL = `https://maps.google.com/?q=${this.props.venue.street_address}, Buffalo, NY`;
 
     return (
       <View style={styles.container}>
@@ -72,25 +71,3 @@ export default class Venue extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    paddingTop: 64
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    color: '#333333',
-    marginBottom: 5,
-  },
-  image: {
-    height: 200
-  }
-});

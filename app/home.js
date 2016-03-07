@@ -1,14 +1,15 @@
-'use strict';
-
 import React, {
   Component,
   StyleSheet,
   Text,
-  View,
-  TouchableHighlight
+  TouchableHighlight,
+  View
 } from 'react-native';
 
 import { fullSchedule } from './server';
+import homeStyles from './styles/home-styles';
+
+const styles = StyleSheet.create(homeStyles);
 
 export default class Home extends Component {
   constructor(props) {
@@ -38,22 +39,3 @@ export default class Home extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});

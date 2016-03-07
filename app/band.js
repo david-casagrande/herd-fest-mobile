@@ -1,16 +1,17 @@
-'use strict';
-
 import React, {
   Component,
+  Image,
+  ScrollView,
   StyleSheet,
   Text,
-  View,
-  Image,
-  ScrollView
+  View
 } from 'react-native';
 
+import bandStyles from './styles/band-styles';
 import lookup from './data/lookup';
 import utils from './utils';
+
+const styles = StyleSheet.create(bandStyles);
 
 function setTimes(props) {
   const bandSetTimes = lookup.getMany(props.fullSchedule.set_times, props.band.set_times);
@@ -22,7 +23,7 @@ export default class Band extends Component {
     super(props);
     this.state = {
       setTimes: setTimes(this.props)
-    }
+    };
   }
 
   setTimes() {
@@ -35,7 +36,7 @@ export default class Band extends Component {
       function renderSetTimes() {
         return setTimesToRender.map((setTime) => {
           const venue = lookup.getOne(venues, setTime.venue);
-          return <Text key={setTime.id}>{setTime.start_time} @ {venue.name}</Text>
+          return <Text key={setTime.id}>{setTime.start_time} @ {venue.name}</Text>;
         });
       }
 
@@ -63,25 +64,3 @@ export default class Band extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: '#fff',
-    paddingTop: 64
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    color: '#333333',
-    marginBottom: 5,
-  },
-  image: {
-    height: 200
-  }
-});

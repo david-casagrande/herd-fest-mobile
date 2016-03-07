@@ -5,16 +5,18 @@ function notEqual(l, r) {
 }
 
 function uniq(collection) {
-  return collection.filter((item, idx) => collection.indexOf(item) ===  idx);
+  return collection.filter((obj, idx) => collection.indexOf(obj) === idx);
 }
 
 function groupBy(collection, key) {
   const grouped = {};
 
-  collection.forEach((item) => {
-    const itemKey = item[key];
-    if(typeof grouped[itemKey] === 'undefined') { grouped[itemKey] = []; }
-    grouped[itemKey].push(item);
+  collection.forEach((obj) => {
+    const objKey = obj[key];
+    if (typeof grouped[objKey] === 'undefined') {
+      grouped[objKey] = [];
+    }
+    grouped[objKey].push(obj);
   });
 
   return grouped;
@@ -27,12 +29,16 @@ function formatDate(date, format = 'h:mmA') {
 
 function sortStartTimes(l, r) {
   function addTime(hour) {
-    if(hour < 7) { hour += 23; }
+    const amHours = 7;
+    const hours = 23;
+    if (hour < amHours) {
+      hour += hours;
+    }
     return hour;
   }
 
-  let lHour = moment.utc(l.startTime).hour();
-  let rHour = moment.utc(r.startTime).hour();
+  const lHour = moment.utc(l.startTime).hour();
+  const rHour = moment.utc(r.startTime).hour();
 
   return addTime(lHour) > addTime(rHour);
 }

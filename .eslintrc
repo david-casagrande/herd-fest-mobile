@@ -1,0 +1,21 @@
+{
+  "extends": ["strict"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "globals": {
+    "fetch": true
+  },
+  "rules": {
+    "array-bracket-spacing": [2, "never"],
+    "arrow-body-style": [2, "as-needed"],
+    "camelcase": [0],
+    "comma-dangle": [2, "never"],
+    "id-length": [2, {"min": 2, "max": 24, "properties": "never", "exceptions": ["l", "r"]}],
+    "max-len": [2, 140],
+    "newline-after-var": [0],
+    "template-curly-spacing": [2, "never"],
+  }
+}
