@@ -6,7 +6,7 @@ import React, {
   View
 } from 'react-native';
 
-import { fullSchedule } from './server';
+import fullSchedule from './data/full-schedule';
 import homeStyles from './styles/home-styles';
 
 const styles = StyleSheet.create(homeStyles);
@@ -21,7 +21,7 @@ export default class Home extends Component {
   }
 
   setFullSchedule() {
-    fullSchedule().then((json) => {
+    fullSchedule.get().then((json) => {
       this.setState({ fullSchedule: json });
     });
   }

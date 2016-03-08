@@ -11,7 +11,7 @@ import List from './list';
 import NavigationRouteMapper from './navigation/route-mapper';
 import Venue from './venue';
 
-import { fullSchedule } from './server';
+import fullSchedule from './data/full-schedule';
 import lookup from './data/lookup';
 import navStyles from './styles/nav-styles';
 
@@ -24,7 +24,7 @@ export default class NavigationBarSample extends Component {
   }
 
   setFullSchedule() {
-    fullSchedule().then((json) => {
+    fullSchedule.get().then((json) => {
       this.setState({ fullSchedule: json });
     });
   }

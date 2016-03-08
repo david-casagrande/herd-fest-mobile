@@ -7,6 +7,8 @@ import React, {
   View
 } from 'react-native';
 
+import ToggleSetTime from './toggle-set-time';
+
 import dayListDecorator from './decorators/day-list';
 import dayListStyles from './styles/day-list-styles';
 import utils from './utils';
@@ -52,6 +54,7 @@ function renderRow(rowData, navigator) {
       <View style={styles.rowContainer}>
         <Text style={[styles.row, styles.setTime]}>{utils.formatDate(rowData.startTime)}</Text>
         <Text style={styles.row}>{rowData.band.name}</Text>
+        <ToggleSetTime setTime={rowData}/>
       </View>
     </TouchableHighlight>
   );
