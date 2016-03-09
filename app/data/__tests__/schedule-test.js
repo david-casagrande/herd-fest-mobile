@@ -3,11 +3,12 @@ jest.dontMock('../schedule');
 describe('schedule', function() {
   const scheduleData = ['1', '3', '9'];
 
-  function setMock() {
+  function setMock(notSet = false) {
     jest.setMock('react-native', {
       AsyncStorage: {
         getItem() {
-          return new Promise((resolve) => resolve(JSON.stringify(scheduleData)));
+          const returnedValue = notSet ? null : JSON.stringify(scheduleData);
+          return new Promise((resolve) => resolve(returnedValue));
         },
 
         setItem(key, value) {
@@ -19,6 +20,7 @@ describe('schedule', function() {
 
   describe('get', function() {
     pit('returns empty array if schedule is null', function() {
+      setMock(true);
       const schedule = require('../schedule').default;
 
       return schedule.get().then(function(v) {
@@ -37,6 +39,8 @@ describe('schedule', function() {
   });
 
   describe('add', function() {
+    setMock();
+
     pit('adds item to schedule if it doesn\'t already exist', function() {
       const schedule = require('../schedule').default;
       const id = '10';
@@ -61,6 +65,8 @@ describe('schedule', function() {
   });
 
   describe('remove', function() {
+    setMock();
+
     pit('removes item to schedule if it exists', function() {
       const schedule = require('../schedule').default;
       const id = scheduleData[0];
