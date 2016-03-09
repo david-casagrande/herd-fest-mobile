@@ -1,6 +1,5 @@
-import React, {
-  AsyncStorage
-} from 'react-native';
+import React from 'react-native';
+const AsyncStorage = React.AsyncStorage;
 
 function get() {
   return AsyncStorage.getItem('schedule').then((value) => {
