@@ -25,6 +25,10 @@ const dayListStyles = {
     width: 74,
     color: 'white'
   },
+  toggleSetTime: {
+    position: 'absolute'
+    // textAlign: 'right'
+  },
   separator: {
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#CCCCCC'

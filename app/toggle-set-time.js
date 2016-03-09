@@ -34,10 +34,11 @@ export default class Home extends Component {
 
   render() {
     const text = this.state.scheduled ? 'Remove' : 'Add';
+    const style = this.props.style || {};
 
     return (
       <TouchableHighlight onPress={() => toggle(this.state.scheduled, this.props.setTime.id, this)}>
-        <Text>{text}</Text>
+        <Text style={style}>{text}</Text>
       </TouchableHighlight>
     );
   }

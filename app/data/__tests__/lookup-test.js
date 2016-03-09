@@ -1,8 +1,6 @@
 jest.dontMock('../lookup');
 
 const lookup = require('../lookup').default;
-const getMany = lookup.getMany;
-const getOne = lookup.getOne;
 
 describe('lookup', function() {
   const collection = [
@@ -14,9 +12,9 @@ describe('lookup', function() {
   describe('getMany', function() {
     it('returns an array of objects with ids matching given ids argument', function() {
       const ids = ['1', '3'];
-      const results = getMany(collection, ids);
+      const results = lookup.getMany(collection, ids);
 
-      // expect(results.length).toEqual(2);
+      expect(results.length).toEqual(2);
       expect(results[0]).toEqual(collection[0]);
       expect(results[1]).toEqual(collection[2]);
     });
@@ -25,7 +23,7 @@ describe('lookup', function() {
   describe('getMany', function() {
     it('returns an object from match in collection', function() {
       const id = '2';
-      const result = getOne(collection, id);
+      const result = lookup.getOne(collection, id);
 
       expect(result).toEqual(collection[1]);
     });

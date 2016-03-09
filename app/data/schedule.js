@@ -2,7 +2,6 @@ import React, {
   AsyncStorage
 } from 'react-native';
 
-
 function get() {
   return AsyncStorage.getItem('schedule').then((value) => {
     return new Promise((resolve, reject) => {
@@ -32,6 +31,7 @@ function remove(id) {
   return get()
     .then((schedule) => {
       const idx = schedule.indexOf(id);
+
       if (schedule.indexOf(id) > -1) {
         schedule.splice(idx, 1);
       }

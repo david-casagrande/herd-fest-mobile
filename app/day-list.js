@@ -54,7 +54,7 @@ function renderRow(rowData, navigator) {
       <View style={styles.rowContainer}>
         <Text style={[styles.row, styles.setTime]}>{utils.formatDate(rowData.startTime)}</Text>
         <Text style={styles.row}>{rowData.band.name}</Text>
-        <ToggleSetTime setTime={rowData}/>
+        <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime]} />
       </View>
     </TouchableHighlight>
   );
