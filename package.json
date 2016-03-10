@@ -11,38 +11,39 @@
     "react-native": "^0.21.0"
   },
   "devDependencies": {
-    "babel-jest": "6.0.1",
+    "babel-jest": "^9.0.2",
     "eslint": "^2.2.0",
     "eslint-config-strict": "^8.4.0",
     "eslint-plugin-filenames": "^0.2.0",
     "eslint-plugin-react": "^4.2.0",
     "eslint-plugin-react-native": "^1.0.0",
     "install": "^0.5.5",
-    "jest-cli": "0.8.2",
-    "npm": "^3.8.0"
+    "jest-cli": "^0.9.1",
+    "npm": "^3.8.0",
+    "react-addons-test-utils": "^0.14.7"
   },
   "jest": {
     "testPathDirs": [
       "<rootDir>"
     ],
-    "scriptPreprocessor": "node_modules/react-native/jestSupport/preprocessor.js",
-    "setupEnvScriptFile": "node_modules/react-native/jestSupport/env.js",
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "packager/react-packager/src/Activity/"
-    ],
+    "scriptPreprocessor": "<rootDir>/node_modules/react-native/jestSupport/preprocessor.js",
+    "setupEnvScriptFile": "<rootDir>/node_modules/react-native/jestSupport/env.js",
     "testFileExtensions": [
+      "js"
+    ],
+    "moduleFileExtensions": [
       "js"
     ],
     "unmockedModulePathPatterns": [
       "promise",
       "source-map",
       "<rootDir>/node_modules/react",
-      "<rootDir>/node_modules/fbjs",
-      "<rootDir>/node_modules/react-dom",
-      "<rootDir>/node_modules/react-addons-test-utils"
+      "<rootDir>/node_modules/fbjs"
     ],
-    "verbose": true,
-    "collectCoverage": true
+    "globals": {
+      "fetch": true
+    },
+    "verbose": false,
+    "collectCoverage": false
   }
 }
