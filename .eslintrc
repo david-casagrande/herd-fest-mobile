@@ -23,6 +23,7 @@
     "global-require": 0,
     "id-blacklist": [0],
     "id-length": [2, {"min": 2, "max": 24, "properties": "never", "exceptions": ["l", "r"]}],
+    "id-match": [0],
     "max-len": [2, 140],
     "newline-after-var": [0],
     no-magic-numbers: [2, { "ignoreArrayIndexes": true, "ignore": [-1, 0, 1, 2] }],

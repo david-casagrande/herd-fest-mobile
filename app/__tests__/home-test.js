@@ -54,8 +54,8 @@ describe('Home', () => {
     const home = renderScreen(component, null, { fullSchedule: { days } });
     const homeDays = home.output.props.children[1];
 
-    expect(homeDays[0].props.children[0]).toEqual('Day 1');
-    expect(homeDays[1].props.children[0]).toEqual('Day 2');
+    expect(homeDays[0].props.children.props.children).toEqual('Day 1');
+    expect(homeDays[1].props.children.props.children).toEqual('Day 2');
   });
 
   it('navigates to day', () => {

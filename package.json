@@ -36,6 +36,7 @@
     "unmockedModulePathPatterns": [
       "promise",
       "source-map",
+      "<rootDir>/node_modules/moment",
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/fbjs",
       "<rootDir>/node_modules/react-addons-test-utils"

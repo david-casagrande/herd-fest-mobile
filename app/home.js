@@ -33,7 +33,7 @@ export default class Home extends Component {
   render() {
     const days = this.state.fullSchedule.days.sort((l, r) => l.name > r.name).map((day) => {
       return (
-        <TouchableOpacity key={day.id} onPress={() => this.goToDay(day)}>{day.name}>
+        <TouchableOpacity key={day.id} onPress={() => this.goToDay(day)}>
           <Text>{day.name}</Text>
         </TouchableOpacity>
       );

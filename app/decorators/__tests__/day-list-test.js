@@ -28,73 +28,47 @@ const bands = [
 const setTimes = [
   { id: 'st-1', start_time: '2000-01-01T20:00:00.000Z', band: 'b-1' },
   { id: 'st-2', start_time: '2000-01-01T01:00:00.000Z', band: 'b-1' },
-  { id: 'st-3', start_time: '2000-01-01T00:00:00.000Z', band: 'b-3' },
+  { id: 'st-3', start_time: '2000-01-01T01:00:00.000Z', band: 'b-3' },
   { id: 'st-4', start_time: '2000-01-01T23:00:00.000Z', band: 'b-4' }
 ];
 
 const fullSchedule = {
   days: [day],
-  venues: venues,
-  bands: bands,
+  venues,
+  bands,
   set_times: setTimes
 };
 
-describe('dayListDecorator', function() {
-  it('converts day', function() {
+describe('dayListDecorator', () => {
+  it('converts day', () => {
     const result = dayListDecorator(day, fullSchedule);
-    const expected = {
-      // id: day.id,
-      // name: day.name,
-      venues: [
-        {
-          id: venues[1].id,
-          name: venues[1].name,
-          setTimes: [
-            {
-              id: setTimes[3].id,
-              startTime: setTimes[3].start_time,
-              band: {
-                id: bands[2].id,
-                name: bands[2].name
-              }
-            },
-            {
-              id: setTimes[2].id,
-              startTime: setTimes[2].start_time,
-              band: {
-                id: bands[3].id,
-                name: bands[3].name
-              }
-            }
-          ]
-        },
-        {
-          id: venues[0].id,
-          name: venues[0].name,
-          setTimes: [
-            {
-              id: setTimes[0].id,
-              startTime: setTimes[3].start_time,
-              band: {
-                id: bands[0].id,
-                name: bands[0].name
-              }
-            },
-            {
-              id: setTimes[1].id,
-              startTime: setTimes[1].start_time,
-              band: {
-                id: bands[0].id,
-                name: bands[0].name
-              }
-            }
-          ]
-        }
-      ]
-    };
 
     expect(result.id).toEqual(day.id);
     expect(result.name).toEqual(day.name);
+  });
+
+  it('embeds and sorts venues on day', () => {
+    const result = dayListDecorator(day, fullSchedule);
+
     expect(result.venues.length).toEqual(2);
+    expect(result.venues[0].name).toEqual('Venue A');
+    expect(result.venues[1].name).toEqual('Venue B');
+  });
+
+  it('embeds and sorts set times on venues', () => {
+    const result = dayListDecorator(day, fullSchedule);
+    const venue = result.venues[0];
+
+    expect(venue.setTimes.length).toEqual(2);
+    expect(venue.setTimes[0].id).toEqual('st-4');
+    expect(venue.setTimes[1].id).toEqual('st-3');
+  });
+
+  it('embeds and sorts bands on set times', () => {
+    const result = dayListDecorator(day, fullSchedule);
+    const venue = result.venues[0];
+    const setTime = venue.setTimes[0];
+
+    expect(setTime.band.name).toEqual('Band 4');
   });
 });

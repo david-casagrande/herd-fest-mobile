@@ -1,6 +1,7 @@
 import lookup from '../data/lookup';
 import utils from '../utils';
 
+/* eslint  arrow-body-style: "off" */
 function venueSetTimes(venue, setTimes, bands) {
   return setTimes
     .filter((setTime) => venue.set_times.indexOf(setTime.id) > -1)

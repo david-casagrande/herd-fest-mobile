@@ -1,4 +1,3 @@
-jest.dontMock('moment');
 jest.dontMock('../utils');
 
 const utils = require('../utils').default;
