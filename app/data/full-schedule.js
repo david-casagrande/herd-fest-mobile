@@ -4,7 +4,7 @@ const domain = 'http://localhost:3000';
 const fullScheduleURL = `${domain}/api/full_schedule`;
 
 function get() {
-  return fetch(fullScheduleURL).then((resp) => resp.json()).catch((fsError) => fsError);
+  return fetch(fullScheduleURL).then((resp) => resp.json());
 }
 
 const fullSchedule = {

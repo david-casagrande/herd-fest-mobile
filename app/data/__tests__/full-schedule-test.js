@@ -13,7 +13,7 @@ function setMock(data) {
 
 describe('fullSchedule', function() {
   describe('get', function() {
-    pit('returns parsed json data', function() {
+    pit('returns parsed json data on success', function() {
       const data = { id: '1' };
       setMock(data);
       const fullSchedule = require('../full-schedule').default;

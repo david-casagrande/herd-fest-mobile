@@ -1,10 +1,10 @@
-import React, {
-  Component,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View
-} from 'react-native';
+import React from 'react-native';
+
+const Component = React.Component;
+const StyleSheet = React.StyleSheet
+const Text = React.Text
+const TouchableHighlight = React.TouchableHighlight
+const View = React.View
 
 import fullSchedule from './data/full-schedule';
 import homeStyles from './styles/home-styles';

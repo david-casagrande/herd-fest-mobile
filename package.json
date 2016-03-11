@@ -38,12 +38,14 @@
       "promise",
       "source-map",
       "<rootDir>/node_modules/react",
-      "<rootDir>/node_modules/fbjs"
+      "<rootDir>/node_modules/fbjs",
+      "<rootDir>/node_modules/react-addons-test-utils"
     ],
     "globals": {
       "fetch": true
     },
-    "verbose": false,
-    "collectCoverage": false
+    "verbose": true,
+    "collectCoverage": true,
+    "testPathIgnorePatterns": ["/node_modules/", "/__mocks__/"]
   }
 }
