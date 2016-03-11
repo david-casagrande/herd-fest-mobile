@@ -1,6 +1,6 @@
 jest.dontMock('../schedule');
 
-describe('schedule', function() {
+describe('schedule', () => {
   const scheduleData = ['1', '3', '9'];
 
   function setMock(notSet = false) {
@@ -18,45 +18,41 @@ describe('schedule', function() {
     });
   }
 
-  describe('get', function() {
-    pit('returns empty array if schedule is null', function() {
+  describe('get', () => {
+    pit('returns empty array if schedule is null', () => {
       setMock(true);
       const schedule = require('../schedule').default;
 
-      return schedule.get().then(function(v) {
-        return expect(v).toEqual([]);
-      });
+      return schedule.get().then((data) => expect(data).toEqual([]));
     });
 
-    pit('returns empty array if schedule is null', function() {
+    pit('returns empty array if schedule is null', () => {
       setMock();
       const schedule = require('../schedule').default;
 
-      return schedule.get().then(function(v) {
-        return expect(v).toEqual(scheduleData);
-      });
+      return schedule.get().then((data) => expect(data).toEqual(scheduleData));
     });
   });
 
-  describe('add', function() {
+  describe('add', () => {
     setMock();
 
-    pit('adds item to schedule if it doesn\'t already exist', function() {
+    pit('adds item to schedule if it doesn\'t already exist', () => {
       const schedule = require('../schedule').default;
       const id = '10';
 
-      return schedule.add(id).then(function(sentValues) {
+      return schedule.add(id).then((sentValues) => {
         const expected = JSON.stringify(scheduleData.concat([id]));
 
         return expect(sentValues).toEqual({ key: 'schedule', value: expected });
       });
     });
 
-    pit('does not add item to schedule if it already exist', function() {
+    pit('does not add item to schedule if it already exist', () => {
       const schedule = require('../schedule').default;
       const id = scheduleData[0];
 
-      return schedule.add(id).then(function(sentValues) {
+      return schedule.add(id).then((sentValues) => {
         const expected = JSON.stringify(scheduleData);
 
         return expect(sentValues).toEqual({ key: 'schedule', value: expected });
@@ -64,25 +60,25 @@ describe('schedule', function() {
     });
   });
 
-  describe('remove', function() {
+  describe('remove', () => {
     setMock();
 
-    pit('removes item to schedule if it exists', function() {
+    pit('removes item to schedule if it exists', () => {
       const schedule = require('../schedule').default;
       const id = scheduleData[0];
 
-      return schedule.remove(id).then(function(sentValues) {
+      return schedule.remove(id).then((sentValues) => {
         const expected = JSON.stringify(scheduleData.slice(1, scheduleData.length));
 
         return expect(sentValues).toEqual({ key: 'schedule', value: expected });
       });
     });
 
-    pit('does not remove item if it exists', function() {
+    pit('does not remove item if it exists', () => {
       const schedule = require('../schedule').default;
       const id = '10';
 
-      return schedule.remove(id).then(function(sentValues) {
+      return schedule.remove(id).then((sentValues) => {
         const expected = JSON.stringify(scheduleData);
 
         return expect(sentValues).toEqual({ key: 'schedule', value: expected });

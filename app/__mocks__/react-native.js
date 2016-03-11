@@ -5,30 +5,34 @@ const ReactNative = React;
 
 ReactNative.StyleSheet = {
   create: function create(styles) {
-      return styles;
+    return styles;
   }
 };
 
 class View extends React.Component {
-  render() { return false; }
+  render() {
+    return false;
+  }
 }
 
 class ListView extends React.Component {
   static DataSource() {
+    return false;
   }
 }
 
 class AppRegistry {
-  static registerComponent () {
+  static registerComponent() {
+    return false;
   }
 }
 
-const AsyncStorage = {
-  getItem() {
+class AsyncStorage {
+  static getItem() {
     return new Promise((resolve) => resolve(null));
-  },
+  }
 
-  setItem(key, value) {
+  static setItem(key, value) {
     return new Promise((resolve) => resolve({ key, value }));
   }
 }

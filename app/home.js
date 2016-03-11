@@ -3,7 +3,7 @@ import React from 'react-native';
 const Component = React.Component;
 const StyleSheet = React.StyleSheet
 const Text = React.Text
-const TouchableHighlight = React.TouchableHighlight
+const TouchableOpacity = React.TouchableOpacity
 const View = React.View
 
 import fullSchedule from './data/full-schedule';
@@ -32,7 +32,11 @@ export default class Home extends Component {
 
   render() {
     const days = this.state.fullSchedule.days.sort((l, r) => l.name > r.name).map((day) => {
-      return <Text key={day.id} onPress={() => this.goToDay(day)}>{day.name}</Text>;
+      return (
+        <TouchableOpacity key={day.id} onPress={() => this.goToDay(day)}>{day.name}>
+          <Text>{day.name}</Text>
+        </TouchableOpacity>
+      );
     });
 
     return (

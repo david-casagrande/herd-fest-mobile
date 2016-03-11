@@ -1,9 +1,9 @@
 jest.dontMock('../full-schedule');
 
 function setMock(data) {
-  jest.setMock('../fetch', function() {
+  jest.setMock('../fetch', () => {
     const resp = {
-      json: function() {
+      json() {
         return new Promise((resolve) => resolve(data));
       }
     };
@@ -11,16 +11,14 @@ function setMock(data) {
   });
 }
 
-describe('fullSchedule', function() {
-  describe('get', function() {
-    pit('returns parsed json data on success', function() {
+describe('fullSchedule', () => {
+  describe('get', () => {
+    pit('returns parsed json data on success', () => {
       const data = { id: '1' };
       setMock(data);
       const fullSchedule = require('../full-schedule').default;
 
-      return fullSchedule.get().then(function(v) {
-        return expect(v).toEqual(data);
-      });
+      return fullSchedule.get().then((json) => expect(json).toEqual(data));
     });
   });
 });

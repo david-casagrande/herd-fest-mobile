@@ -6,16 +6,23 @@
     }
   },
   "globals": {
-    "fetch": true
+    "fetch": true,
+    "jest": true,
+    "describe": true,
+    "expect": true,
+    "it": true,
+    "pit": true
   },
   "rules": {
     "array-bracket-spacing": [2, "never"],
     "arrow-body-style": [2, "as-needed"],
     "camelcase": [0],
     "comma-dangle": [2, "never"],
+    "global-require": 0,
+    "id-blacklist": [0],
     "id-length": [2, {"min": 2, "max": 24, "properties": "never", "exceptions": ["l", "r"]}],
     "max-len": [2, 140],
     "newline-after-var": [0],
-    "template-curly-spacing": [2, "never"],
+    "template-curly-spacing": [2, "never"]
   }
 }
