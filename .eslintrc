@@ -23,6 +23,7 @@
     "id-length": [2, {"min": 2, "max": 24, "properties": "never", "exceptions": ["l", "r"]}],
     "max-len": [2, 140],
     "newline-after-var": [0],
+    no-magic-numbers: [2, { "ignore": [-1, 0, 1, 2] }],
     "template-curly-spacing": [2, "never"]
   }
 }

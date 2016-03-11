@@ -1,6 +1,8 @@
 function getMany(collection, ids) {
   const lookupTable = {};
-  collection.forEach((obj) => lookupTable[obj.id] = obj);
+  collection.forEach((obj) => {
+    lookupTable[obj.id] = obj;
+  });
   return ids.map((id) => lookupTable[id]);
 }
 

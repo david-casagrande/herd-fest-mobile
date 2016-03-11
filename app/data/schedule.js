@@ -1,18 +1,20 @@
 import React from 'react-native';
 const AsyncStorage = React.AsyncStorage;
 
-function get() {
-  return AsyncStorage.getItem('schedule').then((value) => {
-    return new Promise((resolve, reject) => {
-      let schedule = [];
+function parse(value) {
+  return new Promise((resolve) => {
+    let schedule = [];
 
-      if (value) {
-        schedule = JSON.parse(value);
-      }
+    if (value) {
+      schedule = JSON.parse(value);
+    }
 
-      resolve(schedule);
-    });
+    resolve(schedule);
   });
+}
+
+function get() {
+  return AsyncStorage.getItem('schedule').then((value) => parse(value));
 }
 
 function add(id) {
