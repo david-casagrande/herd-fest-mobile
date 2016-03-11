@@ -26,9 +26,13 @@ export default class Home extends Component {
     });
   }
 
+  goToDay(day) {
+    this.props.navigator.push({ name: 'Day', index: 1, title: day.name, day_id: day.id });
+  }
+
   render() {
     const days = this.state.fullSchedule.days.sort((l, r) => l.name > r.name).map((day) => {
-      return <Text key={day.id} onPress={() => this.props.navigator.push({ name: 'Day', index: 1, title: day.name, day_id: day.id })}>{day.name}</Text>;
+      return <Text key={day.id} onPress={() => this.goToDay(day)}>{day.name}</Text>;
     });
 
     return (

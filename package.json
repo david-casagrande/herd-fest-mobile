@@ -46,6 +46,6 @@
     },
     "verbose": true,
     "collectCoverage": true,
-    "testPathIgnorePatterns": ["/node_modules/", "/__mocks__/"]
+    "testPathIgnorePatterns": ["/node_modules/", "app/__mocks__/"]
   }
 }

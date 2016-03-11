@@ -14,9 +14,10 @@ const days = [
   }
 ];
 
-function renderScreen(component, state) {
+function renderScreen(component, props = {}, state) {
   const renderer = utils.createRenderer();
-  const instance = React.createElement(component);
+  const instance = React.createElement(component, props);
+
   renderer.render(instance);
 
   if (state) {
@@ -48,10 +49,24 @@ describe('Home', function() {
   });
 
   it('sorts and renders the days', function() {
-    const home = renderScreen(component, { fullSchedule: { days } });
+    const home = renderScreen(component, null, { fullSchedule: { days } });
     const homeDays = home.output.props.children[1];
 
     expect(homeDays[0].props.children).toEqual('Day 1');
     expect(homeDays[1].props.children).toEqual('Day 2');
+  });
+
+  it('navigates to day', function() {
+    const expected = { name: 'Day', index: 1, title: 'Day 1', day_id: '2' }
+    const navigator = {
+      push: function(data) {
+        expect(data).toEqual(expected);
+      }
+    };
+
+    const home = renderScreen(component, { navigator }, { fullSchedule: { days } });
+    const homeDays = home.output.props.children[1];
+
+    homeDays[0].props.onPress();
   });
 });
