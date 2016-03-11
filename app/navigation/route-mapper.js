@@ -1,8 +1,9 @@
-import React, {
-  StyleSheet,
-  Text,
-  TouchableOpacity
-} from 'react-native';
+import React from 'react-native';
+
+// const Component = React.Component;
+const StyleSheet = React.StyleSheet;
+const Text = React.Text; // eslint-disable-line no-unused-vars
+const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unused-vars
 
 import navStyles from '../styles/nav-styles';
 
@@ -21,8 +22,10 @@ import navStyles from '../styles/nav-styles';
 
 const styles = StyleSheet.create(navStyles);
 
+// all methods get route, navigator, index, navState arguments
+
 const NavigationRouteMapper = {
-  LeftButton: function leftButton(route, navigator, index, navState) {
+  LeftButton: function leftButton(route, navigator, index) {
     if (index < 1) {
       return null;
     }
@@ -40,7 +43,7 @@ const NavigationRouteMapper = {
     );
   },
 
-  RightButton: function rightButton(route, navigator, index, navState) {
+  RightButton: function rightButton() {
     // if(index < 1) {
     //   return null;
     // }
@@ -55,7 +58,7 @@ const NavigationRouteMapper = {
     // );
   },
 
-  Title: function title(route, navigator, index, navState) {
+  Title: function title(route, navigator, index) {
     if (index < 1) {
       return null;
     }

@@ -1,17 +1,16 @@
-import React, {
-  Component,
-  ListView,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View
-} from 'react-native';
-
-import ToggleSetTime from './toggle-set-time';
+import React from 'react-native';
+import ToggleSetTime from './toggle-set-time'; // eslint-disable-line no-unused-vars
 
 import dayListDecorator from './decorators/day-list';
 import dayListStyles from './styles/day-list-styles';
 import utils from './utils';
+
+const Component = React.Component;
+const ListView = React.ListView;
+const StyleSheet = React.StyleSheet;
+const Text = React.Text; // eslint-disable-line no-unused-vars
+const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unused-vars
+const View = React.View; // eslint-disable-line no-unused-vars
 
 const styles = StyleSheet.create(dayListStyles);
 
@@ -50,13 +49,13 @@ function renderRow(rowData, navigator) {
   }
 
   return (
-    <TouchableHighlight underlayColor={'#ccc'} onPress={goToRow}>
+    <TouchableOpacity underlayColor={'#ccc'} onPress={goToRow}>
       <View style={styles.rowContainer}>
         <Text style={[styles.row, styles.setTime]}>{utils.formatDate(rowData.startTime)}</Text>
         <Text style={styles.row}>{rowData.band.name}</Text>
         <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime]} />
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 }
 
@@ -66,13 +65,13 @@ function renderSectionHeader(sectionData, sectionId, navigator) {
   }
 
   return (
-    <TouchableHighlight underlayColor={'#ccc'} onPress={goToSection}>
+    <TouchableOpacity underlayColor={'#ccc'} onPress={goToSection}>
       <Text style={styles.sectionHeader}>{sectionData.name}</Text>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 }
 
-function renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
+function renderSeparator(sectionID, rowID) {
   return <View key={`${sectionID}-${rowID}`} style={styles.separator} />;
 }
 
@@ -91,9 +90,7 @@ export default class DayList extends Component {
           style={styles.listView}
           dataSource={this.state.dataSource}
           renderRow={(rowData) => renderRow(rowData, this.props.navigator)}
-          renderSectionHeader={(sectionData, sectionId) => {
-            return renderSectionHeader(sectionData, sectionId, this.props.navigator);
-          }}
+          renderSectionHeader={(sectionData, sectionId) => renderSectionHeader(sectionData, sectionId, this.props.navigator)}
           renderSeparator={renderSeparator}
         />
       </View>

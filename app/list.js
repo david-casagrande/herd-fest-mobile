@@ -1,13 +1,13 @@
-import React, {
-  Component,
-  ListView,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import React from 'react-native';
 
 import listStyles from './styles/list-styles';
 import utils from './utils';
+
+const Component = React.Component;
+const ListView = React.ListView;
+const StyleSheet = React.StyleSheet;
+const Text = React.Text; // eslint-disable-line no-unused-vars
+const View = React.View; // eslint-disable-line no-unused-vars
 
 const styles = StyleSheet.create(listStyles);
 

@@ -21,7 +21,7 @@ function renderScreen(component, props = {}, state) {
   renderer.render(instance);
 
   if (state) {
-    renderer._instance._instance.setState(state); /* eslint no-underscore-dangle: "off" */
+    renderer._instance._instance.setState(state); // eslint-disable-line no-underscore-dangle
   }
 
   const output = renderer.getRenderOutput();
@@ -59,7 +59,7 @@ describe('Home', () => {
   });
 
   it('navigates to day', () => {
-    const expected = { name: 'Day', index: 1, title: 'Day 1', day_id: '2' }; /* eslint id-match: "off" */
+    const expected = { name: 'Day', index: 1, title: 'Day 1', day_id: '2' }; // eslint-disable-line id-match
     const navigator = {
       push: (data) => {
         expect(data).toEqual(expected);

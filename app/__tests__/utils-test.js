@@ -20,8 +20,8 @@ describe('utils', () => {
 
   describe('uniq', () => {
     it('returns array of unique values', () => {
-      const collection = [1, 1, 2, 3, 4, 4]; /* eslint no-magic-numbers: "off" */
-      const expected = [1, 2, 3, 4];  /* eslint no-magic-numbers: "off" */
+      const collection = [1, 1, 2, 3, 4, 4]; // eslint-disable-line no-magic-numbers
+      const expected = [1, 2, 3, 4];  // eslint-disable-line no-magic-numbers
 
       expect(uniq(collection)).toEqual(expected);
     });

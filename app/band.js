@@ -1,15 +1,15 @@
-import React, {
-  Component,
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import React from 'react-native';
 
 import bandStyles from './styles/band-styles';
 import lookup from './data/lookup';
 import utils from './utils';
+
+const Component = React.Component;
+const Image = React.Image; // eslint-disable-line no-unused-vars
+const ScrollView = React.ScrollView; // eslint-disable-line no-unused-vars
+const StyleSheet = React.StyleSheet;
+const Text = React.Text; // eslint-disable-line no-unused-vars
+const View = React.View; // eslint-disable-line no-unused-vars
 
 const styles = StyleSheet.create(bandStyles);
 
@@ -53,7 +53,7 @@ export default class Band extends Component {
     return (
       <ScrollView style={styles.container}>
         <Image
-          source={{uri: this.props.band.image_url}}
+          source={{ uri: this.props.band.image_url }}
           style={styles.image}
           resizeMode={'cover'}
         />

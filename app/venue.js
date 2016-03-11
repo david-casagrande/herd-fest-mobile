@@ -1,15 +1,15 @@
-import React, {
-  Component,
-  Linking,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import React from 'react-native';
 
 import lookup from './data/lookup';
 import utils from './utils';
 import venueStyles from './styles/venue-styles';
+
+const Component = React.Component;
+const Linking = React.Linking;
+const StyleSheet = React.StyleSheet;
+const Text = React.Text; // eslint-disable-line no-unused-vars
+const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unused-vars
+const View = React.View; // eslint-disable-line no-unused-vars
 
 function setTimes(props) {
   const venueSetTimes = lookup.getMany(props.fullSchedule.set_times, props.venue.set_times);

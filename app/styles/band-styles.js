@@ -1,5 +1,3 @@
-import React, { StyleSheet } from 'react-native';
-
 const bandStyles = {
   container: {
     flex: 1,
@@ -11,11 +9,11 @@ const bandStyles = {
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    margin: 10
   },
   instructions: {
     color: '#333333',
-    marginBottom: 5,
+    marginBottom: 5
   },
   image: {
     height: 200

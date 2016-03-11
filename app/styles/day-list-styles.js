@@ -1,4 +1,5 @@
-import React, { StyleSheet } from 'react-native';
+import React from 'react-native';
+const StyleSheet = React.StyleSheet;
 
 const dayListStyles = {
   container: {

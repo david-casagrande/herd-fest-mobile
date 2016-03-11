@@ -1,18 +1,18 @@
-import React, {
-  Component,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  AsyncStorage
-} from 'react-native';
+import React from 'react-native';
 
 import scheduleData from './data/schedule';
 
-const styles = StyleSheet.create({});
+const Component = React.Component;
+// const StyleSheet = React.StyleSheet;
+const Text = React.Text; // eslint-disable-line no-unused-vars
+const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unused-vars
+
+
+// const styles = StyleSheet.create({});
 
 function toggle(scheduled, id, context) {
   const method = scheduled ? 'remove' : 'add';
-  scheduleData[method](id).then(() => context.checkSchedule())
+  scheduleData[method](id).then(() => context.checkSchedule());
 }
 
 export default class Home extends Component {
@@ -21,14 +21,14 @@ export default class Home extends Component {
 
     this.state = {
       scheduled: false
-    }
+    };
 
     this.checkSchedule();
   }
 
   checkSchedule() {
     scheduleData.get().then((schedule) => {
-      this.setState({ scheduled: schedule.indexOf(this.props.setTime.id) > -1 })
+      this.setState({ scheduled: schedule.indexOf(this.props.setTime.id) > -1 });
     });
   }
 
@@ -37,9 +37,9 @@ export default class Home extends Component {
     const style = this.props.style || {};
 
     return (
-      <TouchableHighlight onPress={() => toggle(this.state.scheduled, this.props.setTime.id, this)}>
+      <TouchableOpacity onPress={() => toggle(this.state.scheduled, this.props.setTime.id, this)}>
         <Text style={style}>{text}</Text>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   }
 }

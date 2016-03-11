@@ -1,19 +1,18 @@
-import React, {
-  Component,
-  Navigator,
-  StyleSheet
-} from 'react-native';
-
-import Band from './band';
-import DayList from './day-list';
-import Home from './home';
-import List from './list';
+import Band from './band'; // eslint-disable-line no-unused-vars
+import DayList from './day-list'; // eslint-disable-line no-unused-vars
+import Home from './home'; // eslint-disable-line no-unused-vars
+import List from './list'; // eslint-disable-line no-unused-vars
 import NavigationRouteMapper from './navigation/route-mapper';
-import Venue from './venue';
+import React from 'react-native';
+import Venue from './venue'; // eslint-disable-line no-unused-vars
 
 import fullSchedule from './data/full-schedule';
 import lookup from './data/lookup';
 import navStyles from './styles/nav-styles';
+
+const Component = React.Component;
+const StyleSheet = React.StyleSheet;
+const Navigator = React.Navigator; // eslint-disable-line no-unused-vars
 
 const styles = StyleSheet.create(navStyles);
 
