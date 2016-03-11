@@ -21,7 +21,7 @@ function renderScreen(component, props = {}, state) {
   renderer.render(instance);
 
   if (state) {
-    renderer._instance._instance.setState(state);
+    renderer._instance._instance.setState(state); /* eslint no-underscore-dangle: "off" */
   }
 
   const output = renderer.getRenderOutput();
@@ -34,24 +34,23 @@ function renderScreen(component, props = {}, state) {
 
 function setMock() {
   jest.setMock('../data/full-schedule', {
-    get: function() {
+    get() {
       return new Promise((resolve) => resolve({}));
     }
   });
 }
 
-describe('Home', function() {
-  let component;
+describe('Home', () => {
+  let component = null;
 
-  beforeEach(function() {
+  beforeEach(() => {
     setMock();
     component = require('../home').default;
   });
 
-  xit('gets full schedule on init', function() {
-  });
+  xit('gets full schedule on init', () => null);
 
-  it('sorts and renders the days', function() {
+  it('sorts and renders the days', () => {
     const home = renderScreen(component, null, { fullSchedule: { days } });
     const homeDays = home.output.props.children[1];
 
@@ -59,10 +58,10 @@ describe('Home', function() {
     expect(homeDays[1].props.children[0]).toEqual('Day 2');
   });
 
-  it('navigates to day', function() {
-    const expected = { name: 'Day', index: 1, title: 'Day 1', day_id: '2' }
+  it('navigates to day', () => {
+    const expected = { name: 'Day', index: 1, title: 'Day 1', day_id: '2' }; /* eslint id-match: "off" */
     const navigator = {
-      push: function(data) {
+      push: (data) => {
         expect(data).toEqual(expected);
       }
     };

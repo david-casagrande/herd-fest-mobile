@@ -6,12 +6,14 @@
     }
   },
   "globals": {
-    "fetch": true,
-    "jest": true,
+    "beforeEach": true,
     "describe": true,
     "expect": true,
+    "fetch": true,
     "it": true,
-    "pit": true
+    "jest": true,
+    "pit": true,
+    "xit": true
   },
   "rules": {
     "array-bracket-spacing": [2, "never"],
@@ -23,7 +25,7 @@
     "id-length": [2, {"min": 2, "max": 24, "properties": "never", "exceptions": ["l", "r"]}],
     "max-len": [2, 140],
     "newline-after-var": [0],
-    no-magic-numbers: [2, { "ignore": [-1, 0, 1, 2] }],
+    no-magic-numbers: [2, { "ignoreArrayIndexes": true, "ignore": [-1, 0, 1, 2] }],
     "template-curly-spacing": [2, "never"]
   }
 }

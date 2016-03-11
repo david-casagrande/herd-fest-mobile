@@ -8,28 +8,28 @@ const groupBy = utils.groupBy;
 const formatDate = utils.formatDate;
 const sortStartTimes = utils.sortStartTimes;
 
-describe('utils', function() {
-  describe('notEqual', function() {
-    it('returns true when items are not equal', function() {
+describe('utils', () => {
+  describe('notEqual', () => {
+    it('returns true when items are not equal', () => {
       expect(notEqual(2, 1)).toBeTruthy();
     });
 
-    it('returns true when items are equal', function() {
+    it('returns true when items are equal', () => {
       expect(notEqual(1, 1)).toBeFalsy();
     });
   });
 
-  describe('uniq', function() {
-    it('returns array of unique values', function() {
-      const collection = [1, 1, 2, 3, 4, 4];
-      const expected = [1, 2, 3, 4];
+  describe('uniq', () => {
+    it('returns array of unique values', () => {
+      const collection = [1, 1, 2, 3, 4, 4]; /* eslint no-magic-numbers: "off" */
+      const expected = [1, 2, 3, 4];  /* eslint no-magic-numbers: "off" */
 
       expect(uniq(collection)).toEqual(expected);
     });
   });
 
-  describe('groupBy', function() {
-    it('returns object collection grouped as key', function() {
+  describe('groupBy', () => {
+    it('returns object collection grouped as key', () => {
       const collection = [
         { id: 1, group: 'g-1' },
         { id: 2, group: 'g-2' },
@@ -48,21 +48,21 @@ describe('utils', function() {
     });
   });
 
-  describe('formatDate', function() {
+  describe('formatDate', () => {
     const date = '2000-01-01T04:00:00.000Z';
 
-    it('returns the date in the given format', function() {
+    it('returns the date in the given format', () => {
       const expected = '04:00 am';
       expect(formatDate(date, 'hh:mm a')).toEqual(expected);
     });
 
-    it('returns the date in the defualt format', function() {
+    it('returns the date in the defualt format', () => {
       const expected = '4:00AM';
       expect(formatDate(date)).toEqual(expected);
     });
   });
 
-  describe('sortStartTimes', function() {
+  describe('sortStartTimes', () => {
     const times = [
       { startTime: '2000-01-01T23:00:00.000Z' },
       { startTime: '2000-01-01T06:00:00.000Z' },
@@ -71,7 +71,7 @@ describe('utils', function() {
       { startTime: '2000-01-01T07:00:00.000Z' }
     ];
 
-    it('handles sorting start times', function() {
+    it('handles sorting start times', () => {
       const result = Array.from(times).sort(sortStartTimes);
       const expected = [
         times[4],
