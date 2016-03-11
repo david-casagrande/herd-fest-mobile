@@ -14,25 +14,31 @@ const dayListStyles = {
   },
   rowContainer: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   row: {
     paddingTop: 10,
     paddingBottom: 10,
-    paddingLeft: 10
   },
   setTime: {
     backgroundColor: 'red',
     width: 74,
-    color: 'white'
+    color: 'white',
+    textAlign: 'center'
+  },
+  band: {
+    flex: 1,
+    paddingLeft: 10
   },
   toggleSetTime: {
-    position: 'absolute'
-    // textAlign: 'right'
+    backgroundColor: '#eee',
+    width: 40,
+    textAlign: 'center'
   },
   separator: {
     height: StyleSheet.hairlineWidth,
-    backgroundColor: '#CCCCCC'
+    backgroundColor: '#ccc'
   }
 };
 

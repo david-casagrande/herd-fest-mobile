@@ -33,7 +33,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const text = this.state.scheduled ? 'Remove' : 'Add';
+    const text = this.state.scheduled ? '-' : '+';
     const style = this.props.style || {};
 
     return (

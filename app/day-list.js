@@ -52,7 +52,7 @@ function renderRow(rowData, navigator) {
     <TouchableOpacity underlayColor={'#ccc'} onPress={goToRow}>
       <View style={styles.rowContainer}>
         <Text style={[styles.row, styles.setTime]}>{utils.formatDate(rowData.startTime)}</Text>
-        <Text style={styles.row}>{rowData.band.name}</Text>
+        <Text style={[styles.row, styles.band]}>{rowData.band.name}</Text>
         <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime]} />
       </View>
     </TouchableOpacity>
