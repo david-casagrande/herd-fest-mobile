@@ -19,7 +19,7 @@ const dayListStyles = {
   },
   row: {
     paddingTop: 10,
-    paddingBottom: 10,
+    paddingBottom: 10
   },
   setTime: {
     backgroundColor: 'red',
