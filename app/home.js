@@ -45,6 +45,9 @@ export default class Home extends Component {
       <View style={styles.container}>
         <Text style={styles.welcome}>HERD FEST</Text>
         {days}
+        <TouchableOpacity onPress={() => this.props.navigator.push({ name: 'Schedule', index: 1, title: 'My Schedule' })}>
+          <Text>My Schedule</Text>
+        </TouchableOpacity>
       </View>
     );
   }

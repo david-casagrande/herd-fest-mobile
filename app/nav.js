@@ -4,6 +4,7 @@ import Home from './home'; // eslint-disable-line no-unused-vars
 import List from './list'; // eslint-disable-line no-unused-vars
 import NavigationRouteMapper from './navigation/route-mapper';
 import React from 'react-native';
+import Schedule from './schedule';
 import Venue from './venue'; // eslint-disable-line no-unused-vars
 
 import fullSchedule from './data/full-schedule';
@@ -77,7 +78,8 @@ export default class NavigationBarSample extends Component {
             'Band': <Band navigator={navigator} band={lookup.getOne(this.state.fullSchedule.bands, route.band_id)}
                     fullSchedule={this.state.fullSchedule}/>,
             'Venue': <Venue navigator={navigator} venue={lookup.getOne(this.state.fullSchedule.venues, route.venue_id)}
-                      fullSchedule={this.state.fullSchedule}/>
+                      fullSchedule={this.state.fullSchedule}/>,
+            'Schedule': <Schedule navigator={navigator} fullSchedule={this.state.fullSchedule}></Schedule>
           };
 
           return component[route.name];

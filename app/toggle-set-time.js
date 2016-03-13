@@ -12,7 +12,13 @@ const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unuse
 
 function toggle(scheduled, id, context) {
   const method = scheduled ? 'remove' : 'add';
-  scheduleData[method](id).then(() => context.checkSchedule());
+  scheduleData[method](id).then(() => {
+    context.checkSchedule();
+
+    if (typeof context.props.toggleCallback === 'function') {
+      context.props.toggleCallback(!scheduled, id);
+    }
+  });
 }
 
 export default class Home extends Component {
