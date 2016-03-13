@@ -1,18 +1,9 @@
 import lookup from '../data/lookup';
+import serializers from '../data/serializers';
 import utils from '../utils';
 
-function serializeSetTimes(schedule, collection) {
-  return schedule.map((id) => {
-    const setTime = lookup.getOne(collection.set_times, id);
-
-    return {
-      id: setTime.id,
-      band: lookup.getOne(collection.bands, setTime.band),
-      day: setTime.day,
-      startTime: setTime.start_time,
-      venue: lookup.getOne(collection.venues, setTime.venue)
-    };
-  });
+function getSetTimes(schedule, collection) {
+  return schedule.map((id) => lookup.getOne(collection.set_times, id));
 }
 
 function groupedByDay(setTimes, collection) {
@@ -25,13 +16,12 @@ function groupedByDay(setTimes, collection) {
     return {
       id: day.id,
       name: day.name,
-      setTimes: grouped[dayId].sort(utils.sortStartTimes)
+      setTimes: serializers.setTimes(grouped[dayId], collection)
     };
   });
 }
 
 export default function scheduleDecorator(schedule, collection) {
-  const setTimes = serializeSetTimes(schedule, collection);
-
+  const setTimes = getSetTimes(schedule, collection);
   return groupedByDay(setTimes, collection).sort((l, r) => l.name > r.name);
 }

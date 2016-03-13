@@ -1,5 +1,6 @@
 jest.dontMock('../../utils');
 jest.dontMock('../../data/lookup');
+jest.dontMock('../../data/serializers');
 jest.dontMock('../schedule');
 
 const scheduleDecorator = require('../schedule').default;

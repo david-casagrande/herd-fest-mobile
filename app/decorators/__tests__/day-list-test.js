@@ -26,10 +26,10 @@ const bands = [
 ];
 
 const setTimes = [
-  { id: 'st-1', start_time: '2000-01-01T20:00:00.000Z', band: 'b-1' },
-  { id: 'st-2', start_time: '2000-01-01T01:00:00.000Z', band: 'b-1' },
-  { id: 'st-3', start_time: '2000-01-01T01:00:00.000Z', band: 'b-3' },
-  { id: 'st-4', start_time: '2000-01-01T23:00:00.000Z', band: 'b-4' }
+  { id: 'st-1', start_time: '2000-01-01T20:00:00.000Z', band: 'b-1', venue: 'v-1' },
+  { id: 'st-2', start_time: '2000-01-01T01:00:00.000Z', band: 'b-1', venue: 'v-1' },
+  { id: 'st-3', start_time: '2000-01-01T01:00:00.000Z', band: 'b-3', venue: 'v-2' },
+  { id: 'st-4', start_time: '2000-01-01T23:00:00.000Z', band: 'b-4', venue: 'v-2' }
 ];
 
 const fullSchedule = {
