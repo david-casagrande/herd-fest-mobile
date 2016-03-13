@@ -43,11 +43,25 @@ export default class Home extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>HERD FEST</Text>
-        {days}
-        <TouchableOpacity onPress={() => this.props.navigator.push({ name: 'Schedule', index: 1, title: 'My Schedule' })}>
-          <Text>My Schedule</Text>
-        </TouchableOpacity>
+        <View style={styles.content}>
+          <Text style={styles.welcome}>HERD FEST</Text>
+          {days}
+        </View>
+        <View style={styles.nav}>
+          <View style={styles.navContainer}>
+            <TouchableOpacity onPress={() => this.props.navigator.push({ name: 'Schedule', index: 1, title: 'My Schedule' })} style={[styles.navLink, { backgroundColor: 'purple' }]}>
+              <Text style={styles.navText}>My Schedule</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => this.props.navigator.push({ name: 'Schedule', index: 1, title: 'My Schedule' })} style={[styles.navLink, { backgroundColor: 'green' }]}>
+              <Text style={styles.navText}>Bands</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => this.props.navigator.push({ name: 'Schedule', index: 1, title: 'My Schedule' })} style={[styles.navLink, { backgroundColor: 'blue' }]}>
+              <Text style={styles.navText}>Venues</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
     );
   }

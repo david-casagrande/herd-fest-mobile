@@ -4,7 +4,8 @@ const StyleSheet = React.StyleSheet;
 const scheduleStyles = {
   container: {
     flex: 1,
-    paddingTop: 64
+    paddingTop: 64,
+    backgroundColor: '#fff'
   },
   sectionHeader: {
     backgroundColor: '#d1d2d4',
