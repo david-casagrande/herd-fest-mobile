@@ -23,7 +23,7 @@ function groupedByVenue(setTimes, collection) {
 
 export default function dayListDecorator(day, collection) {
   const setTimes = getSetTimes(day.set_times, collection);
-  const venues = groupedByVenue(setTimes, collection).sort((l, r) => l.name > r.name);
+  const venues = groupedByVenue(setTimes, collection).sort(utils.sortByName);
 
   return {
     id: day.id,

@@ -8,12 +8,25 @@ const ListView = React.ListView;
 const StyleSheet = React.StyleSheet;
 const Text = React.Text; // eslint-disable-line no-unused-vars
 const View = React.View; // eslint-disable-line no-unused-vars
+const TouchableOpacity = React.TouchableOpacity;
 
 const styles = StyleSheet.create(listStyles);
 
 function dataSource(props) {
   const ds = new ListView.DataSource({ rowHasChanged: utils.notEqual });
   return { dataSource: ds.cloneWithRows(props.dataSource || []) };
+}
+
+function renderRow(rowData, sectionID, rowID, context) {
+  return (
+    <TouchableOpacity style={styles.rowContainer} onPress={() => context.props.goTo(rowData)}>
+      <Text style={[styles.row, styles.content]}>{rowData.name}</Text>
+    </TouchableOpacity>
+  );
+}
+
+function renderSeparator(sectionID, rowID) {
+  return <View key={`${sectionID}-${rowID}`} style={styles.separator} />;
 }
 
 export default class List extends Component {
@@ -28,7 +41,8 @@ export default class List extends Component {
         <ListView
           style={styles.listView}
           dataSource={this.state.dataSource}
-          renderRow={(rowData) => <Text>{rowData.name}</Text>}
+          renderRow={(rowData, sectionID, rowID) => renderRow(rowData, sectionID, rowID, this)}
+          renderSeparator={renderSeparator}
         />
       </View>
     );

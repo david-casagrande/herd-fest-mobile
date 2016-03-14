@@ -2,6 +2,7 @@ import React from 'react-native';
 
 import fullSchedule from './data/full-schedule';
 import homeStyles from './styles/home-styles';
+import utils from './utils';
 
 const Component = React.Component;
 const StyleSheet = React.StyleSheet;
@@ -39,7 +40,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const days = this.state.fullSchedule.days.sort((l, r) => l.name > r.name).map((day) => this.renderDay(day));
+    const days = this.state.fullSchedule.days.sort(utils.sortByName).map((day) => this.renderDay(day));
 
     return (
       <View style={styles.container}>
@@ -57,7 +58,7 @@ export default class Home extends Component {
               <Text style={styles.navText}>Bands</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => this.props.navigator.push({ name: 'Schedule', index: 1, title: 'My Schedule' })} style={[styles.navLink, { backgroundColor: 'blue' }]}>
+            <TouchableOpacity onPress={() => this.props.navigator.push({ name: 'Venues', index: 1, title: 'Venues' })} style={[styles.navLink, { backgroundColor: 'blue' }]}>
               <Text style={styles.navText}>Venues</Text>
             </TouchableOpacity>
           </View>

@@ -1,18 +1,7 @@
 import container from './components/container';
+import list from './components/list';
+import setTimeRow from './components/set-time-row';
 
-const listStyles = {
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  instructions: {
-    color: '#333333',
-    marginBottom: 5
-  },
-  image: {
-    height: 200
-  }
-};
+const listStyles = {};
 
-export default Object.assign(listStyles, container);
+export default Object.assign(listStyles, container, list, setTimeRow);

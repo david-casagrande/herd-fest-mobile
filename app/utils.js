@@ -43,12 +43,23 @@ function sortStartTimes(l, r) {
   return addTime(lHour) > addTime(rHour);
 }
 
+function sortByName(l, r) {
+  return l.name > r.name;
+}
+
+function currentIndex(navigator) {
+  const routes = navigator.getCurrentRoutes();
+  return routes[routes.length - 1].index;
+}
+
 const utils = {
   notEqual,
   groupBy,
   uniq,
   formatDate,
-  sortStartTimes
+  sortStartTimes,
+  currentIndex,
+  sortByName
 };
 
 export default Object.freeze(utils);

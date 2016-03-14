@@ -6,6 +6,8 @@ const uniq = utils.uniq;
 const groupBy = utils.groupBy;
 const formatDate = utils.formatDate;
 const sortStartTimes = utils.sortStartTimes;
+const sortByName = utils.sortByName;
+const currentIndex = utils.currentIndex;
 
 describe('utils', () => {
   describe('notEqual', () => {
@@ -81,6 +83,43 @@ describe('utils', () => {
       ];
 
       expect(result).toEqual(expected);
+    });
+  });
+
+  describe('sortByName', () => {
+    const names = [
+      { name: 'Elliott' },
+      { name: 'Harper' },
+      { name: 'David' }
+    ];
+
+    it('sorts items by name', () => {
+      const result = Array.from(names).sort(sortByName);
+      const expected = [
+        names[2],
+        names[0],
+        names[1]
+      ];
+
+      expect(result).toEqual(expected);
+    });
+  });
+
+  describe('currentIndex', () => {
+    const navigator = {
+      getCurrentRoutes() {
+        return [
+          { index: 1 },
+          { index: 2 },
+          { index: 3 }
+        ];
+      }
+    };
+
+    it('returns the current index in the navigator', () => {
+      const result = currentIndex(navigator);
+
+      expect(result).toEqual(3);
     });
   });
 });

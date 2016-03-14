@@ -10,6 +10,7 @@ import Venue from './venue'; // eslint-disable-line no-unused-vars
 import fullSchedule from './data/full-schedule';
 import lookup from './data/lookup';
 import navStyles from './styles/nav-styles';
+import utils from './utils';
 
 const Component = React.Component;
 const StyleSheet = React.StyleSheet;
@@ -21,6 +22,7 @@ export default class NavigationBarSample extends Component {
   constructor(props) {
     super(props);
     this.state = { fullSchedule: { bands: [], venues: [], set_times: [], days: [] } };
+    this.setFullSchedule();
   }
 
   setFullSchedule() {
@@ -29,35 +31,16 @@ export default class NavigationBarSample extends Component {
     });
   }
 
-  componentWillMount() {
-    // var navigator = this.props.navigator;
-
-    // var callback = (event) => {
-    //   console.log(
-    //     `NavigationBarSample : event ${event.type}`,
-    //     {
-    //       route: JSON.stringify(event.data.route),
-    //       target: event.target,
-    //       type: event.type
-    //     }
-    //   );
-    // };
-
-    // Observe focus change events from this component.
-    // this._listeners = [
-      // navigator.navigationContext.addListener('willfocus', callback),
-      // navigator.navigationContext.addListener('didfocus', callback),
-    // ];
-
-    this.setFullSchedule();
-  }
-
-  componentWillUnmount() {
-    // this._listeners && this._listeners.forEach((listener) => listener.remove());
-  }
-
   findDay(query) {
     return this.state.fullSchedule.days.find((day) => day.name === query);
+  }
+
+  goToBand(band, navigator) {
+    navigator.push({ name: 'Band', index: utils.currentIndex(navigator) + 1, title: band.name, band_id: band.id });
+  }
+
+  goToVenue(venue, navigator) {
+    navigator.push({ name: 'Venue', index: utils.currentIndex(navigator) + 1, title: venue.name, venue_id: venue.id });
   }
 
   render() {
@@ -69,10 +52,8 @@ export default class NavigationBarSample extends Component {
         renderScene={(route, navigator) => {
           const component = {
             'Home': <Home navigator={navigator} />,
-            'Bands': <List navigator={navigator} dataSource={this.state.fullSchedule.bands} />,
-            'Days': <List navigator={navigator} dataSource={this.state.fullSchedule.days} />,
-            'Venues': <List navigator={navigator} dataSource={this.state.fullSchedule.venues} />,
-            'SetTimes': <List navigator={navigator} dataSource={this.state.fullSchedule.set_times} />,
+            'Bands': <List goTo={(band) => this.goToBand(band, navigator)} dataSource={this.state.fullSchedule.bands.sort(utils.sortByName)} />,
+            'Venues': <List goTo={(venue) => this.goToVenue(venue, navigator)} dataSource={this.state.fullSchedule.venues.sort(utils.sortByName)} />,
             'Day': <DayList navigator={navigator} day={lookup.getOne(this.state.fullSchedule.days, route.day_id)}
                     fullSchedule={this.state.fullSchedule} />,
             'Band': <Band navigator={navigator} band={lookup.getOne(this.state.fullSchedule.bands, route.band_id)}

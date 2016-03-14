@@ -38,14 +38,9 @@ function dataSource(collection) {
   return { dataSource: ds.cloneWithRowsAndSections(collection, sectionIds, rowIds) };
 }
 
-function currentIndex(navigator) {
-  const routes = navigator.getCurrentRoutes();
-  return routes[routes.length - 1].index;
-}
-
 function renderRow(rowData, navigator) {
   function goToRow() {
-    navigator.push({ name: 'Band', index: currentIndex(navigator) + 1, title: rowData.band.name, band_id: rowData.band.id });
+    navigator.push({ name: 'Band', index: utils.currentIndex(navigator) + 1, title: rowData.band.name, band_id: rowData.band.id });
   }
 
   return (
@@ -61,7 +56,7 @@ function renderRow(rowData, navigator) {
 
 function renderSectionHeader(sectionData, sectionId, navigator) {
   function goToSection() {
-    navigator.push({ name: 'Venue', index: currentIndex(navigator) + 1, title: sectionData.name, venue_id: sectionData.id });
+    navigator.push({ name: 'Venue', index: utils.currentIndex(navigator) + 1, title: sectionData.name, venue_id: sectionData.id });
   }
 
   return (

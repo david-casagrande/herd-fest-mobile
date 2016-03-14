@@ -23,5 +23,5 @@ function groupedByDay(setTimes, collection) {
 
 export default function scheduleDecorator(schedule, collection) {
   const setTimes = getSetTimes(schedule, collection);
-  return groupedByDay(setTimes, collection).sort((l, r) => l.name > r.name);
+  return groupedByDay(setTimes, collection).sort(utils.sortByName);
 }
