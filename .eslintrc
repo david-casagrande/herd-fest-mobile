@@ -13,7 +13,8 @@
     "it": true,
     "jest": true,
     "pit": true,
-    "xit": true
+    "xit": true,
+    "xdescribe": true
   },
   "rules": {
     "array-bracket-spacing": [2, "never"],

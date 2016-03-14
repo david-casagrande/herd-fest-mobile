@@ -4,4 +4,9 @@ const container = {
   paddingTop: 64
 };
 
-export default { container };
+const centered = {
+  alignItems: 'center',
+  justifyContent: 'center'
+};
+
+export default { container, centered };

@@ -4,10 +4,11 @@ import Home from './home'; // eslint-disable-line no-unused-vars
 import List from './list'; // eslint-disable-line no-unused-vars
 import NavigationRouteMapper from './navigation/route-mapper';
 import React from 'react-native';
-import Schedule from './schedule';
+import Schedule from './schedule'; // eslint-disable-line no-unused-vars
 import Venue from './venue'; // eslint-disable-line no-unused-vars
 
 import fullSchedule from './data/full-schedule';
+import lodash from 'lodash';
 import lookup from './data/lookup';
 import navStyles from './styles/nav-styles';
 import utils from './utils';
@@ -49,11 +50,16 @@ export default class NavigationBarSample extends Component {
         debugOverlay={false}
         style={styles.appContainer}
         initialRoute={{ name: 'Home', index: 0 }}
+        onDidFocus={(route) => {
+          if (route.name === 'Home') {
+            this.setFullSchedule();
+          }
+        }}
         renderScene={(route, navigator) => {
           const component = {
-            'Home': <Home navigator={navigator} />,
-            'Bands': <List goTo={(band) => this.goToBand(band, navigator)} dataSource={this.state.fullSchedule.bands.sort(utils.sortByName)} />,
-            'Venues': <List goTo={(venue) => this.goToVenue(venue, navigator)} dataSource={this.state.fullSchedule.venues.sort(utils.sortByName)} />,
+            'Home': <Home navigator={navigator} fullSchedule={this.state.fullSchedule} />,
+            'Bands': <List goTo={(band) => this.goToBand(band, navigator)} dataSource={lodash.sortBy(this.state.fullSchedule.bands, ['name'])} />,
+            'Venues': <List goTo={(venue) => this.goToVenue(venue, navigator)} dataSource={lodash.sortBy(this.state.fullSchedule.venues, ['name'])} />,
             'Day': <DayList navigator={navigator} day={lookup.getOne(this.state.fullSchedule.days, route.day_id)}
                     fullSchedule={this.state.fullSchedule} />,
             'Band': <Band navigator={navigator} band={lookup.getOne(this.state.fullSchedule.bands, route.band_id)}

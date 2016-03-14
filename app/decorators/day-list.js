@@ -1,3 +1,4 @@
+import lodash from 'lodash';
 import lookup from '../data/lookup';
 import serializers from '../data/serializers';
 import utils from '../utils';
@@ -23,11 +24,11 @@ function groupedByVenue(setTimes, collection) {
 
 export default function dayListDecorator(day, collection) {
   const setTimes = getSetTimes(day.set_times, collection);
-  const venues = groupedByVenue(setTimes, collection).sort(utils.sortByName);
+  const venues = groupedByVenue(setTimes, collection);
 
   return {
     id: day.id,
     name: day.name,
-    venues
+    venues: lodash.sortBy(venues, ['name'])
   };
 }

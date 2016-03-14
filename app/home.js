@@ -1,8 +1,7 @@
 import React from 'react-native';
 
-import fullSchedule from './data/full-schedule';
 import homeStyles from './styles/home-styles';
-import utils from './utils';
+import lodash from 'lodash';
 
 const Component = React.Component;
 const StyleSheet = React.StyleSheet;
@@ -13,40 +12,28 @@ const View = React.View; // eslint-disable-line no-unused-vars
 const styles = StyleSheet.create(homeStyles);
 
 export default class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fullSchedule: { bands: [], venues: [], set_times: [], days: [] }
-    };
-    this.setFullSchedule();
-  }
-
-  setFullSchedule() {
-    fullSchedule.get().then((json) => {
-      this.setState({ fullSchedule: json });
-    });
-  }
-
   goToDay(day) {
     this.props.navigator.push({ name: 'Day', index: 1, title: day.name, day_id: day.id });
   }
 
-  renderDay(day) {
-    return (
-      <TouchableOpacity key={day.id} onPress={() => this.goToDay(day)}>
-        <Text>{day.name}</Text>
-      </TouchableOpacity>
-    );
+  renderDays() {
+    const days = lodash.sortBy(this.props.fullSchedule.days, ['name']);
+
+    return days.map((day) => { // eslint-disable-line arrow-body-style
+      return (
+        <TouchableOpacity key={day.id} onPress={() => this.goToDay(day)}>
+          <Text>{day.name}</Text>
+        </TouchableOpacity>
+      );
+    });
   }
 
   render() {
-    const days = this.state.fullSchedule.days.sort(utils.sortByName).map((day) => this.renderDay(day));
-
     return (
       <View style={styles.container}>
         <View style={styles.content}>
           <Text style={styles.welcome}>HERD FEST</Text>
-          {days}
+          {this.renderDays()}
         </View>
         <View style={styles.nav}>
           <View style={styles.navContainer}>

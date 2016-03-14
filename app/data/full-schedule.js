@@ -1,6 +1,6 @@
 import fetch from './fetch';
 
-const domain = 'http://localhost:3000';
+const domain = 'http://10.0.0.3:3000';
 const fullScheduleURL = `${domain}/api/full_schedule`;
 
 function get() {

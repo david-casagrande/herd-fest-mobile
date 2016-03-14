@@ -1,7 +1,6 @@
 import React from 'react-native';
 import ToggleSetTime from './toggle-set-time'; // eslint-disable-line no-unused-vars
 
-import lookup from './data/lookup';
 import schedule from './data/schedule';
 import scheduleDecorator from './decorators/schedule';
 import scheduleStyles from './styles/schedule-styles';
@@ -58,7 +57,7 @@ class Row extends Component {
     super(props);
 
     this.state = {
-      fadeAnim: new Animated.Value(37), // init opacity 0
+      fadeAnim: new Animated.Value(37) // init opacity 0
     };
   }
 
@@ -105,7 +104,7 @@ export default class Schedule extends Component {
   }
 
   render() {
-    if(!this.state.dataSource) {
+    if (!this.state.dataSource) {
       return (
         <View style={styles.container}>
           <Text>Loading...</Text>
@@ -113,10 +112,10 @@ export default class Schedule extends Component {
       );
     }
 
-    if(this.state.schedule.length < 1) {
+    if (this.state.schedule.length < 1) {
       return (
-        <View style={styles.container}>
-          <Text>You dont have anything scheduled yet</Text>
+        <View style={[styles.container, styles.centered]}>
+          <Text style={styles.message}>Your schedule is a blank slate</Text>
         </View>
       );
     }

@@ -1,12 +1,13 @@
+jest.dontMock('lodash');
 jest.dontMock('../utils');
 
+const lodash = require('lodash');
 const utils = require('../utils').default;
 const notEqual = utils.notEqual;
 const uniq = utils.uniq;
 const groupBy = utils.groupBy;
 const formatDate = utils.formatDate;
 const sortStartTimes = utils.sortStartTimes;
-const sortByName = utils.sortByName;
 const currentIndex = utils.currentIndex;
 
 describe('utils', () => {
@@ -72,8 +73,8 @@ describe('utils', () => {
       { startTime: '2000-01-01T07:00:00.000Z' }
     ];
 
-    it('handles sorting start times', () => {
-      const result = Array.from(times).sort(sortStartTimes);
+    it('handles sorting start times with lodash', () => {
+      const result = lodash.sortBy(times, sortStartTimes);
       const expected = [
         times[4],
         times[2],
@@ -86,40 +87,23 @@ describe('utils', () => {
     });
   });
 
-  describe('sortByName', () => {
-    const names = [
-      { name: 'Elliott' },
-      { name: 'Harper' },
-      { name: 'David' }
+  describe('currentIndex', () => {
+    const routes = [
+      { index: 1 },
+      { index: 2 },
+      { index: 3 }
     ];
 
-    it('sorts items by name', () => {
-      const result = Array.from(names).sort(sortByName);
-      const expected = [
-        names[2],
-        names[0],
-        names[1]
-      ];
-
-      expect(result).toEqual(expected);
-    });
-  });
-
-  describe('currentIndex', () => {
     const navigator = {
       getCurrentRoutes() {
-        return [
-          { index: 1 },
-          { index: 2 },
-          { index: 3 }
-        ];
+        return routes;
       }
     };
 
     it('returns the current index in the navigator', () => {
       const result = currentIndex(navigator);
 
-      expect(result).toEqual(3);
+      expect(result).toEqual(routes[2].index);
     });
   });
 });

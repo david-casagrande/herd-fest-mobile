@@ -1,3 +1,4 @@
+import lodash from 'lodash';
 import lookup from './lookup';
 import utils from '../utils';
 
@@ -12,7 +13,9 @@ function setTime(model, collection) {
 }
 
 function setTimes(set, collection) {
-  return set.map((model) => setTime(model, collection)).sort(utils.sortStartTimes);
+  const serializedSetTimes = set.map((model) => setTime(model, collection));
+
+  return lodash.sortBy(serializedSetTimes, utils.sortStartTimes);
 }
 
 const serializers = {

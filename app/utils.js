@@ -27,24 +27,16 @@ function formatDate(date, format = 'h:mmA') {
   return converted;
 }
 
-function sortStartTimes(l, r) {
-  function addTime(hour) {
-    const amHours = 7;
-    const hours = 23;
-    if (hour < amHours) {
-      hour += hours;
-    }
-    return hour;
+function sortStartTimes(model) {
+  const amHours = 7;
+  const hours = 24;
+  const hour = moment.utc(model.startTime).hour();
+
+  if (hour < amHours) {
+    return hour + hours;
   }
 
-  const lHour = moment.utc(l.startTime).hour();
-  const rHour = moment.utc(r.startTime).hour();
-
-  return addTime(lHour) > addTime(rHour);
-}
-
-function sortByName(l, r) {
-  return l.name > r.name;
+  return hour;
 }
 
 function currentIndex(navigator) {
@@ -58,8 +50,7 @@ const utils = {
   uniq,
   formatDate,
   sortStartTimes,
-  currentIndex,
-  sortByName
+  currentIndex
 };
 
 export default Object.freeze(utils);

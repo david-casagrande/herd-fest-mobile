@@ -8,7 +8,7 @@ const ListView = React.ListView;
 const StyleSheet = React.StyleSheet;
 const Text = React.Text; // eslint-disable-line no-unused-vars
 const View = React.View; // eslint-disable-line no-unused-vars
-const TouchableOpacity = React.TouchableOpacity;
+const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unused-vars
 
 const styles = StyleSheet.create(listStyles);
 
