@@ -1,7 +1,6 @@
+import container from './components/container';
+
 const homeStyles = {
-  container: {
-    flex: 1
-  },
   content: {
     flex: 1,
     justifyContent: 'center',
@@ -38,4 +37,4 @@ const homeStyles = {
   }
 };
 
-export default homeStyles;
+export default Object.assign(homeStyles, container);

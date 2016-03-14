@@ -1,11 +1,10 @@
+import container from './components/container';
+
 const venueStyles = {
-  container: {
-    flex: 1,
+  container: Object.assign({
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    paddingTop: 64
-  },
+    alignItems: 'center'
+  }, container.container),
   welcome: {
     fontSize: 20,
     textAlign: 'center',

@@ -1,11 +1,6 @@
+import container from './components/container';
+
 const bandStyles = {
-  container: {
-    flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: '#fff',
-    paddingTop: 64
-  },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
@@ -20,4 +15,4 @@ const bandStyles = {
   }
 };
 
-export default bandStyles;
+export default Object.assign(bandStyles, container);
