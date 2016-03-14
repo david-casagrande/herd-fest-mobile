@@ -1,6 +1,6 @@
 import React from 'react-native';
 
-import scheduleData from './data/schedule';
+import scheduleData from '../../data/schedule';
 
 const Component = React.Component;
 // const StyleSheet = React.StyleSheet;

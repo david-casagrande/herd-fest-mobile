@@ -1,11 +1,11 @@
-import Band from './band'; // eslint-disable-line no-unused-vars
-import DayList from './day-list'; // eslint-disable-line no-unused-vars
-import Home from './home'; // eslint-disable-line no-unused-vars
-import List from './list'; // eslint-disable-line no-unused-vars
+import Band from './views/band'; // eslint-disable-line no-unused-vars
+import DayList from './views/day-list'; // eslint-disable-line no-unused-vars
+import Home from './views/home'; // eslint-disable-line no-unused-vars
+import List from './views/list'; // eslint-disable-line no-unused-vars
 import NavigationRouteMapper from './navigation/route-mapper';
 import React from 'react-native';
-import Schedule from './schedule'; // eslint-disable-line no-unused-vars
-import Venue from './venue'; // eslint-disable-line no-unused-vars
+import Schedule from './views/schedule'; // eslint-disable-line no-unused-vars
+import Venue from './views/venue'; // eslint-disable-line no-unused-vars
 
 import fullSchedule from './data/full-schedule';
 import lodash from 'lodash';

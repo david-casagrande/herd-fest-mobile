@@ -1,34 +1,24 @@
 import React from 'react-native';
 
+import bandStyles from '../styles/band-styles';
 import lodash from 'lodash';
-import lookup from './data/lookup';
-import venueStyles from './styles/venue-styles';
+import lookup from '../data/lookup';
 
 const Component = React.Component;
-const Linking = React.Linking;
+const Image = React.Image; // eslint-disable-line no-unused-vars
+const ScrollView = React.ScrollView; // eslint-disable-line no-unused-vars
 const StyleSheet = React.StyleSheet;
 const Text = React.Text; // eslint-disable-line no-unused-vars
-const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unused-vars
 const View = React.View; // eslint-disable-line no-unused-vars
 
+const styles = StyleSheet.create(bandStyles);
+
 function setTimes(props) {
-  const venueSetTimes = lookup.getMany(props.fullSchedule.set_times, props.venue.set_times);
-  return lodash.groupBy(venueSetTimes, 'day');
+  const bandSetTimes = lookup.getMany(props.fullSchedule.set_times, props.band.set_times);
+  return lodash.groupBy(bandSetTimes, 'day');
 }
 
-// move to utils
-function link(url) {
-  Linking.canOpenURL(url).then((supported) => {
-    if (!supported) {
-      return url;
-    }
-    return Linking.openURL(url);
-  }).catch((linkingError) => linkingError);
-}
-
-const styles = StyleSheet.create(venueStyles);
-
-export default class Venue extends Component {
+export default class Band extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -60,14 +50,17 @@ export default class Venue extends Component {
   }
 
   render() {
-    const addressURL = `https://maps.google.com/?q=${this.props.venue.street_address}, Buffalo, NY`;
-
     return (
-      <View style={styles.container}>
-        <TouchableOpacity onPress={() => link(addressURL)}>
-          <Text style={styles.welcome}>{this.props.venue.street_address}</Text>
-        </TouchableOpacity>
-      </View>
+      <ScrollView style={styles.container}>
+        <Image
+          source={{ uri: this.props.band.image_url }}
+          style={styles.image}
+          resizeMode={'cover'}
+        />
+        <Text>Bio: {this.props.band.description}</Text>
+        <Text style={styles.welcome}>Playing On</Text>
+        {this.setTimes()}
+      </ScrollView>
     );
   }
 }

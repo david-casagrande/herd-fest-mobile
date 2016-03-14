@@ -1,6 +1,6 @@
 import React from 'react-native';
 
-import homeStyles from './styles/home-styles';
+import homeStyles from '../styles/home-styles';
 import lodash from 'lodash';
 
 const Component = React.Component;

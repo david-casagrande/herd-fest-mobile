@@ -1,7 +1,7 @@
 import React from 'react-native';
 
-import listStyles from './styles/list-styles';
-import utils from './utils';
+import listStyles from '../styles/list-styles';
+import utils from '../utils';
 
 const Component = React.Component;
 const ListView = React.ListView;

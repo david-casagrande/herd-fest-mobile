@@ -1,9 +1,9 @@
 import React from 'react-native';
-import ToggleSetTime from './toggle-set-time'; // eslint-disable-line no-unused-vars
+import ToggleSetTime from './components/toggle-set-time'; // eslint-disable-line no-unused-vars
 
-import dayListDecorator from './decorators/day-list';
-import dayListStyles from './styles/day-list-styles';
-import utils from './utils';
+import dayListDecorator from '../decorators/day-list';
+import dayListStyles from '../styles/day-list-styles';
+import utils from '../utils';
 
 const Component = React.Component;
 const ListView = React.ListView;
