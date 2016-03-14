@@ -1,7 +1,8 @@
+jest.dontMock('lodash');
 jest.dontMock('../../utils');
 jest.dontMock('../../data/lookup');
+jest.dontMock('../../data/serializers');
 jest.dontMock('../day-list');
-jest.autoMockOff();
 
 const dayListDecorator = require('../day-list').default;
 

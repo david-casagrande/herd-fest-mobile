@@ -1,7 +1,7 @@
 import React from 'react-native';
 
+import lodash from 'lodash';
 import lookup from './data/lookup';
-import utils from './utils';
 import venueStyles from './styles/venue-styles';
 
 const Component = React.Component;
@@ -13,7 +13,7 @@ const View = React.View; // eslint-disable-line no-unused-vars
 
 function setTimes(props) {
   const venueSetTimes = lookup.getMany(props.fullSchedule.set_times, props.venue.set_times);
-  return utils.groupBy(venueSetTimes, 'day');
+  return lodash.groupBy(venueSetTimes, 'day');
 }
 
 // move to utils

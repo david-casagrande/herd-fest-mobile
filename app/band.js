@@ -1,8 +1,8 @@
 import React from 'react-native';
 
 import bandStyles from './styles/band-styles';
+import lodash from 'lodash';
 import lookup from './data/lookup';
-import utils from './utils';
 
 const Component = React.Component;
 const Image = React.Image; // eslint-disable-line no-unused-vars
@@ -15,7 +15,7 @@ const styles = StyleSheet.create(bandStyles);
 
 function setTimes(props) {
   const bandSetTimes = lookup.getMany(props.fullSchedule.set_times, props.band.set_times);
-  return utils.groupBy(bandSetTimes, 'day');
+  return lodash.groupBy(bandSetTimes, 'day');
 }
 
 export default class Band extends Component {

@@ -4,8 +4,6 @@ jest.dontMock('../utils');
 const lodash = require('lodash');
 const utils = require('../utils').default;
 const notEqual = utils.notEqual;
-const uniq = utils.uniq;
-const groupBy = utils.groupBy;
 const formatDate = utils.formatDate;
 const sortStartTimes = utils.sortStartTimes;
 const currentIndex = utils.currentIndex;
@@ -18,35 +16,6 @@ describe('utils', () => {
 
     it('returns true when items are equal', () => {
       expect(notEqual(1, 1)).toBeFalsy();
-    });
-  });
-
-  describe('uniq', () => {
-    it('returns array of unique values', () => {
-      const collection = [1, 1, 2, 3, 4, 4]; // eslint-disable-line no-magic-numbers
-      const expected = [1, 2, 3, 4];  // eslint-disable-line no-magic-numbers
-
-      expect(uniq(collection)).toEqual(expected);
-    });
-  });
-
-  describe('groupBy', () => {
-    it('returns object collection grouped as key', () => {
-      const collection = [
-        { id: 1, group: 'g-1' },
-        { id: 2, group: 'g-2' },
-        { id: 3, group: 'g-2' },
-        { id: 4, group: 'g-3' },
-        { id: 5, group: 'g-1' }
-      ];
-
-      const expected = {
-        'g-1': [collection[0], collection[4]],
-        'g-2': [collection[1], collection[2]],
-        'g-3': [collection[3]]
-      };
-
-      expect(groupBy(collection, 'group')).toEqual(expected);
     });
   });
 

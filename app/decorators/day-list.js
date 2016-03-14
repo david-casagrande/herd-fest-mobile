@@ -1,14 +1,13 @@
 import lodash from 'lodash';
 import lookup from '../data/lookup';
 import serializers from '../data/serializers';
-import utils from '../utils';
 
 function getSetTimes(setTimes, collection) {
   return setTimes.map((id) => lookup.getOne(collection.set_times, id));
 }
 
 function groupedByVenue(setTimes, collection) {
-  const grouped = utils.groupBy(setTimes, 'venue');
+  const grouped = lodash.groupBy(setTimes, 'venue');
   const venues = Object.keys(grouped);
 
   return venues.map((venueId) => {
