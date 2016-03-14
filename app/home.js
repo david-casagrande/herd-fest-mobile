@@ -53,7 +53,7 @@ export default class Home extends Component {
               <Text style={styles.navText}>My Schedule</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => this.props.navigator.push({ name: 'Schedule', index: 1, title: 'My Schedule' })} style={[styles.navLink, { backgroundColor: 'green' }]}>
+            <TouchableOpacity onPress={() => this.props.navigator.push({ name: 'Bands', index: 1, title: 'Bands' })} style={[styles.navLink, { backgroundColor: 'green' }]}>
               <Text style={styles.navText}>Bands</Text>
             </TouchableOpacity>
 

@@ -76,7 +76,7 @@ class Row extends Component {
     return (
       <Animated.View style={[styles.rowContainer, { height: this.state.fadeAnim, overflow: 'hidden' }]}>
         <Text style={[styles.row, styles.setTime]}>{utils.formatDate(rowData.startTime)}</Text>
-        <Text style={[styles.row, styles.band]}>{rowData.band.name} @ {rowData.venue.name}</Text>
+        <Text style={[styles.row, styles.content]}>{rowData.band.name} @ {rowData.venue.name}</Text>
         <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime]}
         toggleCallback={() => anim(this, context)}/>
       </Animated.View>
