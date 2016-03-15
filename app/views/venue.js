@@ -1,7 +1,7 @@
 import React from 'react-native';
 
 import lodash from 'lodash';
-import lookup from '../data/lookup';
+import utils from '../utils';
 import venueStyles from '../styles/venue-styles';
 
 const Component = React.Component;
@@ -12,7 +12,7 @@ const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unuse
 const View = React.View; // eslint-disable-line no-unused-vars
 
 function setTimes(props) {
-  const venueSetTimes = lookup.getMany(props.fullSchedule.set_times, props.venue.set_times);
+  const venueSetTimes = utils.findMany(props.fullSchedule.set_times, props.venue.set_times);
   return lodash.groupBy(venueSetTimes, 'day');
 }
 
@@ -38,14 +38,14 @@ export default class Venue extends Component {
 
   setTimes() {
     const days = lodash.keys(this.state.setTimes);
-    return days.map((dayId) => {
-      const day = lookup.getOne(this.props.fullSchedule.days, dayId);
-      const setTimesToRender = this.state.setTimes[dayId];
+    return days.map((id) => {
+      const day = lodash.find(this.props.fullSchedule.days, { id });
+      const setTimesToRender = this.state.setTimes[id];
       const venues = this.props.fullSchedule.venues;
 
       function renderSetTimes() {
         return setTimesToRender.map((setTime) => {
-          const venue = lookup.getOne(venues, setTime.venue);
+          const venue = lodash.find(venues, { id: setTime.venue });
           return <Text key={setTime.id}>{setTime.start_time} @ {venue.name}</Text>;
         });
       }

@@ -9,7 +9,6 @@ import Venue from './views/venue'; // eslint-disable-line no-unused-vars
 
 import fullSchedule from './data/full-schedule';
 import lodash from 'lodash';
-import lookup from './data/lookup';
 import navStyles from './styles/nav-styles';
 import utils from './utils';
 
@@ -60,11 +59,11 @@ export default class NavigationBarSample extends Component {
             'Home': <Home navigator={navigator} fullSchedule={this.state.fullSchedule} />,
             'Bands': <List goTo={(band) => this.goToBand(band, navigator)} dataSource={lodash.sortBy(this.state.fullSchedule.bands, ['name'])} />,
             'Venues': <List goTo={(venue) => this.goToVenue(venue, navigator)} dataSource={lodash.sortBy(this.state.fullSchedule.venues, ['name'])} />,
-            'Day': <DayList navigator={navigator} day={lookup.getOne(this.state.fullSchedule.days, route.day_id)}
+            'Day': <DayList navigator={navigator} day={lodash.find(this.state.fullSchedule.days, { id: route.day_id })}
                     fullSchedule={this.state.fullSchedule} />,
-            'Band': <Band navigator={navigator} band={lookup.getOne(this.state.fullSchedule.bands, route.band_id)}
+            'Band': <Band navigator={navigator} band={lodash.find(this.state.fullSchedule.bands, { id: route.band_id })}
                     fullSchedule={this.state.fullSchedule}/>,
-            'Venue': <Venue navigator={navigator} venue={lookup.getOne(this.state.fullSchedule.venues, route.venue_id)}
+            'Venue': <Venue navigator={navigator} venue={lodash.find(this.state.fullSchedule.venues, { id: route.venue_id })}
                       fullSchedule={this.state.fullSchedule}/>,
             'Schedule': <Schedule navigator={navigator} fullSchedule={this.state.fullSchedule}></Schedule>
           };

@@ -26,11 +26,20 @@ function currentIndex(navigator) {
   return routes[routes.length - 1].index;
 }
 
+function findMany(collection, ids) {
+  const lookupTable = {};
+  collection.forEach((obj) => {
+    lookupTable[obj.id] = obj;
+  });
+  return ids.map((id) => lookupTable[id]);
+}
+
 const utils = {
   notEqual,
   formatDate,
   sortStartTimes,
-  currentIndex
+  currentIndex,
+  findMany
 };
 
 export default Object.freeze(utils);

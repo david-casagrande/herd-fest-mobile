@@ -7,6 +7,7 @@ const notEqual = utils.notEqual;
 const formatDate = utils.formatDate;
 const sortStartTimes = utils.sortStartTimes;
 const currentIndex = utils.currentIndex;
+const findMany = utils.findMany;
 
 describe('utils', () => {
   describe('notEqual', () => {
@@ -73,6 +74,23 @@ describe('utils', () => {
       const result = currentIndex(navigator);
 
       expect(result).toEqual(routes[2].index);
+    });
+  });
+
+  describe('findMany', () => {
+    const collection = [
+      { id: '1', name: 'A' },
+      { id: '2', name: 'B' },
+      { id: '3', name: 'C' }
+    ];
+
+    it('returns an array of objects with ids matching given ids argument', () => {
+      const ids = ['1', '3'];
+      const results = findMany(collection, ids);
+
+      expect(results.length).toEqual(2);
+      expect(results[0]).toEqual(collection[0]);
+      expect(results[1]).toEqual(collection[2]);
     });
   });
 });

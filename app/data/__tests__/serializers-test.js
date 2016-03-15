@@ -1,5 +1,4 @@
 jest.dontMock('lodash');
-jest.dontMock('../lookup');
 jest.dontMock('../../utils');
 jest.dontMock('../serializers');
 
