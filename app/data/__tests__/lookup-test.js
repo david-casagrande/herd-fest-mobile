@@ -19,13 +19,4 @@ describe('lookup', () => {
       expect(results[1]).toEqual(collection[2]);
     });
   });
-
-  describe('getMany', () => {
-    it('returns an object from match in collection', () => {
-      const id = '2';
-      const result = lookup.getOne(collection, id);
-
-      expect(result).toEqual(collection[1]);
-    });
-  });
 });

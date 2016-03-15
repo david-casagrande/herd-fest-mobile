@@ -6,13 +6,8 @@ function getMany(collection, ids) {
   return ids.map((id) => lookupTable[id]);
 }
 
-function getOne(collection, id) {
-  return collection.find((obj) => obj.id === id);
-}
-
 const lookup = {
-  getMany,
-  getOne
+  getMany
 };
 
 export default Object.freeze(lookup);
