@@ -7,6 +7,7 @@ import React from 'react-native';
 import Schedule from './views/schedule'; // eslint-disable-line no-unused-vars
 import Venue from './views/venue'; // eslint-disable-line no-unused-vars
 
+
 import fullSchedule from './data/full-schedule';
 import lodash from 'lodash';
 import navStyles from './styles/nav-styles';
@@ -15,6 +16,8 @@ import utils from './utils';
 const Component = React.Component;
 const StyleSheet = React.StyleSheet;
 const Navigator = React.Navigator; // eslint-disable-line no-unused-vars
+const View = React.View; // eslint-disable-line no-unused-vars
+const BackAndroid = React.BackAndroid;
 
 const styles = StyleSheet.create(navStyles);
 
@@ -23,6 +26,13 @@ export default class NavigationBarSample extends Component {
     super(props);
     this.state = { fullSchedule: { bands: [], venues: [], set_times: [], days: [] } };
     this.setFullSchedule();
+  }
+
+  componentWillMount() {
+    BackAndroid.addEventListener('hardwareBackPress', () => {
+      this.setState({ androidBack: 'sup' });
+      return true;
+    });
   }
 
   setFullSchedule() {
@@ -69,7 +79,7 @@ export default class NavigationBarSample extends Component {
             'Schedule': <Schedule navigator={navigator} fullSchedule={this.state.fullSchedule} />
           };
 
-          return component[route.name];
+          return React.createElement(View, { style: { flex: 1 } }, component[route.name]);
         }}
         navigationBar={
           <Navigator.NavigationBar

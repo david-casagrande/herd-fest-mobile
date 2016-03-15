@@ -1,4 +1,5 @@
 import React from 'react-native';
+import Toolbar from './components/toolbar';
 
 import homeStyles from '../styles/home-styles';
 import lodash from 'lodash';
@@ -28,6 +29,16 @@ export default class Home extends Component {
     });
   }
 
+  toolbarOnPress(name, navigator) {
+    const map = {
+      'Schedule': { name, index: 1, title: 'My Schedule' },
+      'Bands': { name, index: 1, title: 'Bands' },
+      'Venues': { name, index: 1, title: 'Venues' }
+    };
+
+    navigator.push(map[name]);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -35,21 +46,7 @@ export default class Home extends Component {
           <Text style={styles.welcome}>HERD FEST</Text>
           {this.renderDays()}
         </View>
-        <View style={styles.nav}>
-          <View style={styles.navContainer}>
-            <TouchableOpacity onPress={() => this.props.navigator.push({ name: 'Schedule', index: 1, title: 'My Schedule' })} style={[styles.navLink, { backgroundColor: 'purple' }]}>
-              <Text style={styles.navText}>My Schedule</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => this.props.navigator.push({ name: 'Bands', index: 1, title: 'Bands' })} style={[styles.navLink, { backgroundColor: 'green' }]}>
-              <Text style={styles.navText}>Bands</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => this.props.navigator.push({ name: 'Venues', index: 1, title: 'Venues' })} style={[styles.navLink, { backgroundColor: 'blue' }]}>
-              <Text style={styles.navText}>Venues</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        <Toolbar onPress={(name) => this.toolbarOnPress(name, this.props.navigator)} />
       </View>
     );
   }
