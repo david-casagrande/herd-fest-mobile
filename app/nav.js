@@ -31,8 +31,12 @@ export default class NavigationBarSample extends Component {
     });
   }
 
-  findDay(query) {
-    return this.state.fullSchedule.days.find((day) => day.name === query);
+  findModel(type, id) {
+    return lodash.find(this.state.fullSchedule[type], { id });
+  }
+
+  sortByName(type) {
+    return lodash.sortBy(this.state.fullSchedule[type], ['name']);
   }
 
   goToBand(band, navigator) {
@@ -57,15 +61,12 @@ export default class NavigationBarSample extends Component {
         renderScene={(route, navigator) => {
           const component = {
             'Home': <Home navigator={navigator} fullSchedule={this.state.fullSchedule} />,
-            'Bands': <List goTo={(band) => this.goToBand(band, navigator)} dataSource={lodash.sortBy(this.state.fullSchedule.bands, ['name'])} />,
-            'Venues': <List goTo={(venue) => this.goToVenue(venue, navigator)} dataSource={lodash.sortBy(this.state.fullSchedule.venues, ['name'])} />,
-            'Day': <DayList navigator={navigator} day={lodash.find(this.state.fullSchedule.days, { id: route.day_id })}
-                    fullSchedule={this.state.fullSchedule} />,
-            'Band': <Band navigator={navigator} band={lodash.find(this.state.fullSchedule.bands, { id: route.band_id })}
-                    fullSchedule={this.state.fullSchedule}/>,
-            'Venue': <Venue navigator={navigator} venue={lodash.find(this.state.fullSchedule.venues, { id: route.venue_id })}
-                      fullSchedule={this.state.fullSchedule}/>,
-            'Schedule': <Schedule navigator={navigator} fullSchedule={this.state.fullSchedule}></Schedule>
+            'Bands': <List goTo={(band) => this.goToBand(band, navigator)} dataSource={this.sortByName('bands')} />,
+            'Venues': <List goTo={(venue) => this.goToVenue(venue, navigator)} dataSource={this.sortByName('venues')} />,
+            'Day': <DayList navigator={navigator} day={this.findModel('days', route.day_id)} fullSchedule={this.state.fullSchedule} />,
+            'Band': <Band navigator={navigator} band={this.findModel('bands', route.band_id)} fullSchedule={this.state.fullSchedule} />,
+            'Venue': <Venue navigator={navigator} venue={this.findModel('venues', route.venue_id)} fullSchedule={this.state.fullSchedule}/>,
+            'Schedule': <Schedule navigator={navigator} fullSchedule={this.state.fullSchedule} />
           };
 
           return component[route.name];
