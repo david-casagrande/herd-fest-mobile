@@ -27,7 +27,7 @@ export default class Band extends Component {
   }
 
   setTimes() {
-    const days = Object.keys(this.state.setTimes);
+    const days = lodash.keys(this.state.setTimes);
     return days.map((dayId) => {
       const day = lookup.getOne(this.props.fullSchedule.days, dayId);
       const setTimesToRender = this.state.setTimes[dayId];

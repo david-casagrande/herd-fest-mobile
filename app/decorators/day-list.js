@@ -1,22 +1,21 @@
 import lodash from 'lodash';
-import lookup from '../data/lookup';
 import serializers from '../data/serializers';
 
 function getSetTimes(setTimes, collection) {
-  return setTimes.map((id) => lookup.getOne(collection.set_times, id));
+  return setTimes.map((id) => lodash.find(collection.set_times, { id }));
 }
 
 function groupedByVenue(setTimes, collection) {
   const grouped = lodash.groupBy(setTimes, 'venue');
-  const venues = Object.keys(grouped);
+  const venues = lodash.keys(grouped);
 
-  return venues.map((venueId) => {
-    const venue = lookup.getOne(collection.venues, venueId);
+  return venues.map((id) => {
+    const venue = lodash.find(collection.venues, { id });
 
     return {
       id: venue.id,
       name: venue.name,
-      setTimes: serializers.setTimes(grouped[venueId], collection)
+      setTimes: serializers.setTimes(grouped[id], collection)
     };
   });
 }
