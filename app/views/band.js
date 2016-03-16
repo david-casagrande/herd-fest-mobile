@@ -21,8 +21,9 @@ function setTimes(props) {
 export default class Band extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      setTimes: setTimes(this.props)
+      setTimes: setTimes(props)
     };
   }
 

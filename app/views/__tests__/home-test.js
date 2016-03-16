@@ -1,8 +1,7 @@
 jest.dontMock('lodash');
 jest.dontMock('../home');
 
-const React = require('react-native/node_modules/react');
-const utils = require('react-native/node_modules/react/lib/ReactTestUtils');
+const testUtils = require('../../test-utils');
 
 const days = [
   {
@@ -15,45 +14,16 @@ const days = [
   }
 ];
 
-function renderScreen(component, props = {}, state) {
-  const renderer = utils.createRenderer();
-  const instance = React.createElement(component, props);
-
-  renderer.render(instance);
-
-  if (state) {
-    renderer._instance._instance.setState(state); // eslint-disable-line no-underscore-dangle
-  }
-
-  const output = renderer.getRenderOutput();
-
-  return {
-    output,
-    instance
-  };
-}
-
-function setMock() {
-  jest.setMock('../data/full-schedule', {
-    get() {
-      return new Promise((resolve) => resolve({}));
-    }
-  });
-}
-
-xdescribe('Home', () => {
+describe('Home', () => {
   let component = null;
 
   beforeEach(() => {
-    setMock();
     component = require('../home').default;
   });
 
-  xit('gets full schedule on init', () => null);
-
   it('sorts and renders the days', () => {
-    const home = renderScreen(component, null, { fullSchedule: { days } });
-    const homeDays = home.output.props.children[1];
+    const home = testUtils.render(component, { fullSchedule: { days } });
+    const homeDays = home.output.props.children[0].props.children[1];
 
     expect(homeDays[0].props.children.props.children).toEqual('Day 1');
     expect(homeDays[1].props.children.props.children).toEqual('Day 2');
@@ -67,8 +37,8 @@ xdescribe('Home', () => {
       }
     };
 
-    const home = renderScreen(component, { navigator }, { fullSchedule: { days } });
-    const homeDays = home.output.props.children[1];
+    const home = testUtils.render(component, { navigator, fullSchedule: { days } });
+    const homeDays = home.output.props.children[0].props.children[1];
 
     homeDays[0].props.onPress();
   });

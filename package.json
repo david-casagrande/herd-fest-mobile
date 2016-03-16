@@ -40,7 +40,9 @@
       "<rootDir>/node_modules/moment",
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/fbjs",
-      "<rootDir>/node_modules/react-addons-test-utils"
+      "<rootDir>/node_modules/react-addons-test-utils",
+      "<rootDir>/app/test-utils"
+
     ],
     "globals": {
       "fetch": true

@@ -7,7 +7,6 @@ import React from 'react-native';
 import Schedule from './views/schedule'; // eslint-disable-line no-unused-vars
 import Venue from './views/venue'; // eslint-disable-line no-unused-vars
 
-
 import fullSchedule from './data/full-schedule';
 import lodash from 'lodash';
 import navStyles from './styles/nav-styles';
@@ -79,7 +78,7 @@ export default class NavigationBarSample extends Component {
             'Schedule': <Schedule navigator={navigator} fullSchedule={this.state.fullSchedule} />
           };
 
-          return React.createElement(View, { style: { flex: 1 } }, component[route.name]);
+          return component[route.name];
         }}
         navigationBar={
           <Navigator.NavigationBar
