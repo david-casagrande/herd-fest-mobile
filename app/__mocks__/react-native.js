@@ -27,15 +27,10 @@ class AppRegistry {
   }
 }
 
-class AsyncStorage {
-  static getItem() {
-    return new Promise((resolve) => resolve(null));
-  }
-
-  static setItem(key, value) {
-    return new Promise((resolve) => resolve({ key, value }));
-  }
-}
+const AsyncStorage = {
+  getItem: jest.fn(() => new Promise((resolve) => resolve(null))),
+  setItem: jest.fn((key, value) => new Promise((resolve) => resolve({ key, value })))
+};
 
 ReactNative.View = View;
 ReactNative.ScrollView = View;
