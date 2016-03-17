@@ -1,4 +1,8 @@
+import React from 'react-native';
+
 import moment from 'moment';
+
+const Linking = React.Linking;
 
 function notEqual(l, r) {
   return l !== r;
@@ -34,12 +38,22 @@ function findMany(collection, ids) {
   return ids.map((id) => lookupTable[id]);
 }
 
+function link(url) {
+  return Linking.canOpenURL(url).then((supported) => {
+    if (!supported) {
+      return new Promise((resolve, reject) => reject(supported));
+    }
+    return Linking.openURL(url);
+  });
+}
+
 const utils = {
   notEqual,
   formatDate,
   sortStartTimes,
   currentIndex,
-  findMany
+  findMany,
+  link
 };
 
 export default Object.freeze(utils);

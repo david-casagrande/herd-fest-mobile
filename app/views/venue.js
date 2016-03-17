@@ -5,7 +5,6 @@ import utils from '../utils';
 import venueStyles from '../styles/venue-styles';
 
 const Component = React.Component;
-const Linking = React.Linking;
 const StyleSheet = React.StyleSheet;
 const Text = React.Text; // eslint-disable-line no-unused-vars
 const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unused-vars
@@ -14,16 +13,6 @@ const View = React.View; // eslint-disable-line no-unused-vars
 function setTimes(props) {
   const venueSetTimes = utils.findMany(props.fullSchedule.set_times, props.venue.set_times);
   return lodash.groupBy(venueSetTimes, 'day');
-}
-
-// move to utils
-function link(url) {
-  Linking.canOpenURL(url).then((supported) => {
-    if (!supported) {
-      return url;
-    }
-    return Linking.openURL(url);
-  }).catch((linkingError) => linkingError);
 }
 
 const styles = StyleSheet.create(venueStyles);
@@ -64,7 +53,7 @@ export default class Venue extends Component {
 
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => link(addressURL)}>
+        <TouchableOpacity onPress={() => utils.link(addressURL)}>
           <Text style={styles.welcome}>{this.props.venue.street_address}</Text>
         </TouchableOpacity>
       </View>

@@ -93,4 +93,43 @@ describe('utils', () => {
       expect(results[1]).toEqual(collection[2]);
     });
   });
+
+  describe('link', () => {
+    describe('canOpenUrl returns true', () => {
+      pit('returns Linking.openURL promise', () => {
+        jest.setMock('react-native', {
+          Linking: {
+            canOpenURL: jest.fn(() => new Promise((resolve) => resolve(true))),
+            openURL: jest.fn((url) => new Promise((resolve) => resolve(url)))
+          }
+        });
+
+        const react = require('react-native');
+        const _utils = require('../utils').default;
+
+        return _utils.link('url').then((value) => {
+          expect(react.Linking.canOpenURL).toBeCalledWith('url');
+          expect(value).toEqual('url');
+        });
+      });
+    });
+
+    describe('canOpenUrl returns false', () => {
+      pit('returns promise with false', () => {
+        jest.setMock('react-native', {
+          Linking: {
+            canOpenURL: jest.fn(() => new Promise((resolve, reject) => reject(false)))
+          }
+        });
+
+        const react = require('react-native');
+        const _utils = require('../utils').default;
+
+        return _utils.link('url').catch((value) => {
+          expect(react.Linking.canOpenURL).toBeCalledWith('url');
+          expect(value).toEqual(false);
+        });
+      });
+    });
+  });
 });
