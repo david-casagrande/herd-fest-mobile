@@ -40,7 +40,7 @@ function dataSource(collection) {
 
 function renderRow(rowData, navigator) {
   function goToRow() {
-    navigator.push({ name: 'Band', index: utils.currentIndex(navigator) + 1, title: rowData.band.name, band_id: rowData.band.id });
+    navigator.push({ name: 'Band', index: utils.currentIndex(navigator) + 1, title: rowData.band.name, id: rowData.band.id });
   }
 
   return (
@@ -56,7 +56,7 @@ function renderRow(rowData, navigator) {
 
 function renderSectionHeader(sectionData, sectionId, navigator) {
   function goToSection() {
-    navigator.push({ name: 'Venue', index: utils.currentIndex(navigator) + 1, title: sectionData.name, venue_id: sectionData.id });
+    navigator.push({ name: 'Venue', index: utils.currentIndex(navigator) + 1, title: sectionData.name, id: sectionData.id });
   }
 
   return (

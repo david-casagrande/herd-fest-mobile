@@ -41,8 +41,8 @@
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/fbjs",
       "<rootDir>/node_modules/react-addons-test-utils",
+      "<rootDir>/node_modules/lodash",
       "<rootDir>/app/test-utils"
-
     ],
     "globals": {
       "fetch": true

@@ -14,7 +14,7 @@ const styles = StyleSheet.create(homeStyles);
 
 export default class Home extends Component {
   goToDay(day) {
-    this.props.navigator.push({ name: 'Day', index: 1, title: day.name, day_id: day.id });
+    this.props.navigator.push({ name: 'Day', index: 1, title: day.name, id: day.id });
   }
 
   renderDays() {

@@ -1,22 +1,13 @@
-import Band from './views/band'; // eslint-disable-line no-unused-vars
-import DayList from './views/day-list'; // eslint-disable-line no-unused-vars
-import Home from './views/home'; // eslint-disable-line no-unused-vars
-import List from './views/list'; // eslint-disable-line no-unused-vars
 import NavigationRouteMapper from './navigation/route-mapper';
+import NavManager from './nav-manager'; // eslint-disable-line no-unused-vars
 import React from 'react-native';
-import Schedule from './views/schedule'; // eslint-disable-line no-unused-vars
-import Venue from './views/venue'; // eslint-disable-line no-unused-vars
 
 import fullSchedule from './data/full-schedule';
-import lodash from 'lodash';
 import navStyles from './styles/nav-styles';
-import utils from './utils';
 
 const Component = React.Component;
 const StyleSheet = React.StyleSheet;
 const Navigator = React.Navigator; // eslint-disable-line no-unused-vars
-const View = React.View; // eslint-disable-line no-unused-vars
-const BackAndroid = React.BackAndroid;
 
 const styles = StyleSheet.create(navStyles);
 
@@ -27,33 +18,10 @@ export default class NavigationBarSample extends Component {
     this.setFullSchedule();
   }
 
-  componentWillMount() {
-    BackAndroid.addEventListener('hardwareBackPress', () => {
-      this.setState({ androidBack: 'sup' });
-      return true;
-    });
-  }
-
   setFullSchedule() {
     fullSchedule.get().then((json) => {
       this.setState({ fullSchedule: json });
     });
-  }
-
-  findModel(type, id) {
-    return lodash.find(this.state.fullSchedule[type], { id });
-  }
-
-  sortByName(type) {
-    return lodash.sortBy(this.state.fullSchedule[type], ['name']);
-  }
-
-  goToBand(band, navigator) {
-    navigator.push({ name: 'Band', index: utils.currentIndex(navigator) + 1, title: band.name, band_id: band.id });
-  }
-
-  goToVenue(venue, navigator) {
-    navigator.push({ name: 'Venue', index: utils.currentIndex(navigator) + 1, title: venue.name, venue_id: venue.id });
   }
 
   render() {
@@ -67,19 +35,7 @@ export default class NavigationBarSample extends Component {
             this.setFullSchedule();
           }
         }}
-        renderScene={(route, navigator) => {
-          const component = {
-            'Home': <Home navigator={navigator} fullSchedule={this.state.fullSchedule} />,
-            'Bands': <List goTo={(band) => this.goToBand(band, navigator)} dataSource={this.sortByName('bands')} />,
-            'Venues': <List goTo={(venue) => this.goToVenue(venue, navigator)} dataSource={this.sortByName('venues')} />,
-            'Day': <DayList navigator={navigator} day={this.findModel('days', route.day_id)} fullSchedule={this.state.fullSchedule} />,
-            'Band': <Band navigator={navigator} band={this.findModel('bands', route.band_id)} fullSchedule={this.state.fullSchedule} />,
-            'Venue': <Venue navigator={navigator} venue={this.findModel('venues', route.venue_id)} fullSchedule={this.state.fullSchedule}/>,
-            'Schedule': <Schedule navigator={navigator} fullSchedule={this.state.fullSchedule} />
-          };
-
-          return component[route.name];
-        }}
+        renderScene={(route, navigator) => <NavManager route={route} navigator={navigator} fullSchedule={this.state.fullSchedule} />}
         navigationBar={
           <Navigator.NavigationBar
             routeMapper={NavigationRouteMapper}

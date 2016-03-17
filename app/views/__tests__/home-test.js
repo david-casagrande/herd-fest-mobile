@@ -30,7 +30,7 @@ describe('Home', () => {
   });
 
   it('navigates to day', () => {
-    const expected = { name: 'Day', index: 1, title: 'Day 1', day_id: '2' }; // eslint-disable-line id-match
+    const expected = { name: 'Day', index: 1, title: 'Day 1', id: '2' }; // eslint-disable-line id-match
     const navigator = {
       push: (data) => {
         expect(data).toEqual(expected);
