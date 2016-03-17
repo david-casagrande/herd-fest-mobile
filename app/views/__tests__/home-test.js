@@ -42,4 +42,43 @@ describe('Home', () => {
 
     homeDays[0].props.onPress();
   });
+
+  describe('toolbar', () => {
+    let navigator = null;
+    let home = null;
+    let toolbar = null;
+
+    beforeEach(() => {
+      navigator = { push: jest.fn() };
+      home = testUtils.render(component, { navigator, fullSchedule: { days } });
+      toolbar = home.output.props.children[1];
+    });
+
+    it('handles schedule', () => {
+      const expected = { name: 'Schedule', index: 1, title: 'My Schedule' };
+
+      toolbar.props.onPress('Schedule');
+
+      expect(navigator.push.mock.calls[0].length).toEqual(1);
+      expect(navigator.push.mock.calls[0][0]).toEqual(expected);
+    });
+
+    it('handles bands', () => {
+      const expected = { name: 'Bands', index: 1, title: 'Bands' };
+
+      toolbar.props.onPress('Bands');
+
+      expect(navigator.push.mock.calls[0].length).toEqual(1);
+      expect(navigator.push.mock.calls[0][0]).toEqual(expected);
+    });
+
+    it('handles venues', () => {
+      const expected = { name: 'Venues', index: 1, title: 'Venues' };
+
+      toolbar.props.onPress('Venues');
+
+      expect(navigator.push.mock.calls[0].length).toEqual(1);
+      expect(navigator.push.mock.calls[0][0]).toEqual(expected);
+    });
+  });
 });
