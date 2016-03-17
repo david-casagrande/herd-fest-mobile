@@ -1,5 +1,5 @@
 jest.dontMock('lodash');
-jest.dontMock('../band');
+jest.dontMock('../venue');
 
 const testUtils = require('../../test-utils');
 
@@ -26,15 +26,15 @@ const fullSchedule = {
   days
 };
 
-describe('Band', () => {
+describe('Venue', () => {
   let component = null;
 
   beforeEach(() => {
-    component = require('../band').default;
+    component = require('../venue').default;
   });
 
   it('renders', () => {
-    const band = testUtils.render(component, { band: bands[0], fullSchedule });
-    expect(band.output.props.children.length).toEqual(4);
+    const venue = testUtils.render(component, { venue: venues[0], fullSchedule });
+    expect(venue.output.props.children.props.children.props.children).toEqual(venues[0].street_address);
   });
 });
