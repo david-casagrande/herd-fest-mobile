@@ -105,7 +105,7 @@ describe('utils', () => {
         });
 
         const react = require('react-native');
-        const _utils = require('../utils').default;
+        const _utils = require('../utils').default; // eslint-disable-line no-underscore-dangle
 
         return _utils.link('url').then((value) => {
           expect(react.Linking.canOpenURL).toBeCalledWith('url');
@@ -123,7 +123,7 @@ describe('utils', () => {
         });
 
         const react = require('react-native');
-        const _utils = require('../utils').default;
+        const _utils = require('../utils').default; // eslint-disable-line no-underscore-dangle
 
         return _utils.link('url').catch((value) => {
           expect(react.Linking.canOpenURL).toBeCalledWith('url');

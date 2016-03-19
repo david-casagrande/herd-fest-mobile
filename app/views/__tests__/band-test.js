@@ -35,6 +35,7 @@ describe('Band', () => {
 
   it('renders', () => {
     const band = testUtils.render(component, { band: bands[0], fullSchedule });
-    expect(band.output.props.children.length).toEqual(4);
+    const expected = 4;
+    expect(band.output.props.children.length).toEqual(expected);
   });
 });

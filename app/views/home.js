@@ -1,5 +1,6 @@
 import React from 'react-native';
-import Toolbar from './components/toolbar';
+import Toolbar from './components/toolbar'; // eslint-disable-line no-unused-vars
+import Twitter from './components/twitter'; // eslint-disable-line no-unused-vars
 
 import homeStyles from '../styles/home-styles';
 import lodash from 'lodash';
@@ -44,6 +45,7 @@ export default class Home extends Component {
       <View style={styles.container}>
         <View style={styles.content}>
           <Text style={styles.welcome}>HERD FEST</Text>
+          <Twitter />
           {this.renderDays()}
         </View>
         <Toolbar onPress={(name) => this.toolbarOnPress(name, this.props.navigator)} />

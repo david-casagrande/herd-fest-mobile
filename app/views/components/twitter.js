@@ -12,12 +12,12 @@ function tweet(app = true) {
   return `${host}${msg}`;
 }
 
-function postToTwitterApp() {
-  return utils.link(tweet()).catch(() => postToTwitterWeb());
-}
-
 function postToTwitterWeb() {
   return utils.link(tweet(false));
+}
+
+function postToTwitterApp() {
+  return utils.link(tweet()).catch(() => postToTwitterWeb());
 }
 
 export default class Twitter extends Component {

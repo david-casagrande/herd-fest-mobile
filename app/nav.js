@@ -1,5 +1,5 @@
-import NavigationRouteMapper from './navigation/route-mapper';
 import NavManager from './nav-manager'; // eslint-disable-line no-unused-vars
+import NavigationRouteMapper from './navigation/route-mapper';
 import React from 'react-native';
 
 import fullSchedule from './data/full-schedule';
@@ -19,9 +19,23 @@ export default class NavigationBarSample extends Component {
   }
 
   setFullSchedule() {
-    fullSchedule.get().then((json) => {
-      this.setState({ fullSchedule: json });
-    });
+    fullSchedule.get()
+      .then((json) => {
+        fullSchedule.cache(json);
+        this.setState({ fullSchedule: json });
+      })
+      .catch(() => {
+        this.setFullScheduleFromCache();
+      });
+  }
+
+  setFullScheduleFromCache() {
+    fullSchedule.getCache()
+      .then((value) => {
+        if (value) {
+          this.setState({ fullSchedule: value });
+        }
+      });
   }
 
   render() {

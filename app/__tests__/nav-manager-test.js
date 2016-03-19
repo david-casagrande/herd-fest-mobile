@@ -38,7 +38,7 @@ describe('NavManager', () => {
 
     it('renders Day View', () => {
       const fullScheduleWithDays = Object.assign({ days: [{ id: 'd-1' }] }, fullSchedule);
-      const route = { name: 'Day',  id: 'd-1' };
+      const route = { name: 'Day', id: 'd-1' };
       const component = testUtils.render(NavManager, { fullSchedule: fullScheduleWithDays, navigator, route });
 
       expect(component.output.type).toEqual(DayList);
@@ -51,7 +51,7 @@ describe('NavManager', () => {
 
     it('renders Band View', () => {
       const fullScheduleWithBands = Object.assign({ bands: [{ id: 'b-1' }] }, fullSchedule);
-      const route = { name: 'Band',  id: 'b-1' };
+      const route = { name: 'Band', id: 'b-1' };
       const component = testUtils.render(NavManager, { fullSchedule: fullScheduleWithBands, navigator, route });
 
       expect(component.output.type).toEqual(Band);
@@ -64,7 +64,7 @@ describe('NavManager', () => {
 
     it('renders Venue View', () => {
       const fullScheduleWithVenues = Object.assign({ venues: [{ id: 'v-1' }] }, fullSchedule);
-      const route = { name: 'Venue',  id: 'v-1' };
+      const route = { name: 'Venue', id: 'v-1' };
       const component = testUtils.render(NavManager, { fullSchedule: fullScheduleWithVenues, navigator, route });
 
       expect(component.output.type).toEqual(Venue);

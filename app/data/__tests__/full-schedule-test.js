@@ -27,7 +27,7 @@ describe('fullSchedule', () => {
     const React = require('react-native');
 
     it('sets passed value on async storage', () => {
-      const data = { id: '1' }
+      const data = { id: '1' };
       fullSchedule.cache(data);
 
       expect(React.AsyncStorage.setItem).toBeCalledWith('fullSchedule', JSON.stringify(data));

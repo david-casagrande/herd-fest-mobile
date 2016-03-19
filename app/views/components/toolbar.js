@@ -11,11 +11,7 @@ import toolbarStyles from '../../styles/components/toolbar';
 const styles = StyleSheet.create(toolbarStyles);
 
 export default class Toolbar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  _onPress(name) {
+  onPress(name) {
     this.props.onPress(name);
   }
 
@@ -23,15 +19,15 @@ export default class Toolbar extends Component {
     return (
       <View style={styles.nav}>
         <View style={styles.navContainer}>
-          <TouchableOpacity onPress={() => this._onPress('Schedule')} style={[styles.navLink, { backgroundColor: 'purple' }]}>
+          <TouchableOpacity onPress={() => this.onPress('Schedule')} style={[styles.navLink, { backgroundColor: 'purple' }]}>
             <Text style={styles.navText}>My Schedule</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this._onPress('Bands')} style={[styles.navLink, { backgroundColor: 'green' }]}>
+          <TouchableOpacity onPress={() => this.onPress('Bands')} style={[styles.navLink, { backgroundColor: 'green' }]}>
             <Text style={styles.navText}>Bands</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this._onPress('Venues')} style={[styles.navLink, { backgroundColor: 'blue' }]}>
+          <TouchableOpacity onPress={() => this.onPress('Venues')} style={[styles.navLink, { backgroundColor: 'blue' }]}>
             <Text style={styles.navText}>Venues</Text>
           </TouchableOpacity>
         </View>
