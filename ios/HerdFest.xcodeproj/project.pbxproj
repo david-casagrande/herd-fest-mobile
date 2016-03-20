@@ -24,9 +24,12 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A42121AE1C9A65A50012EAD9 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		A4C92FE21C9747E600C44A75 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4C92FDF1C9747E600C44A75 /* iTunesArtwork@2x.png */; };
-		A4C92FE61C97496600C44A75 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4C92FE41C97496600C44A75 /* icon@2x.png */; };
-		A4C92FE71C97496600C44A75 /* icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4C92FE51C97496600C44A75 /* icon@3x.png */; };
 		A4C92FE91C974C5E00C44A75 /* LaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = A4C92FE81C974C5E00C44A75 /* LaunchScreen.png */; };
+		A4EAF3751C9EFF690009667E /* icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EAF3701C9EFF690009667E /* icon-29@2x.png */; };
+		A4EAF3761C9EFF690009667E /* icon-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EAF3711C9EFF690009667E /* icon-29@3x.png */; };
+		A4EAF3771C9EFF690009667E /* icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EAF3721C9EFF690009667E /* icon-40@2x.png */; };
+		A4EAF3781C9EFF690009667E /* icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EAF3731C9EFF690009667E /* icon-60@2x.png */; };
+		A4EAF3791C9EFF690009667E /* icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EAF3741C9EFF690009667E /* icon-60@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,9 +135,12 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		A4C92FDF1C9747E600C44A75 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
-		A4C92FE41C97496600C44A75 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		A4C92FE51C97496600C44A75 /* icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@3x.png"; sourceTree = "<group>"; };
 		A4C92FE81C974C5E00C44A75 /* LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreen.png; sourceTree = "<group>"; };
+		A4EAF3701C9EFF690009667E /* icon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-29@2x.png"; sourceTree = "<group>"; };
+		A4EAF3711C9EFF690009667E /* icon-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-29@3x.png"; sourceTree = "<group>"; };
+		A4EAF3721C9EFF690009667E /* icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-40@2x.png"; sourceTree = "<group>"; };
+		A4EAF3731C9EFF690009667E /* icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60@2x.png"; sourceTree = "<group>"; };
+		A4EAF3741C9EFF690009667E /* icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,8 +325,11 @@
 		A4C92FE31C9747F300C44A75 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				A4C92FE41C97496600C44A75 /* icon@2x.png */,
-				A4C92FE51C97496600C44A75 /* icon@3x.png */,
+				A4EAF3701C9EFF690009667E /* icon-29@2x.png */,
+				A4EAF3711C9EFF690009667E /* icon-29@3x.png */,
+				A4EAF3721C9EFF690009667E /* icon-40@2x.png */,
+				A4EAF3731C9EFF690009667E /* icon-60@2x.png */,
+				A4EAF3741C9EFF690009667E /* icon-60@3x.png */,
 				A4C92FE81C974C5E00C44A75 /* LaunchScreen.png */,
 				A4C92FDF1C9747E600C44A75 /* iTunesArtwork@2x.png */,
 			);
@@ -531,11 +540,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4C92FE91C974C5E00C44A75 /* LaunchScreen.png in Resources */,
+				A4EAF3761C9EFF690009667E /* icon-29@3x.png in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				A4C92FE61C97496600C44A75 /* icon@2x.png in Resources */,
-				A4C92FE71C97496600C44A75 /* icon@3x.png in Resources */,
 				A4C92FE21C9747E600C44A75 /* iTunesArtwork@2x.png in Resources */,
+				A4EAF3751C9EFF690009667E /* icon-29@2x.png in Resources */,
+				A4EAF3771C9EFF690009667E /* icon-40@2x.png in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				A4EAF3791C9EFF690009667E /* icon-60@3x.png in Resources */,
+				A4EAF3781C9EFF690009667E /* icon-60@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
