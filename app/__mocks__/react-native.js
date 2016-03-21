@@ -15,9 +15,16 @@ class View extends React.Component {
   }
 }
 
+function ds(opts, dsOpts) {
+  return { dataSourceArgs: opts, dsArgs: dsOpts };
+}
+
 class ListView extends React.Component {
-  static DataSource() {
-    return false;
+  static DataSource(opts) {
+    return {
+      cloneWithRows: jest.fn((cloneOpts) => ds(opts, cloneOpts)),
+      cloneWithRowsAndSections: jest.fn((cloneOpts) => ds(opts, cloneOpts))
+    };
   }
 }
 

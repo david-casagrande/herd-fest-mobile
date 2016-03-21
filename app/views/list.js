@@ -14,7 +14,7 @@ const styles = StyleSheet.create(listStyles);
 
 function dataSource(props) {
   const ds = new ListView.DataSource({ rowHasChanged: utils.notEqual });
-  return { dataSource: ds.cloneWithRows(props.dataSource || []) };
+  return ds.cloneWithRows(props.dataSource || []);
 }
 
 function renderRow(rowData, sectionID, rowID, context) {
@@ -32,7 +32,7 @@ function renderSeparator(sectionID, rowID) {
 export default class List extends Component {
   constructor(props) {
     super(props);
-    this.state = dataSource(props);
+    this.state = { dataSource: dataSource(props) };
   }
 
   render() {

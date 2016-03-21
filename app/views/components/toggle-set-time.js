@@ -6,7 +6,7 @@ const Component = React.Component;
 // const StyleSheet = React.StyleSheet;
 const Text = React.Text; // eslint-disable-line no-unused-vars
 const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unused-vars
-
+// const Alert = React.Alert; // eslint-disable-line no-unused-vars
 
 // const styles = StyleSheet.create({});
 
@@ -14,6 +14,7 @@ function toggle(scheduled, id, context) {
   const method = scheduled ? 'remove' : 'add';
   scheduleData[method](id).then(() => {
     context.checkSchedule();
+    // Alert.alert(scheduled ? 'Event Removed' : 'Event Added');
 
     if (typeof context.props.toggleCallback === 'function') {
       context.props.toggleCallback(!scheduled, id);
