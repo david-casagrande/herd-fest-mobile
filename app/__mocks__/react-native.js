@@ -1,6 +1,6 @@
 // copped from https://github.com/hosainnet/RNUnitTests
 
-const React = require('react-native/node_modules/react');
+const React = require('react');
 const ReactNative = React;
 
 ReactNative.StyleSheet = {

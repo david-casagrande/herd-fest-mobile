@@ -1,5 +1,5 @@
-const React = require('react-native/node_modules/react');
-const utils = require('react-native/node_modules/react/lib/ReactTestUtils');
+const React = require('react');
+const utils = require('react/lib/ReactTestUtils');
 
 function render(component, props = {}, state) {
   const renderer = utils.createRenderer();
