@@ -27,4 +27,14 @@ describe('List', () => {
 
     expect(listViewDataSource.dsArgs).toEqual(dataSource);
   });
+
+  it('uses DataSource instance to cloneRows with dataSource from props', () => {
+    const dataSource = [{ name: 'sup' }];
+    const list = testUtils.render(component, { dataSource });
+    const listView = list.output.props.children;
+    const listViewDataSource = listView.props.dataSource;
+
+    console.log(listViewDataSource.dsArgs);
+    expect(listViewDataSource.dsArgs).toEqual(dataSource);
+  });
 });
