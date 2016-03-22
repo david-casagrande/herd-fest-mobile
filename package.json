@@ -13,12 +13,8 @@
     "react-native": "^0.22.0"
   },
   "devDependencies": {
-    "babel-jest": "^9.0.2",
     "eslint": "^2.2.0",
     "eslint-config-strict": "^8.4.0",
-    "eslint-plugin-filenames": "^0.2.0",
-    "eslint-plugin-react": "^4.2.0",
-    "eslint-plugin-react-native": "^1.0.0",
     "install": "^0.5.5",
     "jest-cli": "^0.9.1",
     "npm": "^3.8.0"
