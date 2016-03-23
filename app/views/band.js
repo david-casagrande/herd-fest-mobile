@@ -2,6 +2,7 @@ import React from 'react-native';
 
 import bandStyles from '../styles/band-styles';
 import lodash from 'lodash';
+import serializers from '../data/serializers';
 import utils from '../utils';
 
 const Component = React.Component;
@@ -27,24 +28,20 @@ export default class Band extends Component {
     };
   }
 
-  setTimes() {
-    const days = lodash.keys(this.state.setTimes);
-    return days.map((id) => {
-      const day = lodash.find(this.props.fullSchedule.days, { id });
-      const setTimesToRender = this.state.setTimes[id];
-      const venues = this.props.fullSchedule.venues;
+  renderSetTimes(setTimesToRender) {
+    const serialized = serializers.setTimes(setTimesToRender, this.props.fullSchedule);
+    return serialized.map((setTime) => <Text key={setTime.id}>{setTime.startTime} @ {setTime.venue.name}</Text>);
+  }
 
-      function renderSetTimes() {
-        return setTimesToRender.map((setTime) => {
-          const venue = lodash.find(venues, { id: setTime.venue });
-          return <Text key={setTime.id}>{setTime.start_time} @ {venue.name}</Text>;
-        });
-      }
+  renderDays() {
+    const dayIds = lodash.keys(this.state.setTimes);
+    const days = utils.findMany(this.props.fullSchedule.days, dayIds);
 
+    return lodash.sortBy(days, ['name']).map((day) => { // eslint-disable-line arrow-body-style
       return (
         <View key={day.id}>
           <Text>{day.name}</Text>
-          {renderSetTimes()}
+          {this.renderSetTimes(this.state.setTimes[day.id])}
         </View>
       );
     });
@@ -60,7 +57,7 @@ export default class Band extends Component {
         />
         <Text>Bio: {this.props.band.description}</Text>
         <Text style={styles.welcome}>Playing On</Text>
-        {this.setTimes()}
+        {this.renderDays()}
       </ScrollView>
     );
   }
