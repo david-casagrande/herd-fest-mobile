@@ -32,9 +32,8 @@ describe('List', () => {
   it('renders a seperator', () => {
     const sectionId = 1;
     const rowId = 1;
-    const separator = listView.props.renderSeparator(1, 1);
+    const separator = listView.props.renderSeparator(sectionId, rowId);
 
-    console.log(separator);
     expect(separator.key).toEqual('1-1');
   });
 

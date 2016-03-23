@@ -12,7 +12,8 @@ const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unuse
 
 function toggle(scheduled, id, context) {
   const method = scheduled ? 'remove' : 'add';
-  scheduleData[method](id).then(() => {
+
+  return scheduleData[method](id).then(() => {
     context.checkSchedule();
     // Alert.alert(scheduled ? 'Event Removed' : 'Event Added');
 
