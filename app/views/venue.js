@@ -24,7 +24,7 @@ function linkToGoogleMapsApp(streetAddress) {
 export default class Venue extends Component {
   constructor(props) {
     super(props);
-    this.state = { streetAddress: `${this.props.venue.street_address}, Buffalo, NY` }
+    this.state = { streetAddress: `${this.props.venue.street_address}, Buffalo, NY` };
   }
 
   render() {
