@@ -118,7 +118,7 @@ describe('utils', () => {
       pit('returns promise with false', () => {
         jest.setMock('react-native', {
           Linking: {
-            canOpenURL: jest.fn(() => new Promise((resolve, reject) => reject(false)))
+            canOpenURL: jest.fn(() => new Promise((resolve) => resolve(false)))
           }
         });
 
