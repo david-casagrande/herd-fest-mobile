@@ -24,18 +24,10 @@ function getRowData(dataBlob, sectionId, rowId) {
 // }
 
 function dataSource(collection) {
-  collection = collection || {};
-  const ds = new ListView.DataSource({
-    getRowData,
-    // getSectionHeaderData: getSectionHeaderData,
-    rowHasChanged: utils.notEqual,
-    sectionHeaderHasChanged: utils.notEqual
-  });
-
   const sectionIds = collection.map((venue, idx) => idx);
   const rowIds = collection.map((venue) => venue.setTimes.map((setTime) => setTime.id));
 
-  return { dataSource: ds.cloneWithRowsAndSections(collection, sectionIds, rowIds) };
+  return utils.dataSource(collection, { sectionIds, rowIds }, { getRowData });
 }
 
 function renderRow(rowData, navigator) {
@@ -75,7 +67,7 @@ export default class DayList extends Component {
     super(props);
 
     const day = dayListDecorator(props.day, props.fullSchedule);
-    this.state = dataSource(day.venues);
+    this.state = { dataSource: dataSource(day.venues) };
   }
 
   render() {

@@ -21,17 +21,10 @@ function getRowData(dataBlob, sectionId, rowId) {
 }
 
 function dataSource(collection) {
-  collection = collection || [];
-  const ds = new ListView.DataSource({
-    getRowData,
-    rowHasChanged: utils.notEqual,
-    sectionHeaderHasChanged: utils.notEqual
-  });
-
   const sectionIds = collection.map((day, idx) => idx);
   const rowIds = collection.map((day) => day.setTimes.map((setTime) => setTime.id));
 
-  return ds.cloneWithRowsAndSections(collection, sectionIds, rowIds);
+  return utils.dataSource(collection, { sectionIds, rowIds }, { getRowData });
 }
 
 function renderRow(rowData, navigator, context) {
@@ -119,7 +112,7 @@ export default class Schedule extends Component {
         </View>
       );
     }
-
+console.log(this.state.dataSource);
     return (
       <View style={styles.container}>
         <ListView

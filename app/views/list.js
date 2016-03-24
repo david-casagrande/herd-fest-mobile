@@ -12,11 +12,6 @@ const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unuse
 
 const styles = StyleSheet.create(listStyles);
 
-function dataSource(props) {
-  const ds = new ListView.DataSource({ rowHasChanged: utils.notEqual });
-  return ds.cloneWithRows(props.dataSource || []);
-}
-
 function renderRow(rowData, sectionID, rowID, context) {
   return (
     <TouchableOpacity style={styles.rowContainer} onPress={() => context.props.goTo(rowData)}>
@@ -32,7 +27,7 @@ function renderSeparator(sectionID, rowID) {
 export default class List extends Component {
   constructor(props) {
     super(props);
-    this.state = { dataSource: dataSource(props) };
+    this.state = { dataSource: utils.dataSource(props.dataSource || []) };
   }
 
   render() {
