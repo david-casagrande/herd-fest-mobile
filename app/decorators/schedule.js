@@ -1,9 +1,6 @@
 import lodash from 'lodash';
 import serializers from '../data/serializers';
-
-function getSetTimes(schedule, collection) {
-  return schedule.map((id) => lodash.find(collection.set_times, { id }));
-}
+import utils from '../utils';
 
 function groupByDay(setTimes, collection) {
   const grouped = lodash.groupBy(setTimes, 'day');
@@ -21,7 +18,7 @@ function groupByDay(setTimes, collection) {
 }
 
 export default function scheduleDecorator(schedule, collection) {
-  const setTimes = getSetTimes(schedule, collection);
+  const setTimes = utils.findMany(collection.set_times, schedule);
   const groupedByDay = groupByDay(setTimes, collection);
   return lodash.sortBy(groupedByDay, ['name']);
 }
