@@ -132,4 +132,61 @@ describe('utils', () => {
       });
     });
   });
+
+  describe('dataSource', () => {
+    let ds = null;
+    let _utils = null;
+
+    beforeEach(() => {
+      ds = {
+        cloneWithRows: jest.fn(),
+        cloneWithRowsAndSections: jest.fn()
+      };
+
+      jest.setMock('react-native', {
+        ListView: {
+          DataSource: jest.fn(() => ds)
+        }
+      });
+
+      _utils = require('../utils').default;
+    });
+
+    it('creates an instance of ListView.DataSource and clones with rows', () => {
+      const react = require('react-native');
+      const collection = [1];
+
+      _utils.dataSource(collection);
+
+      expect(react.ListView.DataSource).toBeCalledWith({
+        rowHasChanged: _utils.notEqual,
+        sectionHeaderHasChanged: _utils.notEqual
+      });
+
+      expect(ds.cloneWithRows).toBeCalledWith(collection);
+    });
+
+    it('creates an instance of ListView.DataSource and clones with rows and sections', () => {
+      const react = require('react-native');
+      const collection = [1];
+      const ids = {
+        sectionIds: [1],
+        rowIds: [1]
+      };
+
+      const opts = {
+        getRowData: jest.fn()
+      }
+
+      _utils.dataSource(collection, ids, opts);
+
+      expect(react.ListView.DataSource).toBeCalledWith({
+        rowHasChanged: _utils.notEqual,
+        sectionHeaderHasChanged: _utils.notEqual,
+        getRowData: opts.getRowData
+      });
+
+      expect(ds.cloneWithRowsAndSections).toBeCalledWith(collection, ids.sectionIds, ids.rowIds);
+    });
+  });
 });

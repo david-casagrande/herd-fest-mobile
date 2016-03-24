@@ -3,6 +3,7 @@ import React from 'react-native';
 import moment from 'moment';
 
 const Linking = React.Linking;
+const ListView = React.ListView;
 
 function notEqual(l, r) {
   return l !== r;
@@ -47,13 +48,29 @@ function link(url) {
   });
 }
 
+function dataSource(collection, ids = {}, opts = {}) {
+  const dsOpts =  Object.assign(opts, {
+    rowHasChanged: notEqual,
+    sectionHeaderHasChanged: notEqual
+  });
+
+  const ds = new ListView.DataSource(dsOpts);
+
+  if(ids.rowIds && ids.sectionIds) {
+    return ds.cloneWithRowsAndSections(collection, ids.sectionIds, ids.rowIds);
+  }
+
+  return ds.cloneWithRows(collection);
+}
+
 const utils = {
   notEqual,
   formatDate,
   sortStartTimes,
   currentIndex,
   findMany,
-  link
+  link,
+  dataSource
 };
 
 export default Object.freeze(utils);
