@@ -49,14 +49,14 @@ function link(url) {
 }
 
 function dataSource(collection, ids = {}, opts = {}) {
-  const dsOpts =  Object.assign(opts, {
+  const dsOpts = Object.assign(opts, {
     rowHasChanged: notEqual,
     sectionHeaderHasChanged: notEqual
   });
 
   const ds = new ListView.DataSource(dsOpts);
 
-  if(ids.rowIds && ids.sectionIds) {
+  if (ids.rowIds && ids.sectionIds) {
     return ds.cloneWithRowsAndSections(collection, ids.sectionIds, ids.rowIds);
   }
 

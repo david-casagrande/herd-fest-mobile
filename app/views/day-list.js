@@ -6,7 +6,7 @@ import dayListStyles from '../styles/day-list-styles';
 import utils from '../utils';
 
 const Component = React.Component;
-const ListView = React.ListView;
+const ListView = React.ListView; // eslint-disable-line no-unused-vars
 const StyleSheet = React.StyleSheet;
 const Text = React.Text; // eslint-disable-line no-unused-vars
 const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unused-vars

@@ -135,7 +135,7 @@ describe('utils', () => {
 
   describe('dataSource', () => {
     let ds = null;
-    let _utils = null;
+    let _utils = null; // eslint-disable-line no-underscore-dangle
 
     beforeEach(() => {
       ds = {
@@ -176,7 +176,7 @@ describe('utils', () => {
 
       const opts = {
         getRowData: jest.fn()
-      }
+      };
 
       _utils.dataSource(collection, ids, opts);
 
