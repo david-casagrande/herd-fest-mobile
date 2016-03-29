@@ -60,5 +60,5 @@ export default class Home extends Component {
 
 Home.propTypes = {
   fullSchedule: React.PropTypes.object,
-  navigator: React.PropTypes.instanceOf(React.Navigator)
+  navigator: React.PropTypes.object
 };

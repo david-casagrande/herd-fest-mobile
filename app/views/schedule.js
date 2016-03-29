@@ -135,6 +135,6 @@ export default class Schedule extends Component {
 
 Schedule.propTypes = {
   fullSchedule: React.PropTypes.object,
-  navigator: React.PropTypes.instanceOf(React.Navigator),
+  navigator: React.PropTypes.object,
   route: React.PropTypes.object
 };

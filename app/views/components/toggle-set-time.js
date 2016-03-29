@@ -56,5 +56,5 @@ ToggleSetTime.propTypes = {
   setTime: React.PropTypes.shape({
     id: React.PropTypes.string
   }),
-  style: React.PropTypes.instanceOf(React.StyleSheet)
+  style: React.PropTypes.array
 };
