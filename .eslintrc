@@ -1,5 +1,5 @@
 {
-  "plugins": ["react"],
+  "plugins": ["react", "react-native"],
   "extends": ["strict", "plugin:react/recommended"],
   "parserOptions": {
     "ecmaFeatures": {
@@ -29,6 +29,8 @@
     "max-len": [2, 140],
     "newline-after-var": [0],
     no-magic-numbers: [2, { "ignoreArrayIndexes": true, "ignore": [-1, 0, 1, 2] }],
-    "template-curly-spacing": [2, "never"]
+    "template-curly-spacing": [2, "never"],
+    "react-native/no-unused-styles": [2],
+    "react-native/split-platform-components": [2],
   }
 }
