@@ -6,11 +6,11 @@ import serializers from '../data/serializers';
 import utils from '../utils';
 
 const Component = React.Component;
-const Image = React.Image; // eslint-disable-line no-unused-vars
-const ScrollView = React.ScrollView; // eslint-disable-line no-unused-vars
+const Image = React.Image;
+const ScrollView = React.ScrollView;
 const StyleSheet = React.StyleSheet;
-const Text = React.Text; // eslint-disable-line no-unused-vars
-const View = React.View; // eslint-disable-line no-unused-vars
+const Text = React.Text;
+const View = React.View;
 
 const styles = StyleSheet.create(bandStyles);
 

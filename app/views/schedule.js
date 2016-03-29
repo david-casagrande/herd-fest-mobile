@@ -1,5 +1,5 @@
 import React from 'react-native';
-import ToggleSetTime from './components/toggle-set-time'; // eslint-disable-line no-unused-vars
+import ToggleSetTime from './components/toggle-set-time';
 
 import schedule from '../data/schedule';
 import scheduleDecorator from '../decorators/schedule';
@@ -10,8 +10,8 @@ const Animated = React.Animated;
 const Component = React.Component;
 const ListView = React.ListView;
 const StyleSheet = React.StyleSheet;
-const Text = React.Text; // eslint-disable-line no-unused-vars
-const View = React.View; // eslint-disable-line no-unused-vars
+const Text = React.Text;
+const View = React.View;
 
 const styles = StyleSheet.create(scheduleStyles);
 

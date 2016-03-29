@@ -3,8 +3,8 @@ import React from 'react-native';
 import utils from '../../utils';
 
 const Component = React.Component;
-const Text = React.Text; // eslint-disable-line no-unused-vars
-const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unused-vars
+const Text = React.Text;
+const TouchableOpacity = React.TouchableOpacity;
 
 function tweet(app = true) {
   const host = app ? 'twitter://post?message=' : 'https://twitter.com/intent/tweet?text=';

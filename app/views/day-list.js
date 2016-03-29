@@ -1,16 +1,16 @@
 import React from 'react-native';
-import ToggleSetTime from './components/toggle-set-time'; // eslint-disable-line no-unused-vars
+import ToggleSetTime from './components/toggle-set-time';
 
 import dayListDecorator from '../decorators/day-list';
 import dayListStyles from '../styles/day-list-styles';
 import utils from '../utils';
 
 const Component = React.Component;
-const ListView = React.ListView; // eslint-disable-line no-unused-vars
+const ListView = React.ListView;
 const StyleSheet = React.StyleSheet;
-const Text = React.Text; // eslint-disable-line no-unused-vars
-const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unused-vars
-const View = React.View; // eslint-disable-line no-unused-vars
+const Text = React.Text;
+const TouchableOpacity = React.TouchableOpacity;
+const View = React.View;
 
 const styles = StyleSheet.create(dayListStyles);
 

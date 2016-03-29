@@ -1,4 +1,4 @@
-import NavManager from './nav-manager'; // eslint-disable-line no-unused-vars
+import NavManager from './nav-manager';
 import NavigationRouteMapper from './navigation/route-mapper';
 import React from 'react-native';
 
@@ -7,7 +7,7 @@ import navStyles from './styles/nav-styles';
 
 const Component = React.Component;
 const StyleSheet = React.StyleSheet;
-const Navigator = React.Navigator; // eslint-disable-line no-unused-vars
+const Navigator = React.Navigator;
 
 const styles = StyleSheet.create(navStyles);
 

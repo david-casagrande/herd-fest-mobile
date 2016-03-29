@@ -5,9 +5,9 @@ import venueStyles from '../styles/venue-styles';
 
 const Component = React.Component;
 const StyleSheet = React.StyleSheet;
-const Text = React.Text; // eslint-disable-line no-unused-vars
-const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unused-vars
-const View = React.View; // eslint-disable-line no-unused-vars
+const Text = React.Text;
+const TouchableOpacity = React.TouchableOpacity;
+const View = React.View;
 
 const styles = StyleSheet.create(venueStyles);
 

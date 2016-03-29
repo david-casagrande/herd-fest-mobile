@@ -2,9 +2,9 @@ import React from 'react-native';
 
 const Component = React.Component;
 const StyleSheet = React.StyleSheet;
-const View = React.View; // eslint-disable-line no-unused-vars
-const Text = React.Text; // eslint-disable-line no-unused-vars
-const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unused-vars
+const View = React.View;
+const Text = React.Text;
+const TouchableOpacity = React.TouchableOpacity;
 
 import toolbarStyles from '../../styles/components/toolbar';
 
