@@ -37,7 +37,7 @@ export default class Band extends Component {
     const dayIds = lodash.keys(this.state.setTimes);
     const days = utils.findMany(this.props.fullSchedule.days, dayIds);
 
-    return lodash.sortBy(days, ['name']).map((day) => { // eslint-disable-line arrow-body-style
+    return lodash.sortBy(days, ['date']).map((day) => { // eslint-disable-line arrow-body-style
       return (
         <View key={day.id}>
           <Text>{day.name}</Text>

@@ -1,4 +1,5 @@
 import container from './components/container';
+import colors from './components/colors';
 
 const homeStyles = {
   content: {
@@ -6,15 +7,26 @@ const homeStyles = {
     justifyContent: 'center',
     alignItems: 'center'
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
+  logo: {
+    width: 260,
+    height: 260,
+    marginBottom: 24
   },
-  instructions: {
+  days: {
+    width: 260
+  },
+  link: {
+    borderColor: colors.primary,
+    borderWidth: 2,
+    marginBottom: 10,
+    paddingTop: 10,
+    paddingBottom: 10
+  },
+  linkText: {
+    color: colors.primary,
+    fontWeight: 'bold',
     textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
+    fontSize: 18
   }
 };
 

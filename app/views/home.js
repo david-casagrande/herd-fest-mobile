@@ -1,15 +1,17 @@
 import React from 'react-native';
-import Toolbar from './components/toolbar'; // eslint-disable-line no-unused-vars
-import Twitter from './components/twitter'; // eslint-disable-line no-unused-vars
+import Toolbar from './components/toolbar';
+import Twitter from './components/twitter';
 
 import homeStyles from '../styles/home-styles';
 import lodash from 'lodash';
 
 const Component = React.Component;
+const Dimensions = React.Dimensions;
+const Image = React.Image;
 const StyleSheet = React.StyleSheet;
-const Text = React.Text; // eslint-disable-line no-unused-vars
-const TouchableOpacity = React.TouchableOpacity; // eslint-disable-line no-unused-vars
-const View = React.View; // eslint-disable-line no-unused-vars
+const Text = React.Text;
+const TouchableOpacity = React.TouchableOpacity;
+const View = React.View;
 
 const styles = StyleSheet.create(homeStyles);
 
@@ -19,12 +21,12 @@ export default class Home extends Component {
   }
 
   renderDays() {
-    const days = lodash.sortBy(this.props.fullSchedule.days, ['name']);
+    const days = lodash.sortBy(this.props.fullSchedule.days, ['date']);
 
     return days.map((day) => { // eslint-disable-line arrow-body-style
       return (
-        <TouchableOpacity key={day.id} onPress={() => this.goToDay(day)}>
-          <Text>{day.name}</Text>
+        <TouchableOpacity key={day.id} onPress={() => this.goToDay(day)} style={[styles.link]}>
+          <Text style={styles.linkText}>{day.name.toUpperCase()}</Text>
         </TouchableOpacity>
       );
     });
@@ -41,14 +43,15 @@ export default class Home extends Component {
   }
 
   render() {
+    // <Toolbar onPress={(name) => this.toolbarOnPress(name, this.props.navigator)} />
+    // console.log(Dimensions.get('window').width)
+    const width = Dimensions.get('window').width - 100;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { paddingTop: 30 }]}>
         <View style={styles.content}>
-          <Text style={styles.welcome}>HERD FEST</Text>
-          <Twitter />
-          {this.renderDays()}
+          <Image style={[styles.logo, { width, height: width }]} resizeMode={'contain'} source={require('../images/home.png')} />
+          <View style={[styles.days, { width }]}>{this.renderDays()}</View>
         </View>
-        <Toolbar onPress={(name) => this.toolbarOnPress(name, this.props.navigator)} />
       </View>
     );
   }

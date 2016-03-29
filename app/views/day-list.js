@@ -52,7 +52,7 @@ function renderSectionHeader(sectionData, sectionId, navigator) {
   }
 
   return (
-    <TouchableOpacity underlayColor={'#ccc'} onPress={goToSection}>
+    <TouchableOpacity onPress={goToSection}>
       <Text style={styles.sectionHeader}>{sectionData.name}</Text>
     </TouchableOpacity>
   );

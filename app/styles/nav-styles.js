@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from './components/colors';
 
 const navStyles = {
   messageText: {
@@ -19,16 +20,16 @@ const navStyles = {
     fontWeight: '500'
   },
   navBar: {
-    backgroundColor: 'white'
+    backgroundColor: '#fff'
   },
   navBarText: {
     fontSize: 16,
     marginVertical: 10
   },
   navBarTitleText: {
-    // color: cssVar('fbui-bluegray-60'),
     fontWeight: '500',
-    marginVertical: 9
+    marginVertical: 9,
+    color: colors.primary
   },
   navBarLeftButton: {
     paddingLeft: 10
@@ -37,7 +38,7 @@ const navStyles = {
     paddingRight: 10
   },
   navBarButtonText: {
-    // color: cssVar('fbui-accent-blue')
+    color: colors.primary
   },
   scene: {
     flex: 1,

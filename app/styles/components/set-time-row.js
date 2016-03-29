@@ -1,19 +1,25 @@
+import colors from './colors';
+import fontSizes from './font-sizes';
+
 const setTime = {
-  backgroundColor: 'red',
   width: 74,
-  color: 'white',
-  textAlign: 'center'
+  color: colors.primary,
+  textAlign: 'center',
+  fontSize: fontSizes.medium
 };
 
 const content = {
   flex: 1,
-  paddingLeft: 10
+  paddingLeft: 2,
+  color: colors.secondary,
+  fontSize: fontSizes.medium
 };
 
 const toggleSetTime = {
-  backgroundColor: '#eee',
+  // backgroundColor: '#eee',
   width: 40,
-  textAlign: 'center'
+  textAlign: 'center',
+  color: colors.primary
 };
 
 export default { setTime, content, toggleSetTime };
