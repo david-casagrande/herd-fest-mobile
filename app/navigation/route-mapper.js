@@ -63,7 +63,7 @@ const NavigationRouteMapper = {
       return null;
     }
     return (
-      <Text style={[styles.navBarText, styles.navBarTitleText]}>
+      <Text style={[styles.navBarText, styles.navBarTitleText]} numberOfLines={1}>
         {route.title}
       </Text>
     );
