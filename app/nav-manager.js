@@ -1,10 +1,10 @@
-import Band from './views/band'; // eslint-disable-line no-unused-vars
-import DayList from './views/day-list'; // eslint-disable-line no-unused-vars
-import Home from './views/home'; // eslint-disable-line no-unused-vars
-import List from './views/list'; // eslint-disable-line no-unused-vars
+import Band from './views/band';
+import DayList from './views/day-list';
+import Home from './views/home';
+import List from './views/list';
 import React from 'react-native';
-import Schedule from './views/schedule'; // eslint-disable-line no-unused-vars
-import Venue from './views/venue'; // eslint-disable-line no-unused-vars
+import Schedule from './views/schedule';
+import Venue from './views/venue';
 
 import lodash from 'lodash';
 import utils from './utils';
@@ -86,3 +86,9 @@ export default class NavManager extends Component {
     return components[route.name](navigator, fullSchedule, route);
   }
 }
+
+NavManager.propTypes = {
+  fullSchedule: React.PropTypes.object,
+  navigator: React.PropTypes.instanceOf(React.Navigator),
+  route: React.PropTypes.object
+};

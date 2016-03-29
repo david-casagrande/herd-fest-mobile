@@ -31,7 +31,7 @@ function renderRow(rowData, navigator, context) {
   return <Row rowData={rowData} context={context} />;
 }
 
-function renderSectionHeader(sectionData, sectionId, navigator) {
+function renderSectionHeader(sectionData) {
   // function goToSection() {
   //   navigator.push({ name: 'Venue', index: currentIndex(navigator) + 1, title: sectionData.name, venue_id: sectionData.id });
   // }
@@ -49,8 +49,9 @@ class Row extends Component {
   constructor(props) {
     super(props);
 
+    const initHeight = 37;
     this.state = {
-      fadeAnim: new Animated.Value(37) // init opacity 0
+      fadeAnim: new Animated.Value(initHeight)
     };
   }
 
@@ -58,9 +59,9 @@ class Row extends Component {
     const rowData = this.props.rowData;
     const context = this.props.context;
 
-    function anim(context, parent) {
+    function anim(animContext, parent) {
       Animated.timing(
-        context.state.fadeAnim,
+        animContext.state.fadeAnim,
         { toValue: 0, duration: 300 }
       ).start(() => parent.setSchedule());
     }
@@ -75,6 +76,11 @@ class Row extends Component {
     );
   }
 }
+
+Row.propTypes = {
+  rowData: React.PropTypes.object,
+  context: React.PropTypes.object
+};
 
 export default class Schedule extends Component {
   constructor(props) {
@@ -112,7 +118,7 @@ export default class Schedule extends Component {
         </View>
       );
     }
-console.log(this.state.dataSource);
+
     return (
       <View style={styles.container}>
         <ListView
@@ -126,3 +132,9 @@ console.log(this.state.dataSource);
     );
   }
 }
+
+Schedule.propTypes = {
+  fullSchedule: React.PropTypes.object,
+  navigator: React.PropTypes.instanceOf(React.Navigator),
+  route: React.PropTypes.object
+};

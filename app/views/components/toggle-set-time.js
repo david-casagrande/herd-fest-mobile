@@ -23,7 +23,7 @@ function toggle(scheduled, id, context) {
   });
 }
 
-export default class Home extends Component {
+export default class ToggleSetTime extends Component {
   constructor(props) {
     super(props);
 
@@ -51,3 +51,10 @@ export default class Home extends Component {
     );
   }
 }
+
+ToggleSetTime.propTypes = {
+  setTime: React.PropTypes.shape({
+    id: React.PropTypes.string
+  }),
+  style: React.PropTypes.instanceOf(React.StyleSheet)
+};

@@ -35,3 +35,7 @@ export default class Toolbar extends Component {
     );
   }
 }
+
+Toolbar.propTypes = {
+  onPress: React.PropTypes.func
+};

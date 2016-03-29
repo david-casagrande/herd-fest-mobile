@@ -1,5 +1,5 @@
-import container from './components/container';
 import colors from './components/colors';
+import container from './components/container';
 
 const homeStyles = {
   content: {

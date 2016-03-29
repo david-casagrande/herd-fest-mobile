@@ -84,3 +84,9 @@ export default class DayList extends Component {
     );
   }
 }
+
+DayList.propTypes = {
+  day: React.PropTypes.object,
+  fullSchedule: React.PropTypes.object,
+  navigator: React.PropTypes.instanceOf(React.Navigator)
+};

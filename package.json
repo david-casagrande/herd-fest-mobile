@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "node_modules/.bin/jest"
+    "test": "node_modules/.bin/jest",
+    "lint": "if node_modules/.bin/eslint app; then exit 0; else exit 0; fi"
   },
   "dependencies": {
     "lodash": "^4.6.1",
@@ -15,6 +16,8 @@
   "devDependencies": {
     "eslint": "^2.2.0",
     "eslint-config-strict": "^8.4.0",
+    "eslint-plugin-react": "^4.2.3",
+    "eslint-plugin-react-native": "^1.0.0",
     "install": "^0.5.5",
     "jest-cli": "^0.9.1",
     "npm": "^3.8.0"

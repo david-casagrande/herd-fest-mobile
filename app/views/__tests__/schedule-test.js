@@ -6,18 +6,14 @@ jest.dontMock('../schedule');
 
 const testUtils = require('../../test-utils');
 
-const fullSchedule = {
-  bands: [],
-  venues: [],
-  set_times: [],
-  days: []
-}
+// const fullSchedule = {
+//   bands: [],
+//   venues: [],
+//   set_times: [],
+//   days: []
+// };
 
 describe('Schedule', () => {
-  beforeEach(() => {
-
-  });
-
   it('displays loading screen', () => {
     const component = require('../schedule').default;
     const schedule = testUtils.render(component);
@@ -32,14 +28,14 @@ describe('Schedule', () => {
     expect(schedule.output.props.children.props.children).toEqual('Your schedule is a blank slate');
   });
 
-  describe('users schedule', () => {
-    let component = require('../schedule').default;
-    let schedule = testUtils.render(component, { fullSchedule }, { dataSource: true, schedule: [] });
-
-    it('creates DataSource instance', () => {
-      expect(listViewDataSource.dataSourceArgs.rowHasChanged.toString()).toEqual(utils.notEqual.toString());
-    });
-  });
+  // describe('users schedule', () => {
+  //   const component = require('../schedule').default;
+  //   const schedule = testUtils.render(component, { fullSchedule }, { dataSource: true, schedule: [] });
+  //
+  //   it('creates DataSource instance', () => {
+  //     expect(listViewDataSource.dataSourceArgs.rowHasChanged.toString()).toEqual(utils.notEqual.toString());
+  //   });
+  // });
   // it('uses DataSource instance to cloneRows with dataSource from props', () => {
   //   expect(listViewDataSource.dsArgs).toEqual(dataSource);
   // });

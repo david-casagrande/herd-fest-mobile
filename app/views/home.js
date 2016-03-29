@@ -1,6 +1,6 @@
 import React from 'react-native';
-import Toolbar from './components/toolbar';
-import Twitter from './components/twitter';
+// import Toolbar from './components/toolbar';
+// import Twitter from './components/twitter';
 
 import homeStyles from '../styles/home-styles';
 import lodash from 'lodash';
@@ -45,7 +45,8 @@ export default class Home extends Component {
   render() {
     // <Toolbar onPress={(name) => this.toolbarOnPress(name, this.props.navigator)} />
     // console.log(Dimensions.get('window').width)
-    const width = Dimensions.get('window').width - 100;
+    const offset = 100;
+    const width = Dimensions.get('window').width - offset;
     return (
       <View style={[styles.container, { paddingTop: 30 }]}>
         <View style={styles.content}>
@@ -56,3 +57,8 @@ export default class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  fullSchedule: React.PropTypes.object,
+  navigator: React.PropTypes.instanceOf(React.Navigator)
+};

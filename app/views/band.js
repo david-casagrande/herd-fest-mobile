@@ -62,3 +62,11 @@ export default class Band extends Component {
     );
   }
 }
+
+Band.propTypes = {
+  band: React.PropTypes.shape({
+    description: React.PropTypes.string,
+    image_url: React.PropTypes.string
+  }),
+  fullSchedule: React.PropTypes.object
+};

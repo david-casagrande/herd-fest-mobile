@@ -1,5 +1,6 @@
 {
-  "extends": ["strict"],
+  "plugins": ["react"],
+  "extends": ["strict", "plugin:react/recommended"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true

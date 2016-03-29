@@ -43,3 +43,7 @@ export default class List extends Component {
     );
   }
 }
+
+List.propTypes = {
+  dataSource: React.PropTypes.array
+};

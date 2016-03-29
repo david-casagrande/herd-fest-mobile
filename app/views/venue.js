@@ -37,3 +37,9 @@ export default class Venue extends Component {
     );
   }
 }
+
+Venue.propTypes = {
+  venue: React.PropTypes.shape({
+    street_address: React.PropTypes.string
+  })
+};
