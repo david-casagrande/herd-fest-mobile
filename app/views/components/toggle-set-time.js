@@ -6,6 +6,7 @@ const Component = React.Component;
 // const StyleSheet = React.StyleSheet;
 const Text = React.Text;
 const TouchableOpacity = React.TouchableOpacity;
+const View = React.View;
 // const Alert = React.Alert;
 
 // const styles = StyleSheet.create({});
@@ -41,12 +42,13 @@ export default class ToggleSetTime extends Component {
   }
 
   render() {
-    const text = this.state.scheduled ? '-' : '+';
+    const rotate = this.state.scheduled ? '45deg' : '0deg';
+    const paddingLeft = this.state.scheduled ? 0 : 2;
     const style = this.props.style || {};
 
     return (
       <TouchableOpacity onPress={() => toggle(this.state.scheduled, this.props.setTime.id, this)}>
-        <Text style={style}>{text}</Text>
+        <Text style={[style, { transform: [{ rotate }], paddingLeft }]}>+</Text>
       </TouchableOpacity>
     );
   }

@@ -17,8 +17,8 @@ function goTo(name, model, navigator) {
   navigator.push({ name, index, title: model.name, id: model.id });
 }
 
-function home(navigator, fullSchedule) {
-  return <Home navigator={navigator} fullSchedule={fullSchedule} />;
+function home(navigator) {
+  return <Home navigator={navigator} />;
 }
 
 function day(navigator, fullSchedule, route) {
@@ -56,6 +56,7 @@ const components = {
   'Band': band,
   'Venue': venue,
   'Schedule': schedule,
+  'My Schedule': schedule,
   'Bands': bands,
   'Venues': venues
 };

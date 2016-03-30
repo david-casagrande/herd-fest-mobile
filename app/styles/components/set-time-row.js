@@ -16,8 +16,11 @@ const content = {
 };
 
 const toggleSetTime = {
-  // backgroundColor: '#eee',
-  width: 40,
+  backgroundColor: 'transparent',
+  width: 37,
+  height: 37,
+  lineHeight: 20,
+  fontSize: 22,
   textAlign: 'center',
   color: colors.primary
 };
