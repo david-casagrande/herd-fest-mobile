@@ -14,8 +14,10 @@ const styles = StyleSheet.create(listStyles);
 
 function renderRow(rowData, sectionID, rowID, context) {
   return (
-    <TouchableOpacity style={styles.rowContainer} onPress={() => context.props.goTo(rowData)}>
-      <Text style={[styles.row, styles.content]}>{rowData.name}</Text>
+    <TouchableOpacity onPress={() => context.props.goTo(rowData)}>
+      <View style={styles.rowContainer}>
+        <Text numberOfLines={1} style={[styles.row, styles.content]}>{rowData.name}</Text>
+      </View>
     </TouchableOpacity>
   );
 }

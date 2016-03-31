@@ -1,4 +1,5 @@
 import Band from './views/band';
+import Days from './views/days';
 import DayList from './views/day-list';
 import Home from './views/home';
 import List from './views/list';
@@ -50,12 +51,16 @@ function venues(navigator, fullSchedule) {
   return <List goTo={(model) => goTo('Venue', model, navigator)} dataSource={dataSource} />;
 }
 
+function days(navigator, fullSchedule) {
+  return <Days navigator={navigator} fullSchedule={fullSchedule} />;
+}
+
 const components = {
   'Home': home,
   'Day': day,
   'Band': band,
   'Venue': venue,
-  'Schedule': schedule,
+  'Schedule': days,
   'My Schedule': schedule,
   'Bands': bands,
   'Venues': venues

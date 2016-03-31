@@ -63,19 +63,17 @@ function renderSeparator(sectionID, rowID) {
 }
 
 export default class DayList extends Component {
-  constructor(props) {
-    super(props);
-
-    const day = dayListDecorator(props.day, props.fullSchedule);
-    this.state = { dataSource: dataSource(day.venues) };
+  dataSource() {
+    const day = dayListDecorator(this.props.day, this.props.fullSchedule);
+    return dataSource(day.venues);
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { paddingTop: 0 }]}>
         <ListView
           style={styles.listView}
-          dataSource={this.state.dataSource}
+          dataSource={this.dataSource()}
           renderRow={(rowData) => renderRow(rowData, this.props.navigator)}
           renderSectionHeader={(sectionData, sectionId) => renderSectionHeader(sectionData, sectionId, this.props.navigator)}
           renderSeparator={renderSeparator}

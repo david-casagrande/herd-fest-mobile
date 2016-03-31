@@ -5,6 +5,7 @@ import schedule from '../data/schedule';
 import scheduleDecorator from '../decorators/schedule';
 import scheduleStyles from '../styles/schedule-styles';
 import utils from '../utils';
+import lodash from 'lodash';
 
 const Animated = React.Animated;
 const Component = React.Component;
@@ -69,7 +70,7 @@ class Row extends Component {
     return (
       <Animated.View style={[styles.rowContainer, { height: this.state.fadeAnim, overflow: 'hidden' }]}>
         <Text style={[styles.row, styles.setTime]}>{utils.formatDate(rowData.startTime)}</Text>
-        <Text style={[styles.row, styles.content]}>{rowData.band.name} @ {rowData.venue.name}</Text>
+        <Text style={[styles.row, styles.content]} numberOfLines={1}>{rowData.band.name} @ {rowData.venue.name}</Text>
         <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime]}
         toggleCallback={() => anim(this, context)}/>
       </Animated.View>
