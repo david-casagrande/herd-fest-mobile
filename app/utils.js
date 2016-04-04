@@ -26,6 +26,10 @@ function sortStartTimes(model) {
   return hour;
 }
 
+function sortSetTimesByDays(model) {
+  return model.day.date;
+}
+
 function currentIndex(navigator) {
   const routes = navigator.getCurrentRoutes();
   return routes[routes.length - 1].index;
@@ -67,6 +71,7 @@ const utils = {
   notEqual,
   formatDate,
   sortStartTimes,
+  sortSetTimesByDays,
   currentIndex,
   findMany,
   link,

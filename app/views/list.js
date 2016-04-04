@@ -16,7 +16,7 @@ function renderRow(rowData, sectionID, rowID, context) {
   return (
     <TouchableOpacity onPress={() => context.props.goTo(rowData)}>
       <View style={styles.rowContainer}>
-        <Text numberOfLines={1} style={[styles.row, styles.content]}>{rowData.name}</Text>
+        <Text numberOfLines={1} style={[styles.row, styles.text]}>{rowData.name}</Text>
       </View>
     </TouchableOpacity>
   );

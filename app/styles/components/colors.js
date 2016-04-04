@@ -1,4 +1,4 @@
-const secondary = '#555';
+const secondary = '#444';
 const lightGrey = '#b0b1b2';
 
 const green = '#7ec583';
@@ -14,5 +14,6 @@ export default {
   primaryAlt: teal,
   secondary,
   lightGrey,
-  white
+  white,
+  pinWheel: [green, purple, blue, teal, red]
 };

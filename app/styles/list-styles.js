@@ -7,7 +7,10 @@ const listStyles = {
   rowContainer: {
     paddingLeft: 10,
     paddingRight: 10
+  },
+  text: {
+    color: colors.secondary
   }
 };
 
-export default Object.assign({}, container, list, setTimeRow, listStyles);
+export default Object.assign({}, container, list, listStyles);

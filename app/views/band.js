@@ -4,6 +4,7 @@ import bandStyles from '../styles/band-styles';
 import lodash from 'lodash';
 import serializers from '../data/serializers';
 import utils from '../utils';
+import colors from '../styles/components/colors';
 
 const Component = React.Component;
 const Image = React.Image;
@@ -14,50 +15,89 @@ const View = React.View;
 
 const styles = StyleSheet.create(bandStyles);
 
-function setTimes(props) {
-  const bandSetTimes = utils.findMany(props.fullSchedule.set_times, props.band.set_times);
-  return lodash.groupBy(bandSetTimes, 'day');
+function bandSetTimesByDay(props) {
+  const setTimes = utils.findMany(props.fullSchedule.set_times, props.band.set_times);
+  return lodash.groupBy(setTimes, 'day');
+}
+
+function colorMap(collection) {
+  const map = {};
+  let count = 0;
+
+  collection.forEach((key) => {
+    if(typeof map[key] !== 'undefined') {
+      return;
+    }
+
+    map[key] = colors.pinWheel[count];
+    count++;
+  });
+
+  return map;
 }
 
 export default class Band extends Component {
-  constructor(props) {
-    super(props);
+  setTime(setTime, color, idx, end) {
+    const separator = (idx === end) ? null : <View style={styles.separator}></View>;
 
-    this.state = {
-      setTimes: setTimes(props)
-    };
+    return (
+      <View key={setTime.id}>
+        <View style={styles.rowContainer}>
+          <Text style={[styles.row, styles.setTime, { color }]} numberOfLines={1}>{utils.formatDate(setTime.startTime)}</Text>
+          <Text style={[styles.row, styles.content, { color: colors.secondary }]} numberOfLines={1}>{setTime.venue.name}</Text>
+        </View>
+        {separator}
+      </View>
+    );
   }
 
-  renderSetTimes(setTimesToRender) {
-    const serialized = serializers.setTimes(setTimesToRender, this.props.fullSchedule);
-    return serialized.map((setTime) => <Text key={setTime.id}>{setTime.startTime} @ {setTime.venue.name}</Text>);
+  setTimes(setTimes, color) {
+    const serialized = serializers.setTimes(setTimes, this.props.fullSchedule);
+    const last = serialized.length - 1;
+    return serialized.map((setTime, idx) => this.setTime(setTime, color, idx, last));
   }
 
-  renderDays() {
-    const dayIds = lodash.keys(this.state.setTimes);
-    const days = utils.findMany(this.props.fullSchedule.days, dayIds);
+  days() {
+    const days = bandSetTimesByDay(this.props);
+    const dayKeys = lodash.keys(days);
+    const colors = colorMap(dayKeys);
 
-    return lodash.sortBy(days, ['date']).map((day) => { // eslint-disable-line arrow-body-style
+    return dayKeys.map((id) => {
+      const day = lodash.find(this.props.fullSchedule.days, { id });
+      const backgroundColor = `${colors[id]}B3`;
+
       return (
-        <View key={day.id}>
-          <Text>{day.name}</Text>
-          {this.renderSetTimes(this.state.setTimes[day.id])}
+        <View key={id}>
+          <Text style={[styles.sectionHeader, { backgroundColor }]}>{day.name}</Text>
+          {this.setTimes(days[id], colors[id])}
         </View>
       );
     });
   }
 
+  image() {
+    if(!this.props.band.image_url) {
+      return null;
+    }
+
+    return (
+      <Image
+        source={{ uri: this.props.band.image_url }}
+        style={styles.image}
+        resizeMode={'cover'}
+      />
+    );
+  }
+
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Image
-          source={{ uri: this.props.band.image_url }}
-          style={styles.image}
-          resizeMode={'cover'}
-        />
-        <Text>Bio: {this.props.band.description}</Text>
-        <Text style={styles.welcome}>Playing On</Text>
-        {this.renderDays()}
+        {this.image()}
+        <View style={styles.bandDetail}>
+          <Text style={[styles.text, styles.bandName]}>{this.props.band.name}</Text>
+          <Text style={styles.text}>{this.props.band.description}</Text>
+        </View>
+        {this.days()}
       </ScrollView>
     );
   }

@@ -6,6 +6,7 @@ const utils = require('../utils').default;
 const notEqual = utils.notEqual;
 const formatDate = utils.formatDate;
 const sortStartTimes = utils.sortStartTimes;
+const sortSetTimesByDays = utils.sortSetTimesByDays;
 const currentIndex = utils.currentIndex;
 const findMany = utils.findMany;
 
@@ -51,6 +52,29 @@ describe('utils', () => {
         times[0],
         times[3],
         times[1]
+      ];
+
+      expect(result).toEqual(expected);
+    });
+  });
+
+  describe('sortSetTimesByDays', () => {
+    const setTimes = [
+      { day: { date: '2000-01-02T23:00:00.000Z' } },
+      { day: { date: '2000-01-01T06:00:00.000Z' } },
+      { day: { date: '2000-01-03T22:00:00.000Z' } },
+      { day: { date: '2000-01-05T00:00:00.000Z' } },
+      { day: { date: '2000-01-04T07:00:00.000Z' } }
+    ];
+
+    it('handles sorting start times with lodash', () => {
+      const result = lodash.sortBy(setTimes, sortSetTimesByDays);
+      const expected = [
+        setTimes[1],
+        setTimes[0],
+        setTimes[2],
+        setTimes[4],
+        setTimes[3]
       ];
 
       expect(result).toEqual(expected);
