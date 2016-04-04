@@ -3,20 +3,14 @@ import React from 'react-native';
 import scheduleData from '../../data/schedule';
 
 const Component = React.Component;
-// const StyleSheet = React.StyleSheet;
 const Text = React.Text;
 const TouchableOpacity = React.TouchableOpacity;
-const View = React.View;
-// const Alert = React.Alert;
-
-// const styles = StyleSheet.create({});
 
 function toggle(scheduled, id, context) {
   const method = scheduled ? 'remove' : 'add';
 
   return scheduleData[method](id).then(() => {
     context.checkSchedule();
-    // Alert.alert(scheduled ? 'Event Removed' : 'Event Added');
 
     if (typeof context.props.toggleCallback === 'function') {
       context.props.toggleCallback(!scheduled, id);

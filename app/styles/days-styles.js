@@ -1,8 +1,5 @@
 import colors from './components/colors';
 import container from './components/container';
-import React from 'react';
-
-const StyleSheet = React.StyleSheet;
 
 const dayLinkMargin = 0;
 const daysPadding = 0;

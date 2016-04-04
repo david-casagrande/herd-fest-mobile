@@ -1,6 +1,6 @@
 import Band from './views/band';
-import Days from './views/days';
 import DayList from './views/day-list';
+import Days from './views/days';
 import Home from './views/home';
 import List from './views/list';
 import React from 'react-native';

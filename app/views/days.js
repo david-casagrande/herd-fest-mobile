@@ -1,5 +1,5 @@
-import React from 'react-native';
 import DayList from './day-list';
+import React from 'react-native';
 
 import daysStyles from '../styles/days-styles';
 import lodash from 'lodash';
@@ -14,14 +14,14 @@ const styles = StyleSheet.create(daysStyles);
 
 export default class Days extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     const day = lodash.sortBy(this.props.fullSchedule.days, ['date'])[0];
-    this.state = { day }
+    this.state = { day };
   }
 
   setDay(day) {
-    this.setState({ day: day });
+    this.setState({ day });
   }
 
   days() {

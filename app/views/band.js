@@ -1,10 +1,10 @@
 import React from 'react-native';
 
 import bandStyles from '../styles/band-styles';
+import colors from '../styles/components/colors';
 import lodash from 'lodash';
 import serializers from '../data/serializers';
 import utils from '../utils';
-import colors from '../styles/components/colors';
 
 const Component = React.Component;
 const Image = React.Image;
@@ -25,7 +25,7 @@ function colorMap(collection) {
   let count = 0;
 
   collection.forEach((key) => {
-    if(typeof map[key] !== 'undefined') {
+    if (typeof map[key] !== 'undefined') {
       return;
     }
 
@@ -60,23 +60,23 @@ export default class Band extends Component {
   days() {
     const days = bandSetTimesByDay(this.props);
     const dayKeys = lodash.keys(days);
-    const colors = colorMap(dayKeys);
+    const daysColorMap = colorMap(dayKeys);
 
     return dayKeys.map((id) => {
       const day = lodash.find(this.props.fullSchedule.days, { id });
-      const backgroundColor = `${colors[id]}B3`;
+      const backgroundColor = `${daysColorMap[id]}B3`;
 
       return (
         <View key={id}>
           <Text style={[styles.sectionHeader, { backgroundColor }]}>{day.name}</Text>
-          {this.setTimes(days[id], colors[id])}
+          {this.setTimes(days[id], daysColorMap[id])}
         </View>
       );
     });
   }
 
   image() {
-    if(!this.props.band.image_url) {
+    if (!this.props.band.image_url) {
       return null;
     }
 
@@ -89,13 +89,21 @@ export default class Band extends Component {
     );
   }
 
+  description() {
+    if (!this.props.band.description) {
+      return null;
+    }
+
+    return <Text style={styles.text}>{this.props.band.description}</Text>;
+  }
+
   render() {
     return (
       <ScrollView style={styles.container}>
         {this.image()}
         <View style={styles.bandDetail}>
           <Text style={[styles.text, styles.bandName]}>{this.props.band.name}</Text>
-          <Text style={styles.text}>{this.props.band.description}</Text>
+          {this.description()}
         </View>
         {this.days()}
       </ScrollView>
@@ -106,7 +114,8 @@ export default class Band extends Component {
 Band.propTypes = {
   band: React.PropTypes.shape({
     description: React.PropTypes.string,
-    image_url: React.PropTypes.string
+    image_url: React.PropTypes.string,
+    name: React.PropTypes.string
   }),
   fullSchedule: React.PropTypes.object
 };

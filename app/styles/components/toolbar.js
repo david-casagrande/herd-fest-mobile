@@ -20,7 +20,7 @@ const navLink = {
 
 const navText = {
   fontSize: 14,
-  color: colors.white;
+  color: colors.white
 };
 
 export default { nav, navContainer, navLink, navText };

@@ -5,7 +5,6 @@ import schedule from '../data/schedule';
 import scheduleDecorator from '../decorators/schedule';
 import scheduleStyles from '../styles/schedule-styles';
 import utils from '../utils';
-import lodash from 'lodash';
 
 const Animated = React.Animated;
 const Component = React.Component;
