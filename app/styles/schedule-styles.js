@@ -1,12 +1,15 @@
 import colors from './components/colors';
 import container from './components/container';
 import list from './components/list';
+import padding from './components/padding';
 import setTimeRow from './components/set-time-row';
 
 const scheduleStyles = {
   message: {
     fontSize: 24,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: colors.primary,
+    padding: padding.primary
   },
 
   band: {

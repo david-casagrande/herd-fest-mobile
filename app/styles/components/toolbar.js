@@ -1,4 +1,5 @@
 import colors from './colors';
+import fontSizes from './font-sizes';
 
 const nav = {
   height: 44
@@ -19,7 +20,7 @@ const navLink = {
 };
 
 const navText = {
-  fontSize: 14,
+  fontSize: fontSizes.medium,
   color: colors.white
 };
 

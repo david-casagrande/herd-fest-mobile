@@ -1,12 +1,13 @@
 import React from 'react-native';
 import colors from './colors';
 import fontSizes from './font-sizes';
+import padding from './padding';
 
 const StyleSheet = React.StyleSheet;
 
 const row = {
-  paddingTop: 10,
-  paddingBottom: 10
+  paddingTop: padding.primary,
+  paddingBottom: padding.primary
 };
 
 const rowContainer = {
@@ -22,9 +23,9 @@ const separator = {
 
 const sectionHeader = {
   backgroundColor: colors.primary,
-  paddingTop: 10,
-  paddingBottom: 10,
-  paddingLeft: 10,
+  paddingTop: padding.primary,
+  paddingBottom: padding.primary,
+  paddingLeft: padding.primary,
   color: colors.white,
   fontWeight: 'bold',
   fontSize: fontSizes.medium

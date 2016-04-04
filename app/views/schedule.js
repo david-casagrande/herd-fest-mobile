@@ -106,8 +106,8 @@ export default class Schedule extends Component {
   render() {
     if (!this.state.dataSource) {
       return (
-        <View style={styles.container}>
-          <Text>Loading...</Text>
+        <View style={[styles.container, styles.centered]}>
+          <Text style={styles.message}>Loading...</Text>
         </View>
       );
     }
@@ -115,7 +115,7 @@ export default class Schedule extends Component {
     if (this.state.schedule.length < 1) {
       return (
         <View style={[styles.container, styles.centered]}>
-          <Text style={styles.message}>Your schedule is a blank slate</Text>
+          <Text style={styles.message}>Your schedule is a blank slate.</Text>
         </View>
       );
     }

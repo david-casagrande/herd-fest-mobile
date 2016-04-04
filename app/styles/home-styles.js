@@ -1,5 +1,7 @@
 import colors from './components/colors';
 import container from './components/container';
+import fontSizes from './components/font-sizes';
+import padding from './components/padding';
 
 const homeStyles = {
   content: {
@@ -18,15 +20,15 @@ const homeStyles = {
   link: {
     borderColor: colors.primary,
     borderWidth: 2,
-    marginBottom: 10,
-    paddingTop: 10,
-    paddingBottom: 10
+    marginBottom: padding.primary,
+    paddingTop: padding.primary,
+    paddingBottom: padding.primary
   },
   linkText: {
     color: colors.primary,
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 18
+    fontSize: fontSizes.xlarge
   }
 };
 

@@ -1,5 +1,6 @@
 import colors from './components/colors';
 import container from './components/container';
+import fontSizes from './components/font-sizes';
 
 const dayLinkMargin = 0;
 const daysPadding = 0;
@@ -39,7 +40,7 @@ const dayLinkActive = {
 };
 
 const dayText = {
-  fontSize: 11,
+  fontSize: fontSizes.small,
   color: colors.primary,
   fontWeight: '600'
 };

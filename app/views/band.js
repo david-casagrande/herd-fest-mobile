@@ -1,4 +1,5 @@
 import React from 'react-native';
+import ToggleSetTime from './components/toggle-set-time';
 
 import bandStyles from '../styles/band-styles';
 import colors from '../styles/components/colors';
@@ -45,6 +46,7 @@ export default class Band extends Component {
         <View style={styles.rowContainer}>
           <Text style={[styles.row, styles.setTime, { color }]} numberOfLines={1}>{utils.formatDate(setTime.startTime)}</Text>
           <Text style={[styles.row, styles.content, { color: colors.secondary }]} numberOfLines={1}>{setTime.venue.name}</Text>
+          <ToggleSetTime setTime={setTime} style={[styles.row, styles.toggleSetTime]} />
         </View>
         {separator}
       </View>

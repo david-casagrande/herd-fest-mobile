@@ -1,27 +1,27 @@
 import colors from './components/colors';
 import container from './components/container';
+import fontSizes from './components/font-sizes';
 import list from './components/list';
+import padding from './components/padding';
 import setTimeRow from './components/set-time-row';
-
-const bandDetailPadding = 10;
 
 const bandStyles = {
   image: {
     height: 200
   },
   bandDetail: {
-    padding: bandDetailPadding
+    padding: padding.primary
   },
   bandName: {
     color: colors.primary,
-    fontSize: 16,
+    fontSize: fontSizes.large,
     paddingTop: 2,
     fontWeight: 'bold'
   },
   text: {
     color: colors.secondary,
-    fontSize: 14,
-    paddingBottom: bandDetailPadding
+    fontSize: fontSizes.medium,
+    paddingBottom: padding.primary
   }
 };
 
