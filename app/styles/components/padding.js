@@ -1,5 +1,4 @@
-const primary = 10;
+const primary = 12;
+const secondary = 16;
 
-export default {
-  primary
-};
+export default { primary, secondary };

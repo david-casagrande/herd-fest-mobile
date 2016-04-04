@@ -6,8 +6,8 @@ import padding from './padding';
 const StyleSheet = React.StyleSheet;
 
 const row = {
-  paddingTop: padding.primary,
-  paddingBottom: padding.primary
+  paddingTop: padding.secondary,
+  paddingBottom: padding.secondary
 };
 
 const rowContainer = {

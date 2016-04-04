@@ -49,7 +49,7 @@ class Row extends Component {
   constructor(props) {
     super(props);
 
-    const initHeight = 37;
+    const initHeight = 47;
     this.state = {
       fadeAnim: new Animated.Value(initHeight)
     };

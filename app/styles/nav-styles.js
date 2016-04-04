@@ -26,7 +26,7 @@ const navStyles = {
     fontWeight: '500',
     marginVertical: 9,
     color: colors.primary,
-    width: 230,
+    width: 200,
     textAlign: 'center'
   },
   navBarLeftButton: {

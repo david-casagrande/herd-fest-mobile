@@ -1,6 +1,6 @@
 const small = 11;
-const medium = 14;
-const large = 16;
-const xlarge = 18;
+const medium = 16;
+const large = 18;
+const xlarge = 20;
 
 export default { small, medium, large, xlarge };

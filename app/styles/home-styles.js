@@ -28,7 +28,7 @@ const homeStyles = {
     color: colors.primary,
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: fontSizes.xlarge
+    fontSize: fontSizes.large
   }
 };
 

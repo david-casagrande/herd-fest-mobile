@@ -4,6 +4,7 @@ import React from 'react-native';
 
 import fullSchedule from './data/full-schedule';
 import navStyles from './styles/nav-styles';
+import utils from './utils';
 
 const Component = React.Component;
 const StyleSheet = React.StyleSheet;
@@ -11,11 +12,13 @@ const Navigator = React.Navigator;
 
 const styles = StyleSheet.create(navStyles);
 
-export default class NavigationBarSample extends Component {
+export default class Navigation extends Component {
   constructor(props) {
     super(props);
-    this.state = { fullSchedule: { bands: [], venues: [], set_times: [], days: [] } };
-    this.setFullSchedule();
+    this.state = {
+      fullSchedule: { bands: [], venues: [], set_times: [], days: [] },
+      showNavBar: false
+    };
   }
 
   setFullSchedule() {
@@ -38,13 +41,28 @@ export default class NavigationBarSample extends Component {
       });
   }
 
+  setShowNavBar(showNavBar) {
+    this.setState({ showNavBar });
+  }
+
   render() {
+    const navBarStyles = this.state.showNavBar ? styles.navBar : [styles.navBar, { backgroundColor: 'transparent' }];
+
     return (
       <Navigator
         debugOverlay={false}
         style={styles.appContainer}
         initialRoute={{ name: 'Home', index: 0 }}
+        onWillFocus={(route) => {
+          if (route.name === 'Home') {
+            this.setShowNavBar(false);
+          }
+        }}
         onDidFocus={(route) => {
+          if (route.name !== 'Home') {
+            this.setShowNavBar(true);
+          }
+
           if (route.name === 'Home') {
             this.setFullSchedule();
           }
@@ -53,7 +71,7 @@ export default class NavigationBarSample extends Component {
         navigationBar={
           <Navigator.NavigationBar
             routeMapper={NavigationRouteMapper}
-            style={styles.navBar}
+            style={navBarStyles}
           />
         }
       />
