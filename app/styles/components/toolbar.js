@@ -1,3 +1,5 @@
+import colors from './colors';
+
 const nav = {
   height: 44
 };
@@ -18,7 +20,7 @@ const navLink = {
 
 const navText = {
   fontSize: 14,
-  color: '#fff'
+  color: colors.white;
 };
 
 export default { nav, navContainer, navLink, navText };

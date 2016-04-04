@@ -1,5 +1,7 @@
+import colors from './colors';
+
 const container = {
-  backgroundColor: '#fff',
+  backgroundColor: colors.white,
   flex: 1,
   paddingTop: 64
 };

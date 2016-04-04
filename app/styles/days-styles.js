@@ -13,7 +13,7 @@ const days = {
   paddingRight: daysPadding,
   paddingBottom: 0,
   flexDirection: 'row',
-  justifyContent: 'space-between',
+  justifyContent: 'space-between'
 };
 
 const dayLink = {
@@ -48,7 +48,7 @@ const dayText = {
 };
 
 const dayTextActive = {
-  color: '#fff'
+  color: colors.white
 };
 
 const dayStyles = {

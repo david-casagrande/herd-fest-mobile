@@ -7,8 +7,12 @@ const red = '#ad181a';
 const teal = '#81cbc3';
 const blue = '#1680c7';
 
+const white = '#ffffff';
+
 export default {
-  primary: green,
+  primary: teal,
+  primaryAlt: teal,
   secondary,
-  lightGrey
+  lightGrey,
+  white
 };

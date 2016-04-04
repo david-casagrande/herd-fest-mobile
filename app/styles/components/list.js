@@ -25,7 +25,7 @@ const sectionHeader = {
   paddingTop: 10,
   paddingBottom: 10,
   paddingLeft: 10,
-  color: '#fff',
+  color: colors.white,
   fontWeight: 'bold',
   fontSize: fontSizes.medium
 };

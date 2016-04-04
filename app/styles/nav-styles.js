@@ -20,7 +20,7 @@ const navStyles = {
     fontWeight: '500'
   },
   navBar: {
-    backgroundColor: '#fff'
+    backgroundColor: colors.white
   },
   navBarText: {
     fontSize: 16,
