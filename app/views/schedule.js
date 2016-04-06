@@ -75,7 +75,7 @@ class Row extends Component {
           <Text style={[styles.venue]} numberOfLines={1}>{rowData.venue.name}</Text>
           <Text style={[styles.band]} numberOfLines={1}>{rowData.band.name}</Text>
         </View>
-        <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime, { paddingTop: padding.secondary + commonPadding }]}
+        <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime]}
         toggleCallback={() => anim(this, context)}/>
       </Animated.View>
     );
