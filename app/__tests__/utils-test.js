@@ -1,7 +1,9 @@
 jest.dontMock('lodash');
 jest.dontMock('../utils');
+jest.dontMock('../styles/components/colors');
 
 const lodash = require('lodash');
+const colors = require('../styles/components/colors').default;
 const utils = require('../utils').default;
 const notEqual = utils.notEqual;
 const formatDate = utils.formatDate;
@@ -9,6 +11,7 @@ const sortStartTimes = utils.sortStartTimes;
 const sortSetTimesByDays = utils.sortSetTimesByDays;
 const currentIndex = utils.currentIndex;
 const findMany = utils.findMany;
+const colorMap = utils.colorMap;
 
 describe('utils', () => {
   describe('notEqual', () => {
@@ -211,6 +214,22 @@ describe('utils', () => {
       });
 
       expect(ds.cloneWithRowsAndSections).toBeCalledWith(collection, ids.sectionIds, ids.rowIds);
+    });
+  });
+
+  describe('colorMap', () => {
+    const collection = ['item-1', 'item-2', 'item-3', 'item-4', 'item-5'];
+
+    it('returns colors.pinWheel as a hash for each item in collection', () => {
+      const expected = {};
+
+      expected[collection[0]] = colors.pinWheel[0];
+      expected[collection[1]] = colors.pinWheel[1];
+      expected[collection[2]] = colors.pinWheel[2];
+      expected[collection[3]] = colors.pinWheel[3];
+      expected[collection[4]] = colors.pinWheel[4];
+
+      expect(colorMap(collection)).toEqual(expected);
     });
   });
 });

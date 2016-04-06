@@ -1,5 +1,6 @@
 import React from 'react-native';
 
+import colors from './styles/components/colors';
 import moment from 'moment';
 
 const Linking = React.Linking;
@@ -67,6 +68,22 @@ function dataSource(collection, ids = {}, opts = {}) {
   return ds.cloneWithRows(collection);
 }
 
+function colorMap(collection) {
+  const map = {};
+  let count = 0;
+
+  collection.forEach((key) => {
+    if (typeof map[key] !== 'undefined') {
+      return;
+    }
+
+    map[key] = colors.pinWheel[count];
+    count++;
+  });
+
+  return map;
+}
+
 const utils = {
   notEqual,
   formatDate,
@@ -75,7 +92,8 @@ const utils = {
   currentIndex,
   findMany,
   link,
-  dataSource
+  dataSource,
+  colorMap
 };
 
 export default Object.freeze(utils);
