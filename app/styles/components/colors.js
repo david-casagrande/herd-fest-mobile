@@ -11,7 +11,7 @@ const white = '#ffffff';
 
 export default {
   primary: teal,
-  primaryAlt: teal,
+  primaryAlt: blue,
   secondary,
   lightGrey,
   white,

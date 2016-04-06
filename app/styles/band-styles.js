@@ -13,7 +13,7 @@ const bandStyles = {
     padding: padding.primary
   },
   bandName: {
-    color: colors.primary,
+    color: colors.secondary,
     fontSize: fontSizes.large,
     paddingTop: 2,
     fontWeight: 'bold'
