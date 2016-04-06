@@ -1,7 +1,6 @@
 import React from 'react-native';
 import ToggleSetTime from './components/toggle-set-time';
 
-import fontSizes from '../styles/components/font-sizes';
 import padding from '../styles/components/padding';
 import schedule from '../data/schedule';
 import scheduleDecorator from '../decorators/schedule';
@@ -60,6 +59,7 @@ class Row extends Component {
   render() {
     const rowData = this.props.rowData;
     const context = this.props.context;
+    const commonPadding = 4;
 
     function anim(animContext, parent) {
       Animated.timing(
@@ -71,11 +71,11 @@ class Row extends Component {
     return (
       <Animated.View style={[styles.rowContainer, { height: this.state.fadeAnim, overflow: 'hidden' }]}>
         <Text style={[styles.row, styles.setTime]}>{utils.formatDate(rowData.startTime)}</Text>
-        <View style={{ flex: 1, justifyContent: 'center', paddingLeft: 4 }}>
+        <View style={{ flex: 1, justifyContent: 'center', paddingLeft: commonPadding }}>
           <Text style={[styles.venue]} numberOfLines={1}>{rowData.venue.name}</Text>
           <Text style={[styles.band]} numberOfLines={1}>{rowData.band.name}</Text>
         </View>
-        <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime, { paddingTop: padding.secondary + 4 }]}
+        <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime, { paddingTop: padding.secondary + commonPadding }]}
         toggleCallback={() => anim(this, context)}/>
       </Animated.View>
     );

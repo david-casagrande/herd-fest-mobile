@@ -1,4 +1,5 @@
 import React from 'react-native';
+
 import colors from './colors';
 import fontSizes from './font-sizes';
 import padding from './padding';

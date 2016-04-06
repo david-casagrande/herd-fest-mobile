@@ -4,7 +4,6 @@ import React from 'react-native';
 
 import fullSchedule from './data/full-schedule';
 import navStyles from './styles/nav-styles';
-import utils from './utils';
 
 const Component = React.Component;
 const StyleSheet = React.StyleSheet;

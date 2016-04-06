@@ -5,8 +5,6 @@ import list from './components/list';
 import padding from './components/padding';
 import setTimeRow from './components/set-time-row';
 
-const smallerFontSize = 12;
-
 const scheduleStyles = {
   message: {
     fontSize: 24,

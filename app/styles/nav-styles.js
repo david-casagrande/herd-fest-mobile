@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import colors from './components/colors';
 import fontSizes from './components/font-sizes';
 import padding from './components/padding';
