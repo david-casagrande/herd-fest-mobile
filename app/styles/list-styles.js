@@ -1,6 +1,7 @@
 import colors from './components/colors';
 import container from './components/container';
 import list from './components/list';
+import fontSizes from './components/font-sizes';
 import padding from './components/padding';
 
 const listStyles = {
@@ -9,7 +10,8 @@ const listStyles = {
     paddingRight: padding.primary
   },
   text: {
-    color: colors.secondary
+    color: colors.secondary,
+    fontSize: fontSizes.medium
   }
 };
 

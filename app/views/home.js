@@ -35,7 +35,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const offset = 100;
+    const offset = 80;
     const width = Dimensions.get('window').width - offset;
 
     return (

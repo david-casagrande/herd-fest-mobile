@@ -37,7 +37,7 @@ export default class ToggleSetTime extends Component {
 
   render() {
     const rotate = this.state.scheduled ? '45deg' : '0deg';
-    const paddingLeft = this.state.scheduled ? 0 : 2;
+    const paddingLeft = this.state.scheduled ? 0 : 0;
     const style = this.props.style || {};
 
     return (

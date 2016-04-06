@@ -8,12 +8,6 @@ const setTime = {
   fontSize: fontSizes.medium
 };
 
-const venue = {
-  width: 80,
-  color: colors.secondary,
-  fontSize: fontSizes.medium
-};
-
 const content = {
   flex: 1,
   paddingLeft: 2,
@@ -31,4 +25,4 @@ const toggleSetTime = {
   color: colors.primary
 };
 
-export default { setTime, content, toggleSetTime, venue };
+export default { setTime, content, toggleSetTime };

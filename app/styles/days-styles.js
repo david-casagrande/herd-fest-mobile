@@ -40,7 +40,7 @@ const dayLinkActive = {
 };
 
 const dayText = {
-  fontSize: fontSizes.small,
+  fontSize: fontSizes.verySmall,
   color: colors.primary,
   fontWeight: '600'
 };
