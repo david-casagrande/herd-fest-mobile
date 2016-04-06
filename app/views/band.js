@@ -21,22 +21,6 @@ function bandSetTimesByDay(props) {
   return lodash.groupBy(setTimes, 'day');
 }
 
-function colorMap(collection) {
-  const map = {};
-  let count = 0;
-
-  collection.forEach((key) => {
-    if (typeof map[key] !== 'undefined') {
-      return;
-    }
-
-    map[key] = colors.pinWheel[count];
-    count++;
-  });
-
-  return map;
-}
-
 export default class Band extends Component {
   setTime(setTime, color, idx, end) {
     const separator = (idx === end) ? null : <View style={styles.separator}></View>;
@@ -62,7 +46,7 @@ export default class Band extends Component {
   days() {
     const days = bandSetTimesByDay(this.props);
     const dayKeys = lodash.keys(days);
-    const daysColorMap = colorMap(dayKeys);
+    const daysColorMap = utils.colorMap(dayKeys);
 
     return dayKeys.map((id) => {
       const day = lodash.find(this.props.fullSchedule.days, { id });
