@@ -9,36 +9,31 @@ const StyleSheet = React.StyleSheet;
 const Text = React.Text;
 const TouchableOpacity = React.TouchableOpacity;
 const ScrollView = React.ScrollView;
+const View = React.View;
 
 const styles = StyleSheet.create(venueStyles);
-
-function linkToGoogleMapsWeb(streetAddress) {
-  const addressURL = `https://maps.google.com/?q=${streetAddress}`;
-  return utils.link(addressURL);
-}
-
-function linkToGoogleMapsApp(streetAddress) {
-  const addressURL = `comgooglemaps://?q=${streetAddress}`;
-  return utils.link(addressURL).catch(() => linkToGoogleMapsWeb(streetAddress));
-}
 
 export default class Venue extends Component {
   address() {
     const address = `${this.props.venue.street_address}, Buffalo, NY`;
 
     return (
-      <TouchableOpacity onPress={() => linkToGoogleMapsApp(address)}>
-        <Text style={styles.welcome}>{this.props.venue.street_address}</Text>
-      </TouchableOpacity>
+      <View style={styles.venueAddressContainer}>
+        <View style={styles.venueAddressFlexContainer}>
+          <Text style={styles.venueAddress}>{this.props.venue.street_address}</Text>
+        </View>
+      </View>
     );
   }
 
   render() {
     return (
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         {this.address()}
-        <SetTimesByDay fullSchedule={this.props.fullSchedule} setTimes={this.props.venue.set_times} showBand={true} />
-      </ScrollView>
+        <ScrollView>
+          <SetTimesByDay fullSchedule={this.props.fullSchedule} setTimes={this.props.venue.set_times} showBand={true} />
+        </ScrollView>
+      </View>
     );
   }
 }

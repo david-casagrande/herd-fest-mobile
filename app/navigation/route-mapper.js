@@ -1,4 +1,5 @@
 import React from 'react-native';
+import MapAddress from '../views/components/map-address';
 
 // const Component = React.Component;
 const StyleSheet = React.StyleSheet;
@@ -43,7 +44,13 @@ const NavigationRouteMapper = {
     );
   },
 
-  RightButton: function rightButton() {
+  RightButton: function rightButton(route, navigator) {
+    console.log(navigator.state);
+    if(route.name === 'Venue') {
+      return (
+        <MapAddress style={[styles.navBarText, styles.navBarButtonText, styles.navBarRightButton]} />
+      );
+    }
     // if(index < 1) {
     //   return null;
     // }
