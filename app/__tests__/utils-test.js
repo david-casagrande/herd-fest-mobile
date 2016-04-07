@@ -1,26 +1,18 @@
-jest.dontMock('lodash');
-jest.dontMock('../utils');
-jest.dontMock('../styles/components/colors');
+jest.unmock('../utils');
+jest.unmock('../styles/components/colors');
 
-const lodash = require('lodash');
 const colors = require('../styles/components/colors').default;
+const lodash = require('lodash');
 const utils = require('../utils').default;
-const notEqual = utils.notEqual;
-const formatDate = utils.formatDate;
-const sortStartTimes = utils.sortStartTimes;
-const sortSetTimesByDays = utils.sortSetTimesByDays;
-const currentIndex = utils.currentIndex;
-const findMany = utils.findMany;
-const colorMap = utils.colorMap;
 
 describe('utils', () => {
   describe('notEqual', () => {
     it('returns true when items are not equal', () => {
-      expect(notEqual(2, 1)).toBeTruthy();
+      expect(utils.notEqual(2, 1)).toBeTruthy();
     });
 
-    it('returns true when items are equal', () => {
-      expect(notEqual(1, 1)).toBeFalsy();
+    it('returns false when items are equal', () => {
+      expect(utils.notEqual(1, 1)).toBeFalsy();
     });
   });
 
@@ -29,12 +21,12 @@ describe('utils', () => {
 
     it('returns the date in the given format', () => {
       const expected = '04:00 am';
-      expect(formatDate(date, 'hh:mm a')).toEqual(expected);
+      expect(utils.formatDate(date, 'hh:mm a')).toEqual(expected);
     });
 
     it('returns the date in the defualt format', () => {
       const expected = '4:00AM';
-      expect(formatDate(date)).toEqual(expected);
+      expect(utils.formatDate(date)).toEqual(expected);
     });
   });
 
@@ -48,7 +40,7 @@ describe('utils', () => {
     ];
 
     it('handles sorting start times with lodash', () => {
-      const result = lodash.sortBy(times, sortStartTimes);
+      const result = lodash.sortBy(times, utils.sortStartTimes);
       const expected = [
         times[4],
         times[2],
@@ -71,7 +63,7 @@ describe('utils', () => {
     ];
 
     it('handles sorting start times with lodash', () => {
-      const result = lodash.sortBy(setTimes, sortSetTimesByDays);
+      const result = lodash.sortBy(setTimes, utils.sortSetTimesByDays);
       const expected = [
         setTimes[1],
         setTimes[0],
@@ -98,7 +90,7 @@ describe('utils', () => {
     };
 
     it('returns the current index in the navigator', () => {
-      const result = currentIndex(navigator);
+      const result = utils.currentIndex(navigator);
 
       expect(result).toEqual(routes[2].index);
     });
@@ -113,7 +105,7 @@ describe('utils', () => {
 
     it('returns an array of objects with ids matching given ids argument', () => {
       const ids = ['1', '3'];
-      const results = findMany(collection, ids);
+      const results = utils.findMany(collection, ids);
 
       expect(results.length).toEqual(2);
       expect(results[0]).toEqual(collection[0]);
@@ -229,7 +221,7 @@ describe('utils', () => {
       expected[collection[3]] = colors.pinWheel[3];
       expected[collection[4]] = colors.pinWheel[4];
 
-      expect(colorMap(collection)).toEqual(expected);
+      expect(utils.colorMap(collection)).toEqual(expected);
     });
   });
 });
