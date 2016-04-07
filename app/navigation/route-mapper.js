@@ -1,6 +1,8 @@
 import React from 'react-native';
 import MapAddress from '../views/components/map-address';
 
+import lodash from 'lodash';
+
 // const Component = React.Component;
 const StyleSheet = React.StyleSheet;
 const Text = React.Text;
@@ -45,24 +47,15 @@ const NavigationRouteMapper = {
   },
 
   RightButton: function rightButton(route, navigator) {
-    console.log(navigator.state);
     if(route.name === 'Venue') {
+      const venue = lodash.find(navigator.props.fullSchedule.venues, { 'id': route.id });
+      if (!venue) {
+        return null;
+      }
       return (
-        <MapAddress style={[styles.navBarText, styles.navBarButtonText, styles.navBarRightButton]} />
+        <MapAddress address={venue.street_address} style={[styles.navBarText, styles.navBarButtonText, styles.navBarRightButton]} />
       );
     }
-    // if(index < 1) {
-    //   return null;
-    // }
-    // return (
-    //   <TouchableOpacity
-    //     onPress={() => navigator.push()}
-    //     style={styles.navBarRightButton}>
-    //     <Text style={[styles.navBarText, styles.navBarButtonText]}>
-    //       Next
-    //     </Text>
-    //   </TouchableOpacity>
-    // );
   },
 
   Title: function title(route, navigator, index) {

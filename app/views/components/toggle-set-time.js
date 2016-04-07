@@ -28,7 +28,7 @@ export default class ToggleSetTime extends Component {
     super(props);
 
     this.state = {
-      scheduled: false
+      scheduled: undefined
     };
 
     this.checkSchedule();
@@ -53,6 +53,10 @@ export default class ToggleSetTime extends Component {
   }
 
   render() {
+    if(typeof this.state.scheduled === 'undefined') {
+      return null;
+    }
+
     const rotate = this.state.scheduled ? '45deg' : '0deg';
     const left = this.state.scheduled ? -2 : 0;
 

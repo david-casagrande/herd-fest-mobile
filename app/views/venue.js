@@ -15,8 +15,6 @@ const styles = StyleSheet.create(venueStyles);
 
 export default class Venue extends Component {
   address() {
-    const address = `${this.props.venue.street_address}, Buffalo, NY`;
-
     return (
       <View style={styles.venueAddressContainer}>
         <View style={styles.venueAddressFlexContainer}>

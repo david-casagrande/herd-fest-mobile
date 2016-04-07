@@ -73,6 +73,7 @@ export default class Navigation extends Component {
             style={navBarStyles}
           />
         }
+        fullSchedule={this.state.fullSchedule}
       />
     );
   }

@@ -20,8 +20,10 @@ function linkToGoogleMapsApp(streetAddress) {
 
 export default class MapAddress extends Component {
   render() {
+    const address = `${this.props.address}, Buffalo, NY`;
+
     return (
-      <TouchableOpacity onPress={() => linkToGoogleMapsApp(this.props.address)}>
+      <TouchableOpacity onPress={() => linkToGoogleMapsApp(address)}>
         <Text style={this.props.style || []}>Map</Text>
       </TouchableOpacity>
     );
