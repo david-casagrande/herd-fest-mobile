@@ -1,6 +1,6 @@
 import React from 'react-native';
 
-import fetch from './fetch';
+import fetch from '../shims/fetch';
 
 const AsyncStorage = React.AsyncStorage;
 

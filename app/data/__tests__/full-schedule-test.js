@@ -1,7 +1,7 @@
 jest.dontMock('../full-schedule');
 
 function setMock(data) {
-  jest.setMock('../fetch', () => {
+  jest.setMock('../../shims/fetch', () => {
     const resp = {
       json() {
         return new Promise((resolve) => resolve(data));
