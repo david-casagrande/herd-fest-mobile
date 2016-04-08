@@ -43,7 +43,7 @@ export default class Band extends Component {
           <Text style={[styles.text, styles.bandName]}>{this.props.band.name}</Text>
           {this.description()}
         </View>
-        <SetTimesByDay fullSchedule={this.props.fullSchedule} setTimes={this.props.band.set_times}/>
+        <SetTimesByDay fullSchedule={this.props.fullSchedule} setTimes={this.props.band.set_times} />
       </ScrollView>
     );
   }

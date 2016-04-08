@@ -1,3 +1,4 @@
+// const ReactNative = require('react-native-mock/mock');
 // copped from https://github.com/hosainnet/RNUnitTests
 
 const React = require('react');
@@ -40,14 +41,14 @@ const AsyncStorage = {
 };
 
 ReactNative.View = View;
-ReactNative.ScrollView = View;
+ReactNative.ScrollView = class ScrollView extends View {};
 ReactNative.ListView = ListView;
-ReactNative.Text = View;
-ReactNative.TouchableOpacity = View;
-ReactNative.TouchableHighlight = View;
-ReactNative.TouchableWithoutFeedback = View;
-ReactNative.ToolbarAndroid = View;
-ReactNative.Image = View;
+ReactNative.Text = class Text extends View {};
+ReactNative.TouchableOpacity = class TouchableOpacity extends View {};
+ReactNative.TouchableHighlight = class TouchableHighlight extends View {};
+ReactNative.TouchableWithoutFeedback = class TouchableWithoutFeedback extends View {};
+ReactNative.ToolbarAndroid = class ToolbarAndroid extends View {};
+ReactNative.Image = class Image extends View {};
 ReactNative.AppRegistry = AppRegistry;
 ReactNative.AsyncStorage = AsyncStorage;
 

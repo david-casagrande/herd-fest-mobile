@@ -4,9 +4,10 @@ jest.unmock('../views/day-list');
 jest.unmock('../views/band');
 jest.unmock('../views/venue');
 jest.unmock('../views/list');
+jest.unmock('../views/days');
 jest.unmock('../utils');
 
-const React = require('react');
+const React = require('react-native');
 const shallow = require('enzyme/shallow');
 
 const NavManager = require('../nav-manager').default;
@@ -216,6 +217,29 @@ describe('NavManager', () => {
 
       expect(navigator.push.mock.calls.length).toEqual(1);
       expect(navigator.push.mock.calls[0][0]).toEqual({ name: 'Venue', index: 2, id: model.id, title: model.name });
+    });
+  });
+
+  describe('Schedule', () => {
+    const Day = require('../views/days').default;
+
+    it('renders Day with correct props', () => {
+      const fullScheduleWithDays = Object.assign({ days: [{ id: 'd-1' }] }, fullSchedule);
+      const route = { name: 'Schedule' };
+      const props = {
+        fullSchedule: fullScheduleWithDays,
+        navigator,
+        route
+      };
+
+      const wrapper = shallow(<NavManager {...props} />);
+
+      expect(wrapper.find(Day).length).toEqual(1);
+
+      const day = wrapper.find(Day).first();
+
+      expect(day.props().navigator).toEqual(navigator);
+      expect(day.props().fullSchedule).toEqual(fullScheduleWithDays);
     });
   });
 });

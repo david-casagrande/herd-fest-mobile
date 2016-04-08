@@ -210,7 +210,7 @@ describe('utils', () => {
   });
 
   describe('colorMap', () => {
-    const collection = ['item-1', 'item-2', 'item-3', 'item-4', 'item-5'];
+    const collection = ['item-1', 'item-2', 'item-3', 'item-4', 'item-5', 'item-1'];
 
     it('returns colors.pinWheel as a hash for each item in collection', () => {
       const expected = {};
