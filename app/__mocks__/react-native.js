@@ -40,6 +40,15 @@ const AsyncStorage = {
   setItem: jest.fn((key, value) => new Promise((resolve) => resolve({ key, value })))
 };
 
+class Dimensions {
+  static get() {
+    return {
+      width: 300,
+      height: 200
+    };
+  }
+}
+
 ReactNative.View = View;
 ReactNative.ScrollView = class ScrollView extends View {};
 ReactNative.ListView = ListView;
@@ -51,5 +60,6 @@ ReactNative.ToolbarAndroid = class ToolbarAndroid extends View {};
 ReactNative.Image = class Image extends View {};
 ReactNative.AppRegistry = AppRegistry;
 ReactNative.AsyncStorage = AsyncStorage;
+ReactNative.Dimensions = Dimensions;
 
 module.exports = ReactNative;

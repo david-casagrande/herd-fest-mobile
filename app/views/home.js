@@ -1,6 +1,7 @@
 import React from 'react-native';
 
 import homeStyles from '../styles/home-styles';
+import require from '../shims/require';
 
 const Component = React.Component;
 const Dimensions = React.Dimensions;
@@ -24,14 +25,16 @@ export default class Home extends Component {
     this.props.navigator.push({ name, title: name, index: 1 });
   }
 
-  renderLinks() {
-    return LinkMap.map((name, idx) => { // eslint-disable-line arrow-body-style
-      return (
-        <TouchableOpacity key={idx} onPress={() => this.goTo(name)} style={[styles.link]}>
-          <Text style={styles.linkText}>{name.toUpperCase()}</Text>
-        </TouchableOpacity>
-      );
-    });
+  link(name, idx) {
+    return (
+      <TouchableOpacity key={idx} onPress={() => this.goTo(name)} style={[styles.link]}>
+        <Text style={styles.linkText}>{name.toUpperCase()}</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  links() {
+    return LinkMap.map((name, idx) => this.link(name, idx));
   }
 
   render() {
@@ -43,7 +46,7 @@ export default class Home extends Component {
         <View style={styles.content}>
           <Image style={[styles.logo, { width, height: width }]} resizeMode={'contain'} source={require('../images/home.png')} />
           <View style={[styles.days, { width }]}>
-            {this.renderLinks()}
+            {this.links()}
           </View>
         </View>
       </View>
