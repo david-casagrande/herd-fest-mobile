@@ -42,12 +42,12 @@ function schedule(navigator, fullSchedule) {
 }
 
 function bands(navigator, fullSchedule) {
-  const dataSource = lodash.sortBy(fullSchedule.bands, ['name']);
+  const dataSource = lodash.sortBy(fullSchedule.bands, 'name');
   return <List goTo={(model) => goTo('Band', model, navigator)} dataSource={dataSource} />;
 }
 
 function venues(navigator, fullSchedule) {
-  const dataSource = lodash.sortBy(fullSchedule.venues, ['name']);
+  const dataSource = lodash.sortBy(fullSchedule.venues, 'name');
   return <List goTo={(model) => goTo('Venue', model, navigator)} dataSource={dataSource} />;
 }
 

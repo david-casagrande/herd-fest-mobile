@@ -1,7 +1,6 @@
-jest.dontMock('lodash');
-jest.dontMock('../../utils');
-jest.dontMock('../../data/serializers');
-jest.dontMock('../schedule');
+jest.unmock('../../utils');
+jest.unmock('../../data/serializers');
+jest.unmock('../schedule');
 
 const scheduleDecorator = require('../schedule').default;
 
@@ -13,8 +12,8 @@ const setTimes = [
 ];
 
 const days = [
-  { id: 'day-2', name: 'Day 2' },
-  { id: 'day-1', name: 'Day 1' }
+  { id: 'day-2', name: 'Day 2', date: '2015-06-12' },
+  { id: 'day-1', name: 'Day 1', date: '2015-06-11' }
 ];
 
 const bands = [

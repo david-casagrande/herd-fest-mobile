@@ -21,5 +21,6 @@ function groupByDay(setTimes, collection) {
 export default function scheduleDecorator(schedule, collection) {
   const setTimes = utils.findMany(collection.set_times, schedule);
   const groupedByDay = groupByDay(setTimes, collection);
-  return lodash.sortBy(groupedByDay, ['date']);
+
+  return lodash.sortBy(groupedByDay, 'date');
 }

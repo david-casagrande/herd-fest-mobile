@@ -27,6 +27,6 @@ export default function dayListDecorator(day, collection) {
   return {
     id: day.id,
     name: day.name,
-    venues: lodash.sortBy(venues, ['name'])
+    venues: lodash.sortBy(venues, 'name')
   };
 }

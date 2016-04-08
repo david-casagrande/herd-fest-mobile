@@ -157,7 +157,7 @@ describe('NavManager', () => {
       expect(wrapper.find(List).length).toEqual(1);
     });
 
-    xit('sorts bands by name for dataSource', () => {
+    it('sorts bands by name for dataSource', () => {
       const wrapper = shallow(<NavManager {...props} />);
       const list = wrapper.find(List).first();
 
@@ -198,7 +198,7 @@ describe('NavManager', () => {
       expect(wrapper.find(List).length).toEqual(1);
     });
 
-    xit('sorts venues by name for dataSource', () => {
+    it('sorts venues by name for dataSource', () => {
       const wrapper = shallow(<NavManager {...props} />);
       const list = wrapper.find(List).first();
 
