@@ -6,13 +6,6 @@ const shallow = require('enzyme/shallow');
 const ScheduleRow = require('../schedule-row').default;
 const testUtils = require('../../test-utils');
 
-const fullSchedule = {
-  bands: [],
-  venues: [],
-  set_times: [],
-  days: []
-};
-
 describe('Schedule', () => {
   const Text = React.Text;
   const ListView = React.ListView;
@@ -86,8 +79,6 @@ describe('Schedule', () => {
     });
 
     it('renderSeparator returns Text', () => {
-      const sectionData = { name: 'Test' };
-
       const sectionId = 1;
       const rowId = 1;
       const separator = wrapper.find(ListView).first().props().renderSeparator(sectionId, rowId);

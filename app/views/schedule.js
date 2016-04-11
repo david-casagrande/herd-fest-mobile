@@ -1,14 +1,11 @@
 import React from 'react-native';
-import ToggleSetTime from './components/toggle-set-time';
 import ScheduleRow from './schedule-row';
 
-import padding from '../styles/components/padding';
 import schedule from '../data/schedule';
 import scheduleDecorator from '../decorators/schedule';
 import scheduleStyles from '../styles/schedule-styles';
 import utils from '../utils';
 
-const Animated = React.Animated;
 const Component = React.Component;
 const ListView = React.ListView;
 const StyleSheet = React.StyleSheet;
