@@ -1,64 +1,62 @@
-jest.dontMock('../../utils');
-jest.dontMock('../list');
+jest.unmock('../list');
+jest.unmock('../../utils');
 
-const testUtils = require('../../test-utils');
+const React = require('react-native');
+const shallow = require('enzyme/shallow');
+
+const List = require('../list').default;
 const utils = require('../../utils').default;
 
 describe('List', () => {
+  const ListView = React.ListView;
+  const Text = React.Text;
   const dataSource = [{ name: 'sup' }];
 
-  let component = null;
-  let list = null;
-  let listView = null;
-  let listViewDataSource = null;
-  let goTo = null;
+  it('renders a ListView with data source', () => {
+    const wrapper = shallow(<List dataSource={dataSource} />);
+    const listView = wrapper.children().first();
+    const props = listView.props();
 
-  beforeEach(() => {
-    component = require('../list').default;
-    goTo = jest.fn();
-    list = testUtils.render(component, { dataSource, goTo });
-    listView = list.output.props.children;
-    listViewDataSource = listView.props.dataSource;
-  });
-
-  it('creates DataSource instance', () => {
-    expect(listViewDataSource.dataSourceArgs.rowHasChanged.toString()).toEqual(utils.notEqual.toString());
-  });
-
-  it('uses DataSource instance to cloneRows with dataSource from props', () => {
-    expect(listViewDataSource.dsArgs).toEqual(dataSource);
-  });
-
-  it('renders a seperator', () => {
-    const sectionId = 1;
-    const rowId = 1;
-    const separator = listView.props.renderSeparator(sectionId, rowId);
-
-    expect(separator.key).toEqual('1-1');
+    expect(props.dataSource).toEqual(utils.dataSource(dataSource));
   });
 
   describe('row', () => {
     let rowData = null;
     let sectionId = null;
     let rowId = null;
+    let wrapper = null;
+    let listView = null;
+    let row = null;
+    let goTo = null;
 
     beforeEach(() => {
       rowData = dataSource[0];
       sectionId = 1;
       rowId = 1;
+      goTo = jest.fn();
+      wrapper = shallow(<List dataSource={dataSource} goTo={goTo} />);
+      listView = wrapper.children().first();
+      row = listView.props().renderRow(rowData, sectionId, rowId);
     });
 
     it('correctly renders a row', () => {
-      const row = listView.props.renderRow(rowData, sectionId, rowId);
-
-      expect(row.props.children.props.children).toEqual(rowData.name);
+      expect(row.props.children.props.children.props.children).toEqual(rowData.name);
     });
 
     it('handles a click on the row', () => {
-      const row = listView.props.renderRow(rowData, sectionId, rowId);
       row.props.onPress();
 
       expect(goTo).toBeCalledWith(rowData);
     });
+  });
+
+  it('renders a seperator', () => {
+    const wrapper = shallow(<List dataSource={dataSource} />);
+    const listView = wrapper.children().first();
+    const sectionId = 1;
+    const rowId = 1;
+    const separator = listView.props().renderSeparator(sectionId, rowId);
+
+    expect(separator.key).toEqual('1-1');
   });
 });
