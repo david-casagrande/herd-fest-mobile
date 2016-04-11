@@ -1,5 +1,6 @@
 import React from 'react-native';
 import ToggleSetTime from './components/toggle-set-time';
+import ScheduleRow from './schedule-row';
 
 import padding from '../styles/components/padding';
 import schedule from '../data/schedule';
@@ -29,12 +30,12 @@ function dataSource(collection) {
 }
 
 function renderRow(rowData, navigator, context) {
-  return <Row rowData={rowData} context={context} />;
+  return <ScheduleRow rowData={rowData} context={context} />;
 }
 
 function renderSectionHeader(sectionData) {
   // function goToSection() {
-  //   navigator.push({ name: 'Venue', index: currentIndex(navigator) + 1, title: sectionData.name, venue_id: sectionData.id });
+  //   navigator.push({ name: 'Venue', index: utils.currentIndex(navigator) + 1, title: sectionData.name, venue_id: sectionData.id });
   // }
 
   return (
@@ -46,53 +47,13 @@ function renderSeparator(sectionID, rowID) {
   return <View key={`${sectionID}-${rowID}`} style={styles.separator} />;
 }
 
-class Row extends Component {
-  constructor(props) {
-    super(props);
-
-    const initHeight = 52;
-    this.state = {
-      fadeAnim: new Animated.Value(initHeight)
-    };
-  }
-
-  render() {
-    const rowData = this.props.rowData;
-    const context = this.props.context;
-    const commonPadding = 4;
-
-    function anim(animContext, parent) {
-      Animated.timing(
-        animContext.state.fadeAnim,
-        { toValue: 0, duration: 300 }
-      ).start(() => parent.setSchedule());
-    }
-
-    return (
-      <Animated.View style={[styles.rowContainer, { height: this.state.fadeAnim, overflow: 'hidden' }]}>
-        <Text style={[styles.row, styles.setTime]}>{utils.formatDate(rowData.startTime)}</Text>
-        <View style={{ flex: 1, justifyContent: 'center', paddingLeft: commonPadding }}>
-          <Text style={[styles.venue]} numberOfLines={1}>{rowData.venue.name}</Text>
-          <Text style={[styles.band]} numberOfLines={1}>{rowData.band.name}</Text>
-        </View>
-        <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime]}
-        toggleCallback={() => anim(this, context)}/>
-      </Animated.View>
-    );
-  }
-}
-
-Row.propTypes = {
-  rowData: React.PropTypes.object,
-  context: React.PropTypes.object
-};
-
 export default class Schedule extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       dataSource: null,
+      error: false,
       schedule: []
     };
 
@@ -100,17 +61,23 @@ export default class Schedule extends Component {
   }
 
   setSchedule() {
-    schedule.get().then((setTimes) => {
-      const decorated = scheduleDecorator(setTimes, this.props.fullSchedule);
-      this.setState({ dataSource: dataSource(decorated), schedule: setTimes });
-    });
+    return schedule.get()
+      .then((setTimes) => {
+        const decorated = scheduleDecorator(setTimes, this.props.fullSchedule);
+        this.setState({ dataSource: dataSource(decorated), schedule: setTimes });
+      })
+      .catch(() => {
+        this.setState({ error: true });
+      });
   }
 
   render() {
     if (!this.state.dataSource) {
+      const message = this.state.error ? '💩' : 'Loading...';
+
       return (
         <View style={[styles.container, styles.centered]}>
-          <Text style={styles.message}>Loading...</Text>
+          <Text style={styles.message}>{message}</Text>
         </View>
       );
     }
@@ -126,6 +93,7 @@ export default class Schedule extends Component {
     return (
       <View style={styles.container}>
         <ListView
+          initialListSize={12}
           style={styles.listView}
           dataSource={this.state.dataSource}
           renderRow={(rowData) => renderRow(rowData, this.props.navigator, this)}

@@ -35,6 +35,16 @@ class AppRegistry {
   }
 }
 
+const Animated = {
+  View: View,
+  Value: jest.fn((val) => val),
+  timing: jest.fn(() => {
+    return {
+      start: jest.fn()
+    };
+  })
+};
+
 const AsyncStorage = {
   getItem: jest.fn(() => new Promise((resolve) => resolve(null))),
   setItem: jest.fn((key, value) => new Promise((resolve) => resolve({ key, value })))
@@ -61,5 +71,6 @@ ReactNative.Image = class Image extends View {};
 ReactNative.AppRegistry = AppRegistry;
 ReactNative.AsyncStorage = AsyncStorage;
 ReactNative.Dimensions = Dimensions;
+ReactNative.Animated = Animated;
 
 module.exports = ReactNative;
