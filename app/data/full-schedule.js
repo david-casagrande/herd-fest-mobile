@@ -4,7 +4,7 @@ import fetch from '../shims/fetch';
 
 const AsyncStorage = React.AsyncStorage;
 
-const domain = 'http://localhost:3000';
+const domain = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://herd-fest-api.herokuapp.com';
 const fullScheduleURL = `${domain}/api/full_schedule`;
 
 function get() {
