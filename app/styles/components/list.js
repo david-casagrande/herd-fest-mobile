@@ -27,6 +27,7 @@ const sectionHeader = {
   paddingTop: padding.primary,
   paddingBottom: padding.primary,
   paddingLeft: padding.primary,
+  paddingRight: padding.primary,
   color: colors.white,
   fontWeight: 'bold',
   fontSize: fontSizes.medium
