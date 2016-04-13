@@ -29,7 +29,7 @@ function renderSeparator(sectionID, rowID) {
 export default class List extends Component {
   constructor(props) {
     super(props);
-    this.state = { dataSource: utils.dataSource(props.dataSource || []) };
+    this.state = { dataSource: utils.dataSource(props.dataSource) };
   }
 
   render() {
@@ -47,6 +47,6 @@ export default class List extends Component {
 }
 
 List.propTypes = {
-  dataSource: React.PropTypes.array,
+  dataSource: React.PropTypes.array.isRequired,
   goTo: React.PropTypes.func
 };
