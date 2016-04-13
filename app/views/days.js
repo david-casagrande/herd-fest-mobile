@@ -16,7 +16,7 @@ export default class Days extends Component {
   constructor(props) {
     super(props);
 
-    const day = lodash.sortBy(this.props.fullSchedule.days, ['date'])[0];
+    const day = lodash.sortBy(this.props.fullSchedule.days, 'date')[0];
     this.state = { day };
   }
 
@@ -25,7 +25,7 @@ export default class Days extends Component {
   }
 
   days() {
-    const sorted = lodash.sortBy(this.props.fullSchedule.days, ['date']);
+    const sorted = lodash.sortBy(this.props.fullSchedule.days, 'date');
 
     return sorted.map((day) => {
       const active = (day === this.state.day);
