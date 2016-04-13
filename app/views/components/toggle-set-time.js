@@ -15,7 +15,7 @@ function toggle(scheduled, id, context) {
   const method = scheduled ? 'remove' : 'add';
 
   return scheduleData[method](id).then(() => {
-    context.checkSchedule();
+    context.setState({ scheduled: !scheduled });
 
     if (typeof context.props.toggleCallback === 'function') {
       context.props.toggleCallback(!scheduled, id);
@@ -35,7 +35,7 @@ export default class ToggleSetTime extends Component {
   }
 
   checkSchedule() {
-    scheduleData.get().then((schedule) => {
+    return scheduleData.get().then((schedule) => {
       this.setState({ scheduled: schedule.indexOf(this.props.setTime.id) > -1 });
     });
   }
@@ -74,5 +74,6 @@ ToggleSetTime.propTypes = {
   setTime: React.PropTypes.shape({
     id: React.PropTypes.string
   }),
-  style: React.PropTypes.array
+  style: React.PropTypes.array,
+  toggleCallback: React.PropTypes.func
 };
