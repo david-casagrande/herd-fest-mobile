@@ -1,44 +1,53 @@
-jest.dontMock('../twitter');
+jest.unmock('../twitter');
 
-const testUtils = require('../../../test-utils');
+const React = require('react-native');
+const shallow = require('enzyme/shallow');
+
+const Twitter = require('../twitter').default;
 
 describe('twitter', () => {
-  it('renders', () => {
-    const component = require('../twitter').default;
-    const twitter = testUtils.render(component);
+  const Text = React.Text;
 
-    expect(twitter.output.props.children.props.children).toEqual('Tweet');
+  it('renders children', () => {
+    const wrapper = shallow(<Twitter><Text>Tweet</Text></Twitter>);
+
+    expect(wrapper.contains(<Text>Tweet</Text>)).toBeTruthy();
   });
 
-  describe('post to twitter', () => {
-    it('posts to twitter app', () => {
+  describe('onPress', () => {
+    describe('twitter app is available', () => {
       jest.setMock('../../../utils', {
         link: jest.fn(() => new Promise((resolve) => resolve()))
       });
 
-      const component = require('../twitter').default;
-      const twitter = testUtils.render(component);
+      it('opens twitter with messahe', () => {
+        utils = require('../../../utils');
 
-      twitter.output.props.onPress();
+        const _Twitter = require('../twitter').default;
+        const wrapper = shallow(<_Twitter />);
+        const expectedURL = `twitter://post?message=%23HerdFest2016`;
 
-      const utils = require('../../../utils');
+        wrapper.simulate('press');
 
-      expect(utils.link).toBeCalledWith('twitter://post?message=%23HerdFest2016');
+        expect(utils.link).toBeCalledWith(expectedURL);
+      });
     });
 
-    pit('posts to twitter web if twitter app fails', () => {
+    describe('twitter app is not available', () => {
       jest.setMock('../../../utils', {
         link: jest.fn(() => new Promise((resolve, reject) => reject()))
       });
 
-      const component = require('../twitter').default;
-      const twitter = testUtils.render(component);
+      pit('opens google maps with address', () => {
+        utils = require('../../../utils');
 
-      const utils = require('../../../utils');
+        const _Twitter = require('../twitter').default;
+        const wrapper = shallow(<_Twitter />);
+        const expectedURL = `https://twitter.com/intent/tweet?text=%23HerdFest2016`;
 
-      return twitter.output.props.onPress().catch(() => {
-        expect(utils.link).toBeCalledWith('twitter://post?message=%23HerdFest2016');
-        expect(utils.link).toBeCalledWith('https://twitter.com/intent/tweet?text=%23HerdFest2016');
+        return wrapper.props().onPress().catch(() => {
+          expect(utils.link).toBeCalledWith(expectedURL);
+        });
       });
     });
   });
