@@ -40,7 +40,7 @@ const Animated = {
   Value: jest.fn((val) => val),
   timing: jest.fn(() => {
     return {
-      start: jest.fn()
+      start: jest.fn((fn) => fn())
     };
   })
 };
