@@ -19,10 +19,6 @@ function getRowData(dataBlob, sectionId, rowId) {
   return setTimes.find((setTime) => setTime.id === rowId);
 }
 
-// function getSectionHeaderData(dataBlob, sectionId) {
-//   return dataBlob[sectionId];
-// }
-
 function dataSource(collection) {
   const sectionIds = collection.map((venue, idx) => idx);
   const rowIds = collection.map((venue) => venue.setTimes.map((setTime) => setTime.id));
@@ -72,6 +68,7 @@ export default class DayList extends Component {
     return (
       <View style={[styles.container, { paddingTop: 0 }]}>
         <ListView
+          initialListSize={12}
           style={styles.listView}
           dataSource={this.dataSource()}
           renderRow={(rowData) => renderRow(rowData, this.props.navigator)}
