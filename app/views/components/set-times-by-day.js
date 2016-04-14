@@ -45,10 +45,11 @@ export default class SetTimesByDay extends Component {
   days() {
     const days = groupByDay(this.props);
     const dayKeys = lodash.keys(days);
-    const daysColorMap = utils.colorMap(dayKeys);
-
     const dayModels = utils.findMany(this.props.fullSchedule.days, dayKeys);
-    return lodash.sortBy(dayModels, 'date').map((day) => {
+    const sortedDays = lodash.sortBy(dayModels, 'date');
+    const daysColorMap = utils.colorMap(sortedDays.map((day) => day.id));
+
+    return sortedDays.map((day) => {
       const backgroundColor = `${daysColorMap[day.id]}B3`;
 
       return (
