@@ -39,12 +39,6 @@ describe('Band', () => {
   const Text = React.Text;
   const SetTimesByDay = require('../components/set-times-by-day').default;
 
-  let component = null;
-
-  beforeEach(() => {
-    component = require('../band').default;
-  });
-
   it('render an Image', () => {
     const wrapper = shallow(<Band band={bands[0]} fullSchedule={fullSchedule} />);
 
@@ -85,7 +79,4 @@ describe('Band', () => {
     expect(setTimesByDay.props().fullSchedule).toEqual(fullSchedule);
     expect(setTimesByDay.props().setTimes).toEqual(bands[0].set_times);
   });
-
-
-
 });

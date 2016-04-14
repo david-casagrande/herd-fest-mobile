@@ -1,7 +1,6 @@
 import React from 'react-native';
 
 import homeStyles from '../styles/home-styles';
-import require from '../shims/require';
 
 const Component = React.Component;
 const Dimensions = React.Dimensions;
@@ -37,6 +36,12 @@ export default class Home extends Component {
     return LinkMap.map((name, idx) => this.link(name, idx));
   }
 
+  image(width) {
+    return (
+      <Image style={[styles.logo, { width, height: width }]} resizeMode={'contain'} source={require('../images/home.png')} />
+    );
+  }
+
   render() {
     const offset = 80;
     const width = Dimensions.get('window').width - offset;
@@ -44,7 +49,7 @@ export default class Home extends Component {
     return (
       <View style={[styles.container, { paddingTop: 30 }]}>
         <View style={styles.content}>
-          <Image style={[styles.logo, { width, height: width }]} resizeMode={'contain'} source={{ uri: 'https://i.imgur.com/iasNJcm.png' }} />
+          {this.image(width)}
           <View style={[styles.days, { width }]}>
             {this.links()}
           </View>

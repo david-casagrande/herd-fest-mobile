@@ -3,7 +3,6 @@ import React from 'react-native';
 import utils from '../../utils';
 
 const Component = React.Component;
-const Text = React.Text;
 const TouchableOpacity = React.TouchableOpacity;
 
 function linkToGoogleMapsWeb(streetAddress) {
@@ -29,5 +28,6 @@ export default class MapAddress extends Component {
 }
 
 MapAddress.propTypes = {
-  address: React.PropTypes.string.isRequired
+  address: React.PropTypes.string.isRequired,
+  children: React.PropTypes.array
 };

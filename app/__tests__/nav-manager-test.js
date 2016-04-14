@@ -141,7 +141,7 @@ describe('NavManager', () => {
   describe('Bands', () => {
     const List = require('../views/list').default;
     const route = { name: 'Bands' };
-    const  bands = [
+    const bands = [
       { name: 'band 2' },
       { name: 'band 1' }
     ];
@@ -192,7 +192,7 @@ describe('NavManager', () => {
 
     beforeEach(() => {
       props = { fullSchedule: fullScheduleWithVenues, navigator, route };
-    })
+    });
 
     it('renders List View', () => {
       const wrapper = shallow(<NavManager {...props} />);

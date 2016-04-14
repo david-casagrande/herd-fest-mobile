@@ -24,9 +24,27 @@ const days = [
 ];
 
 const setTimes = [
-  testUtils.fabricate('setTime', { id: 'st-1', band: bands[0].id, venue: venues[0].id, day: days[0].id, start_time: '2000-01-01T20:00:00.000Z' }),
-  testUtils.fabricate('setTime', { id: 'st-2', band: bands[0].id, venue: venues[1].id, day: days[0].id, start_time: '2000-01-01T19:00:00.000Z' }),
-  testUtils.fabricate('setTime', { id: 'st-3', band: bands[0].id, venue: venues[1].id, day: days[1].id, start_time: '2000-01-01T18:00:00.000Z' })
+  testUtils.fabricate('setTime', {
+    id: 'st-1',
+    band: bands[0].id,
+    venue: venues[0].id,
+    day: days[0].id,
+    start_time: '2000-01-01T20:00:00.000Z'
+  }),
+  testUtils.fabricate('setTime', {
+    id: 'st-2',
+    band: bands[0].id,
+    venue: venues[1].id,
+    day: days[0].id,
+    start_time: '2000-01-01T19:00:00.000Z'
+  }),
+  testUtils.fabricate('setTime', {
+    id: 'st-3',
+    band: bands[0].id,
+    venue: venues[1].id,
+    day: days[1].id,
+    start_time: '2000-01-01T18:00:00.000Z'
+  })
 ];
 
 const fullSchedule = {
@@ -37,7 +55,6 @@ const fullSchedule = {
 };
 
 describe('SetTimesByDay', () => {
-  const View = React.View;
   const Text = React.Text;
 
   it('renders a View and Text for each day', () => {
@@ -76,7 +93,7 @@ describe('SetTimesByDay', () => {
     expect(day2Text.at(1).prop('children')).toEqual(venues[1].name);
 
     expect(day2Text.at(2).prop('children')).toEqual(utils.formatDate(setTimes[0].start_time));
-    expect(day2Text.at(3).prop('children')).toEqual(venues[0].name);
+    expect(day2Text.at(3).prop('children')).toEqual(venues[0].name); // eslint-disable-line no-magic-numbers
     expect(day2.contains(ToggleSetTime)).toBeTruthy();
   });
 

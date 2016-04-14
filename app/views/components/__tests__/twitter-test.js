@@ -21,11 +21,11 @@ describe('twitter', () => {
       });
 
       it('opens twitter with messahe', () => {
-        utils = require('../../../utils');
+        const utils = require('../../../utils');
 
-        const _Twitter = require('../twitter').default;
+        const _Twitter = require('../twitter').default; // eslint-disable-line no-underscore-dangle
         const wrapper = shallow(<_Twitter />);
-        const expectedURL = `twitter://post?message=%23HerdFest2016`;
+        const expectedURL = 'twitter://post?message=%23HerdFest2016';
 
         wrapper.simulate('press');
 
@@ -39,11 +39,11 @@ describe('twitter', () => {
       });
 
       pit('opens google maps with address', () => {
-        utils = require('../../../utils');
+        const utils = require('../../../utils');
 
-        const _Twitter = require('../twitter').default;
+        const _Twitter = require('../twitter').default; // eslint-disable-line no-underscore-dangle
         const wrapper = shallow(<_Twitter />);
-        const expectedURL = `https://twitter.com/intent/tweet?text=%23HerdFest2016`;
+        const expectedURL = 'https://twitter.com/intent/tweet?text=%23HerdFest2016';
 
         return wrapper.props().onPress().catch(() => {
           expect(utils.link).toBeCalledWith(expectedURL);

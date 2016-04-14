@@ -1,13 +1,10 @@
 import React from 'react-native';
 import SetTimesByDay from './components/set-times-by-day';
 
-import utils from '../utils';
 import venueStyles from '../styles/venue-styles';
 
 const Component = React.Component;
 const StyleSheet = React.StyleSheet;
-const Text = React.Text;
-const TouchableOpacity = React.TouchableOpacity;
 const ScrollView = React.ScrollView;
 const View = React.View;
 

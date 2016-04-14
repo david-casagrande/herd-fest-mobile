@@ -48,7 +48,7 @@ const NavigationRouteMapper = {
   },
 
   RightButton: function rightButton(route, navigator) {
-    if(route.name === 'Venue') {
+    if (route.name === 'Venue') {
       const venue = lodash.find(navigator.props.fullSchedule.venues, { 'id': route.id });
       if (!venue) {
         return null;
@@ -59,6 +59,8 @@ const NavigationRouteMapper = {
         </MapAddress>
       );
     }
+
+    return false;
   },
 
   Title: function title(route, navigator, index) {
@@ -66,7 +68,7 @@ const NavigationRouteMapper = {
       return null;
     }
 
-    if(route.name === 'Venue') {
+    if (route.name === 'Venue') {
       const venue = lodash.find(navigator.props.fullSchedule.venues, { 'id': route.id });
       if (!venue) {
         return null;

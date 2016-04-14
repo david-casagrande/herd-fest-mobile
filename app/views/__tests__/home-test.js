@@ -1,4 +1,5 @@
 jest.unmock('../home');
+jest.mock('../../images/home.png', () => '../images/home.png');
 jest.setMock('../../shims/require', (val) => val);
 
 const React = require('react-native');
@@ -26,7 +27,7 @@ describe('Home', () => {
 
     const img = wrapper.find(Image).first();
 
-    expect(img.props().source).toEqual({ uri: 'https://i.imgur.com/iasNJcm.png' });
+    expect(img.prop('source')).toEqual('../images/home.png');
   });
 
 
@@ -51,7 +52,7 @@ describe('Home', () => {
 
         expect(text.props().children).toEqual(name.toUpperCase());
 
-        link.props().onPress()
+        link.props().onPress();
 
         const expectedProps = { name, title: name, index: 1 };
         expect(navigator.push).toBeCalledWith(expectedProps);

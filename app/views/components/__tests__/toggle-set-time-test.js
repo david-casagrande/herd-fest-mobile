@@ -14,9 +14,6 @@ function setMock(value) {
 }
 
 describe('ToggleSetTime', () => {
-  const Text = React.Text;
-  const TouchableOpacity = React.TouchableOpacity;
-
   let setTime = null;
   let props = null;
 
@@ -25,7 +22,7 @@ describe('ToggleSetTime', () => {
     props = {
       setTime,
       toggleCallback: jest.fn()
-    }
+    };
   });
 
   it('renders null if state.scheduled is undefined', () => {

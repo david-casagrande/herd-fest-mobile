@@ -71,7 +71,8 @@ export default class SetTimesByDay extends Component {
 
 SetTimesByDay.propTypes = {
   fullSchedule: React.PropTypes.shape({
-    set_times: React.PropTypes.array
+    set_times: React.PropTypes.array,
+    days: React.PropTypes.array
   }),
   setTimes: React.PropTypes.array,
   showBand: React.PropTypes.bool

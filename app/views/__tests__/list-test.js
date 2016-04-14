@@ -8,8 +8,6 @@ const List = require('../list').default;
 const utils = require('../../utils').default;
 
 describe('List', () => {
-  const ListView = React.ListView;
-  const Text = React.Text;
   const dataSource = [{ name: 'sup' }];
 
   it('renders a ListView with data source', () => {

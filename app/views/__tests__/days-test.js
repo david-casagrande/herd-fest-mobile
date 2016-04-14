@@ -19,7 +19,7 @@ const days = [
 
 const fullSchedule = {
   days
-}
+};
 
 describe('Days', () => {
   const Text = React.Text;
@@ -49,7 +49,7 @@ describe('Days', () => {
       fullSchedule: props.fullSchedule,
       navigator: props.navigator,
       day: wrapper.state().day
-    }
+    };
 
     expect(wrapper.contains(DayList)).toBeTruthy();
     expect(wrapper.find(DayList).first().props()).toEqual(expectedProps);
@@ -64,7 +64,7 @@ describe('Days', () => {
       expect(allText.at(0).props().children).toEqual(sortedDays[0].name.toUpperCase());
       expect(allText.at(1).props().children).toEqual(sortedDays[1].name.toUpperCase());
       expect(allText.at(2).props().children).toEqual(sortedDays[2].name.toUpperCase());
-      expect(allText.at(3).props().children).toEqual(sortedDays[3].name.toUpperCase());
+      expect(allText.at(3).props().children).toEqual(sortedDays[3].name.toUpperCase()); // eslint-disable-line no-magic-numbers
     });
 
     it('handles onPress', () => {

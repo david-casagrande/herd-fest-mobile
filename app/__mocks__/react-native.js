@@ -36,9 +36,9 @@ class AppRegistry {
 }
 
 const Animated = {
-  View: View,
+  View,
   Value: jest.fn((val) => val),
-  timing: jest.fn(() => {
+  timing: jest.fn(() => { // eslint-disable-line arrow-body-style
     return {
       start: jest.fn((fn) => fn())
     };

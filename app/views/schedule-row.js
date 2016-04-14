@@ -1,15 +1,11 @@
 import React from 'react-native';
 import ToggleSetTime from './components/toggle-set-time';
 
-import padding from '../styles/components/padding';
-import schedule from '../data/schedule';
-import scheduleDecorator from '../decorators/schedule';
 import scheduleStyles from '../styles/schedule-styles';
 import utils from '../utils';
 
 const Animated = React.Animated;
 const Component = React.Component;
-const ListView = React.ListView;
 const StyleSheet = React.StyleSheet;
 const Text = React.Text;
 const View = React.View;
@@ -36,7 +32,7 @@ export default class ScheduleRow extends Component {
     function anim(animContext, parent) {
       Animated.timing(
         animContext.state.heightAnim,
-        { toValue: 0, duration: duration }
+        { toValue: 0, duration }
       ).start(() => parent.setSchedule());
     }
 

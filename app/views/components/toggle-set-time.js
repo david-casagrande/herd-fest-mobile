@@ -28,7 +28,7 @@ export default class ToggleSetTime extends Component {
     super(props);
 
     this.state = {
-      scheduled: undefined
+      scheduled: undefined // eslint-disable-line no-undefined
     };
 
     this.checkSchedule();
@@ -45,7 +45,7 @@ export default class ToggleSetTime extends Component {
       styles.text,
       this.props.style || {},
       {
-        transform: [{ rotate }],
+        transform: [{ rotate }]
       }
     ];
 
@@ -53,12 +53,12 @@ export default class ToggleSetTime extends Component {
   }
 
   render() {
-    if(typeof this.state.scheduled === 'undefined') {
+    if (typeof this.state.scheduled === 'undefined') {
       return null;
     }
 
     const rotate = this.state.scheduled ? '45deg' : '0deg';
-    const left = this.state.scheduled ? -2 : 0;
+    const left = this.state.scheduled ? -2 : 0; // eslint-disable-line no-magic-numbers
 
     return (
       <View style={[styles.container, { left }]}>

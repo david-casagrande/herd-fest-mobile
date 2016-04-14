@@ -50,7 +50,6 @@ const fullSchedule = {
 
 describe('DayList', () => {
   const ListView = React.ListView;
-  const Text = React.Text;
   const ToggleSetTime = require('../components/toggle-set-time').default;
 
   describe('ListView', () => {
@@ -104,10 +103,10 @@ describe('DayList', () => {
 
       it('renders ToggleSetTime', () => {
         const toggleSetTime = view.props.children[2];
-        const props = toggleSetTime.props;
+        const setTimeProps = toggleSetTime.props;
 
         expect(toggleSetTime.type).toEqual(ToggleSetTime);
-        expect(props.setTime).toEqual(rowData);
+        expect(setTimeProps.setTime).toEqual(rowData);
       });
 
       it('handles onClick', () => {
@@ -124,6 +123,7 @@ describe('DayList', () => {
 
       beforeEach(() => {
         sectionData = { id: 1, name: 'Test' };
+        sectionId = 0;
         sectionHeader = wrapper.find(ListView).first().props().renderSectionHeader(sectionData, sectionId, props.navigator);
       });
 
@@ -171,8 +171,6 @@ describe('DayList', () => {
 
         DayList = require('../day-list').default;
         wrapper = shallow(<DayList {...props} />);
-
-        const listView = wrapper.find(ListView).first();
 
         expect(scheduleDecorator).toBeCalledWith(props.day, props.fullSchedule);
         expect(utils.dataSource.mock.calls[0][0]).toEqual(decorated.venues);

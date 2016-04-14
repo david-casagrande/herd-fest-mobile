@@ -24,9 +24,9 @@ describe('MapAddress', () => {
       });
 
       it('opens google maps with address', () => {
-        utils = require('../../../utils');
+        const utils = require('../../../utils');
 
-        const _MapAddress = require('../map-address').default;
+        const _MapAddress = require('../map-address').default; // eslint-disable-line no-underscore-dangle
         const wrapper = shallow(<_MapAddress address={address} />);
         const expectedAddress = `comgooglemaps://?q=${fullAddress}`;
 
@@ -42,9 +42,9 @@ describe('MapAddress', () => {
       });
 
       pit('opens google maps with address', () => {
-        utils = require('../../../utils');
+        const utils = require('../../../utils');
 
-        const _MapAddress = require('../map-address').default;
+        const _MapAddress = require('../map-address').default; // eslint-disable-line no-underscore-dangle
         const wrapper = shallow(<_MapAddress address={address} />);
         const expectedAddress = `https://maps.google.com/?q=${fullAddress}`;
 

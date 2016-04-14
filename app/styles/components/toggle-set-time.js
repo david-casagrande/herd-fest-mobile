@@ -1,6 +1,3 @@
-import colors from './colors';
-import fontSizes from './font-sizes';
-
 const container = {
   width: 40,
   height: 40,

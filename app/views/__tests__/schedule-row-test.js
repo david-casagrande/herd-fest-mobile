@@ -27,7 +27,7 @@ describe('ScheduleRow', () => {
       context: {
         setSchedule: jest.fn()
       }
-    }
+    };
   });
 
   it('sets initial state.heightAnim', () => {

@@ -8,18 +8,21 @@
     "lint": "if node_modules/.bin/eslint app; then exit 0; else exit 0; fi"
   },
   "dependencies": {
-    "lodash": "^4.6.1",
+    "lodash": "^4.9.0",
     "moment": "^2.11.2",
     "react": "^0.14.7",
-    "react-native": "^0.23.0"
+    "react-native": "0.23.0"
   },
   "devDependencies": {
     "enzyme": "^2.2.0",
     "eslint": "^2.2.0",
     "eslint-config-strict": "^8.4.0",
+    "eslint-plugin-filenames": "^0.2.0",
     "eslint-plugin-react": "^4.2.3",
     "eslint-plugin-react-native": "^1.0.0",
-    "jest-cli": "^0.10.0"
+    "jest-cli": "^0.10.0",
+    "react-addons-test-utils": "^0.14.8",
+    "react-dom": "^0.14.8"
   },
   "jest": {
     "testPathDirs": [
@@ -31,17 +34,20 @@
       "js"
     ],
     "moduleFileExtensions": [
-      "js"
+      "js",
+      "json"
     ],
     "unmockedModulePathPatterns": [
       "promise",
       "source-map",
+      "<rootDir>/node_modules/lodash",
       "<rootDir>/node_modules/moment",
       "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-dom",
       "<rootDir>/node_modules/fbjs",
       "<rootDir>/node_modules/react-addons-test-utils",
-      "<rootDir>/node_modules/lodash",
-      "<rootDir>/app/test-utils"
+      "<rootDir>/app/test-utils",
+      "<rootDir>/node_modules/enzyme"
     ],
     "globals": {
       "fetch": true
