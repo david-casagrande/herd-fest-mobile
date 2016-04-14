@@ -39,7 +39,7 @@ export default class SetTimesByDay extends Component {
   setTimes(setTimes, color) {
     const serialized = serializers.setTimes(setTimes, this.props.fullSchedule);
     const last = serialized.length - 1;
-    return serialized.map((setTime, idx) => this.setTime(setTime, color, idx, last));
+    return <View>{serialized.map((setTime, idx) => this.setTime(setTime, color, idx, last))}</View>;
   }
 
   days() {
@@ -47,14 +47,14 @@ export default class SetTimesByDay extends Component {
     const dayKeys = lodash.keys(days);
     const daysColorMap = utils.colorMap(dayKeys);
 
-    return dayKeys.map((id) => {
-      const day = lodash.find(this.props.fullSchedule.days, { id });
-      const backgroundColor = `${daysColorMap[id]}B3`;
+    const dayModels = utils.findMany(this.props.fullSchedule.days, dayKeys);
+    return lodash.sortBy(dayModels, 'date').map((day) => {
+      const backgroundColor = `${daysColorMap[day.id]}B3`;
 
       return (
-        <View key={id}>
+        <View key={day.id}>
           <Text style={[styles.sectionHeader, { backgroundColor }]}>{day.name}</Text>
-          {this.setTimes(days[id], daysColorMap[id])}
+          {this.setTimes(days[day.id], daysColorMap[day.id])}
         </View>
       );
     });
@@ -70,7 +70,9 @@ export default class SetTimesByDay extends Component {
 }
 
 SetTimesByDay.propTypes = {
-  fullSchedule: React.PropTypes.object,
+  fullSchedule: React.PropTypes.shape({
+    set_times: React.PropTypes.array
+  }),
   setTimes: React.PropTypes.array,
   showBand: React.PropTypes.bool
 };
