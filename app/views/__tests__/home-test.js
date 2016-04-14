@@ -26,8 +26,7 @@ describe('Home', () => {
 
     const img = wrapper.find(Image).first();
 
-    expect(img.props().source).toEqual('../images/home.png');
-    expect(img.props().source).toEqual('../images/home.png');
+    expect(img.props().source).toEqual({ uri: 'https://i.imgur.com/iasNJcm.png' });
   });
 
 

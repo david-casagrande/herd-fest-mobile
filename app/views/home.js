@@ -44,7 +44,7 @@ export default class Home extends Component {
     return (
       <View style={[styles.container, { paddingTop: 30 }]}>
         <View style={styles.content}>
-          <Image style={[styles.logo, { width, height: width }]} resizeMode={'contain'} source={require('../images/home.png')} />
+          <Image style={[styles.logo, { width, height: width }]} resizeMode={'contain'} source={{ uri: 'https://i.imgur.com/iasNJcm.png' }} />
           <View style={[styles.days, { width }]}>
             {this.links()}
           </View>
