@@ -29,5 +29,5 @@ export default class MapAddress extends Component {
 
 MapAddress.propTypes = {
   address: React.PropTypes.string.isRequired,
-  children: React.PropTypes.array
+  children: React.PropTypes.object
 };
