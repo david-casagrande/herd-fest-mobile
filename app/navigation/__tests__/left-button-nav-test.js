@@ -6,7 +6,6 @@ const shallow = require('enzyme/shallow');
 const LeftButtonNav = require('../left-button-nav').default;
 
 describe('LeftButtonNav', () => {
-  const TouchableOpacity = React.TouchableOpacity;
   const Text = React.Text;
 
   let props = null;

@@ -1,6 +1,5 @@
 jest.unmock('../home');
 jest.mock('../../images/home.png', () => '../images/home.png');
-jest.setMock('../../shims/require', (val) => val);
 
 const React = require('react-native');
 const shallow = require('enzyme/shallow');
