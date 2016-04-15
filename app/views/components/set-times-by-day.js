@@ -50,7 +50,7 @@ export default class SetTimesByDay extends Component {
     const daysColorMap = utils.colorMap(sortedDays.map((day) => day.id));
 
     return sortedDays.map((day) => {
-      const backgroundColor = `${daysColorMap[day.id]}B3`;
+      const backgroundColor = daysColorMap[day.id];
 
       return (
         <View key={day.id}>
