@@ -62,7 +62,7 @@ describe('Schedule', () => {
     });
 
     it('renderRow returns ScheduleRow for', () => {
-      const rowData = { name: 'Test' };
+      const rowData = { name: 'Test', day: { id: '1' } };
       const row = wrapper.find(ListView).first().props().renderRow(rowData);
 
       expect(row.type === ScheduleRow).toBeTruthy();
@@ -112,7 +112,8 @@ describe('Schedule', () => {
       });
       jest.setMock('../../decorators/schedule', jest.fn(() => decorated));
       jest.setMock('../../utils', {
-        dataSource: jest.fn(() => dataSource)
+        dataSource: jest.fn(() => dataSource),
+        colorMap: jest.fn(() => null)
       });
 
       const Schedule = require('../schedule').default;
@@ -125,7 +126,7 @@ describe('Schedule', () => {
         expect(utils.dataSource.mock.calls[0][0]).toEqual(decorated);
         expect(utils.dataSource.mock.calls[0][1]).toEqual({ sectionIds: [0], rowIds: [['st-1']] });
         expect(utils.dataSource.mock.calls[0][2].getRowData([{ setTimes: [{ id: 'st-1' }] }], 0, 'st-1')).toEqual({ id: 'st-1' });
-        expect(wrapper.state('schedule')).toEqual(data);
+        expect(wrapper.state('schedule')).toEqual(scheduleDecorator(data));
       });
     });
   });

@@ -26,17 +26,13 @@ function dataSource(collection) {
   return utils.dataSource(collection, { sectionIds, rowIds }, { getRowData });
 }
 
-function renderRow(rowData, navigator, context) {
-  return <ScheduleRow rowData={rowData} context={context} />;
+function renderRow(rowData, navigator, context, colorMap) {
+  return <ScheduleRow rowData={rowData} context={context} color={colorMap[rowData.day.id]} />;
 }
 
-function renderSectionHeader(sectionData) {
-  // function goToSection() {
-  //   navigator.push({ name: 'Venue', index: utils.currentIndex(navigator) + 1, title: sectionData.name, venue_id: sectionData.id });
-  // }
-
+function renderSectionHeader(sectionData, sectionId, navigator, colorMap) {
   return (
-    <Text style={styles.sectionHeader}>{sectionData.name}</Text>
+    <Text style={[styles.sectionHeader, { backgroundColor: colorMap[sectionData.id] }]}>{sectionData.name}</Text>
   );
 }
 
@@ -61,7 +57,7 @@ export default class Schedule extends Component {
     return schedule.get()
       .then((setTimes) => {
         const decorated = scheduleDecorator(setTimes, this.props.fullSchedule);
-        this.setState({ dataSource: dataSource(decorated), schedule: setTimes });
+        this.setState({ dataSource: dataSource(decorated), schedule: decorated });
       })
       .catch(() => {
         this.setState({ error: true });
@@ -87,14 +83,17 @@ export default class Schedule extends Component {
       );
     }
 
+    const colorMap = utils.colorMap(this.state.schedule.map((day) => day.id));
+    const navigator = this.props.navigator;
+
     return (
       <View style={styles.container}>
         <ListView
           initialListSize={12}
           style={styles.listView}
           dataSource={this.state.dataSource}
-          renderRow={(rowData) => renderRow(rowData, this.props.navigator, this)}
-          renderSectionHeader={(sectionData, sectionId) => renderSectionHeader(sectionData, sectionId, this.props.navigator)}
+          renderRow={(rowData) => renderRow(rowData, navigator, this, colorMap)}
+          renderSectionHeader={(sectionData, sectionId) => renderSectionHeader(sectionData, sectionId, navigator, colorMap)}
           renderSeparator={renderSeparator}
         />
       </View>

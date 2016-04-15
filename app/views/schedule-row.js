@@ -27,6 +27,7 @@ export default class ScheduleRow extends Component {
   render() {
     const rowData = this.props.rowData;
     const context = this.props.context;
+    const color = this.props.color;
     const commonPadding = 4;
 
     function anim(animContext, parent) {
@@ -38,12 +39,12 @@ export default class ScheduleRow extends Component {
 
     return (
       <Animated.View style={[styles.rowContainer, { height: this.state.heightAnim, overflow: 'hidden' }]}>
-        <Text style={[styles.row, styles.setTime]}>{utils.formatDate(rowData.startTime)}</Text>
+        <Text style={[styles.row, styles.setTime, { color }]}>{utils.formatDate(rowData.startTime)}</Text>
         <View style={{ flex: 1, justifyContent: 'center', paddingLeft: commonPadding }}>
-          <Text style={[styles.venue]} numberOfLines={1}>{rowData.venue.name}</Text>
+          <Text style={[styles.venue, { color }]} numberOfLines={1}>{rowData.venue.name}</Text>
           <Text style={[styles.band]} numberOfLines={1}>{rowData.band.name}</Text>
         </View>
-        <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime]}
+        <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime, { color }]}
         toggleCallback={() => anim(this, context)}/>
       </Animated.View>
     );
@@ -59,5 +60,6 @@ ScheduleRow.propTypes = {
     band: React.PropTypes.shape({ name: React.PropTypes.string }),
     venue: React.PropTypes.shape({ name: React.PropTypes.string })
   }),
-  context: React.PropTypes.object
+  context: React.PropTypes.object,
+  color: React.PropTypes.string
 };
