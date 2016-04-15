@@ -26,7 +26,7 @@ function dataSource(collection) {
   return utils.dataSource(collection, { sectionIds, rowIds }, { getRowData });
 }
 
-function renderRow(rowData, navigator) {
+function renderRow(rowData, navigator, color) {
   function goToRow() {
     navigator.push({ name: 'Band', index: utils.currentIndex(navigator) + 1, title: rowData.band.name, id: rowData.band.id });
   }
@@ -34,22 +34,22 @@ function renderRow(rowData, navigator) {
   return (
     <TouchableOpacity onPress={goToRow}>
       <View style={styles.rowContainer}>
-        <Text style={[styles.row, styles.setTime]}>{utils.formatDate(rowData.startTime)}</Text>
+        <Text style={[styles.row, styles.setTime, { color }]}>{utils.formatDate(rowData.startTime)}</Text>
         <Text style={[styles.row, styles.content]} numberOfLines={1}>{rowData.band.name}</Text>
-        <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime]} />
+        <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime, { color }]} />
       </View>
     </TouchableOpacity>
   );
 }
 
-function renderSectionHeader(sectionData, sectionId, navigator) {
+function renderSectionHeader(sectionData, sectionId, navigator, color) {
   function goToSection() {
     navigator.push({ name: 'Venue', index: utils.currentIndex(navigator) + 1, title: sectionData.name, id: sectionData.id });
   }
 
   return (
     <TouchableOpacity onPress={goToSection}>
-      <Text style={styles.sectionHeader}>{sectionData.name}</Text>
+      <Text style={[styles.sectionHeader, { backgroundColor: color }]}>{sectionData.name}</Text>
     </TouchableOpacity>
   );
 }
@@ -65,14 +65,17 @@ export default class DayList extends Component {
   }
 
   render() {
+    const color = this.props.color;
+    const navigator = this.props.navigator;
+
     return (
       <View style={[styles.container, { paddingTop: 0 }]}>
         <ListView
           initialListSize={12}
           style={styles.listView}
           dataSource={this.dataSource()}
-          renderRow={(rowData) => renderRow(rowData, this.props.navigator)}
-          renderSectionHeader={(sectionData, sectionId) => renderSectionHeader(sectionData, sectionId, this.props.navigator)}
+          renderRow={(rowData) => renderRow(rowData, navigator, color)}
+          renderSectionHeader={(sectionData, sectionId) => renderSectionHeader(sectionData, sectionId, navigator, color)}
           renderSeparator={renderSeparator}
         />
       </View>
@@ -83,5 +86,6 @@ export default class DayList extends Component {
 DayList.propTypes = {
   day: React.PropTypes.object,
   fullSchedule: React.PropTypes.object,
-  navigator: React.PropTypes.object
+  navigator: React.PropTypes.object,
+  color: React.PropTypes.string
 };

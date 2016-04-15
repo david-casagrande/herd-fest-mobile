@@ -1,5 +1,4 @@
-jest.unmock('../days');
-jest.unmock('../day-list');
+jest.disableAutomock();
 
 const React = require('react-native');
 const shallow = require('enzyme/shallow');
@@ -37,10 +36,12 @@ describe('Days', () => {
     sortedDays = lodash.sortBy(days, 'date');
   });
 
-  it('sets initial state.day', () => {
+  it('sets initial state.day and state.colorMap', () => {
     const wrapper = shallow(<Days {...props} />);
+    const utils = require('../../utils').default;
 
-    expect(wrapper.state().day).toEqual(sortedDays[0]);
+    expect(wrapper.state('day')).toEqual(sortedDays[0]);
+    expect(wrapper.state('colorMap')).toEqual(utils.colorMap(sortedDays.map((day) => day.id)));
   });
 
   it('renders DayList', () => {
@@ -48,7 +49,8 @@ describe('Days', () => {
     const expectedProps = {
       fullSchedule: props.fullSchedule,
       navigator: props.navigator,
-      day: wrapper.state().day
+      day: wrapper.state('day'),
+      color: wrapper.state('colorMap')[wrapper.state('day').id]
     };
 
     expect(wrapper.contains(DayList)).toBeTruthy();
@@ -61,10 +63,10 @@ describe('Days', () => {
       const allText = wrapper.find(Text);
 
       expect(allText.length).toEqual(days.length);
-      expect(allText.at(0).props().children).toEqual(sortedDays[0].name.toUpperCase());
-      expect(allText.at(1).props().children).toEqual(sortedDays[1].name.toUpperCase());
-      expect(allText.at(2).props().children).toEqual(sortedDays[2].name.toUpperCase());
-      expect(allText.at(3).props().children).toEqual(sortedDays[3].name.toUpperCase()); // eslint-disable-line no-magic-numbers
+      expect(allText.at(0).prop('children')).toEqual(sortedDays[0].name.toUpperCase());
+      expect(allText.at(1).prop('children')).toEqual(sortedDays[1].name.toUpperCase());
+      expect(allText.at(2).prop('children')).toEqual(sortedDays[2].name.toUpperCase());
+      expect(allText.at(3).prop('children')).toEqual(sortedDays[3].name.toUpperCase()); // eslint-disable-line no-magic-numbers
     });
 
     it('handles onPress', () => {
