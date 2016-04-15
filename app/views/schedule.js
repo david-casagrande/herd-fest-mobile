@@ -1,6 +1,7 @@
 import React from 'react-native';
 import ScheduleRow from './schedule-row';
 
+import lodash from 'lodash';
 import schedule from '../data/schedule';
 import scheduleDecorator from '../decorators/schedule';
 import scheduleStyles from '../styles/schedule-styles';
@@ -44,10 +45,13 @@ export default class Schedule extends Component {
   constructor(props) {
     super(props);
 
+    const sorted = lodash.sortBy(props.fullSchedule.days, 'date');
+
     this.state = {
       dataSource: null,
       error: false,
-      schedule: []
+      schedule: [],
+      colorMap: utils.colorMap(sorted.map((day) => day.id))
     };
 
     this.setSchedule();
@@ -83,7 +87,7 @@ export default class Schedule extends Component {
       );
     }
 
-    const colorMap = utils.colorMap(this.state.schedule.map((day) => day.id));
+    const colorMap = this.state.colorMap;
     const navigator = this.props.navigator;
 
     return (

@@ -24,7 +24,7 @@ const navStyles = {
   navBarTitleText: {
     fontWeight: '500',
     marginVertical: 9,
-    color: colors.primary,
+    color: colors.secondary,
     width: 200,
     textAlign: 'center'
   },
@@ -35,7 +35,7 @@ const navStyles = {
     paddingRight: padding.primary
   },
   navBarButtonText: {
-    color: colors.primary
+    color: colors.secondary
   }
 };
 

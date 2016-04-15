@@ -6,6 +6,17 @@ const shallow = require('enzyme/shallow');
 const ScheduleRow = require('../schedule-row').default;
 const testUtils = require('../../test-utils');
 
+const bands = [testUtils.fabricate('band')];
+const venues = [testUtils.fabricate('venue')];
+const days = [testUtils.fabricate('day', { id: 'd-1', set_times: ['st-1'] })];
+const setTimes = [testUtils.fabricate('setTime', { id: 'st-1', band: bands[0].id, venue: venues[0].id, day: days[0].id })];
+const fullSchedule = {
+  bands,
+  venues,
+  days,
+  set_times: setTimes
+};
+
 describe('Schedule', () => {
   const Text = React.Text;
   const ListView = React.ListView;
@@ -15,7 +26,7 @@ describe('Schedule', () => {
     const Schedule = require('../schedule').default;
 
     it('displays loading message', () => {
-      const wrapper = shallow(<Schedule />);
+      const wrapper = shallow(<Schedule fullSchedule={fullSchedule} />);
 
       expect(wrapper.find(Text).prop('children')).toEqual('Loading...');
     });
@@ -26,7 +37,7 @@ describe('Schedule', () => {
     const Schedule = require('../schedule').default;
 
     it('displays error message', () => {
-      const wrapper = shallow(<Schedule />);
+      const wrapper = shallow(<Schedule fullSchedule={fullSchedule} />);
       wrapper.setState({ error: true });
 
       expect(wrapper.find(Text).prop('children')).toEqual('💩');
@@ -38,7 +49,7 @@ describe('Schedule', () => {
     const Schedule = require('../schedule').default;
 
     it('displays no schedule message', () => {
-      const wrapper = shallow(<Schedule />);
+      const wrapper = shallow(<Schedule fullSchedule={fullSchedule} />);
       wrapper.setState({ dataSource: true, schedule: [] });
 
       expect(wrapper.find(Text).prop('children')).toEqual('Your schedule is a blank slate.');
@@ -52,7 +63,7 @@ describe('Schedule', () => {
     let dataSource = null;
 
     beforeEach(() => {
-      wrapper = shallow(<Schedule />);
+      wrapper = shallow(<Schedule fullSchedule={fullSchedule} />);
       dataSource = 'testData';
       wrapper.setState({ dataSource, schedule: [0] });
     });
@@ -88,17 +99,6 @@ describe('Schedule', () => {
   });
 
   describe('.setSchedule', () => {
-    const bands = [testUtils.fabricate('band')];
-    const venues = [testUtils.fabricate('venue')];
-    const days = [testUtils.fabricate('day', { id: 'd-1', set_times: ['st-1'] })];
-    const setTimes = [testUtils.fabricate('setTime', { id: 'st-1', band: bands[0].id, venue: venues[0].id, day: days[0].id })];
-    const fullSchedule = {
-      bands,
-      venues,
-      days,
-      set_times: setTimes
-    };
-
     pit('sets up data source', () => {
       const data = [setTimes[0].id];
       const decorated = [{
