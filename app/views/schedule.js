@@ -41,6 +41,10 @@ function renderSeparator(sectionID, rowID) {
   return <View key={`${sectionID}-${rowID}`} style={styles.separator} />;
 }
 
+function filterSetTimes(setTimes, fullSchedule) {
+  return lodash.filter(setTimes, (id) => lodash.find(fullSchedule.set_times, { id }));
+}
+
 export default class Schedule extends Component {
   constructor(props) {
     super(props);
@@ -60,7 +64,8 @@ export default class Schedule extends Component {
   setSchedule() {
     return schedule.get()
       .then((setTimes) => {
-        const decorated = scheduleDecorator(setTimes, this.props.fullSchedule);
+        const filtered = filterSetTimes(setTimes, this.props.fullSchedule);
+        const decorated = scheduleDecorator(filtered, this.props.fullSchedule);
         this.setState({ dataSource: dataSource(decorated), schedule: decorated });
       })
       .catch(() => {

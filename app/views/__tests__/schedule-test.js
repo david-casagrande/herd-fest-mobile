@@ -100,7 +100,7 @@ describe('Schedule', () => {
 
   describe('.setSchedule', () => {
     pit('sets up data source', () => {
-      const data = [setTimes[0].id];
+      const data = [setTimes[0].id, 'st-not-there'];
       const decorated = [{
         id: days[0].id,
         name: days[0].name,
@@ -122,7 +122,7 @@ describe('Schedule', () => {
       const wrapper = shallow(<Schedule fullSchedule={fullSchedule} />);
 
       return wrapper.instance().setSchedule().then(() => {
-        expect(scheduleDecorator).toBeCalledWith(data, fullSchedule);
+        expect(scheduleDecorator).toBeCalledWith([data[0]], fullSchedule);
         expect(utils.dataSource.mock.calls[0][0]).toEqual(decorated);
         expect(utils.dataSource.mock.calls[0][1]).toEqual({ sectionIds: [0], rowIds: [['st-1']] });
         expect(utils.dataSource.mock.calls[0][2].getRowData([{ setTimes: [{ id: 'st-1' }] }], 0, 'st-1')).toEqual({ id: 'st-1' });
