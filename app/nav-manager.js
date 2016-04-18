@@ -1,4 +1,5 @@
 import Band from './views/band';
+import DataError from './views/data-error';
 import DayList from './views/day-list';
 import Days from './views/days';
 import Home from './views/home';
@@ -38,20 +39,36 @@ function venue(navigator, fullSchedule, route) {
 }
 
 function schedule(navigator, fullSchedule) {
+  if (fullSchedule.set_times.length < 1) {
+    return <DataError />;
+  }
+
   return <Schedule navigator={navigator} fullSchedule={fullSchedule} />;
 }
 
 function bands(navigator, fullSchedule) {
+  if (fullSchedule.bands.length < 1) {
+    return <DataError />;
+  }
+
   const dataSource = lodash.sortBy(fullSchedule.bands, 'name');
   return <List goTo={(model) => goTo('Band', model, navigator)} dataSource={dataSource} />;
 }
 
 function venues(navigator, fullSchedule) {
+  if (fullSchedule.venues.length < 1) {
+    return <DataError />;
+  }
+
   const dataSource = lodash.sortBy(fullSchedule.venues, 'name');
   return <List goTo={(model) => goTo('Venue', model, navigator)} dataSource={dataSource} />;
 }
 
 function days(navigator, fullSchedule) {
+  if (fullSchedule.days.length < 1) {
+    return <DataError />;
+  }
+
   return <Days navigator={navigator} fullSchedule={fullSchedule} />;
 }
 

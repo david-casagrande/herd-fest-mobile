@@ -1,16 +1,12 @@
-jest.unmock('../nav-manager');
-jest.unmock('../views/home');
-jest.unmock('../views/day-list');
-jest.unmock('../views/band');
-jest.unmock('../views/venue');
-jest.unmock('../views/list');
-jest.unmock('../views/days');
-jest.unmock('../utils');
+jest.disableAutomock();
 
 const React = require('react-native');
 const shallow = require('enzyme/shallow');
 
+const testUtils = require('../test-utils');
+
 const NavManager = require('../nav-manager').default;
+const DataError = require('../views/data-error').default;
 
 describe('NavManager', () => {
   let navigator = null;
@@ -119,14 +115,26 @@ describe('NavManager', () => {
   describe('My Schedule', () => {
     const Schedule = require('../views/schedule').default;
 
-    it('renders Schedule View', () => {
-      const route = { name: 'My Schedule' };
-      const props = {
-        fullSchedule,
+    let route = null;
+    let props = null;
+
+    beforeEach(() => {
+      route = { name: 'My Schedule' };
+      props = {
+        fullSchedule: { set_times: [testUtils.fabricate('setTime')] },
         navigator,
         route
       };
+    });
 
+    it('renders DataError View if props.fullSchedule.set_times is empty', () => {
+      props.fullSchedule = { set_times: [] };
+
+      const wrapper = shallow(<NavManager {...props} />);
+      expect(wrapper.is(DataError)).toBeTruthy();
+    });
+
+    it('renders Schedule View', () => {
       const wrapper = shallow(<NavManager {...props} />);
 
       expect(wrapper.find(Schedule).length).toEqual(1);
@@ -134,7 +142,7 @@ describe('NavManager', () => {
       const schedule = wrapper.find(Schedule);
 
       expect(schedule.props().navigator).toEqual(navigator);
-      expect(schedule.props().fullSchedule).toEqual(fullSchedule);
+      expect(schedule.props().fullSchedule).toEqual(props.fullSchedule);
     });
   });
 
@@ -151,6 +159,13 @@ describe('NavManager', () => {
 
     beforeEach(() => {
       props = { fullSchedule: fullScheduleWithBands, navigator, route };
+    });
+
+    it('renders DataError View if props.fullSchedule.bands is empty', () => {
+      props.fullSchedule = { bands: [] };
+
+      const wrapper = shallow(<NavManager {...props} />);
+      expect(wrapper.is(DataError)).toBeTruthy();
     });
 
     it('renders a List view', () => {
@@ -194,6 +209,13 @@ describe('NavManager', () => {
       props = { fullSchedule: fullScheduleWithVenues, navigator, route };
     });
 
+    it('renders DataError View if props.fullSchedule.venues is empty', () => {
+      props.fullSchedule = { venues: [] };
+
+      const wrapper = shallow(<NavManager {...props} />);
+      expect(wrapper.is(DataError)).toBeTruthy();
+    });
+
     it('renders List View', () => {
       const wrapper = shallow(<NavManager {...props} />);
       expect(wrapper.find(List).length).toEqual(1);
@@ -223,15 +245,28 @@ describe('NavManager', () => {
   describe('Schedule', () => {
     const Day = require('../views/days').default;
 
-    it('renders Day with correct props', () => {
-      const fullScheduleWithDays = Object.assign({ days: [{ id: 'd-1' }] }, fullSchedule);
-      const route = { name: 'Schedule' };
-      const props = {
+    let fullScheduleWithDays = null;
+    let route = null;
+    let props = null;
+
+    beforeEach(() => {
+      fullScheduleWithDays = Object.assign({ days: [{ id: 'd-1' }] }, fullSchedule);
+      route = { name: 'Schedule' };
+      props = {
         fullSchedule: fullScheduleWithDays,
         navigator,
         route
       };
+    });
 
+    it('renders DataError View if props.fullSchedule.days is empty', () => {
+      props.fullSchedule = { days: [] };
+
+      const wrapper = shallow(<NavManager {...props} />);
+      expect(wrapper.is(DataError)).toBeTruthy();
+    });
+
+    it('renders Day with correct props', () => {
       const wrapper = shallow(<NavManager {...props} />);
 
       expect(wrapper.find(Day).length).toEqual(1);
