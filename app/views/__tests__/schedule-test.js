@@ -129,5 +129,18 @@ describe('Schedule', () => {
         expect(wrapper.state('schedule')).toEqual(scheduleDecorator(data));
       });
     });
+
+    pit('sets state.error to true if schedule.get() fails', () => {
+      jest.setMock('../../data/schedule', {
+        get: () => new Promise((resolve, reject) => reject())
+      });
+
+      const Schedule = require('../schedule').default;
+      const wrapper = shallow(<Schedule fullSchedule={fullSchedule} />);
+
+      return wrapper.instance().setSchedule().catch(() => {
+        expect(wrapper.state('error')).toBeTruthy();
+      });
+    });
   });
 });
