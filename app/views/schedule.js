@@ -11,6 +11,7 @@ const Component = React.Component;
 const ListView = React.ListView;
 const StyleSheet = React.StyleSheet;
 const Text = React.Text;
+const TouchableOpacity = React.TouchableOpacity;
 const View = React.View;
 
 const styles = StyleSheet.create(scheduleStyles);
@@ -28,7 +29,15 @@ function dataSource(collection) {
 }
 
 function renderRow(rowData, navigator, context, colorMap) {
-  return <ScheduleRow rowData={rowData} context={context} color={colorMap[rowData.day.id]} />;
+  function goToRow() {
+    navigator.push({ name: 'Venue', index: utils.currentIndex(navigator) + 1, title: rowData.venue.name, id: rowData.venue.id });
+  }
+
+  return (
+    <TouchableOpacity onPress={goToRow}>
+      <ScheduleRow rowData={rowData} context={context} color={colorMap[rowData.day.id]} />
+    </TouchableOpacity>
+  );
 }
 
 function renderSectionHeader(sectionData, sectionId, navigator, colorMap) {

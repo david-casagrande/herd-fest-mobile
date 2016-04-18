@@ -61,9 +61,15 @@ describe('Schedule', () => {
     const Schedule = require('../schedule').default;
     let wrapper = null;
     let dataSource = null;
+    let navigator = null;
 
     beforeEach(() => {
-      wrapper = shallow(<Schedule fullSchedule={fullSchedule} />);
+      navigator = {
+        push: jest.fn(),
+        getCurrentRoutes: jest.fn(() => [{ index: 0 }, { index: 1 }])
+      };
+
+      wrapper = shallow(<Schedule fullSchedule={fullSchedule} navigator={navigator} />);
       dataSource = 'testData';
       wrapper.setState({ dataSource, schedule: [0] });
     });
@@ -72,13 +78,23 @@ describe('Schedule', () => {
       expect(wrapper.find(ListView).first().prop('dataSource')).toEqual(dataSource);
     });
 
-    it('renderRow returns ScheduleRow for', () => {
+    it('renderRow returns ScheduleRow', () => {
       const rowData = { name: 'Test', day: { id: '1' } };
       const row = wrapper.find(ListView).first().props().renderRow(rowData);
+      const scheduleRow = row.props.children;
 
-      expect(row.type === ScheduleRow).toBeTruthy();
-      expect(row.props.rowData).toEqual(rowData);
-      expect(row.props.context).toEqual(wrapper.instance());
+      expect(scheduleRow.type === ScheduleRow).toBeTruthy();
+      expect(scheduleRow.props.rowData).toEqual(rowData);
+      expect(scheduleRow.props.context).toEqual(wrapper.instance());
+    });
+
+    it('renderRow returns TouchableOpacity and handles onPress ', () => {
+      const rowData = { name: 'Test', day: { id: '1' }, venue: { id: 'v-1', name: 'Venue' } };
+      const row = wrapper.find(ListView).first().props().renderRow(rowData);
+
+      row.props.onPress();
+
+      expect(navigator.push).toBeCalledWith({ name: 'Venue', index: 2, title: rowData.venue.name, id: rowData.venue.id });
     });
 
     it('renderSectionHeader returns Text', () => {
