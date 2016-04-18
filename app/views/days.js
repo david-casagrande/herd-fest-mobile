@@ -3,6 +3,7 @@ import React from 'react-native';
 
 import daysStyles from '../styles/days-styles';
 import lodash from 'lodash';
+import moment from 'moment';
 import utils from '../utils';
 
 const Component = React.Component;
@@ -13,16 +14,28 @@ const View = React.View;
 
 const styles = StyleSheet.create(daysStyles);
 
+function currentDay(days) {
+  const date = new Date();
+  const today = moment.utc(date).format('YYYY-MM-DD');
+
+  return lodash.find(days, (day) => day.date === today);
+}
+
+function initialState(props) {
+  const today = currentDay(props.fullSchedule.days);
+  const sorted = lodash.sortBy(props.fullSchedule.days, 'date');
+
+  return {
+    day: today ? today : sorted[0],
+    colorMap: utils.colorMap(sorted.map((day) => day.id))
+  };
+}
+
 export default class Days extends Component {
   constructor(props) {
     super(props);
 
-    const sorted = lodash.sortBy(props.fullSchedule.days, 'date');
-
-    this.state = {
-      day: sorted[0],
-      colorMap: utils.colorMap(sorted.map((day) => day.id))
-    };
+    this.state = initialState(props);
   }
 
   setDay(day) {

@@ -1,6 +1,7 @@
 jest.disableAutomock();
 
 const React = require('react-native');
+const MockDate = require('mockdate');
 const shallow = require('enzyme/shallow');
 
 const testUtils = require('../../test-utils');
@@ -36,11 +37,28 @@ describe('Days', () => {
     sortedDays = lodash.sortBy(days, 'date');
   });
 
-  it('sets initial state.day and state.colorMap', () => {
+  describe('initial day', () => {
+    it('sets initial state.day', () => {
+      const wrapper = shallow(<Days {...props} />);
+
+      expect(wrapper.state('day')).toEqual(sortedDays[0]);
+    });
+
+    it('sets initial state.day when the current day is one of the fullSchedule.days.date', () => {
+      MockDate.set(new Date(sortedDays[2].date));
+
+      const wrapper = shallow(<Days {...props} />);
+
+      expect(wrapper.state('day')).toEqual(sortedDays[2]);
+
+      MockDate.reset();
+    });
+  });
+
+  it('sets initial state.colorMap', () => {
     const wrapper = shallow(<Days {...props} />);
     const utils = require('../../utils').default;
 
-    expect(wrapper.state('day')).toEqual(sortedDays[0]);
     expect(wrapper.state('colorMap')).toEqual(utils.colorMap(sortedDays.map((day) => day.id)));
   });
 

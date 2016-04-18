@@ -21,6 +21,7 @@
     "eslint-plugin-react": "^4.2.3",
     "eslint-plugin-react-native": "^1.0.0",
     "jest-cli": "^0.10.0",
+    "mockdate": "^1.0.4",
     "react-addons-test-utils": "^0.14.8",
     "react-dom": "^0.14.8"
   },
