@@ -18,9 +18,9 @@ function venue(route, navigator) {
   }
 
   return (
-    <View style={{ paddingTop: 3 }}>
-      <Text style={[styles.navBarTitleText, { marginVertical: 0, fontSize: 13 }]} numberOfLines={1}>{model.name}</Text>
-      <Text style={[styles.navBarTitleText, { marginVertical: 0, fontSize: 16 }]} numberOfLines={1}>{model.street_address}</Text>
+    <View style={styles.navBarContainer}>
+      <Text style={[styles.navBarTitleText, styles.navBarVenueTitleText]} numberOfLines={1}>{model.name}</Text>
+      <Text style={[styles.navBarTitleText, styles.navBarAddressTitleText]} numberOfLines={1}>{model.street_address}</Text>
     </View>
   );
 }

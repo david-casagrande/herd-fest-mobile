@@ -19,7 +19,7 @@ function venue(route, navigator) {
 
   return (
     <MapAddress address={model.street_address}>
-      <Text style={[styles.navBarText, styles.navBarButtonText, styles.navBarRightButton]}>Map</Text>
+      <Text style={[styles.navBarText, styles.navBarRightButton]}>Map</Text>
     </MapAddress>
   );
 }

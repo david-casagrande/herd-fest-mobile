@@ -1,6 +1,14 @@
 import colors from './components/colors';
+import container from './components/container';
 import fontSizes from './components/font-sizes';
 import padding from './components/padding';
+import utils from '../utils';
+
+const iosNavBarTextMargin = 10;
+const androidNavBarTextMargin = 18;
+
+const iosNavBarTitleTextMargin = 9;
+const androidNavBarTitleTextMargin = 17;
 
 const navStyles = {
   messageText: {
@@ -10,32 +18,39 @@ const navStyles = {
     marginTop: 50,
     marginLeft: 15
   },
-  buttonText: {
-    fontSize: fontSizes.medium,
-    fontWeight: '500'
-  },
   navBar: {
     backgroundColor: colors.white
   },
   navBarText: {
-    fontSize: 16,
-    marginVertical: 10
+    fontSize: fontSizes.medium,
+    fontWeight: '500',
+    color: colors.secondary,
+    marginVertical: utils.isAndroid() ? androidNavBarTextMargin : iosNavBarTextMargin,
   },
   navBarTitleText: {
     fontWeight: '500',
-    marginVertical: 9,
+    marginVertical: utils.isAndroid() ? androidNavBarTitleTextMargin : iosNavBarTitleTextMargin,
     color: colors.secondary,
     width: 200,
     textAlign: 'center'
   },
+  navBarContainer: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  navBarVenueTitleText: {
+    marginVertical: 0,
+    fontSize: 13
+  },
+  navBarAddressTitleText: {
+    marginVertical: 0,
+    fontSize: fontSizes.medium
+  },
   navBarLeftButton: {
-    paddingLeft: padding.primary
+    marginLeft: padding.primary
   },
   navBarRightButton: {
-    paddingRight: padding.primary
-  },
-  navBarButtonText: {
-    color: colors.secondary
+    marginRight: padding.primary
   }
 };
 

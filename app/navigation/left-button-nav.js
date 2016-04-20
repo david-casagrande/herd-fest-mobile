@@ -20,10 +20,8 @@ export default class LeftButtonNav extends Component {
     }
 
     return (
-      <TouchableOpacity onPress={() => this.onPress()} style={styles.navBarLeftButton}>
-        <Text style={[styles.navBarText, styles.navBarButtonText]}>
-          Back
-        </Text>
+      <TouchableOpacity onPress={() => this.onPress()}>
+        <Text style={[styles.navBarText, styles.navBarLeftButton]}>Back</Text>
       </TouchableOpacity>
     );
   }
