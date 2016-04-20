@@ -1,16 +1,13 @@
 import React from 'react-native';
 import SectionHeader from './section-header';
 import SetTimeRow from './set-time-row';
-import ToggleSetTime from './toggle-set-time';
 
-import colors from '../../styles/components/colors';
 import lodash from 'lodash';
 import serializers from '../../data/serializers';
 import setTimesByDayStyles from '../../styles/components/set-times-by-day';
 import utils from '../../utils';
 
 const Component = React.Component;
-const Text = React.Text;
 const View = React.View;
 const StyleSheet = React.StyleSheet;
 

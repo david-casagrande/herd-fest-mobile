@@ -8,7 +8,6 @@ const testUtils = require('../../../test-utils');
 const SectionHeader = require('../section-header').default;
 const SetTimeRow = require('../set-time-row').default;
 const SetTimesByDay = require('../set-times-by-day').default;
-const ToggleSetTime = require('../toggle-set-time').default;
 
 const bands = [
   testUtils.fabricate('band', { id: 'b-1' }),
@@ -57,8 +56,6 @@ const fullSchedule = {
 };
 
 describe('SetTimesByDay', () => {
-  const Text = React.Text;
-
   it('renders a View and Text for each day', () => {
     const utils = require('../../../utils').default;
     const lodash = require('lodash');
@@ -90,7 +87,7 @@ describe('SetTimesByDay', () => {
     };
     const wrapper = shallow(<SetTimesByDay {...props} />);
 
-    expect(wrapper.find(SetTimeRow).length).toEqual(3);
+    expect(wrapper.find(SetTimeRow).length).toEqual(setTimes.length);
 
     const setTimeRows = wrapper.find(SetTimeRow);
     const colorMap = utils.colorMap(lodash.sortBy(days, 'date').map((day) => day.id));

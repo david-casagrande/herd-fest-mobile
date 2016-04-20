@@ -53,7 +53,6 @@ const fullSchedule = {
 
 describe('DayList', () => {
   const ListView = React.ListView;
-  const ToggleSetTime = require('../components/toggle-set-time').default;
 
   describe('ListView', () => {
     let DayList = require('../day-list').default;
@@ -82,7 +81,6 @@ describe('DayList', () => {
       let color = null;
       let rowData = null;
       let row = null;
-      let view = null;
 
       beforeEach(() => {
         color = '#ccc';

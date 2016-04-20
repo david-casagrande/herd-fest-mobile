@@ -1,7 +1,6 @@
 import React from 'react-native';
 import SectionHeader from './components/section-header';
 import SetTimeRow from './components/set-time-row';
-import ToggleSetTime from './components/toggle-set-time';
 
 import dayListDecorator from '../decorators/day-list';
 import dayListStyles from '../styles/day-list-styles';
@@ -10,7 +9,6 @@ import utils from '../utils';
 const Component = React.Component;
 const ListView = React.ListView;
 const StyleSheet = React.StyleSheet;
-const Text = React.Text;
 const TouchableOpacity = React.TouchableOpacity;
 const View = React.View;
 

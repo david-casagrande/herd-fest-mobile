@@ -15,10 +15,11 @@ const styles = StyleSheet.create(Object.assign({}, listStyles, setTimeRowStyles)
 
 export default class SetTimeRow extends Component {
   yieldContent() {
+    const children = this.props.children; // eslint-disable-line react/prop-types
     let content = null;
 
-    if (this.props.children) {
-      content = this.props.children;
+    if (children) {
+      content = children;
     } else if (this.props.content) {
       content = <Text style={styles.contentText} numberOfLines={1}>{this.props.content}</Text>;
     }
