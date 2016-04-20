@@ -4,6 +4,8 @@ const React = require('react-native');
 const shallow = require('enzyme/shallow');
 
 const ScheduleRow = require('../schedule-row').default;
+const SectionHeader = require('../components/section-header').default;
+
 const testUtils = require('../../test-utils');
 
 const bands = [testUtils.fabricate('band')];
@@ -97,12 +99,14 @@ describe('Schedule', () => {
       expect(navigator.push).toBeCalledWith({ name: 'Venue', index: 2, title: rowData.venue.name, id: rowData.venue.id });
     });
 
-    it('renderSectionHeader returns Text', () => {
-      const sectionData = { name: 'Test' };
+    it('renderSectionHeader returns SectionHeader', () => {
+      const sectionData = days[0];
       const row = wrapper.find(ListView).first().props().renderSectionHeader(sectionData);
+      const expectedBackgroundColor = wrapper.state('colorMap')[sectionData.id];
 
-      expect(row.type === Text).toBeTruthy();
-      expect(row.props.children).toEqual(sectionData.name);
+      expect(row.type === SectionHeader).toBeTruthy();
+      expect(row.props.title).toEqual(sectionData.name);
+      expect(row.props.backgroundColor).toEqual(expectedBackgroundColor);
     });
 
     it('renderSeparator returns Text', () => {

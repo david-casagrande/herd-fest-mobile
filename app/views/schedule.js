@@ -1,5 +1,6 @@
 import React from 'react-native';
 import ScheduleRow from './schedule-row';
+import SectionHeader from './components/section-header';
 
 import lodash from 'lodash';
 import schedule from '../data/schedule';
@@ -41,9 +42,9 @@ function renderRow(rowData, navigator, context, colorMap) {
 }
 
 function renderSectionHeader(sectionData, sectionId, navigator, colorMap) {
-  return (
-    <Text style={[styles.sectionHeader, { backgroundColor: colorMap[sectionData.id] }]}>{sectionData.name}</Text>
-  );
+  const backgroundColor = colorMap[sectionData.id];
+
+  return <SectionHeader title={sectionData.name} backgroundColor={backgroundColor} />;
 }
 
 function renderSeparator(sectionID, rowID) {
