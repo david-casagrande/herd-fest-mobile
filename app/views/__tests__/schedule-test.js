@@ -133,7 +133,8 @@ describe('Schedule', () => {
       jest.setMock('../../decorators/schedule', jest.fn(() => decorated));
       jest.setMock('../../utils', {
         dataSource: jest.fn(() => dataSource),
-        colorMap: jest.fn(() => null)
+        colorMap: jest.fn(() => null),
+        isAndroid: () => true
       });
 
       const Schedule = require('../schedule').default;

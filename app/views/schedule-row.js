@@ -1,9 +1,7 @@
 import React from 'react-native';
-import ToggleSetTime from './components/toggle-set-time';
 import SetTimeRow from './components/set-time-row';
 
 import scheduleStyles from '../styles/schedule-styles';
-import utils from '../utils';
 
 const Animated = React.Animated;
 const Component = React.Component;
@@ -29,7 +27,6 @@ export default class ScheduleRow extends Component {
     const rowData = this.props.rowData;
     const context = this.props.context;
     const color = this.props.color;
-    const commonPadding = 4;
 
     function anim(animContext, parent) {
       Animated.timing(

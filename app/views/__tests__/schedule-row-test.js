@@ -6,9 +6,7 @@ const shallow = require('enzyme/shallow');
 const testUtils = require('../../test-utils');
 
 const ScheduleRow = require('../schedule-row').default;
-const ToggleSetTime = require('../components/toggle-set-time').default;
 const SetTimeRow = require('../components/set-time-row').default;
-const utils = require('../../utils').default;
 
 describe('ScheduleRow', () => {
   const Animated = React.Animated;
