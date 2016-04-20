@@ -16,7 +16,7 @@ export default class SectionHeader extends Component {
 
     return (
       <View style={viewStyle}>
-        <Text style={styles.sectionHeaderText}>{this.props.title}</Text>
+        <Text style={styles.sectionHeaderText} numberOfLines={2}>{this.props.title}</Text>
       </View>
     );
   }
