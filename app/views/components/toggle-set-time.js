@@ -43,8 +43,8 @@ export default class ToggleSetTime extends Component {
   text(rotate) {
     const style = [
       styles.text,
-      this.props.style || {},
       {
+        color: this.props.color,
         transform: [{ rotate }]
       }
     ];
@@ -75,6 +75,6 @@ ToggleSetTime.propTypes = {
   setTime: React.PropTypes.shape({
     id: React.PropTypes.string
   }),
-  style: React.PropTypes.array,
+  color: React.PropTypes.string,
   toggleCallback: React.PropTypes.func
 };
