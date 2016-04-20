@@ -43,11 +43,13 @@ describe('SetTimeRow', () => {
     it('renders start time', () => {
       const setTime = testUtils.fabricate('setTime');
       const color = '#ccc';
-      const wrapper = shallow(<SetTimeRow setTime={setTime} color={color} />);
+      const toggleCallback = jest.fn();
+      const wrapper = shallow(<SetTimeRow setTime={setTime} color={color} toggleCallback={toggleCallback} />);
       const toggleSetTime = wrapper.find(ToggleSetTime).first();
 
       expect(toggleSetTime.prop('color')).toEqual(color);
       expect(toggleSetTime.prop('setTime')).toEqual(setTime);
+      expect(toggleSetTime.prop('toggleCallback')).toEqual(toggleCallback);
     });
   });
 });

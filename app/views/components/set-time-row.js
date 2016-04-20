@@ -50,7 +50,7 @@ export default class SetTimeRow extends Component {
       <View style={styles.rowContainer}>
         {this.startTime()}
         {this.yieldContent()}
-        <ToggleSetTime setTime={setTime} color={this.props.color} />
+        <ToggleSetTime setTime={setTime} color={this.props.color} toggleCallback={this.props.toggleCallback} />
       </View>
     );
   }
@@ -61,5 +61,6 @@ SetTimeRow.propTypes = {
     startTime: React.PropTypes.string
   }),
   color: React.PropTypes.string,
-  content: React.PropTypes.string
+  content: React.PropTypes.string,
+  toggleCallback: React.PropTypes.func
 };
