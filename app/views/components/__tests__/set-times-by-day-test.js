@@ -7,6 +7,7 @@ const testUtils = require('../../../test-utils');
 
 const SetTimesByDay = require('../set-times-by-day').default;
 const ToggleSetTime = require('../toggle-set-time').default;
+const SectionHeader = require('../section-header').default;
 
 const bands = [
   testUtils.fabricate('band', { id: 'b-1' }),
@@ -58,17 +59,25 @@ describe('SetTimesByDay', () => {
   const Text = React.Text;
 
   it('renders a View and Text for each day', () => {
+    const utils = require('../../../utils').default;
+    const lodash = require('lodash');
+    const daysColorMap = utils.colorMap(lodash.sortBy(days, 'date').map((day) => day.id));
+
     const props = {
       setTimes: setTimes.map((setTime) => setTime.id),
       fullSchedule
     };
+
     const wrapper = shallow(<SetTimesByDay {...props} />);
 
-    const day1 = wrapper.childAt(0);
-    const day2 = wrapper.childAt(1);
+    const day1 = wrapper.find(SectionHeader).first();
+    const day2 = wrapper.find(SectionHeader).last();
 
-    expect(day1.find(Text).first().prop('children')).toEqual(days[1].name);
-    expect(day2.find(Text).first().prop('children')).toEqual(days[0].name);
+    expect(day1.prop('title')).toEqual(days[1].name);
+    expect(day2.prop('title')).toEqual(days[0].name);
+
+    expect(day1.prop('backgroundColor')).toEqual(daysColorMap[days[1].id]);
+    expect(day2.prop('backgroundColor')).toEqual(daysColorMap[days[0].id]);
   });
 
   it('renders a list of set times for each day', () => {

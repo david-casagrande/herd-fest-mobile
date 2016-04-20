@@ -1,4 +1,5 @@
 import React from 'react-native';
+import SectionHeader from './section-header';
 import ToggleSetTime from './toggle-set-time';
 
 import colors from '../../styles/components/colors';
@@ -54,9 +55,7 @@ export default class SetTimesByDay extends Component {
 
       return (
         <View key={day.id}>
-          <View style={[styles.sectionHeader, { backgroundColor }]}>
-            <Text style={styles.sectionHeaderText}>{day.name}</Text>
-          </View>
+          <SectionHeader title={day.name} backgroundColor={backgroundColor} />
           {this.setTimes(days[day.id], daysColorMap[day.id])}
         </View>
       );
