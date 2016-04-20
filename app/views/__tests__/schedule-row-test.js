@@ -1,6 +1,4 @@
-jest.unmock('../schedule-row');
-jest.unmock('../components/toggle-set-time');
-jest.unmock('../../utils');
+jest.disableAutomock();
 
 const React = require('react-native');
 const shallow = require('enzyme/shallow');
@@ -9,6 +7,7 @@ const testUtils = require('../../test-utils');
 
 const ScheduleRow = require('../schedule-row').default;
 const ToggleSetTime = require('../components/toggle-set-time').default;
+const SetTimeRow = require('../components/set-time-row').default;
 const utils = require('../../utils').default;
 
 describe('ScheduleRow', () => {
@@ -26,7 +25,8 @@ describe('ScheduleRow', () => {
       },
       context: {
         setSchedule: jest.fn()
-      }
+      },
+      color: '#ccc'
     };
   });
 
@@ -38,40 +38,35 @@ describe('ScheduleRow', () => {
     expect(wrapper.state().heightAnim).toEqual(new Animated.Value(initHeight));
   });
 
-  it('renders start time', () => {
-    const wrapper = shallow(<ScheduleRow {...props} />);
-
-    expect(wrapper.find(Text).first().props().children).toEqual(utils.formatDate(props.rowData.startTime));
-  });
-
-  it('renders venue name', () => {
-    const wrapper = shallow(<ScheduleRow {...props} />);
-
-    expect(wrapper.find(Text).at(1).props().children).toEqual(props.rowData.venue.name);
-  });
-
-  it('renders band name', () => {
-    const wrapper = shallow(<ScheduleRow {...props} />);
-
-    expect(wrapper.find(Text).last().props().children).toEqual(props.rowData.band.name);
-  });
-
-  describe('ToggleSetTime', () => {
-    it('renders ToggleSetTime', () => {
+  describe('SetTimeRow', () => {
+    it('renders SetTimeRow component', () => {
       const wrapper = shallow(<ScheduleRow {...props} />);
 
-      expect(wrapper.contains(ToggleSetTime)).toBeTruthy();
+      expect(wrapper.contains(SetTimeRow)).toBeTruthy();
 
-      const toggleSetTime = wrapper.find(ToggleSetTime);
+      const setTimeRow = wrapper.find(SetTimeRow).first();
 
-      expect(toggleSetTime.prop('setTime')).toEqual(props.rowData);
+      expect(setTimeRow.prop('setTime')).toEqual(props.rowData);
+      expect(setTimeRow.prop('color')).toEqual(props.color);
+    });
+
+    it('displays venue and band', () => {
+      const wrapper = shallow(<ScheduleRow {...props} />);
+
+      expect(wrapper.contains(SetTimeRow)).toBeTruthy();
+
+      const setTimeRow = wrapper.find(SetTimeRow).first();
+      const text = setTimeRow.find(Text);
+
+      expect(text.first().prop('children')).toEqual(props.rowData.venue.name);
+      expect(text.last().prop('children')).toEqual(props.rowData.band.name);
     });
 
     it('handles toggleCallback', () => {
       const wrapper = shallow(<ScheduleRow {...props} />);
-      const toggleSetTime = wrapper.find(ToggleSetTime);
+      const setTimeRow = wrapper.find(SetTimeRow).first();
 
-      toggleSetTime.props().toggleCallback();
+      setTimeRow.props().toggleCallback();
 
       expect(Animated.timing).toBeCalledWith(wrapper.state().heightAnim, { toValue: 0, duration: ScheduleRow.duration });
       expect(props.context.setSchedule).toBeCalled();

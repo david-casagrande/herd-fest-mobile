@@ -1,5 +1,6 @@
 import React from 'react-native';
 import ToggleSetTime from './components/toggle-set-time';
+import SetTimeRow from './components/set-time-row';
 
 import scheduleStyles from '../styles/schedule-styles';
 import utils from '../utils';
@@ -38,14 +39,11 @@ export default class ScheduleRow extends Component {
     }
 
     return (
-      <Animated.View style={[styles.rowContainer, { height: this.state.heightAnim, overflow: 'hidden' }]}>
-        <Text style={[styles.row, styles.setTime, { color }]}>{utils.formatDate(rowData.startTime)}</Text>
-        <View style={{ flex: 1, justifyContent: 'center', paddingLeft: commonPadding }}>
+      <Animated.View style={{ height: this.state.heightAnim, overflow: 'hidden' }}>
+        <SetTimeRow setTime={rowData} color={color} toggleCallback={() => anim(this, context)}>
           <Text style={[styles.venue, { color }]} numberOfLines={1}>{rowData.venue.name}</Text>
-          <Text style={[styles.band]} numberOfLines={1}>{rowData.band.name}</Text>
-        </View>
-        <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime, { color }]}
-        toggleCallback={() => anim(this, context)}/>
+          <Text style={styles.band} numberOfLines={1}>{rowData.band.name}</Text>
+        </SetTimeRow>
       </Animated.View>
     );
   }
