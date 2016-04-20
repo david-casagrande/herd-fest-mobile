@@ -50,7 +50,7 @@ function renderSectionHeader(sectionData, sectionId, navigator, color) {
 
   return (
     <TouchableOpacity onPress={goToSection}>
-      <SectionHeader title={sectionData.name} backgroundColor={color} /> 
+      <SectionHeader title={sectionData.name} backgroundColor={color} />
     </TouchableOpacity>
   );
 }

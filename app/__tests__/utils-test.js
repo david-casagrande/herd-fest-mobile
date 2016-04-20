@@ -231,7 +231,7 @@ describe('utils', () => {
         Platform: { OS: 'android' }
       });
 
-      const _utils = require('../utils').default;
+      const _utils = require('../utils').default; // eslint-disable-line no-underscore-dangle
       expect(_utils.isAndroid()).toEqual(true);
     });
 
@@ -240,7 +240,7 @@ describe('utils', () => {
         Platform: { OS: 'ios' }
       });
 
-      const _utils = require('../utils').default;
+      const _utils = require('../utils').default; // eslint-disable-line no-underscore-dangle
       expect(_utils.isAndroid()).toEqual(false);
     });
   });
