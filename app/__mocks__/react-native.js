@@ -50,6 +50,10 @@ const AsyncStorage = {
   setItem: jest.fn((key, value) => new Promise((resolve) => resolve({ key, value })))
 };
 
+const Platform = {
+  OS: 'ios'
+};
+
 class Dimensions {
   static get() {
     return {
@@ -72,5 +76,6 @@ ReactNative.AppRegistry = AppRegistry;
 ReactNative.AsyncStorage = AsyncStorage;
 ReactNative.Dimensions = Dimensions;
 ReactNative.Animated = Animated;
+ReactNative.Platform = Platform;
 
 module.exports = ReactNative;
