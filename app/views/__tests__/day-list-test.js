@@ -4,6 +4,7 @@ const React = require('react-native');
 const shallow = require('enzyme/shallow');
 
 const SectionHeader = require('../components/section-header').default;
+const SetTimeRow = require('../components/set-time-row').default;
 
 const testUtils = require('../../test-utils');
 
@@ -78,38 +79,21 @@ describe('DayList', () => {
     });
 
     describe('.renderRow', () => {
+      let color = null;
       let rowData = null;
       let row = null;
       let view = null;
 
       beforeEach(() => {
+        color = '#ccc';
         rowData = Object.assign({}, setTimes[0], { startTime: setTimes[0].start_time, band: bands[0] });
-        row = wrapper.find(ListView).first().props().renderRow(rowData, props.navigator);
-        view = row.props.children;
+        row = wrapper.find(ListView).first().props().renderRow(rowData, props.navigator, color);
       });
 
-      it('renders start time', () => {
-        const utils = require('../../utils').default;
-        const setTime = view.props.children[0];
-        const startTime = setTime.props.children;
-
-        expect(startTime).toEqual(utils.formatDate(rowData.start_time));
-      });
-
-      it('renders band name', () => {
-        const band = view.props.children[1];
-        const bandName = band.props.children;
-
-        expect(typeof bandName !== 'undefined').toBeTruthy();
-        expect(bandName).toBe(rowData.band.name);
-      });
-
-      it('renders ToggleSetTime', () => {
-        const toggleSetTime = view.props.children[2];
-        const setTimeProps = toggleSetTime.props;
-
-        expect(toggleSetTime.type).toEqual(ToggleSetTime);
-        expect(setTimeProps.setTime).toEqual(rowData);
+      it('renders set time row', () => {
+        expect(row.props.children.type).toEqual(SetTimeRow);
+        expect(row.props.children.props.setTime).toEqual(rowData);
+        expect(row.props.children.props.color).toEqual(color);
       });
 
       it('handles onClick', () => {
@@ -166,7 +150,8 @@ describe('DayList', () => {
 
         jest.setMock('../../decorators/day-list', jest.fn(() => decorated));
         jest.setMock('../../utils', {
-          dataSource: jest.fn(() => dataSource)
+          dataSource: jest.fn(() => dataSource),
+          isAndroid: () => true
         });
 
         const scheduleDecorator = require('../../decorators/day-list');

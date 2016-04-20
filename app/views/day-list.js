@@ -1,5 +1,6 @@
 import React from 'react-native';
 import SectionHeader from './components/section-header';
+import SetTimeRow from './components/set-time-row';
 import ToggleSetTime from './components/toggle-set-time';
 
 import dayListDecorator from '../decorators/day-list';
@@ -34,11 +35,7 @@ function renderRow(rowData, navigator, color) {
 
   return (
     <TouchableOpacity onPress={goToRow}>
-      <View style={styles.rowContainer}>
-        <Text style={[styles.row, styles.setTime, { color }]}>{utils.formatDate(rowData.startTime)}</Text>
-        <Text style={[styles.row, styles.content]} numberOfLines={1}>{rowData.band.name}</Text>
-        <ToggleSetTime setTime={rowData} style={[styles.row, styles.toggleSetTime, { color }]} />
-      </View>
+      <SetTimeRow setTime={rowData} color={color} content={rowData.band.name} />
     </TouchableOpacity>
   );
 }
