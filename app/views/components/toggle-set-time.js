@@ -45,11 +45,12 @@ export default class ToggleSetTime extends Component {
       styles.text,
       this.props.style || {},
       {
-        transform: [{ rotate }]
+        transform: [{ rotate }],
+        left: this.state.scheduled ? 0 : -1 // eslint-disable-line no-magic-numbers
       }
     ];
 
-    return <Text style={style}>+</Text>;
+    return <Text style={[style]}>+</Text>;
   }
 
   render() {
@@ -58,12 +59,11 @@ export default class ToggleSetTime extends Component {
     }
 
     const rotate = this.state.scheduled ? '45deg' : '0deg';
-    const left = this.state.scheduled ? -2 : 0; // eslint-disable-line no-magic-numbers
 
     return (
-      <View style={[styles.container, { left }]}>
+      <View style={[styles.container]}>
         <TouchableOpacity onPress={() => toggle(this.state.scheduled, this.props.setTime.id, this)}>
-          {this.text(rotate)}
+            {this.text(rotate)}
         </TouchableOpacity>
       </View>
     );

@@ -3,6 +3,8 @@ jest.autoMockOff();
 const React = require('react-native');
 const shallow = require('enzyme/shallow');
 
+const SectionHeader = require('../components/section-header').default;
+
 const testUtils = require('../../test-utils');
 
 const bands = [
@@ -64,7 +66,8 @@ describe('DayList', () => {
         navigator: {
           push: jest.fn(),
           getCurrentRoutes: jest.fn(() => [{ index: 1 }])
-        }
+        },
+        color: '#ccc'
       };
 
       wrapper = shallow(<DayList {...props} />);
@@ -127,10 +130,10 @@ describe('DayList', () => {
         sectionHeader = wrapper.find(ListView).first().props().renderSectionHeader(sectionData, sectionId, props.navigator);
       });
 
-      it('renders venue name', () => {
-        const venue = sectionHeader.props.children;
-
-        expect(venue.props.children).toEqual(sectionData.name);
+      it('renders SectionHeader component', () => {
+        expect(sectionHeader.props.children.type === SectionHeader).toBeTruthy();
+        expect(sectionHeader.props.children.props.title).toEqual(sectionData.name);
+        expect(sectionHeader.props.children.props.backgroundColor).toEqual(props.color);
       });
 
       it('handles onClick', () => {

@@ -101,12 +101,12 @@ describe('Schedule', () => {
 
     it('renderSectionHeader returns SectionHeader', () => {
       const sectionData = days[0];
-      const row = wrapper.find(ListView).first().props().renderSectionHeader(sectionData);
+      const sectionHeader = wrapper.find(ListView).first().props().renderSectionHeader(sectionData);
       const expectedBackgroundColor = wrapper.state('colorMap')[sectionData.id];
 
-      expect(row.type === SectionHeader).toBeTruthy();
-      expect(row.props.title).toEqual(sectionData.name);
-      expect(row.props.backgroundColor).toEqual(expectedBackgroundColor);
+      expect(sectionHeader.type === SectionHeader).toBeTruthy();
+      expect(sectionHeader.props.title).toEqual(sectionData.name);
+      expect(sectionHeader.props.backgroundColor).toEqual(expectedBackgroundColor);
     });
 
     it('renderSeparator returns Text', () => {

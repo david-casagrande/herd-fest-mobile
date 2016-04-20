@@ -1,4 +1,5 @@
 import React from 'react-native';
+import SectionHeader from './components/section-header';
 import ToggleSetTime from './components/toggle-set-time';
 
 import dayListDecorator from '../decorators/day-list';
@@ -49,7 +50,7 @@ function renderSectionHeader(sectionData, sectionId, navigator, color) {
 
   return (
     <TouchableOpacity onPress={goToSection}>
-      <Text style={[styles.sectionHeader, { backgroundColor: color }]}>{sectionData.name}</Text>
+      <SectionHeader title={sectionData.name} backgroundColor={color} /> 
     </TouchableOpacity>
   );
 }
