@@ -6,10 +6,8 @@ import padding from './padding';
 
 const StyleSheet = React.StyleSheet;
 
-const row = {
-  paddingTop: padding.secondary,
-  paddingBottom: padding.secondary
-};
+const sectionHeaderHeight = 50;
+const columnHeight = 52;
 
 const rowContainer = {
   flex: 1,
@@ -17,20 +15,33 @@ const rowContainer = {
   justifyContent: 'space-between'
 };
 
-const separator = {
-  height: StyleSheet.hairlineWidth,
-  backgroundColor: colors.lightGrey
+const column = {
+  height: columnHeight
+};
+
+const columnContainer = {
+  flex: 1,
+  justifyContent: 'center'
 };
 
 const sectionHeader = {
   backgroundColor: colors.primary,
-  paddingTop: padding.primary,
-  paddingBottom: padding.primary,
-  paddingLeft: padding.primary,
-  paddingRight: padding.primary,
+  height: sectionHeaderHeight,
+  flex: 1,
+  justifyContent: 'center'
+};
+
+const sectionHeaderText = {
+  marginLeft: padding.primary,
+  marginRight: padding.primary,
   color: colors.white,
   fontWeight: 'bold',
   fontSize: fontSizes.medium
 };
 
-export default { row, rowContainer, separator, sectionHeader };
+const separator = {
+  height: StyleSheet.hairlineWidth,
+  backgroundColor: colors.lightGrey
+};
+
+export default { rowContainer, column, columnContainer, separator, sectionHeader, sectionHeaderText };

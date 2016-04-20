@@ -6,9 +6,12 @@ import fontSizes from './components/font-sizes';
 import padding from './components/padding';
 import utils from '../utils';
 
-const offset = utils.isAndroid() ? 100 : 80;
+const androidOffset = 100;
+const iosOffset = 80;
+const iosPadding = 10;
+const offset = utils.isAndroid() ? androidOffset : iosOffset;
 const width = React.Dimensions.get('window').width - offset;
-const paddingTop = utils.isAndroid() ? 0 : 10;
+const paddingTop = utils.isAndroid() ? 0 : iosPadding;
 
 const homeStyles = {
   container: Object.assign({}, container.container, { paddingTop }),

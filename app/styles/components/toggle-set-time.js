@@ -1,6 +1,9 @@
 import utils from '../../utils';
 import listStyles from './list';
 
+const androidLineHeight = 44;
+const iosLineHeight = 30;
+
 const containerWrapper = {
   width: listStyles.column.height,
   height: listStyles.column.height,
@@ -15,7 +18,7 @@ const container = {
 const text = {
   textAlign: 'center',
   fontSize: 30,
-  lineHeight: utils.isAndroid() ? 44 : 30,
+  lineHeight: utils.isAndroid() ? androidLineHeight : iosLineHeight,
   fontWeight: '300'
 };
 
