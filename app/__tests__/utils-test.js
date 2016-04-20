@@ -224,4 +224,24 @@ describe('utils', () => {
       expect(utils.colorMap(collection)).toEqual(expected);
     });
   });
+
+  describe('isAndroid', () => {
+    it('returns true if platform is android', () => {
+      jest.setMock('react-native', {
+        Platform: { OS: 'android' }
+      });
+
+      const _utils = require('../utils').default;
+      expect(_utils.isAndroid()).toEqual(true);
+    });
+
+    it('returns false if platform is not android', () => {
+      jest.setMock('react-native', {
+        Platform: { OS: 'ios' }
+      });
+
+      const _utils = require('../utils').default;
+      expect(_utils.isAndroid()).toEqual(false);
+    });
+  });
 });

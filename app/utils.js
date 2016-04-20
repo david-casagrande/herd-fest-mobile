@@ -5,6 +5,7 @@ import moment from 'moment';
 
 const Linking = React.Linking;
 const ListView = React.ListView;
+const Platform = React.Platform;
 
 function notEqual(l, r) {
   return l !== r;
@@ -84,6 +85,10 @@ function colorMap(collection) {
   return map;
 }
 
+function isAndroid() {
+  return Platform.OS === 'android';
+}
+
 const utils = {
   notEqual,
   formatDate,
@@ -93,7 +98,8 @@ const utils = {
   findMany,
   link,
   dataSource,
-  colorMap
+  colorMap,
+  isAndroid
 };
 
 export default Object.freeze(utils);
