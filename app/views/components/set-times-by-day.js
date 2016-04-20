@@ -54,7 +54,9 @@ export default class SetTimesByDay extends Component {
 
       return (
         <View key={day.id}>
-          <Text style={[styles.sectionHeader, { backgroundColor }]}>{day.name}</Text>
+          <View style={[styles.sectionHeader, { backgroundColor }]}>
+            <Text style={styles.sectionHeaderText}>{day.name}</Text>
+          </View>
           {this.setTimes(days[day.id], daysColorMap[day.id])}
         </View>
       );

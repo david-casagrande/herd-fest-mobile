@@ -67,8 +67,8 @@ describe('SetTimesByDay', () => {
     const day1 = wrapper.childAt(0);
     const day2 = wrapper.childAt(1);
 
-    expect(day1.childAt(0).prop('children')).toEqual(days[1].name);
-    expect(day2.childAt(0).prop('children')).toEqual(days[0].name);
+    expect(day1.find(Text).first().prop('children')).toEqual(days[1].name);
+    expect(day2.find(Text).first().prop('children')).toEqual(days[0].name);
   });
 
   it('renders a list of set times for each day', () => {
