@@ -5,9 +5,10 @@ const shallow = require('enzyme/shallow');
 
 const testUtils = require('../../../test-utils');
 
+const SectionHeader = require('../section-header').default;
+const SetTimeRow = require('../set-time-row').default;
 const SetTimesByDay = require('../set-times-by-day').default;
 const ToggleSetTime = require('../toggle-set-time').default;
-const SectionHeader = require('../section-header').default;
 
 const bands = [
   testUtils.fabricate('band', { id: 'b-1' }),
@@ -81,6 +82,7 @@ describe('SetTimesByDay', () => {
   });
 
   it('renders a list of set times for each day', () => {
+    const lodash = require('lodash');
     const utils = require('../../../utils').default;
     const props = {
       setTimes: setTimes.map((setTime) => setTime.id),
@@ -88,22 +90,22 @@ describe('SetTimesByDay', () => {
     };
     const wrapper = shallow(<SetTimesByDay {...props} />);
 
-    const day1 = wrapper.childAt(0);
-    const day1Text = day1.childAt(1).find(Text);
+    expect(wrapper.find(SetTimeRow).length).toEqual(3);
 
-    expect(day1Text.first().prop('children')).toEqual(utils.formatDate(setTimes[2].start_time));
-    expect(day1Text.last().prop('children')).toEqual(venues[1].name);
-    expect(day1.contains(ToggleSetTime)).toBeTruthy();
+    const setTimeRows = wrapper.find(SetTimeRow);
+    const colorMap = utils.colorMap(lodash.sortBy(days, 'date').map((day) => day.id));
 
-    const day2 = wrapper.childAt(1);
-    const day2Text = day2.childAt(1).find(Text);
+    expect(setTimeRows.at(0).prop('setTime').id).toEqual(setTimes[2].id);
+    expect(setTimeRows.at(1).prop('setTime').id).toEqual(setTimes[1].id);
+    expect(setTimeRows.at(2).prop('setTime').id).toEqual(setTimes[0].id);
 
-    expect(day2Text.at(0).prop('children')).toEqual(utils.formatDate(setTimes[1].start_time));
-    expect(day2Text.at(1).prop('children')).toEqual(venues[1].name);
+    expect(setTimeRows.at(0).prop('content')).toEqual(venues[0].name);
+    expect(setTimeRows.at(1).prop('content')).toEqual(venues[0].name);
+    expect(setTimeRows.at(2).prop('content')).toEqual(venues[1].name);
 
-    expect(day2Text.at(2).prop('children')).toEqual(utils.formatDate(setTimes[0].start_time));
-    expect(day2Text.at(3).prop('children')).toEqual(venues[0].name); // eslint-disable-line no-magic-numbers
-    expect(day2.contains(ToggleSetTime)).toBeTruthy();
+    expect(setTimeRows.at(0).prop('color')).toEqual(colorMap[days[1].id]);
+    expect(setTimeRows.at(1).prop('color')).toEqual(colorMap[days[0].id]);
+    expect(setTimeRows.at(2).prop('color')).toEqual(colorMap[days[0].id]);
   });
 
   it('displays band name instead of venue name if props.showBand is true', () => {
@@ -114,9 +116,6 @@ describe('SetTimesByDay', () => {
     };
     const wrapper = shallow(<SetTimesByDay {...props} />);
 
-    const day1 = wrapper.childAt(0);
-    const day1Text = day1.childAt(1).find(Text);
-
-    expect(day1Text.last().prop('children')).toEqual(bands[0].name);
+    expect(wrapper.find(SetTimeRow).first().prop('content')).toEqual(bands[0].name);
   });
 });

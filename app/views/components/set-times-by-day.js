@@ -1,5 +1,6 @@
 import React from 'react-native';
 import SectionHeader from './section-header';
+import SetTimeRow from './set-time-row';
 import ToggleSetTime from './toggle-set-time';
 
 import colors from '../../styles/components/colors';
@@ -27,11 +28,7 @@ export default class SetTimesByDay extends Component {
 
     return (
       <View key={setTime.id}>
-        <View style={styles.rowContainer}>
-          <Text style={[styles.row, styles.setTime, { color }]} numberOfLines={1}>{utils.formatDate(setTime.startTime)}</Text>
-          <Text style={[styles.row, styles.content, { color: colors.secondary }]} numberOfLines={1}>{content}</Text>
-          <ToggleSetTime setTime={setTime} style={[styles.row, styles.toggleSetTime, { color }]} />
-        </View>
+        <SetTimeRow setTime={setTime} color={color} content={content} />
         {separator}
       </View>
     );
