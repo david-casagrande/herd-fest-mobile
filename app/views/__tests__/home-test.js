@@ -29,7 +29,6 @@ describe('Home', () => {
     expect(img.prop('source')).toEqual('../images/home.png');
   });
 
-
   describe('links', () => {
     const links = ['Schedule', 'My Schedule', 'Bands', 'Venues'];
     let wrapper = null;

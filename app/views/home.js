@@ -3,7 +3,6 @@ import React from 'react-native';
 import homeStyles from '../styles/home-styles';
 
 const Component = React.Component;
-const Dimensions = React.Dimensions;
 const Image = React.Image;
 const StyleSheet = React.StyleSheet;
 const Text = React.Text;
@@ -36,21 +35,19 @@ export default class Home extends Component {
     return LinkMap.map((name, idx) => this.link(name, idx));
   }
 
-  image(width) {
+  image() {
     return (
-      <Image style={[styles.logo, { width, height: width }]} resizeMode={'contain'} source={require('../images/home.png')} />
+      <Image style={styles.logo} resizeMode={'contain'} source={require('../images/home.png')} />
     );
   }
 
   render() {
-    const offset = 80;
-    const width = Dimensions.get('window').width - offset;
 
     return (
-      <View style={[styles.container, { paddingTop: 30 }]}>
+      <View style={styles.container}>
         <View style={styles.content}>
-          {this.image(width)}
-          <View style={[styles.days, { width }]}>
+          {this.image()}
+          <View style={styles.days}>
             {this.links()}
           </View>
         </View>
