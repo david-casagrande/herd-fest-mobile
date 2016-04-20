@@ -5,13 +5,10 @@ import list from './components/list';
 import padding from './components/padding';
 
 const listStyles = {
-  rowContainer: {
-    paddingLeft: padding.primary,
-    paddingRight: padding.primary
-  },
   text: {
     color: colors.secondary,
-    fontSize: fontSizes.medium
+    fontSize: fontSizes.medium,
+    marginLeft: padding.primary
   }
 };
 

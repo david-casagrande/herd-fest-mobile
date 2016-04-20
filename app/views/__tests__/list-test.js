@@ -38,7 +38,7 @@ describe('List', () => {
     });
 
     it('correctly renders a row', () => {
-      expect(row.props.children.props.children.props.children).toEqual(rowData.name);
+      expect(row.props.children.props.children.props.children.props.children).toEqual(rowData.name);
     });
 
     it('handles a click on the row', () => {
