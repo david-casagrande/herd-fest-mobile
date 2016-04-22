@@ -12,7 +12,6 @@ import lodash from 'lodash';
 import utils from './utils';
 
 const Component = React.Component;
-// const BackAndroid = React.BackAndroid;
 
 function goTo(name, model, navigator) {
   const index = utils.currentIndex(navigator) + 1;
@@ -84,23 +83,6 @@ const components = {
 };
 
 export default class NavManager extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
-  // componentWillMount() {
-  //   BackAndroid.addEventListener('hardwareBackPress', this.androidBack);
-  // }
-
-  // componentWillUnmount() {
-  //   BackAndroid.removeEventListener('hardwareBackPress', this.androidBack);
-  // }
-
-  // androidBack() {
-  //   console.log('ahhhhhhh');
-  //   return true;
-  // }
-
   render() {
     const navigator = this.props.navigator;
     const fullSchedule = this.props.fullSchedule;

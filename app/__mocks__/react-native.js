@@ -54,6 +54,10 @@ const Platform = {
   OS: 'ios'
 };
 
+const BackAndroid = {
+  addEventListener: jest.fn()
+}
+
 class Dimensions {
   static get() {
     return {
@@ -77,5 +81,6 @@ ReactNative.AsyncStorage = AsyncStorage;
 ReactNative.Dimensions = Dimensions;
 ReactNative.Animated = Animated;
 ReactNative.Platform = Platform;
+ReactNative.BackAndroid = BackAndroid;
 
 module.exports = ReactNative;

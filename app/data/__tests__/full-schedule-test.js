@@ -1,14 +1,14 @@
 jest.dontMock('../full-schedule');
 
 function setMock(data) {
-  jest.setMock('../../shims/fetch', () => {
+  jest.setMock('../../shims/fetch', jest.fn(() => {
     const resp = {
       json() {
         return new Promise((resolve) => resolve(data));
       }
     };
     return new Promise((resolve) => resolve(resp));
-  });
+  }));
 }
 
 describe('fullSchedule', () => {
@@ -63,6 +63,20 @@ describe('fullSchedule', () => {
           expect(data).toEqual(fullScheduleData);
         });
       });
+    });
+  });
+
+  describe('domain request', () => {
+    it('returns correct domain for development', () => {
+      process.env.NODE_ENV = 'development';
+      const data = { id: '1' };
+      setMock(data);
+      const fullSchedule = require('../full-schedule').default;
+      const fetch = require('../../shims/fetch');
+
+      fullSchedule.get();
+      expect(fetch).toBeCalled();
+      process.env.NODE_ENV = 'test';
     });
   });
 });
