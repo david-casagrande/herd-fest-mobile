@@ -54,10 +54,9 @@ const fabricators = {
   setTime() {
     return {
       id: 'st-1',
-      name: 'Day 1',
-      bands: [],
-      venues: [],
-      set_times: []
+      band: null,
+      venue: null,
+      start_time: null
     };
   }
 };
