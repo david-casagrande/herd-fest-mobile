@@ -17,7 +17,7 @@ const venues = [
 ];
 
 const days = [
-  testUtils.fabricate('day', { date: '2016-06-19' })
+  testUtils.fabricate('day', { date: '2016-06-19', set_times: ['st-2', 'st-1'] })
 ];
 
 const setTimes = [
@@ -77,6 +77,32 @@ describe('DayList', () => {
       expect(wrapper.find(ListView).length).toEqual(1);
     });
 
+    describe('dataSource', () => {
+      it('uses setTimeBy data source', () => {
+        jest.setMock('../../data-sources/set-times-by', jest.fn(() => []));
+        const dsSetTimesBy = require('../../data-sources/set-times-by');
+        const utils = require('../../utils').default;
+        const _DayList = require('../day-list').default;
+
+        shallow(<_DayList {...props} />);
+
+        const expectedSetTimes = utils.findMany(props.fullSchedule.set_times, props.day.set_times);
+        expect(dsSetTimesBy).toBeCalledWith('venue', expectedSetTimes, props.fullSchedule);
+      });
+
+      fit('sets up ListView dataSource', () => {
+        const ds = [];
+        jest.setMock('../../data-sources/set-times-by', jest.fn(() => ds));
+        const _DayList = require('../day-list').default;
+
+        const _wrapper = shallow(<_DayList {...props} />);
+
+        console.log(_wrapper.find(ListView).first().props());
+        // expect(_wrapper.find(ListView).first().prop('dataSource')).toEqual(ds);
+      });
+    });
+
+
     describe('.renderRow', () => {
       let color = null;
       let rowData = null;
@@ -135,34 +161,34 @@ describe('DayList', () => {
       });
     });
 
-    describe('.dataSource', () => {
-      it('sets up data source', () => {
-        const decorated = {
-          id: 'd-1',
-          name: 'Day 1',
-          venues: [
-            { setTimes: [{ id: 'st-1' }] }
-          ]
-        };
-        const dataSource = [];
-
-        jest.setMock('../../decorators/day-list', jest.fn(() => decorated));
-        jest.setMock('../../utils', {
-          dataSource: jest.fn(() => dataSource),
-          isAndroid: () => true
-        });
-
-        const scheduleDecorator = require('../../decorators/day-list');
-        const utils = require('../../utils');
-
-        DayList = require('../day-list').default;
-        wrapper = shallow(<DayList {...props} />);
-
-        expect(scheduleDecorator).toBeCalledWith(props.day, props.fullSchedule);
-        expect(utils.dataSource.mock.calls[0][0]).toEqual(decorated.venues);
-        expect(utils.dataSource.mock.calls[0][1]).toEqual({ sectionIds: [0], rowIds: [['st-1']] });
-        expect(utils.dataSource.mock.calls[0][2].getRowData([{ setTimes: [{ id: 'st-1' }] }], 0, 'st-1')).toEqual({ id: 'st-1' });
-      });
-    });
+    // describe('.dataSource', () => {
+    //   it('sets up data source', () => {
+    //     const decorated = {
+    //       id: 'd-1',
+    //       name: 'Day 1',
+    //       venues: [
+    //         { setTimes: [{ id: 'st-1' }] }
+    //       ]
+    //     };
+    //     const dataSource = [];
+    //
+    //     jest.setMock('../../decorators/day-list', jest.fn(() => decorated));
+    //     jest.setMock('../../utils', {
+    //       dataSource: jest.fn(() => dataSource),
+    //       isAndroid: () => true
+    //     });
+    //
+    //     const scheduleDecorator = require('../../decorators/day-list');
+    //     const utils = require('../../utils');
+    //
+    //     DayList = require('../day-list').default;
+    //     wrapper = shallow(<DayList {...props} />);
+    //
+    //     expect(scheduleDecorator).toBeCalledWith(props.day, props.fullSchedule);
+    //     expect(utils.dataSource.mock.calls[0][0]).toEqual(decorated.venues);
+    //     expect(utils.dataSource.mock.calls[0][1]).toEqual({ sectionIds: [0], rowIds: [['st-1']] });
+    //     expect(utils.dataSource.mock.calls[0][2].getRowData([{ setTimes: [{ id: 'st-1' }] }], 0, 'st-1')).toEqual({ id: 'st-1' });
+    //   });
+    // });
   });
 });
