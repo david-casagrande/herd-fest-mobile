@@ -26,7 +26,7 @@ project.xcworkspace
 #
 .idea
 .gradle
-gradle.properties
+android/gradle.properties
 local.properties
 my-release-key.keystore
 
