@@ -46,7 +46,6 @@ function renderSeparator(sectionID, rowID) {
 export default class DayList extends Component {
   dataSource() {
     const setTimes = utils.findMany(this.props.fullSchedule.set_times, this.props.day.set_times);
-    console.log(dsSetTimesBy('venue', setTimes, this.props.fullSchedule))
     return dsSetTimesBy('venue', setTimes, this.props.fullSchedule);
   }
 

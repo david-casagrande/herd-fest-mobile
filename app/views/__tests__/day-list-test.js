@@ -3,9 +3,6 @@ jest.autoMockOff();
 const React = require('react-native');
 const shallow = require('enzyme/shallow');
 
-const SectionHeader = require('../components/section-header').default;
-const SetTimeRow = require('../components/set-time-row').default;
-
 const testUtils = require('../../test-utils');
 
 const bands = [
@@ -52,11 +49,8 @@ const fullSchedule = {
 };
 
 describe('DayList', () => {
-  const ListView = React.ListView;
 
   describe('ListView', () => {
-    let DayList = require('../day-list').default;
-    let wrapper = null;
     let props = null;
 
     beforeEach(() => {
@@ -69,58 +63,71 @@ describe('DayList', () => {
         },
         color: '#ccc'
       };
-
-      wrapper = shallow(<DayList {...props} />);
     });
 
     it('renders a ListView', () => {
+      const DayList = require('../day-list').default;
+      const ListView = React.ListView;
+
+      const wrapper = shallow(<DayList {...props} />);
       expect(wrapper.find(ListView).length).toEqual(1);
     });
 
     describe('dataSource', () => {
       it('uses setTimeBy data source', () => {
         jest.setMock('../../data-sources/set-times-by', jest.fn(() => []));
+        const DayList = require('../day-list').default;
+        const ListView = React.ListView;
         const dsSetTimesBy = require('../../data-sources/set-times-by');
         const utils = require('../../utils').default;
-        const _DayList = require('../day-list').default;
 
-        shallow(<_DayList {...props} />);
-
+        const wrapper = shallow(<DayList {...props} />);
         const expectedSetTimes = utils.findMany(props.fullSchedule.set_times, props.day.set_times);
+
         expect(dsSetTimesBy).toBeCalledWith('venue', expectedSetTimes, props.fullSchedule);
       });
 
-      fit('sets up ListView dataSource', () => {
-        const ds = [];
+      it('sets up ListView dataSource', () => {
+        const ds = ['2'];
         jest.setMock('../../data-sources/set-times-by', jest.fn(() => ds));
-        const _DayList = require('../day-list').default;
+        const DayList = require('../day-list').default;
+        const ListView = React.ListView;
 
-        const _wrapper = shallow(<_DayList {...props} />);
+        const wrapper = shallow(<DayList {...props} />);
 
-        console.log(_wrapper.find(ListView).first().props());
-        // expect(_wrapper.find(ListView).first().prop('dataSource')).toEqual(ds);
+        expect(wrapper.find(ListView).first().prop('dataSource')).toEqual(ds);
       });
     });
-
 
     describe('.renderRow', () => {
       let color = null;
       let rowData = null;
-      let row = null;
 
       beforeEach(() => {
         color = '#ccc';
         rowData = Object.assign({}, setTimes[0], { startTime: setTimes[0].start_time, band: bands[0] });
-        row = wrapper.find(ListView).first().props().renderRow(rowData, props.navigator, color);
       });
 
       it('renders set time row', () => {
+        const DayList = require('../day-list').default;
+        const ListView = React.ListView;
+        const SetTimeRow = require('../components/set-time-row').default;
+
+        const wrapper = shallow(<DayList {...props} />);
+        const row = wrapper.find(ListView).first().props().renderRow(rowData, props.navigator, color);
+
         expect(row.props.children.type).toEqual(SetTimeRow);
         expect(row.props.children.props.setTime).toEqual(rowData);
         expect(row.props.children.props.color).toEqual(color);
       });
 
       it('handles onClick', () => {
+        const DayList = require('../day-list').default;
+        const ListView = React.ListView;
+
+        const wrapper = shallow(<DayList {...props} />);
+        const row = wrapper.find(ListView).first().props().renderRow(rowData, props.navigator, color);
+
         row.props.onPress();
 
         expect(props.navigator.push).toBeCalledWith({ name: 'Band', index: 2, title: rowData.band.name, id: rowData.band.id });
@@ -130,21 +137,32 @@ describe('DayList', () => {
     describe('.renderSectionHeader', () => {
       let sectionData = null;
       let sectionId = null;
-      let sectionHeader = null;
 
       beforeEach(() => {
         sectionData = { id: 1, name: 'Test' };
         sectionId = 0;
-        sectionHeader = wrapper.find(ListView).first().props().renderSectionHeader(sectionData, sectionId, props.navigator);
       });
 
       it('renders SectionHeader component', () => {
+        const DayList = require('../day-list').default;
+        const ListView = React.ListView;
+        const SectionHeader = require('../components/section-header').default;
+
+        const wrapper = shallow(<DayList {...props} />);
+        const sectionHeader = wrapper.find(ListView).first().props().renderSectionHeader(sectionData, sectionId, props.navigator);
+
         expect(sectionHeader.props.children.type === SectionHeader).toBeTruthy();
         expect(sectionHeader.props.children.props.title).toEqual(sectionData.name);
         expect(sectionHeader.props.children.props.backgroundColor).toEqual(props.color);
       });
 
       it('handles onClick', () => {
+        const DayList = require('../day-list').default;
+        const ListView = React.ListView;
+
+        const wrapper = shallow(<DayList {...props} />);
+        const sectionHeader = wrapper.find(ListView).first().props().renderSectionHeader(sectionData, sectionId, props.navigator);
+
         sectionHeader.props.onPress();
 
         expect(props.navigator.push).toBeCalledWith({ name: 'Venue', index: 2, title: sectionData.name, id: sectionData.id });
@@ -153,42 +171,17 @@ describe('DayList', () => {
 
     describe('.renderSeparator', () => {
       it('renders separator view', () => {
+        const DayList = require('../day-list').default;
+        const ListView = React.ListView;
+
         const sectionId = 1;
         const rowId = 2;
+
+        const wrapper = shallow(<DayList {...props} />);
         const separator = wrapper.find(ListView).first().props().renderSeparator(sectionId, rowId);
 
         expect(separator.key).toEqual(`${sectionId}-${rowId}`);
       });
     });
-
-    // describe('.dataSource', () => {
-    //   it('sets up data source', () => {
-    //     const decorated = {
-    //       id: 'd-1',
-    //       name: 'Day 1',
-    //       venues: [
-    //         { setTimes: [{ id: 'st-1' }] }
-    //       ]
-    //     };
-    //     const dataSource = [];
-    //
-    //     jest.setMock('../../decorators/day-list', jest.fn(() => decorated));
-    //     jest.setMock('../../utils', {
-    //       dataSource: jest.fn(() => dataSource),
-    //       isAndroid: () => true
-    //     });
-    //
-    //     const scheduleDecorator = require('../../decorators/day-list');
-    //     const utils = require('../../utils');
-    //
-    //     DayList = require('../day-list').default;
-    //     wrapper = shallow(<DayList {...props} />);
-    //
-    //     expect(scheduleDecorator).toBeCalledWith(props.day, props.fullSchedule);
-    //     expect(utils.dataSource.mock.calls[0][0]).toEqual(decorated.venues);
-    //     expect(utils.dataSource.mock.calls[0][1]).toEqual({ sectionIds: [0], rowIds: [['st-1']] });
-    //     expect(utils.dataSource.mock.calls[0][2].getRowData([{ setTimes: [{ id: 'st-1' }] }], 0, 'st-1')).toEqual({ id: 'st-1' });
-    //   });
-    // });
   });
 });
