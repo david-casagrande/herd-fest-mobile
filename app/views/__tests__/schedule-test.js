@@ -130,24 +130,33 @@ describe('Schedule', () => {
       jest.setMock('../../data/schedule', {
         get: () => new Promise((resolve) => resolve(data))
       });
-      jest.setMock('../../decorators/schedule', jest.fn(() => decorated));
-      jest.setMock('../../utils', {
-        dataSource: jest.fn(() => dataSource),
-        colorMap: jest.fn(() => null),
-        isAndroid: () => true
-      });
+
+      jest.setMock('../../data-sources/set-times-by', jest.fn(() => []));
+      // jest.setMock('../../decorators/schedule', jest.fn(() => decorated));
+      // jest.setMock('../../utils', {
+      //   dataSource: jest.fn(() => dataSource),
+      //   colorMap: jest.fn(() => null),
+      //   isAndroid: () => true
+      // });
 
       const Schedule = require('../schedule').default;
-      const scheduleDecorator = require('../../decorators/schedule');
-      const utils = require('../../utils');
+      const dsSetTimesBy = require('../../data-sources/set-times-by');
+      const utils = require('../../utils').default;
+
+      // const scheduleDecorator = require('../../decorators/schedule');
+      // const utils = require('../../utils');
       const wrapper = shallow(<Schedule fullSchedule={fullSchedule} />);
 
       return wrapper.instance().setSchedule().then(() => {
-        expect(scheduleDecorator).toBeCalledWith([data[0]], fullSchedule);
-        expect(utils.dataSource.mock.calls[0][0]).toEqual(decorated);
-        expect(utils.dataSource.mock.calls[0][1]).toEqual({ sectionIds: [0], rowIds: [['st-1']] });
-        expect(utils.dataSource.mock.calls[0][2].getRowData([{ setTimes: [{ id: 'st-1' }] }], 0, 'st-1')).toEqual({ id: 'st-1' });
-        expect(wrapper.state('schedule')).toEqual(scheduleDecorator(data));
+        const expectedSetTimes = [setTimes[0]];
+
+        expect(dsSetTimesBy).toBeCalledWith('day', expectedSetTimes, fullSchedule);
+
+        // expect(scheduleDecorator).toBeCalledWith([data[0]], fullSchedule);
+        // expect(utils.dataSource.mock.calls[0][0]).toEqual(decorated);
+        // expect(utils.dataSource.mock.calls[0][1]).toEqual({ sectionIds: [0], rowIds: [['st-1']] });
+        // expect(utils.dataSource.mock.calls[0][2].getRowData([{ setTimes: [{ id: 'st-1' }] }], 0, 'st-1')).toEqual({ id: 'st-1' });
+        expect(wrapper.state('schedule')).toEqual(expectedSetTimes);
       });
     });
 
