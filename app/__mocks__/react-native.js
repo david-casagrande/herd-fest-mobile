@@ -56,7 +56,7 @@ const Platform = {
 
 const BackAndroid = {
   addEventListener: jest.fn()
-}
+};
 
 class Dimensions {
   static get() {

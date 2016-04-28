@@ -2,7 +2,6 @@ import React from 'react-native';
 import SectionHeader from './components/section-header';
 import SetTimeRow from './components/set-time-row';
 
-import dayListDecorator from '../decorators/day-list';
 import dayListStyles from '../styles/day-list-styles';
 import utils from '../utils';
 import dsSetTimesBy from '../data-sources/set-times-by';

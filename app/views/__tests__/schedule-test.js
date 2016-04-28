@@ -121,41 +121,22 @@ describe('Schedule', () => {
   describe('.setSchedule', () => {
     pit('sets up data source', () => {
       const data = [setTimes[0].id, 'st-not-there'];
-      const decorated = [{
-        id: days[0].id,
-        name: days[0].name,
-        setTimes: [Object.assign({}, setTimes[0], { band: bands[0], venue: venues[0], day: [0] })]
-      }];
-      const dataSource = [];
+
       jest.setMock('../../data/schedule', {
         get: () => new Promise((resolve) => resolve(data))
       });
 
       jest.setMock('../../data-sources/set-times-by', jest.fn(() => []));
-      // jest.setMock('../../decorators/schedule', jest.fn(() => decorated));
-      // jest.setMock('../../utils', {
-      //   dataSource: jest.fn(() => dataSource),
-      //   colorMap: jest.fn(() => null),
-      //   isAndroid: () => true
-      // });
 
       const Schedule = require('../schedule').default;
       const dsSetTimesBy = require('../../data-sources/set-times-by');
-      const utils = require('../../utils').default;
 
-      // const scheduleDecorator = require('../../decorators/schedule');
-      // const utils = require('../../utils');
       const wrapper = shallow(<Schedule fullSchedule={fullSchedule} />);
 
       return wrapper.instance().setSchedule().then(() => {
         const expectedSetTimes = [setTimes[0]];
 
         expect(dsSetTimesBy).toBeCalledWith('day', expectedSetTimes, fullSchedule);
-
-        // expect(scheduleDecorator).toBeCalledWith([data[0]], fullSchedule);
-        // expect(utils.dataSource.mock.calls[0][0]).toEqual(decorated);
-        // expect(utils.dataSource.mock.calls[0][1]).toEqual({ sectionIds: [0], rowIds: [['st-1']] });
-        // expect(utils.dataSource.mock.calls[0][2].getRowData([{ setTimes: [{ id: 'st-1' }] }], 0, 'st-1')).toEqual({ id: 'st-1' });
         expect(wrapper.state('schedule')).toEqual(expectedSetTimes);
       });
     });

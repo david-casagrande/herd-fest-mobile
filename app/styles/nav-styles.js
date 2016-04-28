@@ -1,5 +1,4 @@
 import colors from './components/colors';
-import container from './components/container';
 import fontSizes from './components/font-sizes';
 import padding from './components/padding';
 import utils from '../utils';
@@ -8,7 +7,7 @@ const iosNavBarTextMargin = 10;
 const androidNavBarTextMargin = 18;
 
 const iosNavBarTitleTextMargin = 9;
-const androidNavBarTitleTextMargin = 17;
+const androidNavBarTitleTextMargin = 17; // eslint-disable-line id-length
 
 const navStyles = {
   messageText: {
@@ -25,7 +24,7 @@ const navStyles = {
     fontSize: fontSizes.medium,
     fontWeight: '500',
     color: colors.secondary,
-    marginVertical: utils.isAndroid() ? androidNavBarTextMargin : iosNavBarTextMargin,
+    marginVertical: utils.isAndroid() ? androidNavBarTextMargin : iosNavBarTextMargin
   },
   navBarTitleText: {
     fontWeight: '500',

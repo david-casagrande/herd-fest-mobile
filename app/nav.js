@@ -13,21 +13,23 @@ const StyleSheet = React.StyleSheet;
 
 const styles = StyleSheet.create(navStyles);
 
-let _navigator = null;
+let globalNavigator = null;
 
 function hardwareBackPress() {
-  if (_navigator && _navigator.getCurrentRoutes().length > 1) {
-    _navigator.pop();
+  if (globalNavigator && globalNavigator.getCurrentRoutes().length > 1) {
+    globalNavigator.pop();
     return true;
   }
   return false;
 }
 
-(function androidEventListener() {
+function androidEventListener() {
   if (utils.isAndroid()) {
     BackAndroid.addEventListener('hardwareBackPress', () => hardwareBackPress());
   }
-})();
+}
+
+androidEventListener();
 
 export default class Navigation extends Component {
   constructor(props) {
@@ -63,7 +65,7 @@ export default class Navigation extends Component {
   }
 
   renderScene(route, navigator) {
-    _navigator = navigator;
+    globalNavigator = navigator;
     return <NavManager route={route} navigator={navigator} fullSchedule={this.state.fullSchedule} />;
   }
 

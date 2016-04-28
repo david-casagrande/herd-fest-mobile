@@ -49,7 +49,6 @@ const fullSchedule = {
 };
 
 describe('DayList', () => {
-
   describe('ListView', () => {
     let props = null;
 
@@ -77,11 +76,10 @@ describe('DayList', () => {
       it('uses setTimeBy data source', () => {
         jest.setMock('../../data-sources/set-times-by', jest.fn(() => []));
         const DayList = require('../day-list').default;
-        const ListView = React.ListView;
         const dsSetTimesBy = require('../../data-sources/set-times-by');
         const utils = require('../../utils').default;
 
-        const wrapper = shallow(<DayList {...props} />);
+        shallow(<DayList {...props} />);
         const expectedSetTimes = utils.findMany(props.fullSchedule.set_times, props.day.set_times);
 
         expect(dsSetTimesBy).toBeCalledWith('venue', expectedSetTimes, props.fullSchedule);

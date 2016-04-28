@@ -1,12 +1,12 @@
 jest.unmock('../set-times-by');
 
-jest.mock('../../data/serializers', () => {
+jest.mock('../../data/serializers', () => { // eslint-disable-line arrow-body-style
   return {
     setTimes: jest.fn((set) => set)
   };
 });
 
-jest.mock('../../utils', () => {
+jest.mock('../../utils', () => { // eslint-disable-line arrow-body-style
   return {
     dataSource: jest.fn(() => 'dataSource')
   };
@@ -25,21 +25,21 @@ const venues = [
 
 const days = [
   testUtils.fabricate('venue', { id: 'd-1', name: 'Day 1', date: '2015-06-12' }),
-  testUtils.fabricate('venue', { id: 'd-2', name: 'Day 2', date: '2015-06-11' }),
+  testUtils.fabricate('venue', { id: 'd-2', name: 'Day 2', date: '2015-06-11' })
 ];
 
 const setTimes = [
   testUtils.fabricate('setTime', {
-    id: 'st-1', day: days[0].id, venue: venues[0].id, band: bands[0].id, start_time: "2000-01-01T22:00:00.000Z"
+    id: 'st-1', day: days[0].id, venue: venues[0].id, band: bands[0].id, start_time: '2000-01-01T22:00:00.000Z'
   }),
   testUtils.fabricate('setTime', {
-    id: 'st-2', day: days[0].id, venue: venues[0].id, band: bands[0].id, start_time: "2000-01-01T01:00:00.000Z"
+    id: 'st-2', day: days[0].id, venue: venues[0].id, band: bands[0].id, start_time: '2000-01-01T01:00:00.000Z'
   }),
   testUtils.fabricate('setTime', {
-    id: 'st-3', day: days[1].id, venue: venues[1].id, band: bands[0].id, start_time: "2000-01-01T23:00:00.000Z"
+    id: 'st-3', day: days[1].id, venue: venues[1].id, band: bands[0].id, start_time: '2000-01-01T23:00:00.000Z'
   }),
   testUtils.fabricate('setTime', {
-    id: 'st-4', day: days[1].id, venue: venues[1].id, band: bands[0].id, start_time: "2000-01-01T22:00:00.000Z"
+    id: 'st-4', day: days[1].id, venue: venues[1].id, band: bands[0].id, start_time: '2000-01-01T22:00:00.000Z'
   })
 ];
 
