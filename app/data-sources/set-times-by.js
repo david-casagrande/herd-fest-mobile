@@ -16,7 +16,7 @@ function dataSource(collection) {
 function byVenue(venues, fullSchedule) {
   return Object.keys(venues).map((id) => {
     const venue = lodash.find(fullSchedule.venues, { id });
-    const venueSetTimes = lodash.sortBy(venues[id], 'start_time');
+    const venueSetTimes = venues[id];
 
     return {
       id: venue.id,
@@ -29,7 +29,7 @@ function byVenue(venues, fullSchedule) {
 function byDay(days, fullSchedule) {
   return Object.keys(days).map((id) => {
     const day = lodash.find(fullSchedule.days, { id });
-    const daySetTimes = lodash.sortBy(days[id], 'start_time');
+    const daySetTimes = days[id];
 
     return {
       id: day.id,
@@ -54,10 +54,6 @@ export default function dsSetTimesBy(type, setTimes, fullSchedule) {
   const grouped = lodash.groupBy(setTimes, type);
   const parsed = ByMap[type](grouped, fullSchedule);
   const sorted = lodash.sortBy(parsed, SortMap[type]);
-
-  // console.log(parsed);
-  // const venues = groupByVenue(setTimes, fullSchedule);
-  // const sortedVenues = lodash.sortBy(venues, 'name');
 
   return dataSource(sorted);
 }
