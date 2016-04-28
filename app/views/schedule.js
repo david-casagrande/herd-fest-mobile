@@ -4,7 +4,6 @@ import SectionHeader from './components/section-header';
 
 import lodash from 'lodash';
 import schedule from '../data/schedule';
-import scheduleDecorator from '../decorators/schedule';
 import scheduleStyles from '../styles/schedule-styles';
 import utils from '../utils';
 import dsSetTimesBy from '../data-sources/set-times-by';
