@@ -1,7 +1,6 @@
 import React from 'react-native';
 import SectionHeader from './components/section-header';
 import SetTimeRow from './components/set-time-row';
-import SetTimesByDay from './components/set-times-by-day';
 
 import dsSetTimesBy from '../data-sources/set-times-by';
 import lodash from 'lodash';
@@ -10,7 +9,6 @@ import utils from '../utils';
 
 const Component = React.Component;
 const ListView = React.ListView;
-const ScrollView = React.ScrollView;
 const StyleSheet = React.StyleSheet;
 const View = React.View;
 const TouchableOpacity = React.TouchableOpacity;
@@ -79,5 +77,6 @@ Venue.propTypes = {
   venue: React.PropTypes.shape({
     set_times: React.PropTypes.array
   }),
-  fullSchedule: React.PropTypes.object
+  fullSchedule: React.PropTypes.object,
+  navigator: React.PropTypes.object
 };
