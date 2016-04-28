@@ -10,6 +10,7 @@ describe('Home', () => {
   const Image = React.Image;
   const TouchableOpacity = React.TouchableOpacity;
   const Text = React.Text;
+  const Animated = React.Animated;
 
   let navigator = null;
 
@@ -19,14 +20,32 @@ describe('Home', () => {
     };
   });
 
-  it('renders an Image', () => {
-    const wrapper = shallow(<Home navigator={navigator} />);
+  it('sets initial state.opacityAnim', () => {
+    const wrapper = shallow(<Home />);
 
-    expect(wrapper.contains(Image)).toBeTruthy();
+    expect(Animated.Value).toBeCalledWith(0);
+    expect(wrapper.state().opacityAnim).toEqual(new Animated.Value(0));
+  });
 
-    const img = wrapper.find(Image).first();
+  describe('Image', () => {
+    it('renders an Image', () => {
+      const wrapper = shallow(<Home navigator={navigator} />);
 
-    expect(img.prop('source')).toEqual('../images/home.png');
+      expect(wrapper.contains(Image)).toBeTruthy();
+
+      const img = wrapper.find(Image).first();
+
+      expect(img.prop('source')).toEqual('../images/home.png');
+    });
+
+    it('handles onLoad', () => {
+      const wrapper = shallow(<Home />);
+      const img = wrapper.find(Image).first();
+
+      img.props().onLoad();
+
+      expect(Animated.timing).toBeCalledWith(wrapper.state().opacityAnim, { toValue: 1, duration: Home.duration });
+    });
   });
 
   describe('links', () => {
