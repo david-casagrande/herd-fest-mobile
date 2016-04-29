@@ -28,9 +28,7 @@ function renderRow(rowData, navigator, colorMap) {
 }
 
 function renderSectionHeader(sectionData, sectionId, navigator, colorMap) {
-  const backgroundColor = colorMap[sectionData.id];
-
-  return <SectionHeader title={sectionData.name} backgroundColor={backgroundColor} />;
+  return <SectionHeader title={sectionData.name} backgroundColor={colorMap[sectionData.id]} />;
 }
 
 function renderSeparator(sectionID, rowID) {
