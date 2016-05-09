@@ -1,5 +1,5 @@
-import React from 'react-native';
-const AsyncStorage = React.AsyncStorage;
+import ReactNative from 'react-native';
+const AsyncStorage = ReactNative.AsyncStorage;
 
 function parse(value) {
   return new Promise((resolve) => {

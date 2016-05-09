@@ -4,7 +4,7 @@ import DayList from './views/day-list';
 import Days from './views/days';
 import Home from './views/home';
 import List from './views/list';
-import React from 'react-native';
+import React from 'react';
 import Schedule from './views/schedule';
 import Venue from './views/venue';
 

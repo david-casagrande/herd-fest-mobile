@@ -1,11 +1,12 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 
 import navStyles from '../styles/nav-styles';
 
 const Component = React.Component;
-const StyleSheet = React.StyleSheet;
-const Text = React.Text;
-const TouchableOpacity = React.TouchableOpacity;
+const StyleSheet = ReactNative.StyleSheet;
+const Text = ReactNative.Text;
+const TouchableOpacity = ReactNative.TouchableOpacity;
 
 const styles = StyleSheet.create(navStyles);
 

@@ -1,4 +1,5 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 import ScheduleRow from './schedule-row';
 import SectionHeader from './components/section-header';
 
@@ -9,11 +10,11 @@ import utils from '../utils';
 import dsSetTimesBy from '../data-sources/set-times-by';
 
 const Component = React.Component;
-const ListView = React.ListView;
-const StyleSheet = React.StyleSheet;
-const Text = React.Text;
-const TouchableOpacity = React.TouchableOpacity;
-const View = React.View;
+const ListView = ReactNative.ListView;
+const StyleSheet = ReactNative.StyleSheet;
+const Text = ReactNative.Text;
+const TouchableOpacity = ReactNative.TouchableOpacity;
+const View = ReactNative.View;
 
 const styles = StyleSheet.create(scheduleStyles);
 

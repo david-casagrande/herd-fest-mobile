@@ -1,14 +1,15 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 
 import homeStyles from '../styles/home-styles';
 
 const Component = React.Component;
-const Image = React.Image;
-const StyleSheet = React.StyleSheet;
-const Text = React.Text;
-const TouchableOpacity = React.TouchableOpacity;
-const View = React.View;
-const Animated = React.Animated;
+const Image = ReactNative.Image;
+const StyleSheet = ReactNative.StyleSheet;
+const Text = ReactNative.Text;
+const TouchableOpacity = ReactNative.TouchableOpacity;
+const View = ReactNative.View;
+const Animated = ReactNative.Animated;
 
 const styles = StyleSheet.create(homeStyles);
 

@@ -1,13 +1,14 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 
 import scheduleData from '../../data/schedule';
 import toggleSetTimeStyles from '../../styles/components/toggle-set-time';
 
 const Component = React.Component;
-const Text = React.Text;
-const TouchableOpacity = React.TouchableOpacity;
-const StyleSheet = React.StyleSheet;
-const View = React.View;
+const Text = ReactNative.Text;
+const TouchableOpacity = ReactNative.TouchableOpacity;
+const StyleSheet = ReactNative.StyleSheet;
+const View = ReactNative.View;
 
 const styles = StyleSheet.create(toggleSetTimeStyles);
 

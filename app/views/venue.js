@@ -1,4 +1,5 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 import SectionHeader from './components/section-header';
 import SetTimeRow from './components/set-time-row';
 
@@ -8,10 +9,10 @@ import venueStyles from '../styles/venue-styles';
 import utils from '../utils';
 
 const Component = React.Component;
-const ListView = React.ListView;
-const StyleSheet = React.StyleSheet;
-const View = React.View;
-const TouchableOpacity = React.TouchableOpacity;
+const ListView = ReactNative.ListView;
+const StyleSheet = ReactNative.StyleSheet;
+const View = ReactNative.View;
+const TouchableOpacity = ReactNative.TouchableOpacity;
 
 const styles = StyleSheet.create(venueStyles);
 

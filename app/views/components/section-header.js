@@ -1,11 +1,12 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 
 import listStyles from '../../styles/components/list';
 
 const Component = React.Component;
-const View = React.View;
-const Text = React.Text;
-const StyleSheet = React.StyleSheet;
+const View = ReactNative.View;
+const Text = ReactNative.Text;
+const StyleSheet = ReactNative.StyleSheet;
 
 const styles = StyleSheet.create(listStyles);
 

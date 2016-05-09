@@ -1,8 +1,8 @@
-import React from 'react-native';
+import ReactNative from 'react-native';
 
 import fetch from '../shims/fetch';
 
-const AsyncStorage = React.AsyncStorage;
+const AsyncStorage = ReactNative.AsyncStorage;
 
 const domain = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://herd-fest-api.herokuapp.com';
 const fullScheduleURL = `${domain}/api/full_schedule`;

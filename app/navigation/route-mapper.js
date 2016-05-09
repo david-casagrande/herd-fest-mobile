@@ -1,5 +1,5 @@
 import LeftButtonNav from './left-button-nav';
-import React from 'react-native';
+import React from 'react';
 import RightButtonNav from './right-button-nav';
 import TitleNav from './title-nav';
 

@@ -1,12 +1,13 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 
 import lodash from 'lodash';
 import navStyles from '../styles/nav-styles';
 
 const Component = React.Component;
-const StyleSheet = React.StyleSheet;
-const Text = React.Text;
-const View = React.View;
+const StyleSheet = ReactNative.StyleSheet;
+const Text = ReactNative.Text;
+const View = ReactNative.View;
 
 const styles = StyleSheet.create(navStyles);
 

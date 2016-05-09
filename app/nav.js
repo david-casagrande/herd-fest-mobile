@@ -1,15 +1,16 @@
 import NavManager from './nav-manager';
 import NavigationRouteMapper from './navigation/route-mapper';
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 
 import fullSchedule from './data/full-schedule';
 import navStyles from './styles/nav-styles';
 import utils from './utils';
 
-const BackAndroid = React.BackAndroid;
+const BackAndroid = ReactNative.BackAndroid;
 const Component = React.Component;
-const Navigator = React.Navigator;
-const StyleSheet = React.StyleSheet;
+const Navigator = ReactNative.Navigator;
+const StyleSheet = ReactNative.StyleSheet;
 
 const styles = StyleSheet.create(navStyles);
 
