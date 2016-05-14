@@ -1,33 +1,22 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 import ScheduleRow from './schedule-row';
 import SectionHeader from './components/section-header';
 
 import lodash from 'lodash';
 import schedule from '../data/schedule';
-import scheduleDecorator from '../decorators/schedule';
 import scheduleStyles from '../styles/schedule-styles';
 import utils from '../utils';
+import dsSetTimesBy from '../data-sources/set-times-by';
 
 const Component = React.Component;
-const ListView = React.ListView;
-const StyleSheet = React.StyleSheet;
-const Text = React.Text;
-const TouchableOpacity = React.TouchableOpacity;
-const View = React.View;
+const ListView = ReactNative.ListView;
+const StyleSheet = ReactNative.StyleSheet;
+const Text = ReactNative.Text;
+const TouchableOpacity = ReactNative.TouchableOpacity;
+const View = ReactNative.View;
 
 const styles = StyleSheet.create(scheduleStyles);
-
-function getRowData(dataBlob, sectionId, rowId) {
-  const setTimes = dataBlob[sectionId].setTimes;
-  return setTimes.find((setTime) => setTime.id === rowId);
-}
-
-function dataSource(collection) {
-  const sectionIds = collection.map((day, idx) => idx);
-  const rowIds = collection.map((day) => day.setTimes.map((setTime) => setTime.id));
-
-  return utils.dataSource(collection, { sectionIds, rowIds }, { getRowData });
-}
 
 function renderRow(rowData, navigator, context, colorMap) {
   function goToRow() {
@@ -42,9 +31,7 @@ function renderRow(rowData, navigator, context, colorMap) {
 }
 
 function renderSectionHeader(sectionData, sectionId, navigator, colorMap) {
-  const backgroundColor = colorMap[sectionData.id];
-
-  return <SectionHeader title={sectionData.name} backgroundColor={backgroundColor} />;
+  return <SectionHeader title={sectionData.name} backgroundColor={colorMap[sectionData.id]} />;
 }
 
 function renderSeparator(sectionID, rowID) {
@@ -75,8 +62,9 @@ export default class Schedule extends Component {
     return schedule.get()
       .then((setTimes) => {
         const filtered = filterSetTimes(setTimes, this.props.fullSchedule);
-        const decorated = scheduleDecorator(filtered, this.props.fullSchedule);
-        this.setState({ dataSource: dataSource(decorated), schedule: decorated });
+        const allSetTimes = utils.findMany(this.props.fullSchedule.set_times, filtered);
+
+        this.setState({ dataSource: dsSetTimesBy('day', allSetTimes, this.props.fullSchedule), schedule: allSetTimes });
       })
       .catch(() => {
         this.setState({ error: true });

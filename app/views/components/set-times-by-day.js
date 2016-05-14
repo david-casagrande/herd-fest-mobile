@@ -1,4 +1,5 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 import SectionHeader from './section-header';
 import SetTimeRow from './set-time-row';
 
@@ -8,8 +9,8 @@ import setTimesByDayStyles from '../../styles/components/set-times-by-day';
 import utils from '../../utils';
 
 const Component = React.Component;
-const View = React.View;
-const StyleSheet = React.StyleSheet;
+const View = ReactNative.View;
+const StyleSheet = ReactNative.StyleSheet;
 
 const styles = StyleSheet.create(setTimesByDayStyles);
 

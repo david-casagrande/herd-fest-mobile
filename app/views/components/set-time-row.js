@@ -1,4 +1,5 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 
 import ToggleSetTime from './toggle-set-time';
 
@@ -7,9 +8,9 @@ import setTimeRowStyles from '../../styles/components/set-time-row';
 import utils from '../../utils';
 
 const Component = React.Component;
-const View = React.View;
-const Text = React.Text;
-const StyleSheet = React.StyleSheet;
+const View = ReactNative.View;
+const Text = ReactNative.Text;
+const StyleSheet = ReactNative.StyleSheet;
 
 const styles = StyleSheet.create(Object.assign({}, listStyles, setTimeRowStyles));
 

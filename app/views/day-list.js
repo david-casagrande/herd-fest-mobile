@@ -1,30 +1,19 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 import SectionHeader from './components/section-header';
 import SetTimeRow from './components/set-time-row';
 
-import dayListDecorator from '../decorators/day-list';
 import dayListStyles from '../styles/day-list-styles';
 import utils from '../utils';
+import dsSetTimesBy from '../data-sources/set-times-by';
 
 const Component = React.Component;
-const ListView = React.ListView;
-const StyleSheet = React.StyleSheet;
-const TouchableOpacity = React.TouchableOpacity;
-const View = React.View;
+const ListView = ReactNative.ListView;
+const StyleSheet = ReactNative.StyleSheet;
+const TouchableOpacity = ReactNative.TouchableOpacity;
+const View = ReactNative.View;
 
 const styles = StyleSheet.create(dayListStyles);
-
-function getRowData(dataBlob, sectionId, rowId) {
-  const setTimes = dataBlob[sectionId].setTimes;
-  return setTimes.find((setTime) => setTime.id === rowId);
-}
-
-function dataSource(collection) {
-  const sectionIds = collection.map((venue, idx) => idx);
-  const rowIds = collection.map((venue) => venue.setTimes.map((setTime) => setTime.id));
-
-  return utils.dataSource(collection, { sectionIds, rowIds }, { getRowData });
-}
 
 function renderRow(rowData, navigator, color) {
   function goToRow() {
@@ -56,8 +45,8 @@ function renderSeparator(sectionID, rowID) {
 
 export default class DayList extends Component {
   dataSource() {
-    const day = dayListDecorator(this.props.day, this.props.fullSchedule);
-    return dataSource(day.venues);
+    const setTimes = utils.findMany(this.props.fullSchedule.set_times, this.props.day.set_times);
+    return dsSetTimesBy('venue', setTimes, this.props.fullSchedule);
   }
 
   render() {

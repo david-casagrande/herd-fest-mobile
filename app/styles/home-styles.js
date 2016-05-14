@@ -1,4 +1,4 @@
-import React from 'react-native';
+import ReactNative from 'react-native';
 
 import colors from './components/colors';
 import container from './components/container';
@@ -10,7 +10,7 @@ const androidOffset = 100;
 const iosOffset = 80;
 const iosPadding = 10;
 const offset = utils.isAndroid() ? androidOffset : iosOffset;
-const width = React.Dimensions.get('window').width - offset;
+const width = ReactNative.Dimensions.get('window').width - offset;
 const paddingTop = utils.isAndroid() ? 0 : iosPadding;
 
 const homeStyles = {

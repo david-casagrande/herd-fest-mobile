@@ -5,13 +5,14 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "node_modules/.bin/jest",
-    "lint": "if node_modules/.bin/eslint app; then exit 0; else exit 0; fi"
+    "lint": "if node_modules/.bin/eslint app; then exit 0; else exit 0; fi",
+    "inspect": "node_modules/.bin/jsinspect"
   },
   "dependencies": {
     "lodash": "^4.9.0",
     "moment": "^2.11.2",
     "react": "^0.14.7",
-    "react-native": "0.23.0"
+    "react-native": "0.25.1"
   },
   "devDependencies": {
     "enzyme": "^2.2.0",
@@ -21,6 +22,7 @@
     "eslint-plugin-react": "^4.2.3",
     "eslint-plugin-react-native": "^1.0.0",
     "jest-cli": "^0.10.0",
+    "jsinspect": "^0.8.0",
     "mockdate": "^1.0.4",
     "react-addons-test-utils": "^0.14.8",
     "react-dom": "^0.14.8"

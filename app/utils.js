@@ -1,11 +1,11 @@
-import React from 'react-native';
+import ReactNative from 'react-native';
 
 import colors from './styles/components/colors';
 import moment from 'moment';
 
-const Linking = React.Linking;
-const ListView = React.ListView;
-const Platform = React.Platform;
+const Linking = ReactNative.Linking;
+const ListView = ReactNative.ListView;
+const Platform = ReactNative.Platform;
 
 function notEqual(l, r) {
   return l !== r;

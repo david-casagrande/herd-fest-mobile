@@ -1,0 +1,8 @@
+{
+  "threshold":     30,
+  "identifiers":   true,
+  "matches":       2,
+  "ignore":        "test.js|spec.js",
+  "jsx":           true,
+  "suppress":      100
+}

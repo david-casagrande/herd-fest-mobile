@@ -1,5 +1,6 @@
 import DayList from './day-list';
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 
 import daysStyles from '../styles/days-styles';
 import lodash from 'lodash';
@@ -7,10 +8,10 @@ import moment from 'moment';
 import utils from '../utils';
 
 const Component = React.Component;
-const StyleSheet = React.StyleSheet;
-const Text = React.Text;
-const TouchableOpacity = React.TouchableOpacity;
-const View = React.View;
+const StyleSheet = ReactNative.StyleSheet;
+const Text = ReactNative.Text;
+const TouchableOpacity = ReactNative.TouchableOpacity;
+const View = ReactNative.View;
 
 const styles = StyleSheet.create(daysStyles);
 

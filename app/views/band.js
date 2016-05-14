@@ -1,14 +1,15 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 import SetTimesByDay from './components/set-times-by-day';
 
 import bandStyles from '../styles/band-styles';
 
 const Component = React.Component;
-const Image = React.Image;
-const ScrollView = React.ScrollView;
-const StyleSheet = React.StyleSheet;
-const Text = React.Text;
-const View = React.View;
+const Image = ReactNative.Image;
+const ScrollView = ReactNative.ScrollView;
+const StyleSheet = ReactNative.StyleSheet;
+const Text = ReactNative.Text;
+const View = ReactNative.View;
 
 const styles = StyleSheet.create(bandStyles);
 

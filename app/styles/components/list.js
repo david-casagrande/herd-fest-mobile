@@ -1,10 +1,10 @@
-import React from 'react-native';
+import ReactNative from 'react-native';
 
 import colors from './colors';
 import fontSizes from './font-sizes';
 import padding from './padding';
 
-const StyleSheet = React.StyleSheet;
+const StyleSheet = ReactNative.StyleSheet;
 
 const sectionHeaderHeight = 50;
 const columnHeight = 52;

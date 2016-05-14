@@ -40,7 +40,11 @@ const Animated = {
   Value: jest.fn((val) => val),
   timing: jest.fn(() => { // eslint-disable-line arrow-body-style
     return {
-      start: jest.fn((fn) => fn())
+      start: jest.fn((fn) => {
+        if (typeof fn === 'function') {
+          fn();
+        }
+      })
     };
   })
 };
@@ -52,6 +56,10 @@ const AsyncStorage = {
 
 const Platform = {
   OS: 'ios'
+};
+
+const BackAndroid = {
+  addEventListener: jest.fn()
 };
 
 class Dimensions {
@@ -77,5 +85,6 @@ ReactNative.AsyncStorage = AsyncStorage;
 ReactNative.Dimensions = Dimensions;
 ReactNative.Animated = Animated;
 ReactNative.Platform = Platform;
+ReactNative.BackAndroid = BackAndroid;
 
 module.exports = ReactNative;

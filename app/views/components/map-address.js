@@ -1,9 +1,10 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 
 import utils from '../../utils';
 
 const Component = React.Component;
-const TouchableOpacity = React.TouchableOpacity;
+const TouchableOpacity = ReactNative.TouchableOpacity;
 
 function linkToGoogleMapsWeb(streetAddress) {
   const addressURL = `https://maps.google.com/?q=${streetAddress}`;

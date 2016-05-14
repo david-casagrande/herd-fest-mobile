@@ -1,10 +1,11 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 
 import utils from '../../utils';
 
 const Component = React.Component;
-const Text = React.Text;
-const TouchableOpacity = React.TouchableOpacity;
+const Text = ReactNative.Text;
+const TouchableOpacity = ReactNative.TouchableOpacity;
 
 function tweet(app = true) {
   const host = app ? 'twitter://post?message=' : 'https://twitter.com/intent/tweet?text=';

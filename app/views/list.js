@@ -1,14 +1,15 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 
 import listStyles from '../styles/list-styles';
 import utils from '../utils';
 
 const Component = React.Component;
-const ListView = React.ListView;
-const StyleSheet = React.StyleSheet;
-const Text = React.Text;
-const View = React.View;
-const TouchableOpacity = React.TouchableOpacity;
+const ListView = ReactNative.ListView;
+const StyleSheet = ReactNative.StyleSheet;
+const Text = ReactNative.Text;
+const View = ReactNative.View;
+const TouchableOpacity = ReactNative.TouchableOpacity;
 
 const styles = StyleSheet.create(listStyles);
 

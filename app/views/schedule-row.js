@@ -1,13 +1,14 @@
-import React from 'react-native';
+import React from 'react';
+import ReactNative from 'react-native';
 import SetTimeRow from './components/set-time-row';
 
 import scheduleStyles from '../styles/schedule-styles';
 
-const Animated = React.Animated;
+const Animated = ReactNative.Animated;
 const Component = React.Component;
-const StyleSheet = React.StyleSheet;
-const Text = React.Text;
-const View = React.View;
+const StyleSheet = ReactNative.StyleSheet;
+const Text = ReactNative.Text;
+const View = ReactNative.View;
 
 const initHeight = 52;
 const duration = 300;

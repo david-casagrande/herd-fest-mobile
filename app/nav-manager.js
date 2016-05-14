@@ -4,7 +4,7 @@ import DayList from './views/day-list';
 import Days from './views/days';
 import Home from './views/home';
 import List from './views/list';
-import React from 'react-native';
+import React from 'react';
 import Schedule from './views/schedule';
 import Venue from './views/venue';
 
@@ -12,7 +12,6 @@ import lodash from 'lodash';
 import utils from './utils';
 
 const Component = React.Component;
-// const BackAndroid = React.BackAndroid;
 
 function goTo(name, model, navigator) {
   const index = utils.currentIndex(navigator) + 1;
@@ -84,23 +83,6 @@ const components = {
 };
 
 export default class NavManager extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
-  // componentWillMount() {
-  //   BackAndroid.addEventListener('hardwareBackPress', this.androidBack);
-  // }
-
-  // componentWillUnmount() {
-  //   BackAndroid.removeEventListener('hardwareBackPress', this.androidBack);
-  // }
-
-  // androidBack() {
-  //   console.log('ahhhhhhh');
-  //   return true;
-  // }
-
   render() {
     const navigator = this.props.navigator;
     const fullSchedule = this.props.fullSchedule;
