@@ -7,7 +7,8 @@ import setTimeRow from './components/set-time-row';
 
 const bandStyles = {
   image: {
-    height: 200
+    height: 200,
+    backgroundColor: colors.lightGrey
   },
   bandDetail: {
     padding: padding.primary

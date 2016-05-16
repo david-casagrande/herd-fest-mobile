@@ -6,14 +6,41 @@ import bandStyles from '../styles/band-styles';
 
 const Component = React.Component;
 const Image = ReactNative.Image;
+const Linking = ReactNative.Linking;
 const ScrollView = ReactNative.ScrollView;
 const StyleSheet = ReactNative.StyleSheet;
 const Text = ReactNative.Text;
+const TouchableOpacity = ReactNative.TouchableOpacity;
 const View = ReactNative.View;
 
 const styles = StyleSheet.create(bandStyles);
 
 export default class Band extends Component {
+  facebookOnPress() {
+    const url = this.props.band.facebook_url;
+
+    return Linking.canOpenURL(url).then((supported) => {
+      if (!supported) {
+        console.log('Don\'t know how to open URI: ' + url);
+      }
+
+      return Linking.openURL(url);
+    });
+  }
+
+  facebook() {
+    if (!this.props.band.facebook_url) {
+      return false;
+    }
+
+    return (
+      <TouchableOpacity onPress={() => this.facebookOnPress()}>
+        <Text>Facebook</Text>
+      </TouchableOpacity>
+    );
+  }
+
+
   image() {
     if (!this.props.band.image_url) {
       return null;
@@ -41,6 +68,7 @@ export default class Band extends Component {
       <ScrollView style={styles.container}>
         {this.image()}
         <View style={styles.bandDetail}>
+          {this.facebook()}
           <Text style={[styles.text, styles.bandName]}>{this.props.band.name}</Text>
           {this.description()}
         </View>
@@ -55,7 +83,8 @@ Band.propTypes = {
     description: React.PropTypes.string,
     image_url: React.PropTypes.string,
     name: React.PropTypes.string,
-    set_times: React.PropTypes.array
+    set_times: React.PropTypes.array,
+    facebook_url: React.PropTypes.string
   }),
   fullSchedule: React.PropTypes.object
 };
