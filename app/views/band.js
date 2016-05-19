@@ -21,7 +21,7 @@ export default class Band extends Component {
 
     return Linking.canOpenURL(url).then((supported) => {
       if (!supported) {
-        console.log('Don\'t know how to open URI: ' + url);
+        console.log(`Don't know how to open URI: ${url}`); // eslint-disable-line no-console
       }
 
       return Linking.openURL(url);
@@ -68,7 +68,6 @@ export default class Band extends Component {
       <ScrollView style={styles.container}>
         {this.image()}
         <View style={styles.bandDetail}>
-          {this.facebook()}
           <Text style={[styles.text, styles.bandName]}>{this.props.band.name}</Text>
           {this.description()}
         </View>

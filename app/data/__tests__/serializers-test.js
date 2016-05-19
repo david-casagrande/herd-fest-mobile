@@ -69,7 +69,8 @@ describe('serializers', () => {
     });
 
     it('serializes and sorts set times', () => {
-      expect(subject.length).toEqual(3);
+      const expectedLength = 3;
+      expect(subject.length).toEqual(expectedLength);
 
       expect(subject[0].id).toEqual('st-2');
     });

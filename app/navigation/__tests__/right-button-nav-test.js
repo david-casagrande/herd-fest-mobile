@@ -35,7 +35,7 @@ describe('RightButtonNav', () => {
     props.route = { name: 'Venue', id: 'v-1' };
     const wrapper = shallow(<RightButtonNav {...props} />);
 
-    expect(wrapper.contains(MapAddress)).toBeTruthy();
+    expect(wrapper.find(MapAddress).length).toEqual(1);
 
     expect(wrapper.find(MapAddress).prop('address')).toEqual(props.navigator.props.fullSchedule.venues[0].street_address);
     expect(wrapper.find(Text).prop('children')).toEqual('Map');

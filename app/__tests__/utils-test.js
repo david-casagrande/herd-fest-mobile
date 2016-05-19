@@ -43,7 +43,7 @@ describe('utils', () => {
 
     it('handles sorting start times with lodash', () => {
       const result = lodash.sortBy(times, utils.sortStartTimes);
-      console.log(result);
+
       const expected = [
         times[4],
         times[2],

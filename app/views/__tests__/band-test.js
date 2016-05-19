@@ -42,7 +42,7 @@ describe('Band', () => {
   it('render an Image', () => {
     const wrapper = shallow(<Band band={bands[0]} fullSchedule={fullSchedule} />);
 
-    expect(wrapper.contains(Image)).toBeTruthy();
+    expect(wrapper.find(Image).length).toEqual(1);
 
     const img = wrapper.find(Image).first();
 
@@ -73,7 +73,7 @@ describe('Band', () => {
   it('renders SetTimesByDay component', () => {
     const wrapper = shallow(<Band band={bands[0]} fullSchedule={fullSchedule} />);
 
-    expect(wrapper.contains(SetTimesByDay)).toBeTruthy();
+    expect(wrapper.find(SetTimesByDay).length).toEqual(1);
 
     const setTimesByDay = wrapper.find(SetTimesByDay).first();
     expect(setTimesByDay.props().fullSchedule).toEqual(fullSchedule);

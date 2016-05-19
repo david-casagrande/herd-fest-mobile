@@ -40,7 +40,7 @@ describe('ScheduleRow', () => {
     it('renders SetTimeRow component', () => {
       const wrapper = shallow(<ScheduleRow {...props} />);
 
-      expect(wrapper.contains(SetTimeRow)).toBeTruthy();
+      expect(wrapper.find(SetTimeRow).length).toEqual(1);
 
       const setTimeRow = wrapper.find(SetTimeRow).first();
 
@@ -51,7 +51,7 @@ describe('ScheduleRow', () => {
     it('displays venue and band', () => {
       const wrapper = shallow(<ScheduleRow {...props} />);
 
-      expect(wrapper.contains(SetTimeRow)).toBeTruthy();
+      expect(wrapper.find(SetTimeRow).length).toEqual(1);
 
       const setTimeRow = wrapper.find(SetTimeRow).first();
       const text = setTimeRow.find(Text);

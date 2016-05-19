@@ -31,7 +31,7 @@ describe('Home', () => {
     it('renders an Image', () => {
       const wrapper = shallow(<Home navigator={navigator} />);
 
-      expect(wrapper.contains(Image)).toBeTruthy();
+      expect(wrapper.find(Image).length).toEqual(1);
 
       const img = wrapper.find(Image).first();
 

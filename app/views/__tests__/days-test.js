@@ -71,7 +71,7 @@ describe('Days', () => {
       color: wrapper.state('colorMap')[wrapper.state('day').id]
     };
 
-    expect(wrapper.contains(DayList)).toBeTruthy();
+    expect(wrapper.find(DayList).length).toEqual(1);
     expect(wrapper.find(DayList).first().props()).toEqual(expectedProps);
   });
 
