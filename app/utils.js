@@ -19,13 +19,13 @@ function formatDate(date, format = 'h:mmA') {
 function sortStartTimes(model) {
   const amHours = 7;
   const hours = 24;
-  const hour = moment.utc(model.startTime).hour();
+  const time = moment.utc(model.startTime);
 
-  if (hour < amHours) {
-    return hour + hours;
+  if (time.hour() < amHours) {
+    time.add(hours, 'hours');
   }
 
-  return hour;
+  return time;
 }
 
 function sortSetTimesByDays(model) {

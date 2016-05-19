@@ -14,7 +14,15 @@ const setTime = {
 
 const setTime2 = {
   id: 'st-2',
-  start_time: '2000-01-01T18:00:00.000Z',
+  start_time: '2000-01-01T18:15:00.000Z',
+  band: 'b-1',
+  day: 'd-1',
+  venue: 'v-1'
+};
+
+const setTime3 = {
+  id: 'st-3',
+  start_time: '2000-01-01T18:30:00.000Z',
   band: 'b-1',
   day: 'd-1',
   venue: 'v-1'
@@ -57,11 +65,12 @@ describe('serializers', () => {
     let subject = null;
 
     beforeEach(() => {
-      subject = serializers.setTimes([setTime, setTime2], collection);
+      subject = serializers.setTimes([setTime, setTime3, setTime2], collection);
     });
 
     it('serializes and sorts set times', () => {
-      expect(subject.length).toEqual(2);
+      expect(subject.length).toEqual(3);
+
       expect(subject[0].id).toEqual('st-2');
     });
   });

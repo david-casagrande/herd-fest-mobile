@@ -36,17 +36,22 @@ describe('utils', () => {
       { startTime: '2000-01-01T06:00:00.000Z' },
       { startTime: '2000-01-01T22:00:00.000Z' },
       { startTime: '2000-01-01T00:00:00.000Z' },
-      { startTime: '2000-01-01T07:00:00.000Z' }
+      { startTime: '2000-01-01T07:00:00.000Z' },
+      { startTime: '2000-01-01T06:30:00.000Z' },
+      { startTime: '2000-01-01T06:15:00.000Z' }
     ];
 
     it('handles sorting start times with lodash', () => {
       const result = lodash.sortBy(times, utils.sortStartTimes);
+      console.log(result);
       const expected = [
         times[4],
         times[2],
         times[0],
         times[3],
-        times[1]
+        times[1],
+        times[6],
+        times[5]
       ];
 
       expect(result).toEqual(expected);
