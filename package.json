@@ -11,11 +11,11 @@
   "dependencies": {
     "lodash": "^4.9.0",
     "moment": "^2.11.2",
-    "react": "^0.14.7",
-    "react-native": "0.25.1"
+    "react": "^15.0.2",
+    "react-native": "^0.26.0"
   },
   "devDependencies": {
-    "enzyme": "^2.2.0",
+    "enzyme": "^2.3.0",
     "eslint": "^2.2.0",
     "eslint-config-strict": "^8.4.0",
     "eslint-plugin-filenames": "^0.2.0",
@@ -24,8 +24,8 @@
     "jest-cli": "^0.10.0",
     "jsinspect": "^0.8.0",
     "mockdate": "^1.0.4",
-    "react-addons-test-utils": "^0.14.8",
-    "react-dom": "^0.14.8"
+    "react-addons-test-utils": "^15.0.2",
+    "react-dom": "^15.0.2"
   },
   "jest": {
     "testPathDirs": [
