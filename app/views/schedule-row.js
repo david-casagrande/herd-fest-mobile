@@ -8,7 +8,6 @@ const Animated = ReactNative.Animated;
 const Component = React.Component;
 const StyleSheet = ReactNative.StyleSheet;
 const Text = ReactNative.Text;
-const View = ReactNative.View;
 
 const initHeight = 52;
 const duration = 300;
