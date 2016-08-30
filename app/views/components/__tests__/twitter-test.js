@@ -16,15 +16,17 @@ describe('twitter', () => {
 
   describe('onPress', () => {
     describe('twitter app is available', () => {
-      jest.setMock('../../../utils', {
-        link: jest.fn(() => new Promise((resolve) => resolve()))
-      });
+      it('opens twitter with message', () => {
+        jest.doMock('../../../utils', () => {
+          return {
+            link: jest.fn(() => new Promise((resolve) => resolve()))
+          };
+        });
 
-      it('opens twitter with messahe', () => {
         const utils = require('../../../utils');
 
-        const _Twitter = require('../twitter').default; // eslint-disable-line no-underscore-dangle
-        const wrapper = shallow(<_Twitter />);
+        const Twitter = require('../twitter').default; // eslint-disable-line no-underscore-dangle
+        const wrapper = shallow(<Twitter />);
         const expectedURL = 'twitter://post?message=%23HerdFest2016';
 
         wrapper.simulate('press');
@@ -34,15 +36,17 @@ describe('twitter', () => {
     });
 
     describe('twitter app is not available', () => {
-      jest.setMock('../../../utils', {
-        link: jest.fn(() => new Promise((resolve, reject) => reject()))
-      });
+      it('opens google maps with address', () => {
+        jest.doMock('../../../utils', () => {
+          return {
+            link: jest.fn(() => new Promise((resolve, reject) => reject()))
+          };
+        });
 
-      pit('opens google maps with address', () => {
         const utils = require('../../../utils');
 
-        const _Twitter = require('../twitter').default; // eslint-disable-line no-underscore-dangle
-        const wrapper = shallow(<_Twitter />);
+        const Twitter = require('../twitter').default; // eslint-disable-line no-underscore-dangle
+        const wrapper = shallow(<Twitter />);
         const expectedURL = 'https://twitter.com/intent/tweet?text=%23HerdFest2016';
 
         return wrapper.props().onPress().catch(() => {

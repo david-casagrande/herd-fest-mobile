@@ -62,6 +62,11 @@ const BackAndroid = {
   addEventListener: jest.fn()
 };
 
+const Linking = {
+  canOpenURL: jest.fn(() => new Promise((resolve) => resolve(true))),
+  openURL: jest.fn(() => new Promise((resolve) => resolve()))
+}
+
 class Dimensions {
   static get() {
     return {
@@ -86,5 +91,6 @@ ReactNative.Dimensions = Dimensions;
 ReactNative.Animated = Animated;
 ReactNative.Platform = Platform;
 ReactNative.BackAndroid = BackAndroid;
+ReactNative.Linking = Linking;
 
 module.exports = ReactNative;

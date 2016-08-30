@@ -6,10 +6,12 @@ const shallow = require('enzyme/shallow');
 const testUtils = require('../../../test-utils');
 
 function setMock(value) {
-  jest.setMock('../../../data/schedule', {
-    get: jest.fn(() => new Promise((resolve) => resolve(value))),
-    add: jest.fn(() => new Promise((resolve) => resolve())),
-    remove: jest.fn(() => new Promise((resolve) => resolve()))
+  jest.doMock('../../../data/schedule', () => {
+    return {
+      get: jest.fn(() => new Promise((resolve) => resolve(value))),
+      add: jest.fn(() => new Promise((resolve) => resolve())),
+      remove: jest.fn(() => new Promise((resolve) => resolve()))
+    };
   });
 }
 
@@ -35,7 +37,7 @@ describe('ToggleSetTime', () => {
 
   it('sets rotate transform on Text if state.scheduled is true', () => {
     setMock(null);
-    const Text = React.Text;
+    const Text = require('react-native').Text;
     const ToggleSetTime = require('../toggle-set-time').default;
     const wrapper = shallow(<ToggleSetTime {...props} />);
 

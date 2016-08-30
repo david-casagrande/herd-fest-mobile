@@ -66,7 +66,7 @@ describe('DayList', () => {
 
     it('renders a ListView', () => {
       const DayList = require('../day-list').default;
-      const ListView = React.ListView;
+      const ListView = require('react-native').ListView;
 
       const wrapper = shallow(<DayList {...props} />);
       expect(wrapper.find(ListView).length).toEqual(1);
@@ -74,7 +74,7 @@ describe('DayList', () => {
 
     describe('dataSource', () => {
       it('uses setTimeBy data source', () => {
-        jest.setMock('../../data-sources/set-times-by', jest.fn(() => []));
+        jest.doMock('../../data-sources/set-times-by', () => jest.fn(() => []));
         const DayList = require('../day-list').default;
         const dsSetTimesBy = require('../../data-sources/set-times-by');
         const utils = require('../../utils').default;
@@ -87,9 +87,10 @@ describe('DayList', () => {
 
       it('sets up ListView dataSource', () => {
         const ds = ['2'];
-        jest.setMock('../../data-sources/set-times-by', jest.fn(() => ds));
+        jest.doMock('../../data-sources/set-times-by', () => jest.fn(() => ds));
+
         const DayList = require('../day-list').default;
-        const ListView = React.ListView;
+        const ListView = require('react-native').ListView;
 
         const wrapper = shallow(<DayList {...props} />);
 
@@ -108,7 +109,7 @@ describe('DayList', () => {
 
       it('renders set time row', () => {
         const DayList = require('../day-list').default;
-        const ListView = React.ListView;
+        const ListView = require('react-native').ListView;
         const SetTimeRow = require('../components/set-time-row').default;
 
         const wrapper = shallow(<DayList {...props} />);
@@ -121,7 +122,7 @@ describe('DayList', () => {
 
       it('handles onClick', () => {
         const DayList = require('../day-list').default;
-        const ListView = React.ListView;
+        const ListView = require('react-native').ListView;
 
         const wrapper = shallow(<DayList {...props} />);
         const row = wrapper.find(ListView).first().props().renderRow(rowData, props.navigator, color);
@@ -143,7 +144,7 @@ describe('DayList', () => {
 
       it('renders SectionHeader component', () => {
         const DayList = require('../day-list').default;
-        const ListView = React.ListView;
+        const ListView = require('react-native').ListView;
         const SectionHeader = require('../components/section-header').default;
 
         const wrapper = shallow(<DayList {...props} />);
@@ -156,7 +157,7 @@ describe('DayList', () => {
 
       it('handles onClick', () => {
         const DayList = require('../day-list').default;
-        const ListView = React.ListView;
+        const ListView = require('react-native').ListView;
 
         const wrapper = shallow(<DayList {...props} />);
         const sectionHeader = wrapper.find(ListView).first().props().renderSectionHeader(sectionData, sectionId, props.navigator);
@@ -170,7 +171,7 @@ describe('DayList', () => {
     describe('.renderSeparator', () => {
       it('renders separator view', () => {
         const DayList = require('../day-list').default;
-        const ListView = React.ListView;
+        const ListView = require('react-native').ListView;
 
         const sectionId = 1;
         const rowId = 2;
