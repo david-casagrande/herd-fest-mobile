@@ -3,12 +3,12 @@ jest.unmock('../twitter');
 const React = require('react-native');
 const shallow = require('enzyme/shallow');
 
-const Twitter = require('../twitter').default;
 
 describe('twitter', () => {
   const Text = React.Text;
 
   it('renders children', () => {
+    const Twitter = require('../twitter').default;
     const wrapper = shallow(<Twitter><Text>Tweet</Text></Twitter>);
 
     expect(wrapper.contains(<Text>Tweet</Text>)).toBeTruthy();
@@ -17,7 +17,7 @@ describe('twitter', () => {
   describe('onPress', () => {
     describe('twitter app is available', () => {
       it('opens twitter with message', () => {
-        jest.doMock('../../../utils', () => {
+        jest.doMock('../../../utils', () => { // eslint-disable-line arrow-body-style
           return {
             link: jest.fn(() => new Promise((resolve) => resolve()))
           };
@@ -37,7 +37,7 @@ describe('twitter', () => {
 
     describe('twitter app is not available', () => {
       it('opens google maps with address', () => {
-        jest.doMock('../../../utils', () => {
+        jest.doMock('../../../utils', () => { // eslint-disable-line arrow-body-style
           return {
             link: jest.fn(() => new Promise((resolve, reject) => reject()))
           };

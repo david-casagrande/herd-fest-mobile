@@ -65,7 +65,7 @@ const BackAndroid = {
 const Linking = {
   canOpenURL: jest.fn(() => new Promise((resolve) => resolve(true))),
   openURL: jest.fn(() => new Promise((resolve) => resolve()))
-}
+};
 
 class Dimensions {
   static get() {

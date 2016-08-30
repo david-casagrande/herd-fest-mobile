@@ -6,7 +6,7 @@ const shallow = require('enzyme/shallow');
 const testUtils = require('../../../test-utils');
 
 function setMock(value) {
-  jest.doMock('../../../data/schedule', () => {
+  jest.doMock('../../../data/schedule', () => { // eslint-disable-line arrow-body-style
     return {
       get: jest.fn(() => new Promise((resolve) => resolve(value))),
       add: jest.fn(() => new Promise((resolve) => resolve())),
