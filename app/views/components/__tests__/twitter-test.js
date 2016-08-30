@@ -3,11 +3,9 @@ jest.unmock('../twitter');
 const React = require('react-native');
 const shallow = require('enzyme/shallow');
 
-
 describe('twitter', () => {
-  const Text = React.Text;
-
   it('renders children', () => {
+    const Text = require('react-native').Text;
     const Twitter = require('../twitter').default;
     const wrapper = shallow(<Twitter><Text>Tweet</Text></Twitter>);
 
