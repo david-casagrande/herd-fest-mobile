@@ -87,6 +87,11 @@
       </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
+            key = "API_URL"
+            value = "https://herd-fest-api.herokuapp.com/api/devices"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
             key = "PRODUCTION"
             value = "YES"
             isEnabled = "YES">
