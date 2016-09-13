@@ -37,6 +37,7 @@ export default class ToggleSetTime extends Component {
 
   checkSchedule() {
     return scheduleData.get().then((schedule) => {
+      schedule = schedule || [];
       this.setState({ scheduled: schedule.indexOf(this.props.setTime.id) > -1 });
     });
   }
