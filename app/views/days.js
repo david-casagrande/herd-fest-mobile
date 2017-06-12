@@ -63,7 +63,7 @@ export default class Days extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View><View style={styles.days}>{this.days()}</View></View>
+        <View style={{ height: 34 }}><View style={styles.days}>{this.days()}</View></View>
         <DayList
           navigator={this.props.navigator}
           fullSchedule={this.props.fullSchedule}

@@ -12,7 +12,7 @@
     "lodash": "^4.9.0",
     "moment": "^2.11.2",
     "react": "15.3.1",
-    "react-native": "^0.35.0"
+    "react-native": "^0.36.1"
   },
   "devDependencies": {
     "babel-jest": "^14.1.0",
