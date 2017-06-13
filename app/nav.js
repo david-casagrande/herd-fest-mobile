@@ -6,10 +6,10 @@ import ReactNative from 'react-native';
 import fullSchedule from './data/full-schedule';
 import navStyles from './styles/nav-styles';
 import utils from './utils';
+import { Navigator } from 'react-native-deprecated-custom-components'
 
 const BackAndroid = ReactNative.BackAndroid;
 const Component = React.Component;
-const Navigator = ReactNative.Navigator;
 const StyleSheet = ReactNative.StyleSheet;
 
 const styles = StyleSheet.create(navStyles);
