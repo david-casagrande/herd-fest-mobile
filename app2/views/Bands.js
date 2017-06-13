@@ -9,7 +9,7 @@ class BandsView extends React.Component {
       data: this.context.bands,
       keyProp: 'id',
       labelProp: 'name',
-      onPress: (item) => this.props.navigation.navigate('Band', item)
+      onPress: (item) => this.props.navigation.navigate('Band', { band: item })
     };
 
     return (
