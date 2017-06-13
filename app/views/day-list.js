@@ -60,11 +60,23 @@ export default class DayList extends Component {
           style={styles.listView}
           dataSource={this.dataSource()}
           renderRow={(rowData) => renderRow(rowData, navigator, color)}
-          renderSectionHeader={(sectionData, sectionId) => renderSectionHeader(sectionData, sectionId, navigator, color)}
           renderSeparator={renderSeparator}
         />
       </View>
     );
+
+    // return (
+    //   <View style={[styles.container, { paddingTop: 0 }]}>
+    //     <ListView
+    //       initialListSize={12}
+    //       style={styles.listView}
+    //       dataSource={this.dataSource()}
+    //       renderRow={(rowData) => renderRow(rowData, navigator, color)}
+    //       renderSectionHeader={(sectionData, sectionId) => renderSectionHeader(sectionData, sectionId, navigator, color)}
+    //       renderSeparator={renderSeparator}
+    //     />
+    //   </View>
+    // );
   }
 }
 
