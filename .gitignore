@@ -35,6 +35,7 @@ my-release-key.keystore
 #
 node_modules/
 npm-debug.log
+yarn-error.log
 
 coverage
 
