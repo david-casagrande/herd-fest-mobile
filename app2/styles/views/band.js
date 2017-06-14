@@ -4,7 +4,8 @@ import fontSizes from '../_font-sizes';
 
 const image = {
   height: 200,
-  backgroundColor: '#eee'
+  backgroundColor: '#eee',
+  marginBottom: 4,
 };
 
 const details = {
@@ -14,7 +15,7 @@ const details = {
 const name = {
   color: colors.secondary,
   fontSize: fontSizes.large,
-  paddingTop: 2,
+  marginBottom: 4,
   fontWeight: 'bold'
 };
 

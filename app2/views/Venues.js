@@ -9,7 +9,7 @@ class VenuesView extends React.Component {
       data: this.context.venues,
       keyProp: 'id',
       labelProp: 'name',
-      onPress: (item) => this.props.navigation.navigate('Venue', item)
+      onPress: (item) => this.props.navigation.navigate('Venue', { venue: item })
     };
 
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactNative from 'react-native';
-
+import PropTypes from 'prop-types';
 import homeStyles from '../styles/home-styles';
 
 const Component = React.Component;
@@ -32,7 +32,7 @@ export default class Home extends Component {
   }
 
   goTo(name) {
-    this.props.navigator.push({ name, title: name, index: 1 });
+    this.props.navigation.navigate('Bands');
   }
 
   onLoad() {
@@ -76,5 +76,7 @@ export default class Home extends Component {
 
 Home.duration = duration;
 Home.propTypes = {
-  navigator: React.PropTypes.object
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired
+  }).isRequired
 };
