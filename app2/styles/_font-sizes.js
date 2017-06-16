@@ -1,4 +1,4 @@
-const verySmall = 11;
+const verySmall = 12;
 const small = 14;
 const medium = 16;
 const large = 18;
