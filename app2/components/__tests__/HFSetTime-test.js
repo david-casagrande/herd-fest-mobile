@@ -1,7 +1,6 @@
 import 'react-native';
 import React from 'react';
 import HFSetTime from '../HFSetTime';
-import colors from '../../styles/_colors.js';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 

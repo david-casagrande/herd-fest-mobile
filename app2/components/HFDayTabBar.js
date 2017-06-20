@@ -56,7 +56,7 @@ HFDayTabBar.propTypes = {
       index: PropTypes.number.isRequired,
       routeName: PropTypes.string.isRequired,
       routes: PropTypes.array.isRequired
-    }).isRequired,
+    }).isRequired
   }).isRequired
 };
 

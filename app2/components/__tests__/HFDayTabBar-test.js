@@ -16,7 +16,7 @@ describe('HFDayTabBar', () => {
           index: 0,
           routeName: 'Test',
           routes: [{ routeName: 'Test' }, { routeName: 'Test 2' }]
-        },
+        }
       }
     };
   });

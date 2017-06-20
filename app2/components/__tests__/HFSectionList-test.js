@@ -1,7 +1,7 @@
 import 'react-native';
 import React from 'react';
 import HFSectionList from '../HFSectionList';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 // SectionList returns undefined when we dont mock it, try to remove this when updated react-native
 // https://github.com/facebook/react-native/issues/14514

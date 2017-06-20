@@ -42,12 +42,16 @@ class HFSectionList extends React.Component {
     );
   }
 
+  header(info) {
+    return this.props.onPress ? this.sectionHeaderTouchable(info) : this.sectionHeader(info);
+  }
+
   render() {
     const props = {
       sections: this.props.sections,
       keyExtractor: (item) => item[this.props.keyProp],
       renderItem: (info) => this.item(info),
-      renderSectionHeader: (info) => this.props.onPress ? this.sectionHeaderTouchable(info) : this.sectionHeader(info),
+      renderSectionHeader: (info) => this.header(info),
       ItemSeparatorComponent: () => <View style={styles.separator} />
     };
 
