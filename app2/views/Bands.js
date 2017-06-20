@@ -7,10 +7,10 @@ import { sortBy } from 'lodash';
 class BandsView extends React.Component {
   render() {
     const props = {
-      data: sortBy(this.context.bands, ['name']),
+      data: sortBy(this.props.bands, ['name']),
       keyProp: 'id',
       labelProp: 'name',
-      onPress: (item) => this.props.navigation.navigate('Band', { band: item })
+      onPress: (item) => this.props.onNavigate('Band', item)
     };
 
     return (
@@ -22,13 +22,8 @@ class BandsView extends React.Component {
 }
 
 BandsView.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired
-  }).isRequired
-};
-
-BandsView.contextTypes = {
-  bands: PropTypes.array.isRequired
+  bands: PropTypes.array.isRequired,
+  onNavigate: PropTypes.func.isRequired
 };
 
 export default BandsView;

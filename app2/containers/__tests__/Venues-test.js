@@ -18,7 +18,7 @@ describe('VenuesContainer', () => {
     };
   });
 
-  it('HomeView', () => {
+  it('VenuesView', () => {
     const wrapper = shallow(<VenuesContainer {...props} />);
     const view = wrapper.find('VenuesView');
 
