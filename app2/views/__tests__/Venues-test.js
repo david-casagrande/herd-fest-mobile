@@ -6,29 +6,25 @@ import { shallow } from 'enzyme';
 
 describe('VenuesView', () => {
   let props = null;
-  let context = null;
 
   beforeEach(() => {
     props = {
-      navigation: {
-        navigate: jest.fn()
-      }
+      onNavigate: jest.fn(),
+      venues: []
     };
-
-    context = { venues: [] };
   });
 
   it('renders HFFlatList with context.bands', () => {
-    const wrapper = shallow(<VenuesView {...props} />, { context });
+    const wrapper = shallow(<VenuesView {...props} />);
     const list = wrapper.find('HFFlatList');
 
-    expect(list.prop('data')).toEqual(context.venues);
+    expect(list.prop('data')).toEqual(props.venues);
     expect(list.prop('keyProp')).toEqual('id');
     expect(list.prop('labelProp')).toEqual('name');
 
     const item = { id: '1' };
     list.props().onPress(item);
 
-    expect(props.navigation.navigate).toBeCalledWith('Venue', item);
+    expect(props.onNavigate).toBeCalledWith('Venue', item);
   });
 });

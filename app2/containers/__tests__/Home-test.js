@@ -3,7 +3,6 @@ import React from 'react';
 import HomeContainer from '../Home';
 
 import { shallow } from 'enzyme';
-jest.mock('../../images/home.png', () => 'img');
 
 describe('HomeContainer', () => {
   let props = null;
