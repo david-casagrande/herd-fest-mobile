@@ -21,7 +21,7 @@ class BandView extends React.Component {
   }
 
   description() {
-    const description = this.props.band.description;
+    const { description } = this.props.band;
     if (!description) {
       return false;
     }
@@ -30,7 +30,7 @@ class BandView extends React.Component {
   }
 
   name() {
-    const name = this.props.band.name;
+    const { name } = this.props.band;
     if (!name) {
       return false;
     }

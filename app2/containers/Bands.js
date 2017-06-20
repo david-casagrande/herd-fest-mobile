@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BandsView from '../views/Bands';
+import { sortBy } from 'lodash';
 
 class BandsContainer extends React.Component {
   render() {
     const props = {
-      bands: this.props.screenProps.bands,
+      bands: sortBy(this.props.screenProps.bands, ['name']),
       onNavigate: (url, item) => this.props.navigation.navigate(url, item)
     };
 

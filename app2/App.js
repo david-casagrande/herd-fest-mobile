@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Navigator from './Navigator';
+import AppNavigator from './navigators/App';
 import fullSchedule from './data/full-schedule';
 
 class App extends React.Component {
@@ -41,7 +41,7 @@ class App extends React.Component {
   }
 
   render() {
-    return <Navigator />;
+    return <AppNavigator screenProps={this.state.fullSchedule} />;
   }
 }
 

@@ -11,6 +11,10 @@ const LINKS = [
   { label: 'VENUES', url: 'Venues' }
 ];
 
+function image() {
+  return <Image style={styles.image} resizeMode="contain" source={require('../images/home.png')} />;
+}
+
 class HomeView extends React.Component {
   link(link) {
     return (
@@ -28,14 +32,10 @@ class HomeView extends React.Component {
     );
   }
 
-  image() {
-    return <Image style={styles.image} resizeMode="contain" source={require('../images/home.png')} />;
-  }
-
   content() {
     return (
       <View style={styles.content}>
-        {this.image()}
+        {image()}
         {this.links()}
       </View>
     );
