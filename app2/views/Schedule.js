@@ -51,7 +51,7 @@ Day.propTypes = {
     navigate: PropTypes.func.isRequired,
     state: PropTypes.shape({
       key: PropTypes.string.isRequired
-    }).isRequired,
+    }).isRequired
   }).isRequired
 };
 
