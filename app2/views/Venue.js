@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Text } from 'react-native';
 import HFContainer from '../components/HFContainer';
-import styles from '../styles/views/band';
 
 class VenueView extends React.Component {
   render() {

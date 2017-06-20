@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import VenueView from '../views/Venue';
+import BandView from '../views/Band';
 
-class VenueContainer extends React.Component {
+class BandContainer extends React.Component {
   render() {
     const props = {
-      venue: this.props.navigation.state.params
+      band: this.props.navigation.state.params
     };
 
-    return <VenueView {...props} />;
+    return <BandView {...props} />;
   }
 }
 
-VenueContainer.propTypes = {
+BandContainer.propTypes = {
   navigation: PropTypes.shape({
     // navigate: PropTypes.func.isRequired,
     state: PropTypes.shape({
@@ -21,4 +21,4 @@ VenueContainer.propTypes = {
   }).isRequired
 };
 
-export default VenueContainer;
+export default BandContainer;
