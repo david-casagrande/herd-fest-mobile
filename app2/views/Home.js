@@ -8,13 +8,13 @@ const LINKS = [
   { label: 'SCHEDULE', url: 'Schedule' },
   { label: 'MY SCHEDULE', url: 'MySchedule' },
   { label: 'BANDS', url: 'Bands' },
-  { label: 'VENUES', url: 'Venues' },
+  { label: 'VENUES', url: 'Venues' }
 ];
 
 class HomeView extends React.Component {
   link(link) {
     return (
-      <TouchableOpacity onPress={() => this.props.navigation.navigate(link.url)} key={link.url} style={styles.link}>
+      <TouchableOpacity onPress={() => this.props.onNavigate(link.url)} key={link.url} style={styles.link}>
         <Text style={styles.linkText}>{link.label}</Text>
       </TouchableOpacity>
     );
@@ -51,9 +51,7 @@ class HomeView extends React.Component {
 }
 
 HomeView.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired
-  }).isRequired
+  onNavigate: PropTypes.func.isRequired
 };
 
 export default HomeView;

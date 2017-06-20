@@ -7,13 +7,10 @@ jest.mock('../../images/home.png', () => 'img');
 
 describe('HomeView', () => {
   let props = null;
-  let context = null;
 
   beforeEach(() => {
     props = {
-      navigation: {
-        navigate: jest.fn()
-      }
+      onNavigate: jest.fn()
     };
   });
 
@@ -21,7 +18,7 @@ describe('HomeView', () => {
     const wrapper = shallow(<HomeView {...props} />);
     const img = wrapper.find('Image');
 
-    expect(img.prop('source')).toEqual('img')
+    expect(img.prop('source')).toEqual('img');
   });
 
   it('links', () => {
@@ -29,15 +26,15 @@ describe('HomeView', () => {
     const links = wrapper.find('TouchableOpacity');
 
     links.at(0).simulate('press');
-    expect(props.navigation.navigate).toBeCalledWith('Schedule');
+    expect(props.onNavigate).toBeCalledWith('Schedule');
 
     links.at(1).simulate('press');
-    expect(props.navigation.navigate).toBeCalledWith('MySchedule');
+    expect(props.onNavigate).toBeCalledWith('MySchedule');
 
     links.at(2).simulate('press');
-    expect(props.navigation.navigate).toBeCalledWith('Bands');
+    expect(props.onNavigate).toBeCalledWith('Bands');
 
-    links.at(3).simulate('press');
-    expect(props.navigation.navigate).toBeCalledWith('Venues');
+    links.at(3).simulate('press'); // eslint-disable-line no-magic-numbers
+    expect(props.onNavigate).toBeCalledWith('Venues');
   });
 });
