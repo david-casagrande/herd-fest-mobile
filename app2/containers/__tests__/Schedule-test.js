@@ -1,6 +1,7 @@
 import 'react-native';
 import React from 'react';
 import ScheduleContainer from '../Schedule';
+import colors from '../../styles/_colors';
 
 import { shallow } from 'enzyme';
 
@@ -64,6 +65,7 @@ describe('ScheduleContainer', () => {
       ];
 
       expect(view.prop('sections')).toEqual(sections);
+      expect(view.prop('color')).toEqual(colors.pinWheel[0]);
 
       view.simulate('navigate', 'Venue', {});
       expect(props.navigation.navigate).toBeCalledWith('Venue', {});
@@ -97,6 +99,7 @@ describe('ScheduleContainer', () => {
       ];
 
       expect(view.prop('sections')).toEqual(sections);
+      expect(view.prop('color')).toEqual(colors.pinWheel[1]);
 
       view.simulate('navigate', 'Venue', {});
       expect(props.navigation.navigate).toBeCalledWith('Venue', {});
@@ -130,6 +133,7 @@ describe('ScheduleContainer', () => {
       ];
 
       expect(view.prop('sections')).toEqual(sections);
+      expect(view.prop('color')).toEqual(colors.pinWheel[2]);
 
       view.simulate('navigate', 'Venue', {});
       expect(props.navigation.navigate).toBeCalledWith('Venue', {});
@@ -163,6 +167,7 @@ describe('ScheduleContainer', () => {
       ];
 
       expect(view.prop('sections')).toEqual(sections);
+      expect(view.prop('color')).toEqual(colors.pinWheel[3]);
 
       view.simulate('navigate', 'Venue', {});
       expect(props.navigation.navigate).toBeCalledWith('Venue', {});
