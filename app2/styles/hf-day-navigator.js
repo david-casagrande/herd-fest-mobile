@@ -27,7 +27,7 @@ const day = {
 const link = {
   flex: 1,
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'center'
 };
 
 const text = {

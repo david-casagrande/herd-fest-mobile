@@ -5,7 +5,7 @@ import fontSizes from '../_font-sizes';
 const image = {
   height: 200,
   backgroundColor: '#eee',
-  marginBottom: 4,
+  marginBottom: 4
 };
 
 const details = {
