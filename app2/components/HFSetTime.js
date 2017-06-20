@@ -15,7 +15,7 @@ class HFSetTime extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text style={startTimeStyles} data-id="start-time">{formatDate(this.props.setTime.startTime)}</Text>
+        <Text style={startTimeStyles} data-id="start-time">{formatDate(this.props.setTime.start_time)}</Text>
         <Text style={styles.label} data-id="band">{this.props.setTime.band.name}</Text>
         <HFScheduleManager />
       </View>
@@ -25,7 +25,7 @@ class HFSetTime extends React.Component {
 
 HFSetTime.propTypes = {
   setTime: PropTypes.shape({
-    startTime: PropTypes.string.isRequired,
+    start_time: PropTypes.string.isRequired,
     band: PropTypes.shape({
       name: PropTypes.string.isRequired
     }).isRequired

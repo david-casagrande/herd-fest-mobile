@@ -10,7 +10,7 @@ describe('HFSetTime', () => {
   beforeEach(() => {
     props = {
       setTime: {
-        startTime: '2000-01-01T23:15:00.000Z',
+        start_time: '2000-01-01T23:15:00.000Z',
         band: {
           name: 'Band'
         }
