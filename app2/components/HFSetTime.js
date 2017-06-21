@@ -6,14 +6,22 @@ import HFScheduleManager from './HFScheduleManager';
 import styles from '../styles/hf-set-time';
 
 class HFSetTime extends React.Component {
+  text() {
+    return <Text style={styles.labelText} data-id="band">{this.props.setTime.band.name}</Text>;
+  }
+
   name() {
-    return <Text style={styles.label} data-id="band">{this.props.setTime.band.name}</Text>;
+    return (
+      <View style={styles.label}>
+        {this.text()}
+      </View>
+    );
   }
 
   nameTouchable() {
     return (
-      <TouchableOpacity onPress={() => this.props.onPress(this.props.setTime)}>
-        {this.name()}
+      <TouchableOpacity style={styles.label} onPress={() => this.props.onPress(this.props.setTime)}>
+        {this.text()}
       </TouchableOpacity>
     );
   }

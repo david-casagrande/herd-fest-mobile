@@ -16,10 +16,13 @@ const startTime = {
 };
 
 const label = {
-  flex: 1,
+  flex: 1
+};
+
+const labelText = {
   color: colors.secondary,
   textAlign: 'left',
   fontSize: fontSizes.medium
 };
 
-export default { container, startTime, label };
+export default { container, startTime, label, labelText };
