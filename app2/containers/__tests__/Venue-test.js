@@ -14,6 +14,12 @@ describe('VenuesContainer', () => {
         state: {
           params: { id: '1', set_times: [] }
         }
+      },
+      screenProps: {
+        venues: [{ id: '1', set_times: [] }],
+        bands: [],
+        days: [],
+        set_times: []
       }
     };
   });
@@ -22,6 +28,10 @@ describe('VenuesContainer', () => {
     const wrapper = shallow(<VenueContainer {...props} />);
     const view = wrapper.find('VenueView');
 
-    expect(view.prop('venue')).toEqual(props.navigation.state.params);
+    expect(view.prop('venue')).toEqual(props.screenProps.venues[0]);
+
+    view.simulate('navigate', 'Band', {});
+
+    expect(props.navigation.navigate).toBeCalledWith('Band', {});
   });
 });
