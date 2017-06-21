@@ -14,6 +14,12 @@ describe('BandContainer', () => {
         state: {
           params: { id: '1', set_times: [] }
         }
+      },
+      screenProps: {
+        venues: [],
+        bands: [{ id: '1', set_times: [] }],
+        days: [],
+        set_times: []
       }
     };
   });
@@ -22,6 +28,6 @@ describe('BandContainer', () => {
     const wrapper = shallow(<BandContainer {...props} />);
     const view = wrapper.find('BandView');
 
-    expect(view.prop('band')).toEqual(props.navigation.state.params);
+    expect(view.prop('band')).toEqual(props.screenProps.bands[0]);
   });
 });
