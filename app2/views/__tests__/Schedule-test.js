@@ -6,7 +6,6 @@ import { shallow } from 'enzyme';
 
 describe('ScheduleView', () => {
   let props = null;
-  let context = null;
 
   beforeEach(() => {
     props = {
@@ -14,12 +13,10 @@ describe('ScheduleView', () => {
       color: 'color',
       onNavigate: jest.fn()
     };
-
-    context = { venues: [] };
   });
 
   it('renders HFSectionList with props.sections', () => {
-    const wrapper = shallow(<ScheduleView {...props} />, { context });
+    const wrapper = shallow(<ScheduleView {...props} />);
     const list = wrapper.find('HFSectionList');
 
     expect(list.prop('sections')).toEqual([]);
@@ -28,7 +25,7 @@ describe('ScheduleView', () => {
   });
 
   it('item', () => {
-    const wrapper = shallow(<ScheduleView {...props} />, { context });
+    const wrapper = shallow(<ScheduleView {...props} />);
     const list = wrapper.find('HFSectionList');
 
     const item = {
@@ -42,10 +39,14 @@ describe('ScheduleView', () => {
 
     expect(listItem.props.tintColor).toEqual('color');
     expect(listItem.props.setTime).toEqual(item);
+
+    listItem.props.onPress();
+
+    expect(props.onNavigate).toBeCalledWith('Band', item.band);
   });
 
   it('renderSectionHeader', () => {
-    const wrapper = shallow(<ScheduleView {...props} />, { context });
+    const wrapper = shallow(<ScheduleView {...props} />);
     const list = wrapper.find('HFSectionList');
 
     const section = {
@@ -58,7 +59,7 @@ describe('ScheduleView', () => {
   });
 
   it('onPress', () => {
-    const wrapper = shallow(<ScheduleView {...props} />, { context });
+    const wrapper = shallow(<ScheduleView {...props} />);
     const list = wrapper.find('HFSectionList');
 
     list.simulate('press', {});
