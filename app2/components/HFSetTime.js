@@ -1,11 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { formatDate } from '../utils';
 import HFScheduleManager from './HFScheduleManager';
 import styles from '../styles/hf-set-time';
 
 class HFSetTime extends React.Component {
+  name() {
+    return <Text style={styles.label} data-id="band">{this.props.setTime.band.name}</Text>;
+  }
+
+  nameTouchable() {
+    return (
+      <TouchableOpacity onPress={() => this.props.onPress(this.props.setTime)}>
+        {this.name()}
+      </TouchableOpacity>
+    );
+  }
+
   render() {
     const startTimeStyles = [styles.startTime];
 
@@ -16,7 +28,7 @@ class HFSetTime extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={startTimeStyles} data-id="start-time">{formatDate(this.props.setTime.start_time)}</Text>
-        <Text style={styles.label} data-id="band">{this.props.setTime.band.name}</Text>
+        {this.props.onPress ? this.nameTouchable() : this.name()}
         <HFScheduleManager />
       </View>
     );
@@ -30,6 +42,7 @@ HFSetTime.propTypes = {
       name: PropTypes.string.isRequired
     }).isRequired
   }).isRequired,
+  onPress: PropTypes.func,
   tintColor: PropTypes.string
 };
 

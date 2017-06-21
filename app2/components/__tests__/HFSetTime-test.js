@@ -23,8 +23,21 @@ describe('HFSetTime', () => {
     const startTime = wrapper.find('[data-id="start-time"]');
     const band = wrapper.find('[data-id="band"]');
 
-    expect(startTime.prop('children')).toEqual(moment.utc(props.setTime.startTime).format('h:mmA'));
+    expect(startTime.prop('children')).toEqual(moment.utc(props.setTime.start_time).format('h:mmA'));
     expect(band.prop('children')).toEqual('Band');
+  });
+
+  it('onPress', () => {
+    props.onPress = jest.fn();
+    const wrapper = shallow(<HFSetTime {...props} />);
+    const btn = wrapper.find('TouchableOpacity');
+    const band = wrapper.find('[data-id="band"]');
+
+    expect(band.prop('children')).toEqual('Band');
+
+    btn.simulate('press');
+
+    expect(props.onPress).toBeCalledWith(props.setTime);
   });
 
   it('tintColor', () => {
