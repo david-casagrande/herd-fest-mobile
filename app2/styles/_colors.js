@@ -1,5 +1,6 @@
 const secondary = '#444';
 const lightGrey = '#b0b1b2';
+const veryLightGrey = '#eee';
 const white = '#ffffff';
 
 // 2017 Colors
@@ -22,6 +23,7 @@ export default {
   primaryAlt: blue,
   secondary,
   lightGrey,
+  veryLightGrey,
   white,
   pinWheel: [green, purple, teal, red, blue]
 };
