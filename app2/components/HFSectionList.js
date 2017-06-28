@@ -4,11 +4,15 @@ import { SectionList, Text, View, TouchableOpacity } from 'react-native';
 import styles from '../styles/hf-section-list';
 
 class HFSectionList extends React.Component {
-  sectionHeaderStyle() {
+  sectionHeaderStyle(info) {
     const sectionHeaderStyle = [styles.sectionHeader];
 
     if (this.props.tintColor) {
       sectionHeaderStyle.push({ backgroundColor: this.props.tintColor });
+    }
+
+    if (!this.props.tintColor && (info.section && info.section.color)) {
+      sectionHeaderStyle.push({ backgroundColor: info.section.color });
     }
 
     return sectionHeaderStyle;
@@ -16,7 +20,7 @@ class HFSectionList extends React.Component {
 
   sectionHeader(info) {
     return (
-      <View style={this.sectionHeaderStyle()}>
+      <View style={this.sectionHeaderStyle(info)}>
         <Text style={styles.sectionHeaderText}>
           {this.props.renderSectionHeader(info)}
         </Text>
@@ -26,7 +30,7 @@ class HFSectionList extends React.Component {
 
   sectionHeaderTouchable(info) {
     return (
-      <TouchableOpacity style={this.sectionHeaderStyle()} onPress={() => this.props.onPress(info.section)}>
+      <TouchableOpacity style={this.sectionHeaderStyle(info)} onPress={() => this.props.onPress(info.section)}>
         <Text style={styles.sectionHeaderText}>
           {this.props.renderSectionHeader(info)}
         </Text>
@@ -51,7 +55,7 @@ class HFSectionList extends React.Component {
       sections: this.props.sections,
       keyExtractor: (item) => item[this.props.keyProp],
       renderItem: (info) => this.item(info),
-      renderSectionHeader: (info) => this.header(info),
+      renderSectionHeader: (info, a) => this.header(info, a),
       ItemSeparatorComponent: () => <View style={styles.separator} />
     };
 

@@ -87,6 +87,18 @@ describe('HFSectionList', () => {
 
       expect(sectionHeader.props.style[1].backgroundColor).toEqual(props.tintColor);
     });
+
+    it('section.color', () => {
+      props.sections[0].color = '#ccc';
+      props.renderSectionHeader = jest.fn(({ section }) => section.id);
+
+      const wrapper = shallow(<HFSectionList {...props} />);
+      const list = wrapper.find('SectionList');
+
+      const sectionHeader = list.props().renderSectionHeader({ section: props.sections[0] });
+
+      expect(sectionHeader.props.style[1].backgroundColor).toEqual('#ccc');
+    });
   });
 
   describe('renderItem', () => {
