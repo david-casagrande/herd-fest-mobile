@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import { Button } from 'react-native';
+import { Text } from 'react-native';
 
 import HomeContainer from '../containers/Home';
 import VenuesContainer from '../containers/Venues';
@@ -8,6 +8,7 @@ import BandsContainer from '../containers/Bands';
 import VenueContainer from '../containers/Venue';
 import BandContainer from '../containers/Band';
 import ScheduleNavigator from './Schedule';
+import HFMap from '../components/HFMap';
 
 const OPTIONS = {
   navigationOptions: {
@@ -41,7 +42,7 @@ const AppNavigator = StackNavigator({
     screen: VenueContainer,
     navigationOptions: ({ navigation }) => ({
       title: navigation.state.params.name,
-      headerRight: <Button title="Map" onPress={() => false} />
+      headerRight: <HFMap label="Map" address={navigation.state.params.street_address} />
     })
   },
   Schedule: {
