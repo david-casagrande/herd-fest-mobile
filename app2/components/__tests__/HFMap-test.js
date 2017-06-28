@@ -9,7 +9,8 @@ describe('HFMap', () => {
   let props = null;
 
   beforeEach(() => {
-    link.mockReset()
+    link.mockReset();
+
     props = {
       address: '555 Fake Street'
     };
