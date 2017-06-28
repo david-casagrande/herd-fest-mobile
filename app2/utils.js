@@ -1,13 +1,8 @@
-import ReactNative from 'react-native';
-
+import { Linking, Platform } from 'react-native';
 import colors from './styles/_colors';
 import moment from 'moment';
 import serializers from './data/serializers';
 import { groupBy, sortBy, find } from 'lodash';
-
-const Linking = ReactNative.Linking;
-const ListView = ReactNative.ListView;
-const Platform = ReactNative.Platform;
 
 export function formatDate(date, format = 'h:mmA') {
   const converted = moment.utc(date).format(format);
@@ -17,7 +12,7 @@ export function formatDate(date, format = 'h:mmA') {
 export function sortStartTimes(model) {
   const amHours = 7;
   const hours = 24;
-  const time = moment.utc(model.startTime);
+  const time = moment.utc(model.start_time);
 
   if (time.hour() < amHours) {
     time.add(hours, 'hours');
@@ -47,21 +42,21 @@ export function link(url) {
   });
 }
 
-export function colorMap(collection) {
-  const map = {};
-  let count = 0;
-
-  collection.forEach((key) => {
-    if (typeof map[key] !== 'undefined') {
-      return;
-    }
-
-    map[key] = colors.pinWheel[count];
-    count++;
-  });
-
-  return map;
-}
+// export function colorMap(collection) {
+//   const map = {};
+//   let count = 0;
+//
+//   collection.forEach((key) => {
+//     if (typeof map[key] !== 'undefined') {
+//       return;
+//     }
+//
+//     map[key] = colors.pinWheel[count];
+//     count++;
+//   });
+//
+//   return map;
+// }
 
 export function isAndroid() {
   return Platform.OS === 'android';
@@ -69,7 +64,7 @@ export function isAndroid() {
 
 // setTimesBy
 export function setTimesBy(type, setTimes, fullSchedule) {
-  function byVenue(venues, fullSchedule) {
+  function byVenue(venues) {
     return Object.keys(venues).map((id) => {
       const venue = find(fullSchedule.venues, { id });
       const venueSetTimes = venues[id];
@@ -85,16 +80,18 @@ export function setTimesBy(type, setTimes, fullSchedule) {
     });
   }
 
-  function byDay(days, fullSchedule) {
+  function byDay(days) {
     return Object.keys(days).map((id) => {
-      const day = lodash.find(fullSchedule.days, { id });
+      const day = find(fullSchedule.days, { id });
       const daySetTimes = days[id];
+      const serializedSetTimes = serializers.setTimes(daySetTimes, fullSchedule);
 
       return {
         id: day.id,
         name: day.name,
         date: day.date,
-        set_times: serializers.setTimes(daySetTimes, fullSchedule)
+        set_times: serializedSetTimes,
+        data: serializedSetTimes
       };
     });
   }
@@ -110,8 +107,12 @@ export function setTimesBy(type, setTimes, fullSchedule) {
   };
 
   const grouped = groupBy(setTimes, type);
-  const parsed = ByMap[type](grouped, fullSchedule);
+  const parsed = ByMap[type](grouped);
   const sorted = sortBy(parsed, SortMap[type]);
+
+  sorted.forEach((obj, idx) => {
+    obj.color = colors.pinWheel[idx];
+  });
 
   return sorted;
 }
@@ -122,7 +123,7 @@ const utils = {
   sortSetTimesByDays,
   findMany,
   link,
-  colorMap,
+  // colorMap,
   isAndroid,
   setTimesBy
 };
