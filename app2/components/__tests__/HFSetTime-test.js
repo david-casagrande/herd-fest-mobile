@@ -13,6 +13,9 @@ describe('HFSetTime', () => {
         start_time: '2000-01-01T23:15:00.000Z',
         band: {
           name: 'Band'
+        },
+        venue: {
+          name: 'Venue'
         }
       }
     };
@@ -45,5 +48,31 @@ describe('HFSetTime', () => {
     const wrapper = shallow(<HFSetTime {...props} />);
     const startTime = wrapper.find('[data-id="start-time"]');
     expect(startTime.prop('style')[1]).toEqual({ color: props.tintColor });
+  });
+
+  it('showVenue', () => {
+    props.showVenue = true;
+    const wrapper = shallow(<HFSetTime {...props} />);
+    const band = wrapper.find('[data-id="band"]');
+    const venue = wrapper.find('[data-id="venue"]');
+
+    expect(band.prop('children')).toEqual('Band');
+    expect(venue.prop('children')).toEqual('Venue');
+  });
+
+  it('showVenue with onPress', () => {
+    props.showVenue = true;
+    props.onPress = jest.fn();
+    const wrapper = shallow(<HFSetTime {...props} />);
+    const btn = wrapper.find('TouchableOpacity');
+    const band = wrapper.find('[data-id="band"]');
+    const venue = wrapper.find('[data-id="venue"]');
+
+    expect(band.prop('children')).toEqual('Band');
+    expect(venue.prop('children')).toEqual('Venue');
+
+    btn.simulate('press');
+
+    expect(props.onPress).toBeCalledWith(props.setTime);
   });
 });

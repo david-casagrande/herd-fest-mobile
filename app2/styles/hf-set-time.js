@@ -25,4 +25,10 @@ const labelText = {
   fontSize: fontSizes.medium
 };
 
-export default { container, startTime, label, labelText };
+const labelTextSecondary = {
+  color: colors.secondary,
+  textAlign: 'left',
+  fontSize: fontSizes.small
+};
+
+export default { container, startTime, label, labelText, labelTextSecondary };

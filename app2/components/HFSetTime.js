@@ -6,6 +6,22 @@ import HFScheduleManager from './HFScheduleManager';
 import styles from '../styles/hf-set-time';
 
 class HFSetTime extends React.Component {
+  textWithVenue() {
+    const { tintColor } = this.props;
+    const venueStyle = [styles.labelTextSecondary];
+
+    if (tintColor) {
+      venueStyle.push({ color: tintColor });
+    }
+
+    return (
+      <View>
+        <Text style={venueStyle} data-id="venue">{this.props.setTime.venue.name}</Text>
+        <Text style={styles.labelTextSecondary} data-id="band">{this.props.setTime.band.name}</Text>
+      </View>
+    );
+  }
+
   text() {
     return <Text style={styles.labelText} data-id="band">{this.props.setTime.band.name}</Text>;
   }
@@ -13,7 +29,7 @@ class HFSetTime extends React.Component {
   name() {
     return (
       <View style={styles.label}>
-        {this.text()}
+        {this.props.showVenue ? this.textWithVenue() : this.text()}
       </View>
     );
   }
@@ -21,7 +37,7 @@ class HFSetTime extends React.Component {
   nameTouchable() {
     return (
       <TouchableOpacity style={styles.label} onPress={() => this.props.onPress(this.props.setTime)}>
-        {this.text()}
+        {this.props.showVenue ? this.textWithVenue() : this.text()}
       </TouchableOpacity>
     );
   }
@@ -37,7 +53,7 @@ class HFSetTime extends React.Component {
       <View style={styles.container}>
         <Text style={startTimeStyles} data-id="start-time">{formatDate(this.props.setTime.start_time)}</Text>
         {this.props.onPress ? this.nameTouchable() : this.name()}
-        <HFScheduleManager />
+        <HFScheduleManager setTime={this.props.setTime} tintColor={this.props.tintColor} />
       </View>
     );
   }
@@ -48,10 +64,14 @@ HFSetTime.propTypes = {
     start_time: PropTypes.string.isRequired,
     band: PropTypes.shape({
       name: PropTypes.string.isRequired
+    }).isRequired,
+    venue: PropTypes.shape({
+      name: PropTypes.string.isRequired
     }).isRequired
   }).isRequired,
   onPress: PropTypes.func,
-  tintColor: PropTypes.string
+  tintColor: PropTypes.string,
+  showVenue: PropTypes.bool
 };
 
 export default HFSetTime;
