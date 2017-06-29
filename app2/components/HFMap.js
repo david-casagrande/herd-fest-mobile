@@ -30,7 +30,7 @@ class HFMap extends React.Component {
 
 HFMap.propTypes = {
   address: PropTypes.string.isRequired,
-  label: PropTypes.string,
+  label: PropTypes.string
 };
 
 HFMap.defaultProps = {
