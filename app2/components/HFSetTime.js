@@ -44,9 +44,10 @@ class HFSetTime extends React.Component {
 
   render() {
     const startTimeStyles = [styles.startTime];
+    const { tintColor } = this.props;
 
-    if (this.props.tintColor) {
-      startTimeStyles.push({ color: this.props.tintColor });
+    if (tintColor) {
+      startTimeStyles.push({ color: tintColor });
     }
 
     return (
