@@ -25,7 +25,7 @@ describe('HFMap', () => {
     });
 
     it('from props', () => {
-      props.label = 'Test'
+      props.label = 'Test';
       const wrapper = shallow(<HFMap {...props} />);
       const text = wrapper.find('Text');
 
@@ -44,7 +44,7 @@ describe('HFMap', () => {
     });
 
     it('tries browser google maps if google maps app fails', () => {
-      link.mockImplementation(() => new Promise((resolve, reject) => reject()));
+      link.mockImplementation(() => new Promise((resolve, reject) => reject(new Error())));
       const wrapper = shallow(<HFMap {...props} />);
 
       return wrapper.props().onPress().catch(() => {
