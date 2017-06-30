@@ -10,6 +10,7 @@ import BandContainer from '../containers/Band';
 import MyScheduleContainer from '../containers/MySchedule';
 import ScheduleNavigator from './Schedule';
 import HFMap from '../components/HFMap';
+import HFHeaderTitle from '../components/HFHeaderTitle';
 
 const OPTIONS = {
   navigationOptions: {
@@ -42,7 +43,7 @@ const AppNavigator = StackNavigator({
   Venue: {
     screen: VenueContainer,
     navigationOptions: ({ navigation }) => ({
-      title: navigation.state.params.name,
+      headerTitle: <HFHeaderTitle title={navigation.state.params.street_address} sub={navigation.state.params.name} />,
       headerRight: <HFMap label="Map" address={navigation.state.params.street_address} />
     })
   },
