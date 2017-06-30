@@ -27,4 +27,4 @@ const separator = {
   height: StyleSheet.hairlineWidth
 };
 
-export default { sectionHeader, sectionHeaderText, item, separator };
+export default StyleSheet.create({ sectionHeader, sectionHeaderText, item, separator });

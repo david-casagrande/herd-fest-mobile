@@ -1,6 +1,6 @@
 import colors from './_colors';
 import fontSizes from './_font-sizes';
-// import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const HEIGHT = 34;
 const BORDER_WIDTH = 2;
@@ -40,4 +40,4 @@ const textActive = {
   color: colors.white
 };
 
-export default { container, content, day, link, text, textActive };
+export default StyleSheet.create({ container, content, day, link, text, textActive });

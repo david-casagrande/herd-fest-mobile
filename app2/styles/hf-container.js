@@ -1,4 +1,5 @@
 import colors from './_colors';
+import { StyleSheet } from 'react-native';
 
 // const ANDROID_PADDING = 56;
 // const IOS_PADDING = 64;
@@ -8,4 +9,4 @@ const container = {
   flex: 1
 };
 
-export default { container };
+export default StyleSheet.create({ container });

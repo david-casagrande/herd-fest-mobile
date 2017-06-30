@@ -22,4 +22,4 @@ const label = {
   fontSize: fontSizes.medium
 };
 
-export default { item, separator, label };
+export default StyleSheet.create({ item, separator, label });

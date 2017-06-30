@@ -1,5 +1,6 @@
 import colors from './_colors';
 import fontSizes from './_font-sizes';
+import { StyleSheet } from 'react-native';
 
 const container = {
   flex: 1,
@@ -31,4 +32,4 @@ const labelTextSecondary = {
   fontSize: fontSizes.small
 };
 
-export default { container, startTime, label, labelText, labelTextSecondary };
+export default StyleSheet.create({ container, startTime, label, labelText, labelTextSecondary });
