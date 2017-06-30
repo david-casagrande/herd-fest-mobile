@@ -32,6 +32,9 @@ describe('ScheduleView', () => {
       band: {
         name: 'band'
       },
+      venue: {
+        name: 'venue'
+      },
       start_time: '2000-01-01T22:45:00.000Z'
     };
 
