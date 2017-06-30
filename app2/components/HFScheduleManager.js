@@ -61,7 +61,6 @@ class HFScheduleManager extends React.Component {
   }
 
   render() {
-    console.log(this.context.mySchedule)
     if (typeof this.state.scheduled === 'undefined') {
       return null;
     }

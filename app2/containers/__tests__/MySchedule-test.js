@@ -1,37 +1,51 @@
 import 'react-native';
 import React from 'react';
 import MyScheduleContainer from '../MySchedule';
+import { findMany, setTimesBy } from '../../utils';
+import { get } from '../../data/my-schedule'
+import data from './_full-schedule';
 
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
+
+jest.mock('../../data/my-schedule');
 
 describe('MyScheduleContainer', () => {
   let props = null;
 
   beforeEach(() => {
+    // const jsdom = require('jsdom').jsdom;
+    // global.document = jsdom('');
+    // global.window = document.defaultView;
+    // Object.keys(document.defaultView).forEach((property) => {
+    //   if (typeof global[property] === 'undefined') {
+    //     global[property] = document.defaultView[property];
+    //   }
+    // });
+
     props = {
-      // navigation: {
-      //   navigate: jest.fn(),
-      //   state: {
-      //     params: { id: '1', set_times: [] }
-      //   }
-      // },
-      screenProps: {
-        venues: [{ id: '1', set_times: [] }],
-        bands: [],
-        days: [],
-        set_times: []
-      }
+      navigation: {
+        navigate: jest.fn()
+      },
+      screenProps: data
     };
   });
 
-  it('VenueView', () => {
+  it('MyScheduleContainer', () => {
     const wrapper = shallow(<MyScheduleContainer {...props} />);
-    const view = wrapper.find('VenueView');
+    const view = wrapper.find('MyScheduleView');
 
-    expect(view.prop('venue')).toEqual(props.screenProps.venues[0]);
+    expect(view.prop('sections')).toEqual([]);
+  });
 
-    view.simulate('navigate', 'Band', {});
+  it('sets up data on mount', () => {
+    get.mockImplementation(() => new Promise((resolve) => resolve([])));
 
-    expect(props.navigation.navigate).toBeCalledWith('Band', {});
+    const wrapper = mount(<MyScheduleContainer {...props} />);
+    const view = wrapper.find('MyScheduleView');
+
+    // console.log(wrapper.instance())
+    // wrapper.instance().componentDidMount();
+    //
+    // expect(get).toBeCalled();
   });
 });
