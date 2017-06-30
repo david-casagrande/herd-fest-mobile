@@ -14,7 +14,7 @@ describe('VenuesContainer', () => {
       navigation: {
         navigate: jest.fn(),
         state: {
-          params: { id: '1', set_times: [] }
+          params: data.venues[0]
         }
       },
       screenProps: data
