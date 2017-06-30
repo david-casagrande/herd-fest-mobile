@@ -17,12 +17,7 @@ describe('VenuesContainer', () => {
           params: { id: '1', set_times: [] }
         }
       },
-      screenProps: {
-        venues: [{ id: '1', set_times: [] }],
-        bands: [],
-        days: [],
-        set_times: []
-      }
+      screenProps: data
     };
   });
 
