@@ -24,4 +24,8 @@ const text = {
   lineHeight: utils.isAndroid() ? ANDROID_LINE_HEIGHT : IOS_LINE_HEIGHT
 };
 
-export default StyleSheet.create({ container, content, text });
+const textRotate = {
+  transform: [{ rotate: '45deg' }]
+};
+
+export default StyleSheet.create({ container, content, text, textRotate });

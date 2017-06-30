@@ -7,6 +7,7 @@ import VenuesContainer from '../containers/Venues';
 import BandsContainer from '../containers/Bands';
 import VenueContainer from '../containers/Venue';
 import BandContainer from '../containers/Band';
+import MyScheduleContainer from '../containers/MySchedule';
 import ScheduleNavigator from './Schedule';
 import HFMap from '../components/HFMap';
 
@@ -49,6 +50,12 @@ const AppNavigator = StackNavigator({
     screen: ScheduleNavigator,
     navigationOptions: {
       title: 'Schedule'
+    }
+  },
+  MySchedule: {
+    screen: MyScheduleContainer,
+    navigationOptions: {
+      title: 'My Schedule'
     }
   }
 }, OPTIONS);

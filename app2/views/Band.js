@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Image, ScrollView } from 'react-native';
+import HFParallax from '../components/HFParallax';
 import HFContainer from '../components/HFContainer';
+import HFSectionList from '../components/HFSectionList';
+import HFSetTime from '../components/HFSetTime';
 import styles from '../styles/views/band';
 
 class BandView extends React.Component {
@@ -38,15 +41,26 @@ class BandView extends React.Component {
     return <Text style={styles.name} data-id="name">{name}</Text>;
   }
 
+  setTimes() {
+    const props = {
+      keyProp: 'id',
+      sections: this.props.sections,
+      renderItem: ({ item }) => <HFSetTime setTime={item} />,
+      renderSectionHeader: ({ section }) => section.name,
+      onPress: (venue) => this.props.onNavigate('Venue', venue)
+    };
+
+    return <HFSectionList {...props} />;
+  }
+
   content() {
     return (
-      <ScrollView>
-        {this.image()}
+      <HFParallax image={this.props.band.image_url}>
         <View style={styles.details}>
           {this.name()}
           {this.description()}
         </View>
-      </ScrollView>
+      </HFParallax>
     );
   }
 
@@ -63,25 +77,9 @@ BandView.propTypes = {
   band: PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.string,
-    image_url: PropTypes.string,
-    set_times: PropTypes.array.isRequired
-  }).isRequired
+    image_url: PropTypes.string
+  }).isRequired,
+  sections: PropTypes.array.isRequired
 };
-
-// BandView.propTypes = {
-//   navigation: PropTypes.shape({
-//     navigate: PropTypes.func.isRequired,
-//     state: PropTypes.shape({
-//       params: PropTypes.shape({
-//         band: PropTypes.shape({
-//           name: PropTypes.string,
-//           description: PropTypes.string,
-//           image_url: PropTypes.string,
-//           set_times: PropTypes.array
-//         }).isRequired
-//       }).isRequired
-//     }).isRequired
-//   }).isRequired
-// };
 
 export default BandView;
