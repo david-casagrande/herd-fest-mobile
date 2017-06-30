@@ -30,7 +30,7 @@ class MyScheduleContainer extends React.Component {
       onNavigate: (url, item) => this.props.navigation.navigate(url, item)
     };
 
-    return <MyScheduleView sections={sections} />;
+    return <MyScheduleView {...props} />;
   }
 }
 
