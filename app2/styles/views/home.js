@@ -10,7 +10,8 @@ const IMAGE_WIDTH = DIMENSIONS.width - OFFSET;
 const content = {
   flex: 1,
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
+  paddingBottom: 40
 };
 
 const image = {

@@ -43,7 +43,7 @@ class HomeView extends React.Component {
 
   render() {
     return (
-      <HFContainer style={[{ paddingTop: 0 }]}>
+      <HFContainer>
         {this.content()}
       </HFContainer>
     );

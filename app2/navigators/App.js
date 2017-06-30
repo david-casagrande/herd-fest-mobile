@@ -20,7 +20,13 @@ const OPTIONS = {
 
 const AppNavigator = StackNavigator({
   Home: {
-    screen: HomeContainer
+    screen: HomeContainer,
+    navigationOptions: {
+      headerStyle: {
+        shadowOpacity: 0,
+        backgroundColor: '#fff'
+      }
+    }
   },
   Bands: {
     screen: BandsContainer,
