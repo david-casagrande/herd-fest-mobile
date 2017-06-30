@@ -33,7 +33,7 @@ class MyScheduleView extends React.Component {
 
 MyScheduleView.propTypes = {
   sections: PropTypes.array.isRequired,
-  // onNavigate: PropTypes.func.isRequired
+  onNavigate: PropTypes.func.isRequired
 };
 
 export default MyScheduleView;
