@@ -20,8 +20,12 @@ const content = {
 
 const day = {
   borderColor: colors.primary,
-  borderRightWidth: BORDER_WIDTH,
+  borderLeftWidth: BORDER_WIDTH,
   flex: 1
+};
+
+const dayFirst = {
+  borderColor: 'transparent',
 };
 
 const link = {
@@ -40,4 +44,4 @@ const textActive = {
   color: colors.white
 };
 
-export default StyleSheet.create({ container, content, day, link, text, textActive });
+export default StyleSheet.create({ container, content, day, dayFirst, link, text, textActive });

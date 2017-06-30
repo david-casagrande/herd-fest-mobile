@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity } from 'react-native';
-import styles from '../styles/hf-day-navigator';
+import styles from '../styles/hf-day-tab-bar';
 import colors from '../styles/_colors';
 
 class HFDayTabBar extends React.Component {
@@ -19,6 +19,10 @@ class HFDayTabBar extends React.Component {
     if (focused) {
       dayStyle.push({ backgroundColor: color });
       textStyle.push(styles.textActive);
+    }
+
+    if (idx === 0) {
+      dayStyle.push(styles.dayFirst);
     }
 
     return (
