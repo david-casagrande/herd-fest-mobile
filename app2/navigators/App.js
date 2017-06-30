@@ -1,6 +1,7 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import { Text } from 'react-native';
+import colors from '../styles/_colors';
 
 import HomeContainer from '../containers/Home';
 import VenuesContainer from '../containers/Venues';
@@ -14,7 +15,7 @@ import HFHeaderTitle from '../components/HFHeaderTitle';
 
 const OPTIONS = {
   navigationOptions: {
-    headerStyle: { backgroundColor: '#fff' }
+    headerStyle: { backgroundColor: colors.white }
   }
 };
 
@@ -24,7 +25,7 @@ const AppNavigator = StackNavigator({
     navigationOptions: {
       headerStyle: {
         shadowOpacity: 0,
-        backgroundColor: '#fff'
+        backgroundColor: colors.white
       }
     }
   },
