@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "node_modules/.bin/jest",
-    "lint": "if node_modules/.bin/eslint app; then exit 0; else exit 0; fi",
+    "lint": "node_modules/.bin/eslint app2",
     "inspect": "node_modules/.bin/jsinspect",
     "check": "node_modules/.bin/ncu"
   },
@@ -15,16 +15,17 @@
     "react": "16.0.0-alpha.12",
     "react-native": "^0.45.1",
     "react-native-deprecated-custom-components": "^0.1.0",
+    "react-native-parallax-view": "^2.0.6",
     "react-navigation": "^1.0.0-beta.11"
   },
   "devDependencies": {
     "babel-jest": "^20.0.3",
-    "babel-preset-react-native": "^1.9.0",
+    "babel-preset-react-native": "^2.0.0",
     "enzyme": "^2.3.0",
-    "eslint": "^3.4.0",
-    "eslint-config-strict": "^9.1.0",
-    "eslint-plugin-filenames": "^1.1.0",
-    "eslint-plugin-react": "^6.2.0",
+    "eslint": "^3.19.0",
+    "eslint-config-dc": "^1.1.0",
+    "eslint-config-strict": "^13.0.0",
+    "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-react-native": "^2.0.0",
     "jest-cli": "^20.0.4",
     "jest-react-native": "^18.0.0",

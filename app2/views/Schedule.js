@@ -4,36 +4,28 @@ import HFContainer from '../components/HFContainer';
 import HFSectionList from '../components/HFSectionList';
 import HFSetTime from '../components/HFSetTime';
 
-class VenueView extends React.Component {
-  renderItem({ item, section }) {
-    const props = {
-      setTime: item,
-      tintColor: section.color,
-      onPress: () => this.props.onNavigate('Band', item.band)
-    };
-
-    return <HFSetTime {...props} />;
-  }
-
+class ScheduleView extends React.Component {
   render() {
+    const { color } = this.props;
     return (
       <HFContainer>
         <HFSectionList
           keyProp="id"
+          tintColor={color}
           sections={this.props.sections}
-          renderItem={(info) => this.renderItem(info)}
+          renderItem={({ item }) => <HFSetTime setTime={item} tintColor={color} onPress={() => this.props.onNavigate('Band', item.band)} />}
           renderSectionHeader={({ section }) => section.name}
+          onPress={(venue) => this.props.onNavigate('Venue', venue)}
         />
       </HFContainer>
     );
   }
 }
 
-VenueView.propTypes = {
-  venue: PropTypes.shape({
-  }).isRequired,
+ScheduleView.propTypes = {
+  color: PropTypes.string.isRequired,
   sections: PropTypes.array.isRequired,
   onNavigate: PropTypes.func.isRequired
 };
 
-export default VenueView;
+export default ScheduleView;

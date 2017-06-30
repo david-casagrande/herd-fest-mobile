@@ -4,6 +4,7 @@ import HFFlatList from '../HFFlatList';
 import { shallow } from 'enzyme';
 
 // FlatList returns undefined when we dont mock it, try to remove this when updated react-native
+// https://github.com/facebook/react-native/issues/14514
 jest.mock('react-native', () => ({
   FlatList: () => false,
   StyleSheet: {},

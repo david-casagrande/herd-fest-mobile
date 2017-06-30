@@ -6,10 +6,10 @@ import HFContainer from '../components/HFContainer';
 class VenuesView extends React.Component {
   render() {
     const props = {
-      data: this.context.venues,
+      data: this.props.venues,
       keyProp: 'id',
       labelProp: 'name',
-      onPress: (item) => this.props.navigation.navigate('Venue', { venue: item })
+      onPress: (item) => this.props.onNavigate('Venue', item)
     };
 
     return (
@@ -21,12 +21,7 @@ class VenuesView extends React.Component {
 }
 
 VenuesView.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired
-  }).isRequired
-};
-
-VenuesView.contextTypes = {
+  onNavigate: PropTypes.func.isRequired,
   venues: PropTypes.array.isRequired
 };
 

@@ -6,21 +6,14 @@ import { shallow } from 'enzyme';
 
 describe('BandView', () => {
   let props = null;
-  let context = null;
 
   beforeEach(() => {
     props = {
-      navigation: {
-        navigate: jest.fn(),
-        state: {
-          params: {
-            band: {
-              name: 'Band Name',
-              description: 'Band Description',
-              image_url: 'image-url'
-            }
-          }
-        }
+      band: {
+        name: 'Band Name',
+        description: 'Band Description',
+        image_url: 'image-url',
+        set_times: []
       }
     };
   });
@@ -30,14 +23,14 @@ describe('BandView', () => {
       const wrapper = shallow(<BandView {...props} />);
       const img = wrapper.find('Image');
 
-      expect(img.prop('source')).toEqual({ uri: 'image-url' })
+      expect(img.prop('source')).toEqual({ uri: 'image-url' });
     });
 
     it('does not render', () => {
-      props.navigation.state.params.band.image_url = null;
+      props.band.image_url = null;
       const wrapper = shallow(<BandView {...props} />);
 
-      expect(wrapper.find('Image').length).toEqual(0)
+      expect(wrapper.find('Image').length).toEqual(0);
     });
   });
 
@@ -50,10 +43,10 @@ describe('BandView', () => {
     });
 
     it('does not render', () => {
-      props.navigation.state.params.band.name = null;
+      props.band.name = null;
       const wrapper = shallow(<BandView {...props} />);
 
-      expect(wrapper.find('[data-id="name"]').length).toEqual(0)
+      expect(wrapper.find('[data-id="name"]').length).toEqual(0);
     });
   });
 
@@ -66,10 +59,10 @@ describe('BandView', () => {
     });
 
     it('does not render', () => {
-      props.navigation.state.params.band.description = null;
+      props.band.description = null;
       const wrapper = shallow(<BandView {...props} />);
 
-      expect(wrapper.find('[data-id="description"]').length).toEqual(0)
+      expect(wrapper.find('[data-id="description"]').length).toEqual(0);
     });
   });
 });
