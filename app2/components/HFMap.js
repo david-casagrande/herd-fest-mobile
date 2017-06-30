@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TouchableOpacity, Text } from 'react-native';
 import { link } from '../utils';
+import style from '../styles/hf-map';
 
 function linkToGoogleMapsWeb(streetAddress) {
   const addressURL = `https://maps.google.com/?q=${streetAddress}`;
@@ -22,7 +23,7 @@ class HFMap extends React.Component {
   render() {
     return (
       <TouchableOpacity onPress={() => this.onPress()}>
-        <Text>{this.props.label}</Text>
+        <Text style={style.text}>{this.props.label}</Text>
       </TouchableOpacity>
     );
   }
