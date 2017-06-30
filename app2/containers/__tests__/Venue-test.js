@@ -1,6 +1,8 @@
 import 'react-native';
 import React from 'react';
 import VenueContainer from '../Venue';
+import { findMany, setTimesBy } from '../../utils';
+import data from './_full-schedule';
 
 import { shallow } from 'enzyme';
 
@@ -28,7 +30,12 @@ describe('VenuesContainer', () => {
     const wrapper = shallow(<VenueContainer {...props} />);
     const view = wrapper.find('VenueView');
 
-    expect(view.prop('venue')).toEqual(props.screenProps.venues[0]);
+    const venue = props.screenProps.venues[0];
+    const setTimes = findMany(props.screenProps.set_times, venue.set_times);
+    const sections = setTimesBy('day', setTimes, props.screenProps);
+
+    expect(view.prop('venue')).toEqual(venue);
+    expect(view.prop('sections')).toEqual(sections);
 
     view.simulate('navigate', 'Band', {});
 

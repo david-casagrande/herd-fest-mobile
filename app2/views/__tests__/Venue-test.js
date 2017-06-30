@@ -39,9 +39,10 @@ describe('VenueView', () => {
       start_time: '2000-01-01T22:45:00.000Z'
     };
 
-    const listItem = list.props().renderItem({ item });
+    const listItem = list.props().renderItem({ item, section: { color: '#000' } });
 
     expect(listItem.props.setTime).toEqual(item);
+    expect(listItem.props.tintColor).toEqual('#000');
 
     listItem.props.onPress();
 
