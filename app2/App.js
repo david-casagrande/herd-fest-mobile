@@ -51,7 +51,12 @@ class App extends React.Component {
   }
 
   render() {
-    return <AppNavigator screenProps={this.state.fullSchedule} />;
+    const screenProps = {
+      ...this.state.fullSchedule,
+      mySchedule: this.state.mySchedule
+    };
+
+    return <AppNavigator screenProps={screenProps} />;
   }
 }
 

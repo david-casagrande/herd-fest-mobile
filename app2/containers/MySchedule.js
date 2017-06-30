@@ -5,24 +5,8 @@ import { get } from '../data/my-schedule';
 import { findMany, setTimesBy } from '../utils';
 
 class MyScheduleContainer extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      mySchedule: []
-    };
-  }
-
-  componentDidMount() {
-    this.setup();
-  }
-
-  setup() {
-    return get().then((mySchedule) => this.setState({ mySchedule }));
-  }
-
   render() {
-    const setTimes = findMany(this.props.screenProps.set_times, this.state.mySchedule);
+    const setTimes = findMany(this.props.screenProps.set_times, this.props.screenProps.mySchedule);
     const sections = setTimesBy('day', setTimes, this.props.screenProps);
 
     const props = {
@@ -42,7 +26,8 @@ MyScheduleContainer.propTypes = {
     bands: PropTypes.array.isRequired,
     venues: PropTypes.array.isRequired,
     days: PropTypes.array.isRequired,
-    set_times: PropTypes.array.isRequired
+    set_times: PropTypes.array.isRequired,
+    mySchedule: PropTypes.array.isRequired
   }).isRequired
 };
 
