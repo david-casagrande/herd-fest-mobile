@@ -3,7 +3,7 @@ export default {
     { id: '1', name: 'Band 1' }
   ],
   venues: [
-    { id: '1', name: 'Venue 1', street_address: 'address' }
+    { id: '1', name: 'Venue 1', street_address: 'address', set_times: ['1', '2', '3', '4'] }
   ],
   set_times: [
     { id: '1', day: '1', band: '1', venue: '1', start_time: '2000-01-01T22:45:00.000Z' },
