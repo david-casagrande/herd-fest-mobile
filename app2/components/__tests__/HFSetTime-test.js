@@ -50,29 +50,41 @@ describe('HFSetTime', () => {
     expect(startTime.prop('style')[1]).toEqual({ color: props.tintColor });
   });
 
-  it('showVenue', () => {
-    props.showVenue = true;
-    const wrapper = shallow(<HFSetTime {...props} />);
-    const band = wrapper.find('[data-id="band"]');
-    const venue = wrapper.find('[data-id="venue"]');
+  describe('showVenue', () => {
+    it('displays venue name as well as band name', () => {
+      props.showVenue = true;
+      const wrapper = shallow(<HFSetTime {...props} />);
+      const band = wrapper.find('[data-id="band"]');
+      const venue = wrapper.find('[data-id="venue"]');
 
-    expect(band.prop('children')).toEqual('Band');
-    expect(venue.prop('children')).toEqual('Venue');
-  });
+      expect(band.prop('children')).toEqual('Band');
+      expect(venue.prop('children')).toEqual('Venue');
+    });
 
-  it('showVenue with onPress', () => {
-    props.showVenue = true;
-    props.onPress = jest.fn();
-    const wrapper = shallow(<HFSetTime {...props} />);
-    const btn = wrapper.find('TouchableOpacity');
-    const band = wrapper.find('[data-id="band"]');
-    const venue = wrapper.find('[data-id="venue"]');
+    it('passes tintColor to venue', () => {
+      props.showVenue = true;
+      props.tintColor = '#000';
+      const wrapper = shallow(<HFSetTime {...props} />);
+      const band = wrapper.find('[data-id="band"]');
+      const venue = wrapper.find('[data-id="venue"]');
 
-    expect(band.prop('children')).toEqual('Band');
-    expect(venue.prop('children')).toEqual('Venue');
+      expect(venue.prop('style')[1]).toEqual({ color: props.tintColor });
+    });
 
-    btn.simulate('press');
+    it('showVenue with onPress', () => {
+      props.showVenue = true;
+      props.onPress = jest.fn();
+      const wrapper = shallow(<HFSetTime {...props} />);
+      const btn = wrapper.find('TouchableOpacity');
+      const band = wrapper.find('[data-id="band"]');
+      const venue = wrapper.find('[data-id="venue"]');
 
-    expect(props.onPress).toBeCalledWith(props.setTime);
+      expect(band.prop('children')).toEqual('Band');
+      expect(venue.prop('children')).toEqual('Venue');
+
+      btn.simulate('press');
+
+      expect(props.onPress).toBeCalledWith(props.setTime);
+    });
   });
 });
