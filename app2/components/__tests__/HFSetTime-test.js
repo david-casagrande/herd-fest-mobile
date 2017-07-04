@@ -54,6 +54,16 @@ describe('HFSetTime', () => {
     it('displays venue name as well as band name', () => {
       props.showVenue = true;
       const wrapper = shallow(<HFSetTime {...props} />);
+      const venue = wrapper.find('[data-id="band"]');
+
+      expect(venue.prop('children')).toEqual('Venue');
+    });
+  });
+
+  describe('showVenueAndBand', () => {
+    it('displays venue name as well as band name', () => {
+      props.showVenueAndBand = true;
+      const wrapper = shallow(<HFSetTime {...props} />);
       const band = wrapper.find('[data-id="band"]');
       const venue = wrapper.find('[data-id="venue"]');
 
@@ -62,7 +72,7 @@ describe('HFSetTime', () => {
     });
 
     it('passes tintColor to venue', () => {
-      props.showVenue = true;
+      props.showVenueAndBand = true;
       props.tintColor = '#000';
       const wrapper = shallow(<HFSetTime {...props} />);
       const band = wrapper.find('[data-id="band"]');
@@ -72,7 +82,7 @@ describe('HFSetTime', () => {
     });
 
     it('showVenue with onPress', () => {
-      props.showVenue = true;
+      props.showVenueAndBand = true;
       props.onPress = jest.fn();
       const wrapper = shallow(<HFSetTime {...props} />);
       const btn = wrapper.find('TouchableOpacity');

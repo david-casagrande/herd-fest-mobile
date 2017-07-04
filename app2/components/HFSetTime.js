@@ -6,7 +6,7 @@ import HFScheduleManager from './HFScheduleManager';
 import styles from '../styles/hf-set-time';
 
 class HFSetTime extends React.Component {
-  textWithVenue() {
+  textWithVenueAndBand() {
     const { tintColor } = this.props;
     const venueStyle = [styles.labelTextSecondary];
 
@@ -23,13 +23,14 @@ class HFSetTime extends React.Component {
   }
 
   text() {
-    return <Text style={styles.labelText} data-id="band">{this.props.setTime.band.name}</Text>;
+    const text = this.props.showVenue ? this.props.setTime.venue.name : this.props.setTime.band.name;
+    return <Text style={styles.labelText} data-id="band">{text}</Text>;
   }
 
   name() {
     return (
       <View style={styles.label}>
-        {this.props.showVenue ? this.textWithVenue() : this.text()}
+        {this.props.showVenueAndBand ? this.textWithVenueAndBand() : this.text()}
       </View>
     );
   }
@@ -37,7 +38,7 @@ class HFSetTime extends React.Component {
   nameTouchable() {
     return (
       <TouchableOpacity style={styles.label} onPress={() => this.props.onPress(this.props.setTime)}>
-        {this.props.showVenue ? this.textWithVenue() : this.text()}
+        {this.props.showVenueAndBand ? this.textWithVenueAndBand() : this.text()}
       </TouchableOpacity>
     );
   }
@@ -72,7 +73,8 @@ HFSetTime.propTypes = {
   }).isRequired,
   onPress: PropTypes.func,
   tintColor: PropTypes.string,
-  showVenue: PropTypes.bool
+  showVenue: PropTypes.bool,
+  showVenueAndBand: PropTypes.bool
 };
 
 export default HFSetTime;
