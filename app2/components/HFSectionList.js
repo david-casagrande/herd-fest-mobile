@@ -50,16 +50,45 @@ class HFSectionList extends React.Component {
     return this.props.onPress ? this.sectionHeaderTouchable(info) : this.sectionHeader(info);
   }
 
-  render() {
+  sectionList() {
     const props = {
       sections: this.props.sections,
       keyExtractor: (item) => item[this.props.keyProp],
       renderItem: (info) => this.item(info),
-      renderSectionHeader: (info, a) => this.header(info, a),
+      renderSectionHeader: (info) => this.header(info),
       ItemSeparatorComponent: () => <View style={styles.separator} />
     };
 
     return <SectionList {...props} />;
+  }
+
+  sectionListStatic() {
+    const sections = this.props.sections.map((section) => {
+      const data = section.data.map((item, idx) => {
+        const last = idx >= (section.data.length - 1);
+        return (
+          <View key={item[this.props.keyProp]} data-id="item">
+            {this.item({ item, section })}
+            {last ? null : <View style={styles.separator} />}
+          </View>
+        );
+      });
+
+      return (
+        <View key={section[this.props.keyProp]} data-id="section">
+          {this.header({ section })}
+          <View>
+            {data}
+          </View>
+        </View>
+      );
+    });
+
+    return <View>{sections}</View>;
+  }
+
+  render() {
+    return this.props.static ? this.sectionListStatic() : this.sectionList();
   }
 }
 

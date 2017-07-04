@@ -1,4 +1,4 @@
-import 'react-native';
+import { View } from 'react-native';
 import React from 'react';
 import HFSectionList from '../HFSectionList';
 import { shallow } from 'enzyme';
@@ -7,7 +7,7 @@ import { shallow } from 'enzyme';
 // https://github.com/facebook/react-native/issues/14514
 jest.mock('react-native', () => ({
   SectionList: () => false,
-  StyleSheet: {},
+  StyleSheet: { create: jest.fn((style) => style) },
   TouchableOpacity: () => false,
   Text: () => false,
   View: () => false
@@ -120,5 +120,41 @@ describe('HFSectionList', () => {
     const separator = list.props().ItemSeparatorComponent();
 
     expect(separator.props.style).toBeDefined();
+  });
+
+  describe('static', () => {
+    describe('renderSectionHeader', () => {
+      it('renders a sectionHeader with TouchableOpacity if props.onPress is defined', () => {
+        props.static = true;
+        props.renderSectionHeader = jest.fn(({ section }) => section.id);
+        const wrapper = shallow(<HFSectionList {...props} />);
+        const section = wrapper.find('[data-id="section"]');
+
+        expect(section.find('Text').first().prop('children')).toEqual(props.sections[0].id);
+        section.find('TouchableOpacity').first().props().onPress();
+
+        expect(props.onPress).toBeCalledWith(props.sections[0]);
+      });
+
+      it('renders a sectionHeader without TouchableOpacity if props.onPress is not defined', () => {
+        props.static = true;
+        props.onPress = null;
+        props.renderSectionHeader = jest.fn(({ section }) => section.id);
+        const wrapper = shallow(<HFSectionList {...props} />);
+        const section = wrapper.find('[data-id="section"]');
+
+        expect(section.find('Text').first().prop('children')).toEqual(props.sections[0].id);
+        expect(section.find('TouchableOpacity').length).toEqual(0);
+      });
+    });
+
+    xdescribe('renderItem', () => {
+      it('renders an item', () => {
+        props.static = true;
+        props.renderItem = jest.fn(({ item }) => item.name);
+        const wrapper = shallow(<HFSectionList {...props} />);
+        const item = wrapper.find('[data-id="item"]');
+      });
+    });
   });
 });
