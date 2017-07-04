@@ -40,7 +40,7 @@ describe('MyScheduleView', () => {
 
     expect(listItem.props.tintColor).toEqual('#000');
     expect(listItem.props.setTime).toEqual(item);
-    expect(listItem.props.showVenue).toEqual(true);
+    expect(listItem.props.showVenueAndBand).toEqual(true);
 
     listItem.props.onPress();
 

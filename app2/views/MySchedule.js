@@ -9,7 +9,7 @@ class MyScheduleView extends React.Component {
     const props = {
       setTime: item,
       tintColor: section.color,
-      showVenue: true,
+      showVenueAndBand: true,
       onPress: () => this.props.onNavigate('Band', item.band)
     };
 
