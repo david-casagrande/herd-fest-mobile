@@ -11,13 +11,18 @@ class BandContainer extends React.Component {
     const setTimes = findMany(this.props.screenProps.set_times, band.set_times);
     const sections = setTimesBy('day', setTimes, this.props.screenProps);
 
-    return <BandView band={band} sections={sections} />;
+    const props = {
+      band,
+      sections
+    };
+
+    return <BandView {...props} />;
   }
 }
 
 BandContainer.propTypes = {
   navigation: PropTypes.shape({
-    // navigate: PropTypes.func.isRequired,
+    navigate: PropTypes.func.isRequired,
     state: PropTypes.shape({
       params: PropTypes.object.isRequired
     }).isRequired

@@ -2,12 +2,6 @@ import spacing from '../_spacing';
 import colors from '../_colors';
 import fontSizes from '../_font-sizes';
 
-const image = {
-  height: 200,
-  backgroundColor: '#eee',
-  marginBottom: 4
-};
-
 const details = {
   padding: spacing.primary
 };
@@ -25,4 +19,4 @@ const description = {
   paddingBottom: spacing.primary
 };
 
-export default { image, details, name, description };
+export default { details, name, description };

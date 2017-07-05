@@ -23,6 +23,11 @@ class ScheduleContainer extends React.Component {
   render() {
     const idx = this.idx();
     const day = this.props.screenProps.days[idx];
+
+    if (!day) {
+      return false;
+    }
+
     const setTimes = findMany(this.props.screenProps.set_times, day.set_times);
     const sections = setTimesBy('venue', setTimes, this.props.screenProps);
 

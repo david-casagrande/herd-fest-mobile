@@ -8,21 +8,6 @@ import HFSetTime from '../components/HFSetTime';
 import styles from '../styles/views/band';
 
 class BandView extends React.Component {
-  image() {
-    const imageURL = this.props.band.image_url;
-    if (!imageURL) {
-      return false;
-    }
-
-    const props = {
-      source: { uri: imageURL },
-      resizeMode: 'cover',
-      style: styles.image
-    };
-
-    return <Image {...props} />;
-  }
-
   description() {
     const { description } = this.props.band;
     if (!description) {
@@ -45,9 +30,9 @@ class BandView extends React.Component {
     const props = {
       keyProp: 'id',
       sections: this.props.sections,
-      renderItem: ({ item }) => <HFSetTime setTime={item} />,
-      renderSectionHeader: ({ section }) => section.name,
-      onPress: (venue) => this.props.onNavigate('Venue', venue)
+      static: true,
+      renderItem: ({ item }) => <HFSetTime setTime={item} showVenue={true} />,
+      renderSectionHeader: ({ section }) => section.name
     };
 
     return <HFSectionList {...props} />;
@@ -60,6 +45,7 @@ class BandView extends React.Component {
           {this.name()}
           {this.description()}
         </View>
+        {this.setTimes()}
       </HFParallax>
     );
   }
