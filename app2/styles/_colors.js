@@ -18,6 +18,15 @@ const blue = '#174799';
 // const blue = '#1680c7';
 
 
+const pinWheel = [green, purple, teal, red, blue];
+
+const dayMap = {
+  'Thursday': green,
+  'Friday': purple,
+  'Saturday': teal,
+  'Sunday': red
+}
+
 export default {
   primary: teal,
   primaryAlt: blue,
@@ -25,5 +34,6 @@ export default {
   lightGrey,
   veryLightGrey,
   white,
-  pinWheel: [green, purple, teal, red, blue]
+  pinWheel,
+  dayMap
 };

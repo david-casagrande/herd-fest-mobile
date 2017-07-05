@@ -90,6 +90,7 @@ export function setTimesBy(type, setTimes, fullSchedule) {
         id: day.id,
         name: day.name,
         date: day.date,
+        color: colors.dayMap[day.name],
         set_times: serializedSetTimes,
         data: serializedSetTimes
       };
@@ -109,10 +110,6 @@ export function setTimesBy(type, setTimes, fullSchedule) {
   const grouped = groupBy(setTimes, type);
   const parsed = ByMap[type](grouped);
   const sorted = sortBy(parsed, SortMap[type]);
-
-  sorted.forEach((obj, idx) => {
-    obj.color = colors.pinWheel[idx];
-  });
 
   return sorted;
 }

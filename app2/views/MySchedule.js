@@ -24,7 +24,6 @@ class MyScheduleView extends React.Component {
           sections={this.props.sections}
           renderItem={(info) => this.renderItem(info)}
           renderSectionHeader={({ section }) => section.name}
-          onPress={(venue) => this.props.onNavigate('Venue', venue)}
         />
       </HFContainer>
     );

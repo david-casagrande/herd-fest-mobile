@@ -26,12 +26,22 @@ class BandView extends React.Component {
     return <Text style={styles.name} data-id="name">{name}</Text>;
   }
 
+  setTime({ item, section }) {
+    const props = {
+      setTime: item,
+      showVenue: true,
+      tintColor: section.color
+    };
+
+    return <HFSetTime {...props} />;
+  }
+
   setTimes() {
     const props = {
       keyProp: 'id',
       sections: this.props.sections,
       static: true,
-      renderItem: ({ item }) => <HFSetTime setTime={item} showVenue={true} />,
+      renderItem: (info) => this.setTime(info),
       renderSectionHeader: ({ section }) => section.name
     };
 
