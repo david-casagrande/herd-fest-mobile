@@ -1,5 +1,4 @@
-import ReactNative from 'react-native';
-const AsyncStorage = ReactNative.AsyncStorage;
+import { AsyncStorage, Vibration } from 'react-native';
 
 function parse(value) {
   return new Promise((resolve) => {
@@ -26,6 +25,7 @@ export function add(id) {
 
       return AsyncStorage.setItem('schedule', JSON.stringify(schedule));
     });
+    // .then(() => Vibration.vibrate());
 }
 
 export function remove(id) {
@@ -39,4 +39,5 @@ export function remove(id) {
 
       return AsyncStorage.setItem('schedule', JSON.stringify(schedule));
     });
+    // .then(() => Vibration.vibrate());
 }
