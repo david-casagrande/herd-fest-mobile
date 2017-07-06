@@ -1,6 +1,4 @@
 import { AsyncStorage } from 'react-native';
-
-// import fetch from '../shims/fetch';
 // const domain = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://herd-fest-api.herokuapp.com';
 const domain = 'https://herd-fest-api.herokuapp.com';
 
