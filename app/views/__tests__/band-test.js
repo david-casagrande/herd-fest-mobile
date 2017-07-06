@@ -1,82 +1,68 @@
-jest.unmock('../../utils');
-jest.unmock('../../data/serializers');
-jest.unmock('../band');
-jest.unmock('../components/set-times-by-day');
+import 'react-native';
+import React from 'react';
+import BandView from '../Band';
 
-const React = require('react-native');
-const shallow = require('enzyme/shallow');
+import { shallow } from 'enzyme';
 
-const testUtils = require('../../test-utils');
+describe('BandView', () => {
+  let props = null;
 
-const Band = require('../band').default;
-
-const bands = [
-  testUtils.fabricate('band', { image_url: 'https://image.png', set_times: ['st-1'] }),
-  testUtils.fabricate('band', { description: null })
-];
-
-const venues = [
-  testUtils.fabricate('venue')
-];
-
-const days = [
-  testUtils.fabricate('day')
-];
-
-const setTimes = [
-  testUtils.fabricate('setTime', { id: 'st-1', band: bands[0].id, venue: venues[0].id, day: days[0].id })
-];
-
-const fullSchedule = {
-  set_times: setTimes,
-  bands,
-  venues,
-  days
-};
-
-describe('Band', () => {
-  const Image = React.Image;
-  const Text = React.Text;
-  const SetTimesByDay = require('../components/set-times-by-day').default;
-
-  it('render an Image', () => {
-    const wrapper = shallow(<Band band={bands[0]} fullSchedule={fullSchedule} />);
-
-    expect(wrapper.find(Image).length).toEqual(1);
-
-    const img = wrapper.find(Image).first();
-
-    expect(img.props().source).toEqual({ uri: bands[0].image_url });
+  beforeEach(() => {
+    props = {
+      band: {
+        name: 'Band Name',
+        description: 'Band Description',
+        image_url: 'image-url',
+        set_times: []
+      }
+    };
   });
 
-  it('renders band name', () => {
-    const wrapper = shallow(<Band band={bands[0]} fullSchedule={fullSchedule} />);
+  describe('image', () => {
+    it('renders based on image_url', () => {
+      const wrapper = shallow(<BandView {...props} />);
+      const img = wrapper.find('Image');
 
-    const text = wrapper.find(Text).first();
-    expect(text.props().children).toEqual(bands[0].name);
+      expect(img.prop('source')).toEqual({ uri: 'image-url' });
+    });
+
+    it('does not render', () => {
+      props.band.image_url = null;
+      const wrapper = shallow(<BandView {...props} />);
+
+      expect(wrapper.find('Image').length).toEqual(0);
+    });
   });
 
-  it('renders band description', () => {
-    const wrapper = shallow(<Band band={bands[0]} fullSchedule={fullSchedule} />);
+  describe('name', () => {
+    it('renders based on name', () => {
+      const wrapper = shallow(<BandView {...props} />);
+      const name = wrapper.find('[data-id="name"]');
 
-    const text = wrapper.find(Text).last();
-    expect(text.props().children).toEqual(bands[0].description);
+      expect(name.prop('children')).toEqual('Band Name');
+    });
+
+    it('does not render', () => {
+      props.band.name = null;
+      const wrapper = shallow(<BandView {...props} />);
+
+      expect(wrapper.find('[data-id="name"]').length).toEqual(0);
+    });
   });
 
-  it('doesnt renders band description if it does not exist', () => {
-    const wrapper = shallow(<Band band={bands[1]} fullSchedule={fullSchedule} />);
+  describe('description', () => {
+    it('renders based on description', () => {
+      const wrapper = shallow(<BandView {...props} />);
+      const name = wrapper.find('[data-id="description"]');
 
-    const text = wrapper.find(Text);
-    expect(text.length).toEqual(1);
-  });
+      expect(name.prop('children')).toEqual('Band Description');
+    });
 
-  it('renders SetTimesByDay component', () => {
-    const wrapper = shallow(<Band band={bands[0]} fullSchedule={fullSchedule} />);
+    it('does not render', () => {
+      props.band.description = null;
+      const wrapper = shallow(<BandView {...props} />);
 
-    expect(wrapper.find(SetTimesByDay).length).toEqual(1);
-
-    const setTimesByDay = wrapper.find(SetTimesByDay).first();
-    expect(setTimesByDay.props().fullSchedule).toEqual(fullSchedule);
-    expect(setTimesByDay.props().setTimes).toEqual(bands[0].set_times);
+      expect(wrapper.find('[data-id="description"]').length).toEqual(0);
+    });
   });
 });

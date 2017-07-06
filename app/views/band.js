@@ -1,89 +1,81 @@
 import React from 'react';
-import ReactNative from 'react-native';
-import SetTimesByDay from './components/set-times-by-day';
+import PropTypes from 'prop-types';
+import { View, Text, Image, ScrollView } from 'react-native';
+import HFParallax from '../components/HFParallax';
+import HFContainer from '../components/HFContainer';
+import HFSectionList from '../components/HFSectionList';
+import HFSetTime from '../components/HFSetTime';
+import styles from '../styles/views/band';
 
-import bandStyles from '../styles/band-styles';
-
-const Component = React.Component;
-const Image = ReactNative.Image;
-const Linking = ReactNative.Linking;
-const ScrollView = ReactNative.ScrollView;
-const StyleSheet = ReactNative.StyleSheet;
-const Text = ReactNative.Text;
-const TouchableOpacity = ReactNative.TouchableOpacity;
-const View = ReactNative.View;
-
-const styles = StyleSheet.create(bandStyles);
-
-export default class Band extends Component {
-  facebookOnPress() {
-    const url = this.props.band.facebook_url;
-
-    return Linking.canOpenURL(url).then((supported) => {
-      if (!supported) {
-        console.log(`Don't know how to open URI: ${url}`); // eslint-disable-line no-console
-      }
-
-      return Linking.openURL(url);
-    });
-  }
-
-  facebook() {
-    if (!this.props.band.facebook_url) {
+class BandView extends React.Component {
+  description() {
+    const { description } = this.props.band;
+    if (!description) {
       return false;
     }
 
-    return (
-      <TouchableOpacity onPress={() => this.facebookOnPress()}>
-        <Text>Facebook</Text>
-      </TouchableOpacity>
-    );
+    return <Text style={styles.description} data-id="description">{description}</Text>;
   }
 
-
-  image() {
-    if (!this.props.band.image_url) {
-      return null;
+  name() {
+    const { name } = this.props.band;
+    if (!name) {
+      return false;
     }
 
-    return (
-      <Image
-        source={{ uri: this.props.band.image_url }}
-        style={styles.image}
-        resizeMode={'cover'}
-      />
-    );
+    return <Text style={styles.name} data-id="name">{name}</Text>;
   }
 
-  description() {
-    if (!this.props.band.description) {
-      return null;
-    }
+  setTime({ item, section }) {
+    const props = {
+      setTime: item,
+      showVenue: true,
+      tintColor: section.color
+    };
 
-    return <Text style={styles.text}>{this.props.band.description}</Text>;
+    return <HFSetTime {...props} />;
+  }
+
+  setTimes() {
+    const props = {
+      keyProp: 'id',
+      sections: this.props.sections,
+      static: true,
+      renderItem: (info) => this.setTime(info),
+      renderSectionHeader: ({ section }) => section.name
+    };
+
+    return <HFSectionList {...props} />;
+  }
+
+  content() {
+    return (
+      <HFParallax image={this.props.band.image_url}>
+        <View style={styles.details}>
+          {this.name()}
+          {this.description()}
+        </View>
+        {this.setTimes()}
+      </HFParallax>
+    );
   }
 
   render() {
     return (
-      <ScrollView style={styles.container}>
-        {this.image()}
-        <View style={styles.bandDetail}>
-          <Text style={[styles.text, styles.bandName]}>{this.props.band.name}</Text>
-          {this.description()}
-        </View>
-        <SetTimesByDay fullSchedule={this.props.fullSchedule} setTimes={this.props.band.set_times} />
-      </ScrollView>
+      <HFContainer>
+        {this.content()}
+      </HFContainer>
     );
   }
 }
 
-Band.propTypes = {
-  band: React.PropTypes.shape({
-    description: React.PropTypes.string,
-    image_url: React.PropTypes.string,
-    name: React.PropTypes.string,
-    set_times: React.PropTypes.array,
-    facebook_url: React.PropTypes.string
-  }),
-  fullSchedule: React.PropTypes.object
+BandView.propTypes = {
+  band: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.string,
+    image_url: PropTypes.string
+  }).isRequired,
+  sections: PropTypes.array.isRequired
 };
+
+export default BandView;

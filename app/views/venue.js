@@ -1,81 +1,39 @@
 import React from 'react';
-import ReactNative from 'react-native';
-import SectionHeader from './components/section-header';
-import SetTimeRow from './components/set-time-row';
+import PropTypes from 'prop-types';
+import HFContainer from '../components/HFContainer';
+import HFSectionList from '../components/HFSectionList';
+import HFSetTime from '../components/HFSetTime';
 
-import dsSetTimesBy from '../data-sources/set-times-by';
-import lodash from 'lodash';
-import venueStyles from '../styles/venue-styles';
-import utils from '../utils';
-
-const Component = React.Component;
-const ListView = ReactNative.ListView;
-const StyleSheet = ReactNative.StyleSheet;
-const View = ReactNative.View;
-const TouchableOpacity = ReactNative.TouchableOpacity;
-
-const styles = StyleSheet.create(venueStyles);
-
-function renderRow(rowData, navigator, colorMap) {
-  function goToRow() {
-    navigator.push({ name: 'Band', index: utils.currentIndex(navigator) + 1, title: rowData.band.name, id: rowData.band.id });
-  }
-
-  return (
-    <TouchableOpacity onPress={goToRow}>
-      <SetTimeRow setTime={rowData} color={colorMap[rowData.day.id]} content={rowData.band.name} />
-    </TouchableOpacity>
-  );
-}
-
-function renderSectionHeader(sectionData, sectionId, navigator, colorMap) {
-  return <SectionHeader title={sectionData.name} backgroundColor={colorMap[sectionData.id]} />;
-}
-
-function renderSeparator(sectionID, rowID) {
-  return <View key={`${sectionID}-${rowID}`} style={styles.separator} />;
-}
-
-export default class Venue extends Component {
-  constructor(props) {
-    super(props);
-
-    const sorted = lodash.sortBy(props.fullSchedule.days, 'date');
-
-    this.state = {
-      colorMap: utils.colorMap(sorted.map((day) => day.id))
+class VenueView extends React.Component {
+  renderItem({ item, section }) {
+    const props = {
+      setTime: item,
+      tintColor: section.color,
+      onPress: () => this.props.onNavigate('Band', item.band)
     };
-  }
 
-  dataSource() {
-    const setTimes = utils.findMany(this.props.fullSchedule.set_times, this.props.venue.set_times);
-
-    return dsSetTimesBy('day', setTimes, this.props.fullSchedule);
+    return <HFSetTime {...props} />;
   }
 
   render() {
-    const colorMap = this.state.colorMap;
-    const navigator = this.props.navigator;
-
     return (
-      <View style={styles.container}>
-        <ListView
-          initialListSize={12}
-          style={styles.listView}
-          dataSource={this.dataSource()}
-          renderRow={(rowData) => renderRow(rowData, navigator, colorMap)}
-          renderSectionHeader={(sectionData, sectionId) => renderSectionHeader(sectionData, sectionId, navigator, colorMap)}
-          renderSeparator={renderSeparator}
+      <HFContainer>
+        <HFSectionList
+          keyProp="id"
+          sections={this.props.sections}
+          renderItem={(info) => this.renderItem(info)}
+          renderSectionHeader={({ section }) => section.name}
         />
-      </View>
+      </HFContainer>
     );
   }
 }
 
-Venue.propTypes = {
-  venue: React.PropTypes.shape({
-    set_times: React.PropTypes.array
-  }),
-  fullSchedule: React.PropTypes.object,
-  navigator: React.PropTypes.object
+VenueView.propTypes = {
+  venue: PropTypes.shape({
+  }).isRequired,
+  sections: PropTypes.array.isRequired,
+  onNavigate: PropTypes.func.isRequired
 };
+
+export default VenueView;

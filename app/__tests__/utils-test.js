@@ -1,48 +1,45 @@
-jest.unmock('../utils');
-jest.unmock('../styles/components/colors');
+import ReactNative from 'react-native';
+import moment from 'moment';
+import { sortBy } from 'lodash';
+import { formatDate, sortStartTimes, sortSetTimesByDays, findMany, link, isAndroid, setTimesBy } from '../utils';
+import colors from '../styles/_colors';
 
-const colors = require('../styles/components/colors').default;
-const lodash = require('lodash');
-const utils = require('../utils').default;
+jest.mock('ReactNative');
 
 describe('utils', () => {
-  describe('notEqual', () => {
-    it('returns true when items are not equal', () => {
-      expect(utils.notEqual(2, 1)).toBeTruthy();
-    });
-
-    it('returns false when items are equal', () => {
-      expect(utils.notEqual(1, 1)).toBeFalsy();
-    });
+  beforeEach(() => {
+    ReactNative.Linking.canOpenURL.mockReset();
+    ReactNative.Linking.openURL.mockReset();
   });
 
   describe('formatDate', () => {
     const date = '2000-01-01T04:00:00.000Z';
 
-    it('returns the date in the given format', () => {
-      const expected = '04:00 am';
-      expect(utils.formatDate(date, 'hh:mm a')).toEqual(expected);
+    it('formats a date', () => {
+      const expected = moment.utc(date).format('h:mmA')
+      expect(formatDate(date)).toEqual(expected);
     });
 
-    it('returns the date in the defualt format', () => {
-      const expected = '4:00AM';
-      expect(utils.formatDate(date)).toEqual(expected);
+    it('accepts a format', () => {
+      const format = 'hA'
+      const expected = moment.utc(date).format(format)
+      expect(formatDate(date, format)).toEqual(expected);
     });
   });
 
   describe('sortStartTimes', () => {
     const times = [
-      { startTime: '2000-01-01T23:00:00.000Z' },
-      { startTime: '2000-01-01T06:00:00.000Z' },
-      { startTime: '2000-01-01T22:00:00.000Z' },
-      { startTime: '2000-01-01T00:00:00.000Z' },
-      { startTime: '2000-01-01T07:00:00.000Z' },
-      { startTime: '2000-01-01T06:30:00.000Z' },
-      { startTime: '2000-01-01T06:15:00.000Z' }
+      { start_time: '2000-01-01T23:00:00.000Z' },
+      { start_time: '2000-01-01T06:00:00.000Z' },
+      { start_time: '2000-01-01T22:00:00.000Z' },
+      { start_time: '2000-01-01T00:00:00.000Z' },
+      { start_time: '2000-01-01T07:00:00.000Z' },
+      { start_time: '2000-01-01T06:30:00.000Z' },
+      { start_time: '2000-01-01T06:15:00.000Z' }
     ];
 
-    it('handles sorting start times with lodash', () => {
-      const result = lodash.sortBy(times, utils.sortStartTimes);
+    it('handles sorting start times', () => {
+      const result = sortBy(times, sortStartTimes);
 
       const expected = [
         times[4],
@@ -68,7 +65,7 @@ describe('utils', () => {
     ];
 
     it('handles sorting start times with lodash', () => {
-      const result = lodash.sortBy(setTimes, utils.sortSetTimesByDays);
+      const result = sortBy(setTimes, sortSetTimesByDays);
       const expected = [
         setTimes[1],
         setTimes[0],
@@ -81,26 +78,6 @@ describe('utils', () => {
     });
   });
 
-  describe('currentIndex', () => {
-    const routes = [
-      { index: 1 },
-      { index: 2 },
-      { index: 3 }
-    ];
-
-    const navigator = {
-      getCurrentRoutes() {
-        return routes;
-      }
-    };
-
-    it('returns the current index in the navigator', () => {
-      const result = utils.currentIndex(navigator);
-
-      expect(result).toEqual(routes[2].index);
-    });
-  });
-
   describe('findMany', () => {
     const collection = [
       { id: '1', name: 'A' },
@@ -110,7 +87,7 @@ describe('utils', () => {
 
     it('returns an array of objects with ids matching given ids argument', () => {
       const ids = ['1', '3'];
-      const results = utils.findMany(collection, ids);
+      const results = findMany(collection, ids);
 
       expect(results.length).toEqual(2);
       expect(results[0]).toEqual(collection[0]);
@@ -119,134 +96,175 @@ describe('utils', () => {
   });
 
   describe('link', () => {
-    describe('canOpenUrl returns true', () => {
-      pit('returns Linking.openURL promise', () => {
-        jest.setMock('react-native', {
-          Linking: {
-            canOpenURL: jest.fn(() => new Promise((resolve) => resolve(true))),
-            openURL: jest.fn((url) => new Promise((resolve) => resolve(url)))
-          }
-        });
+    it('calls openURL if canOpenURL returns true', () => {
+      ReactNative.Linking.canOpenURL.mockImplementation(() => new Promise((resolve) => resolve(true)));
+      ReactNative.Linking.openURL.mockImplementation(() => new Promise((resolve) => resolve()));
 
-        const react = require('react-native');
-        const _utils = require('../utils').default; // eslint-disable-line no-underscore-dangle
-
-        return _utils.link('url').then((value) => {
-          expect(react.Linking.canOpenURL).toBeCalledWith('url');
-          expect(value).toEqual('url');
-        });
+      return link('url').then((value) => {
+        expect(ReactNative.Linking.canOpenURL).toBeCalledWith('url');
+        expect(ReactNative.Linking.openURL).toBeCalledWith('url');
       });
     });
 
-    describe('canOpenUrl returns false', () => {
-      pit('returns promise with false', () => {
-        jest.setMock('react-native', {
-          Linking: {
-            canOpenURL: jest.fn(() => new Promise((resolve) => resolve(false)))
-          }
-        });
+    it('does not call openURL if canOpenURL returns false', () => {
+      ReactNative.Linking.canOpenURL.mockImplementation(() => new Promise((resolve) => resolve(false)));
+      ReactNative.Linking.openURL.mockImplementation(() => new Promise((resolve) => resolve()));
 
-        const react = require('react-native');
-        const _utils = require('../utils').default; // eslint-disable-line no-underscore-dangle
-
-        return _utils.link('url').catch((value) => {
-          expect(react.Linking.canOpenURL).toBeCalledWith('url');
-          expect(value).toEqual(false);
-        });
+      return link('url').catch((value) => {
+        expect(ReactNative.Linking.canOpenURL).toBeCalledWith('url');
+        expect(ReactNative.Linking.openURL).not.toBeCalled();
       });
-    });
-  });
-
-  describe('dataSource', () => {
-    let ds = null;
-    let _utils = null; // eslint-disable-line no-underscore-dangle
-
-    beforeEach(() => {
-      ds = {
-        cloneWithRows: jest.fn(),
-        cloneWithRowsAndSections: jest.fn()
-      };
-
-      jest.setMock('react-native', {
-        ListView: {
-          DataSource: jest.fn(() => ds)
-        }
-      });
-
-      _utils = require('../utils').default;
-    });
-
-    it('creates an instance of ListView.DataSource and clones with rows', () => {
-      const react = require('react-native');
-      const collection = [1];
-
-      _utils.dataSource(collection);
-
-      expect(react.ListView.DataSource).toBeCalledWith({
-        rowHasChanged: _utils.notEqual,
-        sectionHeaderHasChanged: _utils.notEqual
-      });
-
-      expect(ds.cloneWithRows).toBeCalledWith(collection);
-    });
-
-    it('creates an instance of ListView.DataSource and clones with rows and sections', () => {
-      const react = require('react-native');
-      const collection = [1];
-      const ids = {
-        sectionIds: [1],
-        rowIds: [1]
-      };
-
-      const opts = {
-        getRowData: jest.fn()
-      };
-
-      _utils.dataSource(collection, ids, opts);
-
-      expect(react.ListView.DataSource).toBeCalledWith({
-        rowHasChanged: _utils.notEqual,
-        sectionHeaderHasChanged: _utils.notEqual,
-        getRowData: opts.getRowData
-      });
-
-      expect(ds.cloneWithRowsAndSections).toBeCalledWith(collection, ids.sectionIds, ids.rowIds);
-    });
-  });
-
-  describe('colorMap', () => {
-    const collection = ['item-1', 'item-2', 'item-3', 'item-4', 'item-5', 'item-1'];
-
-    it('returns colors.pinWheel as a hash for each item in collection', () => {
-      const expected = {};
-
-      expected[collection[0]] = colors.pinWheel[0];
-      expected[collection[1]] = colors.pinWheel[1];
-      expected[collection[2]] = colors.pinWheel[2];
-      expected[collection[3]] = colors.pinWheel[3];
-      expected[collection[4]] = colors.pinWheel[4];
-
-      expect(utils.colorMap(collection)).toEqual(expected);
     });
   });
 
   describe('isAndroid', () => {
     it('returns true if platform is android', () => {
-      jest.setMock('react-native', {
-        Platform: { OS: 'android' }
-      });
-
-      const _utils = require('../utils').default; // eslint-disable-line no-underscore-dangle
-      expect(_utils.isAndroid()).toEqual(true);
+      ReactNative.Platform.OS = 'android';
+      expect(isAndroid()).toEqual(true);
     });
 
-    it('returns false if platform is not android', () => {
-      jest.setMock('react-native', {
-        Platform: { OS: 'ios' }
-      });
+    it('returns false if platform is android', () => {
+      ReactNative.Platform.OS = 'ios';
+      expect(isAndroid()).toEqual(false);
+    });
+  });
 
-      const _utils = require('../utils').default; // eslint-disable-line no-underscore-dangle
-      expect(_utils.isAndroid()).toEqual(false);
+  describe('setTimesBy', () => {
+    const bands = [
+      { id: 'b-1', name: 'Band 1' }
+    ];
+
+    const venues = [
+      { id: 'v-1', name: 'Venue B', street_address: '111 St' },
+      { id: 'v-2', name: 'Venue A', street_address: '555 St' }
+    ];
+
+    const days = [
+      { id: 'd-1', name: 'Day 1', date: '2015-06-12' },
+      { id: 'd-2', name: 'Day 2', date: '2015-06-11' }
+    ];
+
+    const setTimes = [
+      { id: 'st-1', day: 'd-1', venue: 'v-1', band: 'b-1', start_time: '2000-01-01T22:00:00.000Z' },
+      { id: 'st-2', day: 'd-1', venue: 'v-1', band: 'b-1', start_time: '2000-01-01T01:00:00.000Z' },
+      { id: 'st-3', day: 'd-2', venue: 'v-2', band: 'b-1', start_time: '2000-01-01T23:00:00.000Z' },
+      { id: 'st-4', day: 'd-2', venue: 'v-2', band: 'b-1', start_time: '2000-01-01T22:00:00.000Z' }
+    ];
+
+    const store = { bands, venues, days, set_times: setTimes };
+
+    it('serializes data and groups by venue', () => {
+      const setTimes1 = [
+        {
+          id: 'st-4',
+          start_time: '2000-01-01T22:00:00.000Z',
+          band: bands[0],
+          day: days[1],
+          venue: venues[1]
+        },
+        {
+          id: 'st-3',
+          start_time: '2000-01-01T23:00:00.000Z',
+          band: bands[0],
+          day: days[1],
+          venue: venues[1]
+        }
+      ];
+
+      const setTimes2 = [
+        {
+          id: 'st-1',
+          start_time: '2000-01-01T22:00:00.000Z',
+          band: bands[0],
+          day: days[0],
+          venue: venues[0]
+        },
+        {
+          id: 'st-2',
+          start_time: '2000-01-01T01:00:00.000Z',
+          band: bands[0],
+          day: days[0],
+          venue: venues[0]
+        }
+      ];
+
+      const expected = [
+        {
+          id: 'v-2',
+          name: 'Venue A',
+          street_address: '555 St',
+          color: colors.pinWheel[0],
+          set_times: setTimes1,
+          data: setTimes1
+        },
+        {
+          id: 'v-1',
+          name: 'Venue B',
+          street_address: '111 St',
+          color: colors.pinWheel[1],
+          set_times: setTimes2,
+          data: setTimes2
+        }
+      ];
+
+      expect(setTimesBy('venue', setTimes, store)).toEqual(expected);
+    });
+
+    it('serializes data and groups by days', () => {
+      const setTimes1 = [
+        {
+          id: 'st-4',
+          start_time: '2000-01-01T22:00:00.000Z',
+          band: bands[0],
+          day: days[1],
+          venue: venues[1]
+        },
+        {
+          id: 'st-3',
+          start_time: '2000-01-01T23:00:00.000Z',
+          band: bands[0],
+          day: days[1],
+          venue: venues[1]
+        }
+      ];
+
+      const setTimes2 = [
+        {
+          id: 'st-1',
+          start_time: '2000-01-01T22:00:00.000Z',
+          band: bands[0],
+          day: days[0],
+          venue: venues[0]
+        },
+        {
+          id: 'st-2',
+          start_time: '2000-01-01T01:00:00.000Z',
+          band: bands[0],
+          day: days[0],
+          venue: venues[0]
+        }
+      ];
+
+      const expected = [
+        {
+          id: 'd-2',
+          name: 'Day 2',
+          date: '2015-06-11',
+          color: colors.pinWheel[0],
+          set_times: setTimes1,
+          data: setTimes1
+        },
+        {
+          id: 'd-1',
+          name: 'Day 1',
+          date: '2015-06-12',
+          color: colors.pinWheel[1],
+          set_times: setTimes2,
+          data: setTimes2
+        }
+      ];
+
+      expect(setTimesBy('day', setTimes, store)).toEqual(expected);
     });
   });
 });

@@ -1,79 +1,40 @@
-jest.unmock('../home');
-jest.mock('../../images/home.png', () => '../images/home.png');
+import 'react-native';
+import React from 'react';
+import HomeView from '../Home';
 
-const React = require('react-native');
-const shallow = require('enzyme/shallow');
+import { shallow } from 'enzyme';
+jest.mock('../../images/home.png', () => 'img');
 
-const Home = require('../home').default;
-
-describe('Home', () => {
-  const Image = React.Image;
-  const TouchableOpacity = React.TouchableOpacity;
-  const Text = React.Text;
-  const Animated = React.Animated;
-
-  let navigator = null;
+describe('HomeView', () => {
+  let props = null;
 
   beforeEach(() => {
-    navigator = {
-      push: jest.fn()
+    props = {
+      onNavigate: jest.fn()
     };
   });
 
-  it('sets initial state.opacityAnim', () => {
-    const wrapper = shallow(<Home />);
+  it('image', () => {
+    const wrapper = shallow(<HomeView {...props} />);
+    const img = wrapper.find('Image');
 
-    expect(Animated.Value).toBeCalledWith(0);
-    expect(wrapper.state().opacityAnim).toEqual(new Animated.Value(0));
+    expect(img.prop('source')).toEqual('img');
   });
 
-  describe('Image', () => {
-    it('renders an Image', () => {
-      const wrapper = shallow(<Home navigator={navigator} />);
+  it('links', () => {
+    const wrapper = shallow(<HomeView {...props} />);
+    const links = wrapper.find('TouchableOpacity');
 
-      expect(wrapper.find(Image).length).toEqual(1);
+    links.at(0).simulate('press');
+    expect(props.onNavigate).toBeCalledWith('Schedule');
 
-      const img = wrapper.find(Image).first();
+    links.at(1).simulate('press');
+    expect(props.onNavigate).toBeCalledWith('MySchedule');
 
-      expect(img.prop('source')).toEqual('../images/home.png');
-    });
+    links.at(2).simulate('press');
+    expect(props.onNavigate).toBeCalledWith('Bands');
 
-    it('handles onLoad', () => {
-      const wrapper = shallow(<Home />);
-      const img = wrapper.find(Image).first();
-
-      img.props().onLoad();
-
-      expect(Animated.timing).toBeCalledWith(wrapper.state().opacityAnim, { toValue: 1, duration: Home.duration });
-    });
-  });
-
-  describe('links', () => {
-    const links = ['Schedule', 'My Schedule', 'Bands', 'Venues'];
-    let wrapper = null;
-
-    beforeEach(() => {
-      wrapper = shallow(<Home navigator={navigator} />);
-    });
-
-    it('renders four TouchableOpacity items', () => {
-      const expectedLinks = 4;
-
-      expect(wrapper.find(TouchableOpacity).length).toEqual(expectedLinks);
-    });
-
-    links.forEach((name, idx) => {
-      it('renders schedule link', () => {
-        const link = wrapper.find(TouchableOpacity).at(idx);
-        const text = link.find(Text).first();
-
-        expect(text.props().children).toEqual(name.toUpperCase());
-
-        link.props().onPress();
-
-        const expectedProps = { name, title: name, index: 1 };
-        expect(navigator.push).toBeCalledWith(expectedProps);
-      });
-    });
+    links.at(3).simulate('press'); // eslint-disable-line no-magic-numbers
+    expect(props.onNavigate).toBeCalledWith('Venues');
   });
 });

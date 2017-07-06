@@ -1,82 +1,57 @@
 import React from 'react';
-import ReactNative from 'react-native';
 import PropTypes from 'prop-types';
-import homeStyles from '../styles/home-styles';
+import { View, TouchableOpacity, Text, Image } from 'react-native';
+import HFContainer from '../components/HFContainer';
+import styles from '../styles/views/home';
 
-const Component = React.Component;
-const Image = ReactNative.Image;
-const StyleSheet = ReactNative.StyleSheet;
-const Text = ReactNative.Text;
-const TouchableOpacity = ReactNative.TouchableOpacity;
-const View = ReactNative.View;
-const Animated = ReactNative.Animated;
-
-const styles = StyleSheet.create(homeStyles);
-
-const LinkMap = [
-  'Schedule',
-  'My Schedule',
-  'Bands',
-  'Venues'
+const LINKS = [
+  { label: 'SCHEDULE', url: 'Schedule' },
+  { label: 'MY SCHEDULE', url: 'MySchedule' },
+  { label: 'BANDS', url: 'Bands' },
+  { label: 'VENUES', url: 'Venues' }
 ];
 
-const duration = 1000;
+function image() {
+  return <Image style={styles.image} resizeMode="contain" source={require('../images/home.png')} />;
+}
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      opacityAnim: new Animated.Value(0)
-    };
-  }
-
-  goTo(name) {
-    this.props.navigation.navigate('Bands');
-  }
-
-  onLoad() {
-    Animated.timing(
-      this.state.opacityAnim,
-      { toValue: 1, duration }
-    ).start();
-  }
-
-  link(name, idx) {
+class HomeView extends React.Component {
+  link(link) {
     return (
-      <TouchableOpacity key={idx} onPress={() => this.goTo(name)} style={[styles.link]}>
-        <Text style={styles.linkText}>{name.toUpperCase()}</Text>
+      <TouchableOpacity onPress={() => this.props.onNavigate(link.url)} key={link.url} style={styles.link}>
+        <Text style={styles.linkText}>{link.label}</Text>
       </TouchableOpacity>
     );
   }
 
   links() {
-    return LinkMap.map((name, idx) => this.link(name, idx));
+    return (
+      <View style={styles.links}>
+        {LINKS.map((link) => this.link(link))}
+      </View>
+    );
   }
 
-  image() {
+  content() {
     return (
-      <Image style={styles.logo} resizeMode={'contain'} source={require('../images/home.png')} onLoad={() => this.onLoad()}/>
+      <View style={styles.content}>
+        {image()}
+        {this.links()}
+      </View>
     );
   }
 
   render() {
     return (
-      <Animated.View style={[styles.container, { opacity: this.state.opacityAnim }]}>
-        <View style={styles.content}>
-          {this.image()}
-          <View style={styles.days}>
-            {this.links()}
-          </View>
-        </View>
-      </Animated.View>
+      <HFContainer>
+        {this.content()}
+      </HFContainer>
     );
   }
 }
 
-Home.duration = duration;
-Home.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired
-  }).isRequired
+HomeView.propTypes = {
+  onNavigate: PropTypes.func.isRequired
 };
+
+export default HomeView;

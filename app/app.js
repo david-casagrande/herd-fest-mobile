@@ -1,58 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, Text } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import Home from './views/home';
+import AppNavigator from './navigators/App';
 import fullSchedule from './data/full-schedule';
-
-class Bands extends React.Component {
-  render() {
-    console.log(this.context.bands)
-
-    const props = {
-      data: this.context.bands,
-      keyExtractor: (item) => item.id,
-      renderItem: ({ item }) => <Text>{item.name}</Text>
-    };
-
-    return <FlatList {...props} />;
-  }
-}
-
-Bands.contextTypes = {
-  bands: PropTypes.array.isRequired
-};
-
-const Navigator = StackNavigator({
-  Home: {
-    screen: Home,
-    navigationOptions: {
-      headerTintColor: 'transparent'
-    }
-  },
-  Bands: {
-    screen: Bands,
-    navigationOptions: {
-      title: 'Bands'
-    }
-  }
-});
+import { get } from './data/my-schedule';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      fullSchedule: { bands: [], venues: [], set_times: [], days: [] }
+      fullSchedule: { bands: [], venues: [], set_times: [], days: [] },
+      mySchedule: []
     };
   }
 
   componentDidMount() {
     this.setFullSchedule();
+    this.setMySchedule();
   }
 
   getChildContext() {
-    return this.state.fullSchedule;
+    return {
+      mySchedule: this.state.mySchedule,
+      refreshMySchedule: () => this.setMySchedule()
+    };
   }
 
   setFullSchedule() {
@@ -75,16 +46,23 @@ class App extends React.Component {
       });
   }
 
+  setMySchedule() {
+    return get().then((mySchedule) => this.setState({ mySchedule }));
+  }
+
   render() {
-    return <Navigator />;
+    const screenProps = {
+      ...this.state.fullSchedule,
+      mySchedule: this.state.mySchedule
+    };
+
+    return <AppNavigator screenProps={screenProps} />;
   }
 }
 
 App.childContextTypes = {
-  bands: PropTypes.array,
-  venues: PropTypes.array,
-  set_times: PropTypes.array,
-  days: PropTypes.array
+  mySchedule: PropTypes.arrayOf(PropTypes.string),
+  refreshMySchedule: PropTypes.func.isRequired
 };
 
 export default App;
