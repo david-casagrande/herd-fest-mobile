@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { SectionList, Text, View, TouchableOpacity } from 'react-native';
+import HFListSeparator from './HFListSeparator';
 import styles from '../styles/hf-section-list';
-
-function Separator() {
-  return <View style={styles.separator} />;
-}
 
 class HFSectionList extends React.Component {
   sectionHeaderStyle(info) {
@@ -60,7 +57,7 @@ class HFSectionList extends React.Component {
       keyExtractor: (item) => item[this.props.keyProp],
       renderItem: (info) => this.item(info),
       renderSectionHeader: (info) => this.header(info),
-      ItemSeparatorComponent: Separator
+      ItemSeparatorComponent: HFListSeparator
     };
 
     return <SectionList {...props} />;
@@ -73,7 +70,7 @@ class HFSectionList extends React.Component {
         return (
           <View key={item[this.props.keyProp]} data-id="item">
             {this.item({ item, section })}
-            {last ? null : <View style={styles.separator} />}
+            {last ? null : <HFListSeparator />}
           </View>
         );
       });

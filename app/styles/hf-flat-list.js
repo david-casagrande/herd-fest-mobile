@@ -12,14 +12,9 @@ const item = {
   paddingRight: spacing.primary
 };
 
-const separator = {
-  backgroundColor: colors.lightGrey,
-  height: StyleSheet.hairlineWidth
-};
-
 const label = {
   color: colors.secondary,
   fontSize: fontSizes.medium
 };
 
-export default StyleSheet.create({ item, separator, label });
+export default StyleSheet.create({ item, label });

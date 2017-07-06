@@ -22,9 +22,4 @@ const item = {
   height: 50
 };
 
-const separator = {
-  backgroundColor: colors.lightGrey,
-  height: StyleSheet.hairlineWidth
-};
-
-export default StyleSheet.create({ sectionHeader, sectionHeaderText, item, separator });
+export default StyleSheet.create({ sectionHeader, sectionHeaderText, item });
