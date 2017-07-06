@@ -6,26 +6,16 @@ jest.mock('react-native', () => ({
   AsyncStorage: {
     getItem: jest.fn(),
     setItem: jest.fn()
+  },
+  Vibration: {
+    vibrate: jest.fn()
   }
 }));
 
-describe('schedule', () => {
-  // const scheduleData = ['1', '3', '9'];
-
-  // function setMock(notSet = false) {
-  //   jest.setMock('react-native', {
-  //     AsyncStorage: {
-  //       getItem() {
-  //         const returnedValue = notSet ? null : JSON.stringify(scheduleData);
-  //         return new Promise((resolve) => resolve(returnedValue));
-  //       },
-  //
-  //       setItem(key, value) {
-  //         return new Promise((resolve) => resolve({ key, value }));
-  //       }
-  //     }
-  //   });
-  // }
+describe('my-schedule', () => {
+  beforeEach(() => {
+    Vibration.vibrate.mockReset();
+  });
 
   describe('get', () => {
     it('returns empty array if schedule is null', () => {
@@ -54,7 +44,8 @@ describe('schedule', () => {
 
       const id = '10';
       return add(id).then(() => {
-        expect(AsyncStorage.setItem).toBeCalledWith('schedule', JSON.stringify([id]))
+        expect(AsyncStorage.setItem).toBeCalledWith('schedule', JSON.stringify([id]));
+        expect(Vibration.vibrate).toBeCalled();
       });
     });
 
@@ -66,6 +57,7 @@ describe('schedule', () => {
 
       return add(id).then(() => {
         expect(AsyncStorage.setItem).toBeCalledWith('schedule', JSON.stringify([id]));
+        expect(Vibration.vibrate).toBeCalled();
       });
     });
   });
@@ -79,6 +71,7 @@ describe('schedule', () => {
 
       return remove(id).then(() => {
         expect(AsyncStorage.setItem).toBeCalledWith('schedule', JSON.stringify([]));
+        expect(Vibration.vibrate).toBeCalled();
       });
     });
 
@@ -89,7 +82,8 @@ describe('schedule', () => {
       AsyncStorage.setItem.mockImplementation(() => new Promise((resolve) => resolve(null)));
 
       return remove('10').then(() => {
-        expect(AsyncStorage.setItem).toBeCalledWith('schedule', JSON.stringify([id]))
+        expect(AsyncStorage.setItem).toBeCalledWith('schedule', JSON.stringify([id]));
+        expect(Vibration.vibrate).toBeCalled();
       });
     });
   });
