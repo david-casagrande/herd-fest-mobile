@@ -16,7 +16,7 @@ const name = {
 const description = {
   color: colors.secondary,
   fontSize: fontSizes.medium,
-  paddingBottom: spacing.primary
+  paddingBottom: 2
 };
 
 export default { details, name, description };

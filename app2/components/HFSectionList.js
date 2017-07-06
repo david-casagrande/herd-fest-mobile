@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { SectionList, Text, View, TouchableOpacity } from 'react-native';
 import styles from '../styles/hf-section-list';
 
+function Separator() {
+  return <View style={styles.separator} />;
+}
+
 class HFSectionList extends React.Component {
   sectionHeaderStyle(info) {
     const sectionHeaderStyle = [styles.sectionHeader];
@@ -56,7 +60,7 @@ class HFSectionList extends React.Component {
       keyExtractor: (item) => item[this.props.keyProp],
       renderItem: (info) => this.item(info),
       renderSectionHeader: (info) => this.header(info),
-      ItemSeparatorComponent: () => <View style={styles.separator} />
+      ItemSeparatorComponent: Separator
     };
 
     return <SectionList {...props} />;
