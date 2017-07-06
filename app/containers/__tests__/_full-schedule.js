@@ -16,5 +16,6 @@ export default {
     { id: '2', name: 'Friday', set_times: ['2'] },
     { id: '3', name: 'Saturday', set_times: ['3'] },
     { id: '4', name: 'Sunday', set_times: ['4'] }
-  ]
+  ],
+  mySchedule: []
 };
