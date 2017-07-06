@@ -140,8 +140,8 @@ describe('utils', () => {
     ];
 
     const days = [
-      { id: 'd-1', name: 'Day 1', date: '2015-06-12' },
-      { id: 'd-2', name: 'Day 2', date: '2015-06-11' }
+      { id: 'd-1', name: 'Friday', date: '2015-06-12' },
+      { id: 'd-2', name: 'Thursday', date: '2015-06-11' }
     ];
 
     const setTimes = [
@@ -193,7 +193,6 @@ describe('utils', () => {
           id: 'v-2',
           name: 'Venue A',
           street_address: '555 St',
-          color: colors.pinWheel[0],
           set_times: setTimes1,
           data: setTimes1
         },
@@ -201,7 +200,6 @@ describe('utils', () => {
           id: 'v-1',
           name: 'Venue B',
           street_address: '111 St',
-          color: colors.pinWheel[1],
           set_times: setTimes2,
           data: setTimes2
         }
@@ -248,17 +246,17 @@ describe('utils', () => {
       const expected = [
         {
           id: 'd-2',
-          name: 'Day 2',
+          name: 'Thursday',
           date: '2015-06-11',
-          color: colors.pinWheel[0],
+          color: colors.dayMap['Thursday'],
           set_times: setTimes1,
           data: setTimes1
         },
         {
           id: 'd-1',
-          name: 'Day 1',
+          name: 'Friday',
           date: '2015-06-12',
-          color: colors.pinWheel[1],
+          color: colors.dayMap['Friday'],
           set_times: setTimes2,
           data: setTimes2
         }
