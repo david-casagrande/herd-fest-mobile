@@ -3,7 +3,7 @@ import React from 'react';
 import ScheduleContainer from '../Schedule';
 import { findMany, setTimesBy } from '../../utils';
 import colors from '../../styles/_colors';
-import data from './_full-schedule';
+import data from '../../../test-data/full-schedule';
 
 import { shallow } from 'enzyme';
 

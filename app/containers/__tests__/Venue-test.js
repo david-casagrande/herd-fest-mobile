@@ -2,7 +2,7 @@ import 'react-native';
 import React from 'react';
 import VenueContainer from '../Venue';
 import { findMany, setTimesBy } from '../../utils';
-import data from './_full-schedule';
+import data from '../../../test-data/full-schedule';
 
 import { shallow } from 'enzyme';
 

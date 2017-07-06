@@ -3,7 +3,7 @@ import React from 'react';
 import MyScheduleContainer from '../MySchedule';
 import { findMany, setTimesBy } from '../../utils';
 import { shallow } from 'enzyme';
-import data from './_full-schedule';
+import data from '../../../test-data/full-schedule';
 
 describe('MyScheduleContainer', () => {
   let props = null;
