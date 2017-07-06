@@ -59,13 +59,4 @@ describe('MyScheduleView', () => {
 
     expect(sectionHeader).toEqual('Section Name');
   });
-
-  it('onPress', () => {
-    const wrapper = shallow(<MyScheduleView {...props} />);
-    const list = wrapper.find('HFSectionList');
-
-    list.simulate('press', {});
-
-    expect(props.onNavigate).toBeCalledWith('Venue', {});
-  });
 });

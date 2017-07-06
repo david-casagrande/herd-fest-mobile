@@ -18,22 +18,6 @@ describe('BandView', () => {
     };
   });
 
-  describe('image', () => {
-    it('renders based on image_url', () => {
-      const wrapper = shallow(<BandView {...props} />);
-      const img = wrapper.find('Image');
-
-      expect(img.prop('source')).toEqual({ uri: 'image-url' });
-    });
-
-    it('does not render', () => {
-      props.band.image_url = null;
-      const wrapper = shallow(<BandView {...props} />);
-
-      expect(wrapper.find('Image').length).toEqual(0);
-    });
-  });
-
   describe('name', () => {
     it('renders based on name', () => {
       const wrapper = shallow(<BandView {...props} />);
