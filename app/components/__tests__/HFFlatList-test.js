@@ -7,7 +7,7 @@ import { shallow } from 'enzyme';
 // https://github.com/facebook/react-native/issues/14514
 jest.mock('react-native', () => ({
   FlatList: () => false,
-  StyleSheet: {},
+  StyleSheet: { create: jest.fn(() => ({})) },
   TouchableOpacity: () => false,
   Text: () => false,
   View: () => false
@@ -50,13 +50,5 @@ describe('HFFlatList', () => {
     item.props.onPress();
 
     expect(props.onPress).toBeCalledWith(props.data[0]);
-  });
-
-  it('separator', () => {
-    const wrapper = shallow(<HFFlatList {...props} />);
-    const list = wrapper.find('FlatList');
-    const separator = list.props().ItemSeparatorComponent();
-
-    expect(separator.props.style).toBeDefined();
   });
 });

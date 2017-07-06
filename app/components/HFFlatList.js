@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 import styles from '../styles/hf-flat-list';
 
+function Separator() {
+  return <View style={styles.separator} />;
+}
+
 class HFFlatList extends React.Component {
   item({ item }) {
     return (
@@ -17,7 +21,7 @@ class HFFlatList extends React.Component {
       data: this.props.data,
       keyExtractor: (item) => item[this.props.keyProp],
       renderItem: (info) => this.item(info),
-      ItemSeparatorComponent: () => <View style={styles.separator} />
+      ItemSeparatorComponent: Separator
     };
 
     return <FlatList {...props} />;
