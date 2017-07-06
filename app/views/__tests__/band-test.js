@@ -14,7 +14,8 @@ describe('BandView', () => {
         description: 'Band Description',
         image_url: 'image-url',
         set_times: []
-      }
+      },
+      sections: []
     };
   });
 
@@ -48,5 +49,48 @@ describe('BandView', () => {
 
       expect(wrapper.find('[data-id="description"]').length).toEqual(0);
     });
+  });
+
+  it('renders HFSectionList with props.sections', () => {
+    const wrapper = shallow(<BandView {...props} />);
+    const list = wrapper.find('HFSectionList');
+
+    expect(list.prop('sections')).toEqual([]);
+    expect(list.prop('keyProp')).toEqual('id');
+    expect(list.prop('static')).toEqual(true);
+  });
+
+  it('HFSectionList item', () => {
+    const wrapper = shallow(<BandView {...props} />);
+    const list = wrapper.find('HFSectionList');
+
+    const item = {
+      venue: {
+        name: 'venue'
+      },
+      band: {
+        name: 'band'
+      },
+      start_time: '2000-01-01T22:45:00.000Z'
+    };
+
+    const listItem = list.props().renderItem({ item, section: { color: '#000' } });
+
+    expect(listItem.props.setTime).toEqual(item);
+    expect(listItem.props.tintColor).toEqual('#000');
+    expect(listItem.props.showVenue).toEqual(true);
+  });
+
+  it('renderSectionHeader', () => {
+    const wrapper = shallow(<BandView {...props} />);
+    const list = wrapper.find('HFSectionList');
+
+    const section = {
+      name: 'Section Name'
+    };
+
+    const sectionHeader = list.props().renderSectionHeader({ section });
+
+    expect(sectionHeader).toEqual('Section Name');
   });
 });

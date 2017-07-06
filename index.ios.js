@@ -7,8 +7,7 @@
 import React from 'react';
 import ReactNative from 'react-native';
 
-import Nav from './app/nav';
-import App from './app2/App';
+import App from './app/App';
 
 const AppRegistry = ReactNative.AppRegistry;
 const Component = React.Component;
