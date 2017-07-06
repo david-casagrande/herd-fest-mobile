@@ -25,7 +25,7 @@ describe('VenuesContainer', () => {
     const wrapper = shallow(<VenueContainer {...props} />);
     const view = wrapper.find('VenueView');
 
-    const venue = props.screenProps.venues[0];
+    const [venue] = props.screenProps.venues;
     const setTimes = findMany(props.screenProps.set_times, venue.set_times);
     const sections = setTimesBy('day', setTimes, props.screenProps);
 

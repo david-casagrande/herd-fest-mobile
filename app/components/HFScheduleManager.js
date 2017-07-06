@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, View } from 'react-native';
 import styles from '../styles/hf-schedule-manager';
 import { add, remove } from '../data/my-schedule';
 
@@ -79,7 +79,7 @@ HFScheduleManager.propTypes = {
   setTime: PropTypes.shape({
     id: PropTypes.string
   }).isRequired,
-  tintColor: PropTypes.string,
+  tintColor: PropTypes.string
   // toggleCallback: React.PropTypes.func
 };
 

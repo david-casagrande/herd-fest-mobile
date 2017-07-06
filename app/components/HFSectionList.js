@@ -102,7 +102,8 @@ HFSectionList.propTypes = {
   renderItem: PropTypes.func.isRequired,
   renderSectionHeader: PropTypes.func.isRequired,
   tintColor: PropTypes.string,
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
+  static: PropTypes.bool
 };
 
 export default HFSectionList;

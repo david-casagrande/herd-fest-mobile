@@ -27,7 +27,7 @@ describe('ScheduleContainer', () => {
       const wrapper = shallow(<ScheduleContainer {...props} />);
       const view = wrapper.find('ScheduleView');
 
-      const day = props.screenProps.days[0];
+      const [day] = props.screenProps.days;
       const setTimes = findMany(props.screenProps.set_times, day.set_times);
       const sections = setTimesBy('venue', setTimes, props.screenProps);
 
@@ -45,7 +45,7 @@ describe('ScheduleContainer', () => {
       const wrapper = shallow(<ScheduleContainer {...props} />);
       const view = wrapper.find('ScheduleView');
 
-      const day = props.screenProps.days[1];
+      const day = props.screenProps.days[1]; // eslint-disable-line prefer-destructuring
       const setTimes = findMany(props.screenProps.set_times, day.set_times);
       const sections = setTimesBy('venue', setTimes, props.screenProps);
 
@@ -63,7 +63,7 @@ describe('ScheduleContainer', () => {
       const wrapper = shallow(<ScheduleContainer {...props} />);
       const view = wrapper.find('ScheduleView');
 
-      const day = props.screenProps.days[2];
+      const day = props.screenProps.days[2]; // eslint-disable-line prefer-destructuring
       const setTimes = findMany(props.screenProps.set_times, day.set_times);
       const sections = setTimesBy('venue', setTimes, props.screenProps);
 
@@ -81,7 +81,7 @@ describe('ScheduleContainer', () => {
       const wrapper = shallow(<ScheduleContainer {...props} />);
       const view = wrapper.find('ScheduleView');
 
-      const day = props.screenProps.days[3];
+      const day = props.screenProps.days[3]; // eslint-disable-line prefer-destructuring
       const setTimes = findMany(props.screenProps.set_times, day.set_times);
       const sections = setTimesBy('venue', setTimes, props.screenProps);
 

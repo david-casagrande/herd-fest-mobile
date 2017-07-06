@@ -75,7 +75,6 @@ describe('HFSetTime', () => {
       props.showVenueAndBand = true;
       props.tintColor = '#000';
       const wrapper = shallow(<HFSetTime {...props} />);
-      const band = wrapper.find('[data-id="band"]');
       const venue = wrapper.find('[data-id="venue"]');
 
       expect(venue.prop('style')[1]).toEqual({ color: props.tintColor });

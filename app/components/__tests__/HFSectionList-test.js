@@ -1,4 +1,3 @@
-import { View } from 'react-native';
 import React from 'react';
 import HFSectionList from '../HFSectionList';
 import { shallow } from 'enzyme';
