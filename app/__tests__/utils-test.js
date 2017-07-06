@@ -16,13 +16,13 @@ describe('utils', () => {
     const date = '2000-01-01T04:00:00.000Z';
 
     it('formats a date', () => {
-      const expected = moment.utc(date).format('h:mmA')
+      const expected = moment.utc(date).format('h:mmA');
       expect(formatDate(date)).toEqual(expected);
     });
 
     it('accepts a format', () => {
-      const format = 'hA'
-      const expected = moment.utc(date).format(format)
+      const format = 'hA';
+      const expected = moment.utc(date).format(format);
       expect(formatDate(date, format)).toEqual(expected);
     });
   });
@@ -100,7 +100,7 @@ describe('utils', () => {
       ReactNative.Linking.canOpenURL.mockImplementation(() => new Promise((resolve) => resolve(true)));
       ReactNative.Linking.openURL.mockImplementation(() => new Promise((resolve) => resolve()));
 
-      return link('url').then((value) => {
+      return link('url').then(() => {
         expect(ReactNative.Linking.canOpenURL).toBeCalledWith('url');
         expect(ReactNative.Linking.openURL).toBeCalledWith('url');
       });
@@ -110,7 +110,7 @@ describe('utils', () => {
       ReactNative.Linking.canOpenURL.mockImplementation(() => new Promise((resolve) => resolve(false)));
       ReactNative.Linking.openURL.mockImplementation(() => new Promise((resolve) => resolve()));
 
-      return link('url').catch((value) => {
+      return link('url').catch(() => {
         expect(ReactNative.Linking.canOpenURL).toBeCalledWith('url');
         expect(ReactNative.Linking.openURL).not.toBeCalled();
       });
@@ -248,7 +248,7 @@ describe('utils', () => {
           id: 'd-2',
           name: 'Thursday',
           date: '2015-06-11',
-          color: colors.dayMap['Thursday'],
+          color: colors.dayMap.Thursday,
           set_times: setTimes1,
           data: setTimes1
         },
@@ -256,7 +256,7 @@ describe('utils', () => {
           id: 'd-1',
           name: 'Friday',
           date: '2015-06-12',
-          color: colors.dayMap['Friday'],
+          color: colors.dayMap.Friday,
           set_times: setTimes2,
           data: setTimes2
         }
