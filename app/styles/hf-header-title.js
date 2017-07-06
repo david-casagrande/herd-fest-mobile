@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const BASE = {
   color: 'rgba(0, 0, 0, .9)',

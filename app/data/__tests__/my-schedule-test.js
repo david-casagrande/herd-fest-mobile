@@ -23,7 +23,7 @@ describe('my-schedule', () => {
       AsyncStorage.getItem.mockImplementation(() => new Promise((resolve) => resolve(resp)));
 
       return get().then((data) => {
-        expect(data).toEqual([])
+        expect(data).toEqual([]);
       });
     });
 

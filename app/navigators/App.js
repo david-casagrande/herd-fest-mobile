@@ -1,6 +1,5 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import { Text } from 'react-native';
 import colors from '../styles/_colors';
 
 import HomeContainer from '../containers/Home';

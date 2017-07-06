@@ -25,7 +25,7 @@ const day = {
 };
 
 const dayFirst = {
-  borderColor: 'transparent',
+  borderColor: 'transparent'
 };
 
 const link = {

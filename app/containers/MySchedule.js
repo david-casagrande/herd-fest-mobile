@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MyScheduleView from '../views/MySchedule';
-import { get } from '../data/my-schedule';
 import { findMany, setTimesBy } from '../utils';
 
 class MyScheduleContainer extends React.Component {

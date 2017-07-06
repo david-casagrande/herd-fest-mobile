@@ -1,11 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image, ScrollView } from 'react-native';
+import { View, Text } from 'react-native';
 import HFParallax from '../components/HFParallax';
 import HFContainer from '../components/HFContainer';
 import HFSectionList from '../components/HFSectionList';
 import HFSetTime from '../components/HFSetTime';
 import styles from '../styles/views/band';
+
+function setTime({ item, section }) {
+  const props = {
+    setTime: item,
+    showVenue: true,
+    tintColor: section.color
+  };
+
+  return <HFSetTime {...props} />;
+}
 
 class BandView extends React.Component {
   description() {
@@ -26,22 +36,12 @@ class BandView extends React.Component {
     return <Text style={styles.name} data-id="name">{name}</Text>;
   }
 
-  setTime({ item, section }) {
-    const props = {
-      setTime: item,
-      showVenue: true,
-      tintColor: section.color
-    };
-
-    return <HFSetTime {...props} />;
-  }
-
   setTimes() {
     const props = {
       keyProp: 'id',
       sections: this.props.sections,
       static: true,
-      renderItem: (info) => this.setTime(info),
+      renderItem: (info) => setTime(info),
       renderSectionHeader: ({ section }) => section.name
     };
 

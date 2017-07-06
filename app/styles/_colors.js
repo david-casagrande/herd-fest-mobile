@@ -25,7 +25,7 @@ const dayMap = {
   'Friday': purple,
   'Saturday': teal,
   'Sunday': red
-}
+};
 
 export default {
   primary: teal,

@@ -7,7 +7,7 @@ import { findMany, setTimesBy } from '../utils';
 class VenueContainer extends React.Component {
   render() {
     const { id } = this.props.navigation.state.params;
-    const venue = find(this.props.screenProps.venues, (venue) => venue.id === id);
+    const venue = find(this.props.screenProps.venues, (v) => v.id === id);
     const setTimes = findMany(this.props.screenProps.set_times, venue.set_times);
     const sections = setTimesBy('day', setTimes, this.props.screenProps);
 
