@@ -1,5 +1,10 @@
 import { AsyncStorage, Vibration } from 'react-native';
 
+function vibrate() {
+  Vibration.cancel();
+  Vibration.vibrate();
+}
+
 function parse(value) {
   return new Promise((resolve) => {
     let schedule = [];
@@ -25,7 +30,7 @@ export function add(id) {
 
       return AsyncStorage.setItem('schedule', JSON.stringify(schedule));
     })
-    .then(() => Vibration.vibrate());
+    .then(() => vibrate());
 }
 
 export function remove(id) {
@@ -39,5 +44,5 @@ export function remove(id) {
 
       return AsyncStorage.setItem('schedule', JSON.stringify(schedule));
     })
-    .then(() => Vibration.vibrate());
+    .then(() => vibrate());
 }

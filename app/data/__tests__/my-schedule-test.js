@@ -1,6 +1,5 @@
 import { get, add, remove } from '../my-schedule';
 import { AsyncStorage, Vibration } from 'react-native';
-// jest.dontMock('../schedule');
 
 jest.mock('react-native', () => ({
   AsyncStorage: {
@@ -8,7 +7,8 @@ jest.mock('react-native', () => ({
     setItem: jest.fn()
   },
   Vibration: {
-    vibrate: jest.fn()
+    vibrate: jest.fn(),
+    cancel: jest.fn()
   }
 }));
 
@@ -46,6 +46,7 @@ describe('my-schedule', () => {
       return add(id).then(() => {
         expect(AsyncStorage.setItem).toBeCalledWith('schedule', JSON.stringify([id]));
         expect(Vibration.vibrate).toBeCalled();
+        expect(Vibration.cancel).toBeCalled();
       });
     });
 
@@ -58,6 +59,7 @@ describe('my-schedule', () => {
       return add(id).then(() => {
         expect(AsyncStorage.setItem).toBeCalledWith('schedule', JSON.stringify([id]));
         expect(Vibration.vibrate).toBeCalled();
+        expect(Vibration.cancel).toBeCalled();
       });
     });
   });
@@ -72,6 +74,7 @@ describe('my-schedule', () => {
       return remove(id).then(() => {
         expect(AsyncStorage.setItem).toBeCalledWith('schedule', JSON.stringify([]));
         expect(Vibration.vibrate).toBeCalled();
+        expect(Vibration.cancel).toBeCalled();
       });
     });
 
@@ -84,6 +87,7 @@ describe('my-schedule', () => {
       return remove('10').then(() => {
         expect(AsyncStorage.setItem).toBeCalledWith('schedule', JSON.stringify([id]));
         expect(Vibration.vibrate).toBeCalled();
+        expect(Vibration.cancel).toBeCalled();
       });
     });
   });
