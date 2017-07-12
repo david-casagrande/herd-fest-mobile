@@ -80,7 +80,6 @@ HFScheduleManager.propTypes = {
     id: PropTypes.string
   }).isRequired,
   tintColor: PropTypes.string
-  // toggleCallback: React.PropTypes.func
 };
 
 HFScheduleManager.contextTypes = {
