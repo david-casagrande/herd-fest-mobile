@@ -1,82 +1,61 @@
-jest.dontMock('../full-schedule');
+import { get, cache, getCache } from '../full-schedule';
+import { AsyncStorage } from 'react-native';
 
-function setMock(data) {
-  jest.setMock('../../shims/fetch', jest.fn(() => {
-    const resp = {
-      json() {
-        return new Promise((resolve) => resolve(data));
-      }
-    };
-    return new Promise((resolve) => resolve(resp));
-  }));
-}
+jest.mock('react-native', () => ({
+  AsyncStorage: {
+    getItem: jest.fn(),
+    setItem: jest.fn()
+  }
+}));
 
-describe('fullSchedule', () => {
+describe('full-schedule', () => {
+  beforeEach(() => {
+    global.fetch = jest.fn();
+  });
+
   describe('get', () => {
-    pit('returns parsed json data on success', () => {
-      const data = { id: '1' };
-      setMock(data);
-      const fullSchedule = require('../full-schedule').default;
+    it('calls fetch to get full schedule', () => {
+      const data = {};
+      const resp = { json: jest.fn(() => data) };
+      global.fetch.mockImplementation(() => new Promise((resolve) => resolve(resp)));
 
-      return fullSchedule.get().then((json) => expect(json).toEqual(data));
+      return get().then((fullSchedule) => {
+        expect(global.fetch).toBeCalledWith('https://herd-fest-api.herokuapp.com/api/full_schedule');
+        expect(fullSchedule).toEqual(data);
+      });
     });
   });
 
   describe('cache', () => {
-    const fullSchedule = require('../full-schedule').default;
-    const React = require('react-native');
+    it('stores data in AsyncStorage', () => {
+      const data = {};
+      AsyncStorage.setItem.mockImplementation(() => new Promise((resolve) => resolve(null)));
 
-    it('sets passed value on async storage', () => {
-      const data = { id: '1' };
-      fullSchedule.cache(data);
-
-      expect(React.AsyncStorage.setItem).toBeCalledWith('fullSchedule', JSON.stringify(data));
+      return cache(data).then(() => {
+        expect(AsyncStorage.setItem).toBeCalledWith('fullSchedule', JSON.stringify(data));
+      });
     });
   });
 
   describe('getCache', () => {
-    describe('value is not set', () => {
-      pit('returns null', () => {
-        const fullSchedule = require('../full-schedule').default;
+    it('retrieves data from AsyncStorage', () => {
+      const data = {};
+      const resp = JSON.stringify(data);
+      AsyncStorage.getItem.mockImplementation(() => new Promise((resolve) => resolve(resp)));
 
-        return fullSchedule.getCache().then((data) => {
-          expect(data).toEqual(null);
-        });
+      return getCache().then((fullSchedule) => {
+        expect(AsyncStorage.getItem).toBeCalledWith('fullSchedule');
+        expect(fullSchedule).toEqual(data);
       });
     });
 
-    describe('value is set', () => {
-      pit('returns parsed value', () => {
-        const fullScheduleData = { id: '1' };
+    it('retrieves data from AsyncStorage when it is not defined', () => {
+      AsyncStorage.getItem.mockImplementation(() => new Promise((resolve) => resolve(null)));
 
-        jest.setMock('react-native', {
-          AsyncStorage: {
-            getItem() {
-              return new Promise((resolve) => resolve(JSON.stringify(fullScheduleData)));
-            }
-          }
-        });
-
-        const fullSchedule = require('../full-schedule').default;
-
-        return fullSchedule.getCache().then((data) => {
-          expect(data).toEqual(fullScheduleData);
-        });
+      return getCache().then((fullSchedule) => {
+        expect(AsyncStorage.getItem).toBeCalledWith('fullSchedule');
+        expect(fullSchedule).toEqual(null);
       });
-    });
-  });
-
-  describe('domain request', () => {
-    it('returns correct domain for development', () => {
-      process.env.NODE_ENV = 'development';
-      const data = { id: '1' };
-      setMock(data);
-      const fullSchedule = require('../full-schedule').default;
-      const fetch = require('../../shims/fetch');
-
-      fullSchedule.get();
-      expect(fetch).toBeCalled();
-      process.env.NODE_ENV = 'test';
     });
   });
 });
